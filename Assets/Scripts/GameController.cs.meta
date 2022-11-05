@@ -1,0 +1,28 @@
+fileFormatVersion: 2
+guid: c116f22e3456b944e9884795141986f4
+MonoImporter:
+  externalObjects: {}
+  serializedVersion: 2
+  defaultReferences:
+  - data: {instanceID: 0}
+  - statsDisplay: {instanceID: 0}
+  - healthDisplay: {instanceID: 0}
+  - waveDisplay: {instanceID: 0}
+  - moneyDisplay: {instanceID: 0}
+  - basicBall: {instanceID: 0}
+  - basicBlock: {instanceID: 0}
+  - healthBar: {instanceID: 0}
+  - ShopMenu: {instanceID: 0}
+  - SettingsMenu: {instanceID: 0}
+  - _dynamic: {instanceID: 0}
+  - _dynamic_balls: {instanceID: 0}
+  - _dynamic_blocks: {instanceID: 0}
+  - ShopContent: {instanceID: 0}
+  - SettingsContent: {instanceID: 0}
+  - upgradeBuyingBar: {fileID: 5887169020256829844, guid: 11d795ac25a9d484281b97f92b6e08c8, type: 3}
+  - settingBar: {fileID: 6728426492982927571, guid: f28fa603a8da54b4783702d8a52f4ebd, type: 3}
+  executionOrder: 0
+  icon: {instanceID: 0}
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
