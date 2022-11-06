@@ -16,6 +16,7 @@ public class GameController : MonoBehaviour
     public TMP_Text healthDisplay;
     public TMP_Text waveDisplay;
     public TMP_Text moneyDisplay;
+    public TMP_Text fpsDisplay;
     public BasicBall basicBall;
     public BasicBall bombBall;
     public BasicBall sniperBall;
@@ -38,6 +39,7 @@ public class GameController : MonoBehaviour
 
     private void Update()
     {
+        displayFPS();
         if (_dynamic_blocks.childCount == 0)
         {
             data.wave++;
@@ -48,6 +50,15 @@ public class GameController : MonoBehaviour
                 SpawnNormalBlock();
             }
         }
+    }
+
+    private int avgFrameRate;
+
+    void displayFPS()
+    {
+        float current = 0;
+        current = Time.frameCount / Time.time;
+        fpsDisplay.text = $"FPS: {current}";
     }
 
     void Start()
