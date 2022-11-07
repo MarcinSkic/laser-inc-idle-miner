@@ -71,7 +71,7 @@ public class Data : MonoBehaviour
         upgrades.Add("Bullet count", new Upgrade() { upgradeBaseCost = 5, upgradeMultCost = 1.7, upgradeMaxLevel = 10 });
         upgrades.Add("Bomb count", new Upgrade() { upgradeBaseCost = 20, upgradeMultCost = 1.7, upgradeMaxLevel = 10 });
         upgrades.Add("Sniper count", new Upgrade() { upgradeBaseCost = 20, upgradeMultCost = 1.7, upgradeMaxLevel = 10 });
-        string[] settingsArray = { "Show maxed upgrades", "Show floating damage text" };
+        string[] settingsArray = { "Show maxed upgrades", "Show floating damage text", "Display 60 FPS" };
         foreach (string setting in settingsArray)
         {
             if (PlayerPrefs.HasKey(setting))

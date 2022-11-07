@@ -131,6 +131,11 @@ public class GameController : MonoBehaviour
                     setting.ignore = 1;
                     setting.GetComponentInChildren<Toggle>().isOn = false;
                 }
+
+                // so this thing actually uses 60 fps if it's supposed to
+                if (setting.settingName == "Display 60 FPS" && IntToBool(PlayerPrefs.GetInt(entry.Key))){
+                    Application.targetFrameRate = 60;
+                }
             }
         }
     }
@@ -362,6 +367,16 @@ public class GameController : MonoBehaviour
         if (settingName == "Show floating damage text")
         {
             data.displayFloatingText = value;
+        }
+        if (settingName == "Display 60 FPS")
+        {
+            if (value)
+            {
+                Application.targetFrameRate = 60;
+            } else
+            {
+                Application.targetFrameRate = 30;
+            }
         }
     }
 }
