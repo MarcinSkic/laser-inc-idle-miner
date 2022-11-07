@@ -16,6 +16,7 @@ public class GameController : MonoBehaviour
     public TMP_Text healthDisplay;
     public TMP_Text waveDisplay;
     public TMP_Text moneyDisplay;
+    public TMP_Text avgFpsDisplay;
     public TMP_Text fpsDisplay;
     public BasicBall basicBall;
     public BasicBall bombBall;
@@ -53,12 +54,21 @@ public class GameController : MonoBehaviour
     }
 
     private int avgFrameRate;
+    private int fpsRefreshCounter = 0;
 
     void displayFPS()
     {
         float current = 0;
-        current = Time.frameCount / Time.time;
-        fpsDisplay.text = $"FPS: {current}";
+        if (fpsRefreshCounter == 0)
+        {
+            fpsRefreshCounter = 100;
+            current = Time.frameCount / Time.time;
+            avgFpsDisplay.text = $"avg FPS: {Mathf.Round(current*10)/10f}";
+            fpsDisplay.text = $"FPS: {Mathf.Round(1 / Time.deltaTime)}";
+        } else
+        {
+            fpsRefreshCounter--;
+        }
     }
 
     void Start()
