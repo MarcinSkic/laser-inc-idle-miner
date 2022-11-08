@@ -50,7 +50,7 @@ public class GameController : MonoBehaviour
             data.wave++;
             statsDisplay.SetWaveDisplay();
             DisplayWave();
-            for (int i=0; i<Random.Range(200, 250); i++)
+            for (int i=0; i<Random.Range(80, 120); i++)
             {
                 SpawnNormalBlock();
             }
