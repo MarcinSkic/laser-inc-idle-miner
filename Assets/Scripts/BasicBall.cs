@@ -26,8 +26,9 @@ public class BasicBall : MonoBehaviour
     }
 
     protected virtual void TryDealDamage(Collision collision){
-        collision.gameObject.TryGetComponent<BasicBlock>(out var block);
-        block.TakeDamage(data.GetBulletDamage());
+        if(collision.gameObject.TryGetComponent<BasicBlock>(out var block)){
+            block.TakeDamage(data.GetBulletDamage());
+        }
     }
 
     void applyConstantVelocity(){
