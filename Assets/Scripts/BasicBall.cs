@@ -21,16 +21,18 @@ public class BasicBall : MonoBehaviour
 
     void OnCollisionEnter(Collision collision)
     {
-        rb.velocity = rb.velocity.normalized * (float)data.GetSpd();
-        if (collision.gameObject.tag == "block")
-        {
-            collision.gameObject.GetComponent<BasicBlock>().TakeDamage(data.GetBulletDamage());
-        }
-        if (collision.gameObject.tag == "block" || collision.gameObject.tag == "border")
-        {
-            // rb.velocity = speed * Vector3.Reflect(rb.velocity.normalized, collision.contacts[0].normal);
-        }
+        applyConstantVelocity();
+        TryDealDamage(collision);
+    }
 
+    protected virtual void TryDealDamage(Collision collision){
+        if(collision.gameObject.TryGetComponent<BasicBlock>(out var block)){
+            block.TakeDamage(data.GetBulletDamage());
+        }
+    }
+
+    void applyConstantVelocity(){
+        rb.velocity = rb.velocity.normalized * (float)data.GetSpd();
     }
 
 }

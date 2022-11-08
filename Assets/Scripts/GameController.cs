@@ -41,6 +41,10 @@ public class GameController : MonoBehaviour
     private void Update()
     {
         displayFPS();
+        checkIfWaveFinished();
+    }
+
+    private void checkIfWaveFinished(){
         if (_dynamic_blocks.childCount == 0)
         {
             data.wave++;
