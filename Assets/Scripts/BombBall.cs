@@ -4,25 +4,19 @@ using UnityEngine;
 
 public class BombBall : BasicBall
 {
-    void OnCollisionEnter(Collision collision)
+    protected override void TryDealDamage(Collision collision)
     {
-        for (int i=0; i<gameController._dynamic_blocks.childCount; i++)
-        {
-            BasicBlock block = gameController._dynamic_blocks.GetChild(i).GetComponent<BasicBlock>();
-            if (Vector3.Distance(block.GetComponent<BoxCollider>().ClosestPoint(this.transform.position), this.transform.position) < 2)
+        //TODO - omówić czy chcemy żeby bomba biła tylko przy trafieniu bloku czy też przy trafieniu obramówki
+        if(collision.gameObject.TryGetComponent<BasicBlock>(out var block)){
+            for (int i=0; i<gameController._dynamic_blocks.childCount; i++)
             {
-                block.TakeDamage(data.GetBulletDamage());
+                //TODO - cast sphere a nie szukać wszystkich childów!
+                BasicBlock foundBlock = gameController._dynamic_blocks.GetChild(i).GetComponent<BasicBlock>();
+                if (Vector3.Distance(foundBlock.GetComponent<BoxCollider>().ClosestPoint(this.transform.position), this.transform.position) < data.explosionSize)
+                {
+                    foundBlock.TakeDamage(data.GetBulletDamage());
+                }
             }
         }
-        rb.velocity = rb.velocity.normalized * (float)data.GetSpd();
-        if (collision.gameObject.tag == "block")
-        {
-            collision.gameObject.GetComponent<BasicBlock>().TakeDamage(data.GetBulletDamage());
-        }
-        if (collision.gameObject.tag == "block" || collision.gameObject.tag == "border")
-        {
-            // rb.velocity = speed * Vector3.Reflect(rb.velocity.normalized, collision.contacts[0].normal);
-        }
-
     }
 }

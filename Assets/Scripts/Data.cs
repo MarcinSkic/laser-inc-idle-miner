@@ -13,6 +13,8 @@ public class Data : MonoBehaviour
     public int basicBulletCount;
     public int bombBulletCount;
     public int sniperBulletCount;
+    [Header("Bomb ball")]
+    public float explosionSize;
 
     [Header("initial stats")]
     public double money;
