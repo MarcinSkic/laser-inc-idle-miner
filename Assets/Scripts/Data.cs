@@ -33,8 +33,10 @@ public class Data : MonoBehaviour
     [Header("Debug")]
     public bool debugSettings;
     public double additionalStartingMoney;
+    [Header("Debug (UNIMPLEMENTED)")]
     public int additionalStartingRound;
     public int additionalStartingBalls;
+    public bool displayFpsStats;
 
     [Header("Settings?")]
     public bool displayFloatingText;

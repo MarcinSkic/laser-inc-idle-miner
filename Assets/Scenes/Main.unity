@@ -7088,7 +7088,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   bulletBaseDamage: 1
   bulletSpeed: 10
-  basicBulletCount: 1
+  basicBulletCount: 0
   bombBulletCount: 0
   sniperBulletCount: 0
   explosionSize: 3
@@ -7100,9 +7100,10 @@ MonoBehaviour:
   dmgPerUpgrade: 1
   bulletSpdPerUpgrade: 10
   debugSettings: 1
-  additionalStartingMoney: 1234567890123
+  additionalStartingMoney: 1234567
   additionalStartingRound: 0
   additionalStartingBalls: 0
+  displayFpsStats: 0
   displayFloatingText: 0
 --- !u!1 &2093626321
 GameObject:
