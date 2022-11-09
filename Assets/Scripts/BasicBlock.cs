@@ -9,6 +9,10 @@ public class BasicBlock : MonoBehaviour
     public GameController gameController;
     public Data data;
 
+    [SerializeField]    
+    private BoxCollider boxCollider;
+    public BoxCollider BoxCollider { get => boxCollider;}
+
     void OnMouseOver()
     {
         if (Input.GetMouseButtonDown(0)){

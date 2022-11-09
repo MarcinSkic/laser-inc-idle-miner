@@ -99,7 +99,7 @@ public class GameController : MonoBehaviour
     public void AddMoney(double amount)
     {
         data.money += amount;
-        data.accumulated += amount;
+        data.earnedMoney += amount;
         moneyDisplay.text = $"Money: {Round(data.money)}";
     }
 
@@ -203,12 +203,12 @@ public class GameController : MonoBehaviour
                 Vector3 spawnLocation = new Vector3(Random.Range(-spawnArea.x, spawnArea.x), Random.Range(-spawnArea.y, spawnArea.y), 0);
                 BasicBall balltype = basicBall;
                 if (name == "Bullet count") {
-                    data.basicBulletCount++;
+                    data.basicBallCount++;
                 } else if (name == "Bomb count") {
-                    data.bombBulletCount++;
+                    data.bombBallCount++;
                     balltype = bombBall;
                 } else if (name == "Sniper count") {
-                    data.sniperBulletCount++;
+                    data.sniperBallCount++;
                     balltype = sniperBall;
                 }
                 statsDisplay.SetBallCountDisplay();

@@ -4,34 +4,31 @@ using UnityEngine;
 
 public class SniperBall : BasicBall
 {
-    void OnCollisionEnter(Collision collision)
+    protected override void OnCollisionEnter(Collision collision)
     {
+        base.OnCollisionEnter(collision);
 
         if (collision.gameObject.tag == "border" && gameController._dynamic_blocks.childCount > 0)
         {
-            Transform target = gameController._dynamic_blocks.GetChild(0);
-            for (int i = 0; i < gameController._dynamic_blocks.childCount; i++)
+            var target = FindTarget();
+
+            rb.velocity = (target.transform.position - transform.position).normalized * (float)data.GetSpd() * data.speedBoost;
+        }
+    }
+
+    private BasicBlock FindTarget()
+    {
+        var blocks = gameController._dynamic_blocks.GetComponentsInChildren<BasicBlock>();
+        var target = blocks[0];
+
+        foreach(var block in blocks)
+        {
+            if(Vector3.Distance(block.BoxCollider.ClosestPoint(transform.position), transform.position) < (Vector3.Distance((target.transform.position), transform.position)))
             {
-                BasicBlock block = gameController._dynamic_blocks.GetChild(i).GetComponent<BasicBlock>();
-                if (Vector3.Distance(block.GetComponent<BoxCollider>().ClosestPoint(this.transform.position), this.transform.position) < 
-                    (Vector3.Distance((target.position), this.transform.position)))
-                {
-                    target = gameController._dynamic_blocks.GetChild(i);
-                }
+                target = block;
             }
-            rb.velocity = (target.position - transform.position).normalized * (float)data.GetSpd() * 2f;
-        } else {
-            rb.velocity = rb.velocity.normalized * (float)data.GetSpd();
         }
 
-        if (collision.gameObject.tag == "block")
-        {
-            collision.gameObject.GetComponent<BasicBlock>().TakeDamage(data.GetBulletDamage());
-        }
-        if (collision.gameObject.tag == "block" || collision.gameObject.tag == "border")
-        {
-            // rb.velocity = speed * Vector3.Reflect(rb.velocity.normalized, collision.contacts[0].normal);
-        }
-
+        return target;
     }
 }

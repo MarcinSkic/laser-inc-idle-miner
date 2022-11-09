@@ -29,12 +29,12 @@ public class StatsDisplay : MonoBehaviour
     
     public void SetSpdDisplay()
     {
-        SpdDisplay.text = $"bullet speed: {data.bulletSpeed}";
+        SpdDisplay.text = $"bullet speed: {data.ballSpeed}";
     }
 
     public void SetBallCountDisplay()
     {
-        ballCountDisplay.text = $"balls: {data.basicBulletCount}, {data.bombBulletCount}, {data.sniperBulletCount}";
+        ballCountDisplay.text = $"balls: {data.basicBallCount}, {data.bombBallCount}, {data.sniperBallCount}";
     }
 
     public void SetWaveDisplay()

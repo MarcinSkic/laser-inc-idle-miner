@@ -114,3 +114,4 @@ MonoBehaviour:
   maxHp: 0
   gameController: {fileID: 0}
   data: {fileID: 0}
+  boxCollider: {fileID: 4917961403807289779}
