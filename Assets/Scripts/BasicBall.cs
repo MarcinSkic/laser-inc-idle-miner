@@ -12,46 +12,64 @@ public class BasicBall : MonoBehaviour
 
     public Color laserColor;
 
-    // Start is called before the first frame update
     void Start()
     {
-        laserRotationDirection = Random.Range(0, 2) == 1 ? 1 : -1;
-        laserRotationSpeedDegrees = Mathf.Abs(laserRotationSpeedDegrees) * laserRotationDirection;
-        rb.velocity = Vector3.Normalize(new Vector3(Random.Range(-1f, 1f), Random.Range(-1f, 1f), 0)) * (float)data.GetSpd();
+        TrySetLaserColor(); //TODO @Filip Why 'Try', there is no case in which it will not set color (even if it is still white)
+        InitLaserRotation();
 
-        TrySetLaserColor();
+        SetInitialVelocity();
     }
 
-    // Update is called once per frame
     void Update()
     {
-        transform.GetChild(0).GetChild(0).Rotate(new Vector3(0, 0, 1), Time.deltaTime*laserRotationSpeedDegrees);
-        /*if (rb.velocity.magnitude == 0)
-        {
-            rb.velocity = Vector3.Normalize(new Vector3(Random.Range(-1f, 1f), Random.Range(-1f, 1f), 0)) * (float)data.GetSpd();
-        }*/
+        RotateLaser();
+        //SetVelocityIfStuck();
     }
 
     void OnCollisionEnter(Collision collision)
     {
-        applyConstantVelocity();
+        KeepConstantVelocity();
+        UpdateLaserRotation();
         TryDealDamage(collision);
-        laserRotationDirection = rb.angularVelocity.z >= 0 ? 1 : -1;
-        rb.angularVelocity = new Vector3(0, 0, 0);
+    }
+
+    private void InitLaserRotation()
+    {
+        laserRotationDirection = Random.Range(0, 2) == 1 ? 1 : -1;
         laserRotationSpeedDegrees = Mathf.Abs(laserRotationSpeedDegrees) * laserRotationDirection;
+    }
+
+    private void SetInitialVelocity()
+    {
+        rb.velocity = Vector3.Normalize(new Vector3(Random.Range(-1f, 1f), Random.Range(-1f, 1f), 0)) * (float)data.GetSpd();
     }
 
     protected virtual void TrySetLaserColor()
     {
-        SpriteRenderer circle = transform.GetChild(0).GetChild(1).GetComponent(typeof(SpriteRenderer)) as SpriteRenderer;
+        SpriteRenderer circle = transform.GetChild(0).GetChild(1).GetComponent<SpriteRenderer>();   //TODO unnecessary getComponent
         circle.color = laserColor;
-        for (int i=0; i<3; i++)
+
+        var arms = transform.GetChild(0).GetChild(0).GetComponentsInChildren<SpriteRenderer>();
+        foreach (var arm in arms)
         {
-            SpriteRenderer arm = transform.GetChild(0).GetChild(0).GetChild(i).GetComponent(typeof(SpriteRenderer)) as SpriteRenderer;
             arm.color = laserColor;
         }
-        TrailRenderer tr = GetComponent(typeof(TrailRenderer)) as TrailRenderer;
+
+        TrailRenderer tr = GetComponent<TrailRenderer>();    //TODO unnecessary getComponent
         tr.startColor = new Color(laserColor.r, laserColor.g, laserColor.b, 0.3f);
+    }
+
+    private void RotateLaser()
+    {
+        transform.GetChild(0).GetChild(0).Rotate(new Vector3(0, 0, 1), Time.deltaTime * laserRotationSpeedDegrees);
+    }
+
+    private void SetVelocityIfStuck()
+    {
+        if (rb.velocity.magnitude == 0)
+        {
+            rb.velocity = Vector3.Normalize(new Vector3(Random.Range(-1f, 1f), Random.Range(-1f, 1f), 0)) * (float)data.GetSpd();
+        }
     }
 
     protected virtual void TryDealDamage(Collision collision){
@@ -60,8 +78,14 @@ public class BasicBall : MonoBehaviour
         }
     }
 
-    void applyConstantVelocity(){
+    private void KeepConstantVelocity(){
         rb.velocity = rb.velocity.normalized * (float)data.GetSpd();
     }
 
+    private void UpdateLaserRotation()
+    {
+        laserRotationDirection = rb.angularVelocity.z >= 0 ? 1 : -1;
+        rb.angularVelocity = new Vector3(0, 0, 0);
+        laserRotationSpeedDegrees = Mathf.Abs(laserRotationSpeedDegrees) * laserRotationDirection;
+    }
 }

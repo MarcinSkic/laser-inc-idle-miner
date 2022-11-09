@@ -9,6 +9,7 @@ public class Data : MonoBehaviour
 {
     [Header("base stats")]
     public double bulletBaseDamage;
+    [SerializeField]
     public double bulletSpeed;
     public int basicBulletCount;
     public int bombBulletCount;
