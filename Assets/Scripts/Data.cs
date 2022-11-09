@@ -7,40 +7,57 @@ using System;
 
 public class Data : MonoBehaviour
 {
-    [Header("base stats")]
-    public double bulletBaseDamage;
-    [SerializeField]
-    public double bulletSpeed;
-    public int basicBulletCount;
-    public int bombBulletCount;
-    public int sniperBulletCount;
+    [Header("BALLS STATS")]
+
+    [Header("Universal")]
+    public double ballDamage;
+    public double ballSpeed;
+
     [Header("Bomb ball")]
     public float explosionSize;
 
-    [Header("initial stats")]
+    [Header("Sniper ball")]
+    public float speedBoost;
+
+    [Space(10)]
+
+    [Header("PLAYER STATS")]
     public double money;
-    public double accumulated;
-    public double wave;
+    public double earnedMoney;
 
-    [Header("rounds stuff")]
-    public int roundNumber;
-    public double roundTime;
-
-
-    [Header("Upgrade bonuses")]
+    [Header("Upgrades")]
     public double dmgPerUpgrade;
     public double bulletSpdPerUpgrade;
 
-    [Header("Debug")]
+    [Space(10)]
+
+    [Header("GAME STATS")]
+
+    public int basicBallCount;
+    public int bombBallCount;
+    public int sniperBallCount;
+
+    [Header("Rounds stats")]
+
+    public double wave;
+    public int roundNumber;
+    public double roundTime;
+
+    [Space(10)]
+
+    [Header("SETTINGS")]
+    public bool displayFloatingText;
+
+    [Space(10)]
+
+    [Header("DEBUG")]
     public bool debugSettings;
     public double additionalStartingMoney;
-    [Header("Debug (UNIMPLEMENTED)")]
+
+    [Header("UNIMPLEMENTED")]
     public int additionalStartingRound;
     public int additionalStartingBalls;
     public bool displayFpsStats;
-
-    [Header("Settings?")]
-    public bool displayFloatingText;
 
 
     private void Start()
@@ -53,7 +70,7 @@ public class Data : MonoBehaviour
         {
             money += additionalStartingMoney;
             roundNumber += additionalStartingRound;
-            basicBulletCount += additionalStartingBalls;
+            basicBallCount += additionalStartingBalls;
         }
     }
 
@@ -123,10 +140,10 @@ public class Data : MonoBehaviour
     }
     public double GetBulletDamage()
     {
-        return bulletBaseDamage + upgrades["Damage"].upgradeLevel * dmgPerUpgrade;
+        return ballDamage + upgrades["Damage"].upgradeLevel * dmgPerUpgrade;
     }
     public double GetSpd()
     {
-        return bulletSpeed + bulletSpdPerUpgrade * upgrades["Bullet speed"].upgradeLevel;
+        return ballSpeed + bulletSpdPerUpgrade * upgrades["Bullet speed"].upgradeLevel;
     }
 }

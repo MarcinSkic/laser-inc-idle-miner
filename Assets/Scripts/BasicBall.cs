@@ -23,12 +23,11 @@ public class BasicBall : MonoBehaviour
     void Update()
     {
         RotateLaser();
-        //SetVelocityIfStuck();
     }
 
-    void OnCollisionEnter(Collision collision)
+    protected virtual void OnCollisionEnter(Collision collision)
     {
-        KeepConstantVelocity();
+        SetVelocity();
         UpdateLaserRotation();
         TryDealDamage(collision);
     }
@@ -64,21 +63,18 @@ public class BasicBall : MonoBehaviour
         transform.GetChild(0).GetChild(0).Rotate(new Vector3(0, 0, 1), Time.deltaTime * laserRotationSpeedDegrees);
     }
 
-    private void SetVelocityIfStuck()
-    {
-        if (rb.velocity.magnitude == 0)
-        {
-            rb.velocity = Vector3.Normalize(new Vector3(Random.Range(-1f, 1f), Random.Range(-1f, 1f), 0)) * (float)data.GetSpd();
-        }
-    }
-
     protected virtual void TryDealDamage(Collision collision){
         if(collision.gameObject.TryGetComponent<BasicBlock>(out var block)){
             block.TakeDamage(data.GetBulletDamage());
         }
     }
 
-    private void KeepConstantVelocity(){
+    protected void SetVelocity(){
+        if(rb.velocity.magnitude <= 0.000001f)
+        {
+            rb.velocity = Vector3.Normalize(new Vector3(Random.Range(-1f, 1f), Random.Range(-1f, 1f), 0)) * (float)data.GetSpd();
+            //Debug.Log("Ball has been unstuck");
+        }
         rb.velocity = rb.velocity.normalized * (float)data.GetSpd();
     }
 

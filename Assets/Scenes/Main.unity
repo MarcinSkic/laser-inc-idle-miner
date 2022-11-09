@@ -135,7 +135,7 @@ GameObject:
   - component: {fileID: 9314946}
   m_Layer: 0
   m_Name: BottomBorder
-  m_TagString: Untagged
+  m_TagString: border
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -537,7 +537,7 @@ GameObject:
   - component: {fileID: 190056609}
   m_Layer: 0
   m_Name: TopBorder
-  m_TagString: Untagged
+  m_TagString: border
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -1507,7 +1507,7 @@ GameObject:
   - component: {fileID: 662815921}
   m_Layer: 0
   m_Name: RightBorder
-  m_TagString: Untagged
+  m_TagString: border
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -5522,7 +5522,7 @@ GameObject:
   - component: {fileID: 1719632678}
   m_Layer: 0
   m_Name: LeftBorder
-  m_TagString: Untagged
+  m_TagString: border
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -7130,25 +7130,26 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 869ac6ad55f1d16498f2c465f8b95556, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  bulletBaseDamage: 1
-  bulletSpeed: 5
-  basicBulletCount: 0
-  bombBulletCount: 0
-  sniperBulletCount: 0
+  ballDamage: 1
+  ballSpeed: 5
   explosionSize: 3
+  speedBoost: 2
   money: 0
-  accumulated: 0
+  earnedMoney: 0
+  dmgPerUpgrade: 1
+  bulletSpdPerUpgrade: 10
+  basicBallCount: 0
+  bombBallCount: 0
+  sniperBallCount: 0
   wave: 0
   roundNumber: 0
   roundTime: 0
-  dmgPerUpgrade: 1
-  bulletSpdPerUpgrade: 10
+  displayFloatingText: 0
   debugSettings: 1
   additionalStartingMoney: 1234567
   additionalStartingRound: 0
   additionalStartingBalls: 0
   displayFpsStats: 0
-  displayFloatingText: 0
 --- !u!1 &2093626321
 GameObject:
   m_ObjectHideFlags: 0
