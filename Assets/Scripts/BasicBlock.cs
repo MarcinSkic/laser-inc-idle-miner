@@ -11,7 +11,7 @@ public class BasicBlock : MonoBehaviour
 
     [SerializeField]    
     private BoxCollider boxCollider;
-    public BoxCollider BoxCollider { get => boxCollider;}
+    public BoxCollider BoxCollider { get => boxCollider; set { Debug.Log("SETTED"); boxCollider = value; } }
 
     void OnMouseOver()
     {

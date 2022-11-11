@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 7269289770812078979}
   - component: {fileID: 5942548627691626418}
   m_Layer: 0
-  m_Name: RotatingGraphic (1)
+  m_Name: Arm (1)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -95,7 +95,7 @@ GameObject:
   - component: {fileID: 3196975153095178810}
   - component: {fileID: 3927882097073815361}
   m_Layer: 0
-  m_Name: RotatingGraphic
+  m_Name: Arm
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -178,7 +178,7 @@ GameObject:
   m_Component:
   - component: {fileID: 7576359030877124014}
   m_Layer: 0
-  m_Name: RotatingParent
+  m_Name: RotatingArms
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -213,7 +213,7 @@ GameObject:
   - component: {fileID: 2593881973539068800}
   - component: {fileID: 1492854786604711348}
   m_Layer: 0
-  m_Name: RotatingGraphic (2)
+  m_Name: Arm (2)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -297,7 +297,7 @@ GameObject:
   - component: {fileID: 5500916423152269993}
   - component: {fileID: 4331527440971810676}
   m_Layer: 0
-  m_Name: RotatingGraphic
+  m_Name: Circle
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

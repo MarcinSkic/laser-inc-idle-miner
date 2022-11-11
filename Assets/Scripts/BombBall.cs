@@ -6,7 +6,6 @@ public class BombBall : BasicBall
 {
     protected override void TryDealDamage(Collision collision)
     {
-        //TODO - omówić czy chcemy żeby bomba biła tylko przy trafieniu bloku czy też przy trafieniu obramówki
         if(collision.gameObject.TryGetComponent<BasicBlock>(out _)){
             var blocks = gameController._dynamic_blocks.GetComponentsInChildren<BasicBlock>();
 

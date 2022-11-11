@@ -376,8 +376,8 @@ MonoBehaviour:
   avgFpsDisplay: {fileID: 1126226993}
   fpsDisplay: {fileID: 133470415}
   basicBall: {fileID: 2441469365506886252, guid: e0cd1037aff08914480e2affbf4e2fe6, type: 3}
-  bombBall: {fileID: -2790462020447897310, guid: 8b5eee2e06073d548867f5298a9c6647, type: 3}
-  sniperBall: {fileID: 7662565890661789930, guid: ecd703b8c6d78cf45b8d429054c7efdd, type: 3}
+  bombBall: {fileID: -4590345092743506191, guid: e8eba36a7b4eb8b409dcffe03f6f91ed, type: 3}
+  sniperBall: {fileID: -7674619496783045030, guid: a7e5ea1c6a5ca2e439a96ac114dd2b07, type: 3}
   basicBlock: {fileID: 2128506963174872199, guid: cda635155749cf04184f488aaeaec66d, type: 3}
   healthBar: {fileID: 1207225453}
   ShopMenu: {fileID: 1704979494}
@@ -3388,7 +3388,7 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 1680778475}
   m_HandleRect: {fileID: 1680778474}
   m_Direction: 2
-  m_Value: 0
+  m_Value: 1
   m_Size: 1
   m_NumberOfSteps: 0
   m_OnValueChanged:

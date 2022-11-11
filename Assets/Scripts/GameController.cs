@@ -215,7 +215,6 @@ public class GameController : MonoBehaviour
                 BasicBall spawning = Instantiate(balltype, spawnLocation, Quaternion.identity, _dynamic_balls);
                 spawning.gameController = this;
                 spawning.data = data;
-                spawning.rb = spawning.GetComponent<Rigidbody>();
             }
         }
         else if (data.money < Cost(name))

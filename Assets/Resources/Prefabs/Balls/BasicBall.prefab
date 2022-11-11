@@ -9,12 +9,10 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 2441469365506886288}
-  - component: {fileID: 2441469365506886289}
-  - component: {fileID: 2441469365506886254}
   - component: {fileID: 2441469365506886255}
-  - component: {fileID: 2441469365506886252}
   - component: {fileID: 2441469365506886253}
   - component: {fileID: 7017461659481143617}
+  - component: {fileID: 2441469365506886252}
   m_Layer: 6
   m_Name: BasicBall
   m_TagString: Untagged
@@ -38,56 +36,6 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!33 &2441469365506886289
-MeshFilter:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2441469365506886250}
-  m_Mesh: {fileID: 10207, guid: 0000000000000000e000000000000000, type: 0}
---- !u!23 &2441469365506886254
-MeshRenderer:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2441469365506886250}
-  m_Enabled: 0
-  m_CastShadows: 1
-  m_ReceiveShadows: 1
-  m_DynamicOccludee: 1
-  m_StaticShadowCaster: 0
-  m_MotionVectors: 1
-  m_LightProbeUsage: 1
-  m_ReflectionProbeUsage: 1
-  m_RayTracingMode: 2
-  m_RayTraceProcedural: 0
-  m_RenderingLayerMask: 1
-  m_RendererPriority: 0
-  m_Materials:
-  - {fileID: 2100000, guid: 9d5616692579216468aa958d55038580, type: 2}
-  m_StaticBatchInfo:
-    firstSubMesh: 0
-    subMeshCount: 0
-  m_StaticBatchRoot: {fileID: 0}
-  m_ProbeAnchor: {fileID: 0}
-  m_LightProbeVolumeOverride: {fileID: 0}
-  m_ScaleInLightmap: 1
-  m_ReceiveGI: 1
-  m_PreserveUVs: 0
-  m_IgnoreNormalsForChartDetection: 0
-  m_ImportantGI: 0
-  m_StitchLightmapSeams: 1
-  m_SelectedEditorRenderState: 3
-  m_MinimumChartSize: 4
-  m_AutoUVMaxDistance: 0.5
-  m_AutoUVMaxAngle: 89
-  m_LightmapParameters: {fileID: 0}
-  m_SortingLayerID: 0
-  m_SortingLayer: 0
-  m_SortingOrder: 0
-  m_AdditionalVertexStreams: {fileID: 0}
 --- !u!135 &2441469365506886255
 SphereCollider:
   m_ObjectHideFlags: 0
@@ -101,23 +49,6 @@ SphereCollider:
   serializedVersion: 2
   m_Radius: 0.4
   m_Center: {x: 0, y: 0, z: 0}
---- !u!114 &2441469365506886252
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2441469365506886250}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: b5a805819ac818041be36791d2ef4d2e, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  data: {fileID: 0}
-  gameController: {fileID: 0}
-  rb: {fileID: 0}
-  laserRotationSpeedDegrees: 180
-  laserColor: {r: 1, g: 1, b: 1, a: 1}
 --- !u!54 &2441469365506886253
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -251,6 +182,23 @@ TrailRenderer:
   m_MinVertexDistance: 0.1
   m_Autodestruct: 0
   m_Emitting: 1
+--- !u!114 &2441469365506886252
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2441469365506886250}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b5a805819ac818041be36791d2ef4d2e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  data: {fileID: 0}
+  gameController: {fileID: 0}
+  rb: {fileID: 2441469365506886253}
+  laserRotationSpeedDegrees: 180
+  laserColor: {r: 1, g: 1, b: 1, a: 1}
 --- !u!1001 &3117298957570745195
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -301,6 +249,26 @@ PrefabInstance:
     - target: {fileID: 52350048325449008, guid: c35cd99ce9bba3d4eb5a54a4ef2cf230, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 263222871365767118, guid: c35cd99ce9bba3d4eb5a54a4ef2cf230, type: 3}
+      propertyPath: m_Name
+      value: Arm (1)
+      objectReference: {fileID: 0}
+    - target: {fileID: 324148734247229149, guid: c35cd99ce9bba3d4eb5a54a4ef2cf230, type: 3}
+      propertyPath: m_Name
+      value: Arm
+      objectReference: {fileID: 0}
+    - target: {fileID: 353127531237132267, guid: c35cd99ce9bba3d4eb5a54a4ef2cf230, type: 3}
+      propertyPath: m_Name
+      value: RotatingArms
+      objectReference: {fileID: 0}
+    - target: {fileID: 1384007506414443237, guid: c35cd99ce9bba3d4eb5a54a4ef2cf230, type: 3}
+      propertyPath: m_Name
+      value: Arm (2)
+      objectReference: {fileID: 0}
+    - target: {fileID: 5177457686998633214, guid: c35cd99ce9bba3d4eb5a54a4ef2cf230, type: 3}
+      propertyPath: m_Name
+      value: Circle
       objectReference: {fileID: 0}
     - target: {fileID: 7121848933269851417, guid: c35cd99ce9bba3d4eb5a54a4ef2cf230, type: 3}
       propertyPath: m_Name
