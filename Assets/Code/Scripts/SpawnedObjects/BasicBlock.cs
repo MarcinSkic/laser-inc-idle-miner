@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Pool;
 
 public class BasicBlock : MonoBehaviour
 {
@@ -8,6 +9,7 @@ public class BasicBlock : MonoBehaviour
     public double maxHp;
     public GameController gameController;
     public Data data;
+    public ObjectPool<BasicBlock> pool { private get; set; }
 
     [SerializeField]    
     private BoxCollider boxCollider;
@@ -33,8 +35,13 @@ public class BasicBlock : MonoBehaviour
     {
         if (hp <= 0)
         {
-            gameController.AddMoney(maxHp);
-            Destroy(gameObject);
+            OnBlockDestroyed();
         }
+    }
+
+    private void OnBlockDestroyed()
+    {
+        gameController.AddMoney(maxHp);
+        pool.Release(this);
     }
 }

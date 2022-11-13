@@ -2,9 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 using TMPro;
-using UnityEngine.SceneManagement;
 using UnityEngine.UI;
-
 using static System.Math;
 
 public class GameController : MonoBehaviour
@@ -38,6 +36,9 @@ public class GameController : MonoBehaviour
 
     public Vector2 spawnArea;
 
+    [Header("TEMP")]
+    [SerializeField] private BlockSpawner blockSpawner;
+
     private void Update()
     {
         displayFPS();
@@ -45,14 +46,15 @@ public class GameController : MonoBehaviour
     }
 
     private void checkIfWaveFinished(){
-        if (_dynamic_blocks.childCount == 0)
+        var blocks = _dynamic_blocks.GetComponentsInChildren<BasicBlock>(false);    //TODO: Very Temp
+        if (blocks.Length == 0)
         {
             data.wave++;
             statsDisplay.SetWaveDisplay();
             DisplayWave();
             for (int i=0; i<Random.Range(80, 120); i++)
             {
-                SpawnNormalBlock();
+                blockSpawner.SpawnBlock();
             }
         }
     }

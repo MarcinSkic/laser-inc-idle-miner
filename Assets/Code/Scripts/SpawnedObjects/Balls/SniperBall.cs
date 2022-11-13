@@ -18,7 +18,7 @@ public class SniperBall : BasicBall
 
     private BasicBlock FindTarget()
     {
-        var blocks = gameController._dynamic_blocks.GetComponentsInChildren<BasicBlock>();
+        var blocks = gameController._dynamic_blocks.GetComponentsInChildren<BasicBlock>(false);
         var target = blocks[0];
 
         foreach(var block in blocks)
