@@ -77,17 +77,9 @@ public class GameController : MonoBehaviour
 
     void Start()
     {
-        //ClearPlayerPrefs();
         HideMenus();
         GenerateBuyingBars();
         GenerateSettingBars();
-    }
-
-    void ClearPlayerPrefs()
-    {
-        PlayerPrefs.DeleteKey("Show maxed upgrades");
-        PlayerPrefs.DeleteKey("Show floating damage text");
-        PlayerPrefs.Save();
     }
 
     void HideMenus()
@@ -118,7 +110,6 @@ public class GameController : MonoBehaviour
         {
             //print(entry.Key);
         }
-        //print(buyingBars.Count);
     }
 
     void GenerateSettingBars()
@@ -176,10 +167,9 @@ public class GameController : MonoBehaviour
 
     public void BuyUpgrade(string name)
     {
-        //print($"you tried to buy {name} upgrade");
+
         if (data.money >= Cost(name) && (data.upgrades[name].upgradeLevel < data.upgrades[name].upgradeMaxLevel || data.upgrades[name].upgradeMaxLevel == 0))
         {
-            //print($"you have enough money to buy {name}");
             data.money -= Cost(name);
             data.upgrades[name].upgradeLevel += 1;
             SetBuyingBarTexts(name);
@@ -192,11 +182,6 @@ public class GameController : MonoBehaviour
             {
                 statsDisplay.SetSpdDisplay();
             }
-            //if (name == "Health")
-            //{
-                //data.health += data.healthPerUpgrade;
-              //  data.maxHealth += data.healthPerUpgrade;
-            //}
             if (name.Contains("count"))
             {
                 statsDisplay.SetBallCountDisplay();
@@ -227,67 +212,6 @@ public class GameController : MonoBehaviour
         }
     }
 
-    /*    private void SpawnNormalEnemy()
-        {
-            Vector2 spawnDirection = Random.insideUnitCircle.normalized;
-            Vector3 spawnLocation = new Vector3(spawnDirection.x * data.spawnDistance, 0, spawnDirection.y * data.spawnDistance);
-            BasicEnemy spawning = Instantiate(basicEnemy, spawnLocation, Quaternion.LookRotation(tower.transform.position - spawnLocation, new Vector3(0, 1, 0)), _dynamic);
-            spawning.speed = data.GetWaveEnemiesSpeed();
-            spawning.dps = data.GetWaveEnemiesDps();
-            spawning.hp = data.GetWaveEnemiesHealth();
-            spawning.moneyGiven = data.GetWaveEnemiesMoney();
-            spawning.SetData(data);
-            spawning.SetGameController(this);
-        }*/
-
-    // CO JA TU POROBIŁEM XD
-
-    /*private void SpawnNormalBlocks()
-    {
-        Vector3 spawnLocation;
-        while (true)
-        {
-            bool tooClose = false;
-            spawnLocation = new Vector3(Random.Range(-spawnArea.x, spawnArea.x), Random.Range(-spawnArea.y, spawnArea.y), 0);
-            for (int i = 0; i < _dynamic_blocks.childCount; i++)
-            {
-                BasicBlock block = _dynamic_blocks.GetChild(i).GetComponent<BasicBlock>();
-                if (Vector3.Distance(block.GetComponent<BoxCollider>().ClosestPoint(spawnLocation), spawnLocation) < 3)
-                {
-                    tooClose = true;
-                    break;
-                }
-            }
-            if (!tooClose)
-            {
-                break;
-            }
-        }
-        Vector3[] offsetVectors = { Vector3.down, Vector3.right };
-        int vectorNumber = Random.Range(0, 2);
-        Vector3 offsetVector = offsetVectors[vectorNumber];
-        float offsetDistance = Random.Range(0.69f, 1f);
-        if (vectorNumber == 1)
-        {
-            offsetDistance *= 1.62f;
-        }
-        float clusteredBlocksCount = Random.Range(4, 11);
-        if ((spawnLocation + offsetVector * offsetDistance * clusteredBlocksCount).x >= -spawnArea.x && (spawnLocation + offsetVector * offsetDistance * clusteredBlocksCount).y >= -spawnArea.y)
-        {
-            spawnLocation -= (offsetVector * offsetDistance * (clusteredBlocksCount));
-        }
-        Debug.LogWarning(vectorNumber);
-        Debug.Log(offsetVector * offsetDistance * (clusteredBlocksCount));
-        for (int i=0; i<clusteredBlocksCount; i++)
-        {
-            BasicBlock spawning = Instantiate(basicBlock, spawnLocation+(offsetVector*offsetDistance*i), Quaternion.identity, _dynamic_blocks);
-            spawning.hp = data.GetWaveEnemiesHealth();
-            spawning.maxHp = spawning.hp;
-            spawning.data = data;
-            spawning.gameController = this;
-        }
-    }*/
-
     private void SpawnNormalBlock()
     {
 
@@ -304,11 +228,6 @@ public class GameController : MonoBehaviour
         waveDisplay.text = $"Wave: {data.wave}";
     }
 
-/*    public void DealDamage(double damage)
-    {
-        data.health -= damage;
-    }*/
-
     public void ShowMenu(GameObject menu)
     {
         bool shouldBeShown = true;
@@ -320,11 +239,6 @@ public class GameController : MonoBehaviour
         if (shouldBeShown)
         {
             menu.SetActive(true);
-            //print($"menu shown: {menu}");
-        }
-        else
-        {
-            //print($"menu: {menu} is now hidden");
         }
     }
 
