@@ -11,11 +11,11 @@ public class BasicBlock : MonoBehaviour
 
     [SerializeField]    
     private BoxCollider boxCollider;
-    public BoxCollider BoxCollider { get => boxCollider; set { Debug.Log("SETTED"); boxCollider = value; } }
+    public BoxCollider BoxCollider { get => boxCollider;}
 
     void OnMouseOver()
     {
-        if (Input.GetMouseButtonDown(0)){
+        if (Input.GetMouseButtonDown(0)){   //TODO: Check on mobile
             TakeDamage(1);
         }
     }
@@ -34,7 +34,7 @@ public class BasicBlock : MonoBehaviour
         if (hp <= 0)
         {
             gameController.AddMoney(maxHp);
-            Destroy(this.gameObject);
+            Destroy(gameObject);
         }
     }
 }

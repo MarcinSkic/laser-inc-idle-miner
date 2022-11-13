@@ -14,7 +14,7 @@ public class BasicBall : MonoBehaviour
 
     void Start()
     {
-        TrySetLaserColor(); //TODO @Filip Why 'Try', there is no case in which it will not set color (even if it is still white)
+        SetLaserColor();
         InitLaserRotation();
 
         SetInitialVelocity();
@@ -43,7 +43,7 @@ public class BasicBall : MonoBehaviour
         rb.velocity = Vector3.Normalize(new Vector3(Random.Range(-1f, 1f), Random.Range(-1f, 1f), 0)) * (float)data.GetSpd();
     }
 
-    protected virtual void TrySetLaserColor()
+    protected virtual void SetLaserColor()
     {
         SpriteRenderer circle = transform.GetChild(0).GetChild(1).GetComponent<SpriteRenderer>();   //TODO unnecessary getComponent
         circle.color = laserColor;

@@ -41,7 +41,7 @@ public class GameController : MonoBehaviour
     private void Update()
     {
         displayFPS();
-        checkIfWaveFinished();
+        checkIfWaveFinished();  //TODO: Make it event activated for each block broken
     }
 
     private void checkIfWaveFinished(){
