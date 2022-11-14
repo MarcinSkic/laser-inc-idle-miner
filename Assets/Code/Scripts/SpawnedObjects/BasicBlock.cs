@@ -1,19 +1,24 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Events;
 using UnityEngine.Pool;
 
 public class BasicBlock : MonoBehaviour
 {
-    public double hp;
-    public double maxHp;
+    [SerializeField]
+    private BoxCollider boxCollider;
+    public BoxCollider BoxCollider { get => boxCollider; }
+
+    public ObjectPool<BasicBlock> Pool { private get; set; }
+
+    protected double hp;
+    protected double maxHp;
+
+
+    [Header("TEMP")]
     public GameController gameController;
     public Data data;
-    public ObjectPool<BasicBlock> pool { private get; set; }
-
-    [SerializeField]    
-    private BoxCollider boxCollider;
-    public BoxCollider BoxCollider { get => boxCollider;}
 
     void OnMouseOver()
     {
@@ -22,26 +27,33 @@ public class BasicBlock : MonoBehaviour
         }
     }
 
+    public void InitBlock(double maxHp)
+    {
+        this.maxHp = maxHp;
+        hp = maxHp;
+    }
+
     public void TakeDamage(double damage)
     {
         hp -= damage;
+
+        if(hp <= 0)
+        {
+            DestroyBlock();
+        }
+
         if (data.displayFloatingText)
         {
             FloatingTextController.CreateFloatingText(damage.ToString(), transform);
         }
     }
 
-    private void Update()
+    public UnityAction onBlockDestroyed;
+    private void DestroyBlock()
     {
-        if (hp <= 0)
-        {
-            OnBlockDestroyed();
-        }
-    }
+        onBlockDestroyed?.Invoke();
+        Pool.Release(this);
 
-    private void OnBlockDestroyed()
-    {
-        gameController.AddMoney(maxHp);
-        pool.Release(this);
+        gameController.AddMoney(maxHp); //TODO-CURRENT: Connect to action
     }
 }

@@ -6,7 +6,7 @@ using UnityEngine.Pool;
 public class BlockSpawner : MonoBehaviour
 {
     [SerializeField] private BasicBlock blockPrefab;
-    [SerializeField] private Transform _dynamic_blocks;
+    [SerializeField] private Transform blocksParent;
     [SerializeField] private Vector2 spawnArea;
 
     [Header("DEBUG")]
@@ -38,9 +38,10 @@ public class BlockSpawner : MonoBehaviour
 
     private BasicBlock CreateBlock()
     {
-        var block = Instantiate(blockPrefab, _dynamic_blocks);
-        block.gameController = gameController;
-        block.pool = pool;
+        var block = Instantiate(blockPrefab, blocksParent);
+        block.Pool = pool;
+
+        block.gameController = gameController;  //TODO-CURRENT: Remove
         block.data = data;
 
         return block;
@@ -48,8 +49,7 @@ public class BlockSpawner : MonoBehaviour
 
     private void BlockGet(BasicBlock block)
     {
-        block.hp = data.GetWaveEnemiesHealth();
-        block.maxHp = block.hp;
+        block.InitBlock(data.GetWaveEnemiesHealth());
 
         block.gameObject.SetActive(true);
     }
