@@ -52,8 +52,9 @@ public class BasicBlock : MonoBehaviour
     private void DestroyBlock()
     {
         onBlockDestroyed?.Invoke();
-        Pool.Release(this);
 
         gameController.AddMoney(maxHp); //TODO-CURRENT: Connect to action
+
+        Pool.Release(this);
     }
 }

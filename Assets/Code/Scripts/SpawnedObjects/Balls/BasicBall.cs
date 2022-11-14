@@ -30,6 +30,12 @@ public class BasicBall : MonoBehaviour
         SetInitialVelocity();
     }
 
+    public void UpgradeBall(double speed, double damage)    //TODO-HOTFIX
+    {
+        this.speed = speed;
+        this.damage = damage;
+    }
+
     void Update()
     {
         RotateLaser();

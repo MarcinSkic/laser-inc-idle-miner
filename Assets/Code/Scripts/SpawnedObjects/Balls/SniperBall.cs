@@ -15,7 +15,8 @@ public class SniperBall : BasicBall
     {
         base.OnCollisionEnter(collision);
 
-        if (collision.gameObject.tag == "border" && gameController._dynamic_blocks.childCount > 0)
+        var blocks = gameController._dynamic_blocks.GetComponentsInChildren<BasicBlock>(false);
+        if (collision.gameObject.tag == "border" && blocks.Length > 0)
         {
             var target = FindTarget();
 
@@ -26,6 +27,7 @@ public class SniperBall : BasicBall
     private BasicBlock FindTarget()
     {
         var blocks = gameController._dynamic_blocks.GetComponentsInChildren<BasicBlock>(false);
+        
         var target = blocks[0];
 
         foreach(var block in blocks)

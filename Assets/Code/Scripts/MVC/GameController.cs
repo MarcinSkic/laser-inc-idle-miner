@@ -203,6 +203,12 @@ public class GameController : MonoBehaviour
 
                 statsDisplay.SetBallCountDisplay();
             }
+
+            var balls = _dynamic_balls.GetComponentsInChildren<BasicBall>(true);    //TODO-HOTFIX
+            foreach (var ball in balls)
+            {
+                ball.UpgradeBall(data.GetSpd(), data.GetBulletDamage());
+            }
         }
         else if (data.money < Cost(name))
         {
