@@ -6,7 +6,7 @@ using UnityEngine.Pool;
 public class BlockSpawner : MonoBehaviour
 {
     [SerializeField] private BasicBlock blockPrefab;
-    [SerializeField] private Transform _dynamic_blocks;
+    [SerializeField] private Transform blocksParent;
     [SerializeField] private Vector2 spawnArea;
 
     [Header("DEBUG")]
@@ -38,7 +38,7 @@ public class BlockSpawner : MonoBehaviour
 
     private BasicBlock CreateBlock()
     {
-        var block = Instantiate(blockPrefab, _dynamic_blocks);
+        var block = Instantiate(blockPrefab, blocksParent);
         block.gameController = gameController;
         block.pool = pool;
         block.data = data;

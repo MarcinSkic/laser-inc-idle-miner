@@ -1,14 +1,18 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Pool;
 
 public class BasicBall : MonoBehaviour
 {
-    public Data data;
-    public GameController gameController;
     public Rigidbody rb;
     public float laserRotationSpeedDegrees;
     private float laserRotationDirection;
+    public ObjectPool<BasicBall> pool {protected get; set;}
+
+    [Header("TEMP")]
+    public Data data;
+    public GameController gameController;
 
     public Color laserColor;
 

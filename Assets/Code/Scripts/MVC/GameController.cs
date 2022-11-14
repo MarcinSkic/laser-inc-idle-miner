@@ -38,6 +38,7 @@ public class GameController : MonoBehaviour
 
     [Header("TEMP")]
     [SerializeField] private BlockSpawner blockSpawner;
+    [SerializeField] private BallSpawner ballsSpawner;
 
     private void Update()
     {
@@ -187,21 +188,20 @@ public class GameController : MonoBehaviour
             if (name.Contains("count"))
             {
                 statsDisplay.SetBallCountDisplay();
-                Vector3 spawnLocation = new Vector3(Random.Range(-spawnArea.x, spawnArea.x), Random.Range(-spawnArea.y, spawnArea.y), 0);
-                BasicBall balltype = basicBall;
-                if (name == "Bullet count") {
-                    data.basicBallCount++;
+
+                BallSpawner.BallType ballType = BallSpawner.BallType.Basic;
+                
+                if (name == "Bullet count") {   //TODO: Replace this switch
+                    ballType = BallSpawner.BallType.Basic;
                 } else if (name == "Bomb count") {
-                    data.bombBallCount++;
-                    balltype = bombBall;
+                    ballType = BallSpawner.BallType.Bomb;
                 } else if (name == "Sniper count") {
-                    data.sniperBallCount++;
-                    balltype = sniperBall;
+                    ballType = BallSpawner.BallType.Sniper;
                 }
+
+                ballsSpawner.SpawnBall(ballType);
+
                 statsDisplay.SetBallCountDisplay();
-                BasicBall spawning = Instantiate(balltype, spawnLocation, Quaternion.identity, _dynamic_balls);
-                spawning.gameController = this;
-                spawning.data = data;
             }
         }
         else if (data.money < Cost(name))
@@ -212,17 +212,6 @@ public class GameController : MonoBehaviour
         {
             //print($"upgrade {name} already at max level!");
         }
-    }
-
-    private void SpawnNormalBlock()
-    {
-
-        Vector3 spawnLocation = new Vector3(Random.Range(-spawnArea.x, spawnArea.x), Random.Range(-spawnArea.y, spawnArea.y), 0);
-        BasicBlock spawning = Instantiate(basicBlock, spawnLocation, Quaternion.identity, _dynamic_blocks);
-        spawning.hp = data.GetWaveEnemiesHealth();
-        spawning.maxHp = spawning.hp;
-        spawning.data = data;
-        spawning.gameController = this;
     }
 
     public void DisplayWave()
