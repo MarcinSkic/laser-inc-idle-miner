@@ -5,22 +5,28 @@ using UnityEngine.Pool;
 
 public class BasicBall : MonoBehaviour
 {
-    public Rigidbody rb;
-    public float laserRotationSpeedDegrees;
-    private float laserRotationDirection;
-    public ObjectPool<BasicBall> pool {protected get; set;}
+    [SerializeField] protected Rigidbody rb;
+    [SerializeField] protected Color laserColor;
+    [SerializeField] protected float laserRotationSpeedDegrees;
+    public ObjectPool<BasicBall> Pool {protected get; set;}
+
+#region Upgradeable
+    protected double speed;
+    protected double damage;
+#endregion
 
     [Header("TEMP")]
-    public Data data;
     public GameController gameController;
 
-    public Color laserColor;
+    private float laserRotationDirection;
 
-    void Start()
+    public virtual void InitBall(double speed, double damage)
     {
+        this.speed = speed;
+        this.damage = damage;
+
         SetLaserColor();
         InitLaserRotation();
-
         SetInitialVelocity();
     }
 
@@ -44,7 +50,7 @@ public class BasicBall : MonoBehaviour
 
     private void SetInitialVelocity()
     {
-        rb.velocity = Vector3.Normalize(new Vector3(Random.Range(-1f, 1f), Random.Range(-1f, 1f), 0)) * (float)data.GetSpd();
+        rb.velocity = Vector3.Normalize(new Vector3(Random.Range(-1f, 1f), Random.Range(-1f, 1f), 0)) * (float)speed;
     }
 
     protected virtual void SetLaserColor()
@@ -69,17 +75,17 @@ public class BasicBall : MonoBehaviour
 
     protected virtual void TryDealDamage(Collision collision){
         if(collision.gameObject.TryGetComponent<BasicBlock>(out var block)){
-            block.TakeDamage(data.GetBulletDamage());
+            block.TakeDamage(damage);
         }
     }
 
     protected void SetVelocity(){
         if(rb.velocity.magnitude <= 0.000001f)
         {
-            rb.velocity = Vector3.Normalize(new Vector3(Random.Range(-1f, 1f), Random.Range(-1f, 1f), 0)) * (float)data.GetSpd();
+            rb.velocity = Vector3.Normalize(new Vector3(Random.Range(-1f, 1f), Random.Range(-1f, 1f), 0)) * (float)speed;
             //Debug.Log("Ball has been unstuck");
         }
-        rb.velocity = rb.velocity.normalized * (float)data.GetSpd();
+        rb.velocity = rb.velocity.normalized * (float)speed;
     }
 
     private void UpdateLaserRotation()

@@ -39,8 +39,9 @@ public class BlockSpawner : MonoBehaviour
     private BasicBlock CreateBlock()
     {
         var block = Instantiate(blockPrefab, blocksParent);
-        block.gameController = gameController;
-        block.pool = pool;
+        block.Pool = pool;
+
+        block.gameController = gameController;  //TODO-CURRENT: Remove
         block.data = data;
 
         return block;
@@ -48,8 +49,7 @@ public class BlockSpawner : MonoBehaviour
 
     private void BlockGet(BasicBlock block)
     {
-        block.hp = data.GetWaveEnemiesHealth();
-        block.maxHp = block.hp;
+        block.InitBlock(data.GetWaveEnemiesHealth());
 
         block.gameObject.SetActive(true);
     }

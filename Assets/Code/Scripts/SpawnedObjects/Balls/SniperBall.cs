@@ -4,6 +4,13 @@ using UnityEngine;
 
 public class SniperBall : BasicBall
 {
+    protected float speedBoost;
+    public void InitBall(double speed, double damage, float speedBoost)
+    {
+        base.InitBall(speed, damage);
+        this.speedBoost = speedBoost;
+    }
+
     protected override void OnCollisionEnter(Collision collision)
     {
         base.OnCollisionEnter(collision);
@@ -12,7 +19,7 @@ public class SniperBall : BasicBall
         {
             var target = FindTarget();
 
-            rb.velocity = (target.transform.position - transform.position).normalized * (float)data.GetSpd() * data.speedBoost;
+            rb.velocity = (target.transform.position - transform.position).normalized * (float)speed * speedBoost;
         }
     }
 
