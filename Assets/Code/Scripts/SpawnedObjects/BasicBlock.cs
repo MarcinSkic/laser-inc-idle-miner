@@ -33,19 +33,26 @@ public class BasicBlock : MonoBehaviour
         hp = maxHp;
     }
 
+    /*public void Update()
+    {
+        
+    }*/
+
     public void TakeDamage(double damage)
     {
         hp -= damage;
+
+        if (hp <= 0 && gameObject.activeSelf)
+        {
+            DestroyBlock();
+        }
 
         if (data.displayFloatingText)
         {
             FloatingTextController.CreateFloatingText(damage.ToString(), transform);
         }
 
-        if (hp <= 0)
-        {
-            DestroyBlock();
-        }
+        
     }
 
     public UnityAction onBlockDestroyed;
