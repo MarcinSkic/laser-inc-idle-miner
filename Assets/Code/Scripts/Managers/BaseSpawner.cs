@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Pool;
 
-public class BaseSpawner<T> : MonoBehaviour where T : MonoBehaviour
+public class BaseSpawner<T> : MonoBehaviour where T : MonoBehaviour, IPoolable<T>
 {
     [Header("BASE SPAWNER")]
     [SerializeField] private T prefab;
@@ -17,7 +17,7 @@ public class BaseSpawner<T> : MonoBehaviour where T : MonoBehaviour
 
     private void Awake()
     {
-        //pool = new ObjectPool<T>(Create, Get, Release);
+        pool = new ObjectPool<T>(Create, Get, Release);
     }
 
     private void Update()
@@ -27,8 +27,25 @@ public class BaseSpawner<T> : MonoBehaviour where T : MonoBehaviour
         inactive = pool.CountInactive;
     }
 
-    public void Spawn()
-    {
+    public T Spawn()
+    {    
+        return pool.Get();
+    }
 
+    private T Create()
+    {
+        T element = Instantiate(prefab, instantionsParent);
+        element.Pool = pool;
+        return element;
+    }
+
+    private void Get(T element)
+    {
+        element.gameObject.SetActive(true);
+    }
+
+    private void Release(T element)
+    {
+        element.gameObject.SetActive(false);
     }
 }

@@ -37,14 +37,14 @@ public class BasicBlock : MonoBehaviour
     {
         hp -= damage;
 
-        if(hp <= 0)
-        {
-            DestroyBlock();
-        }
-
         if (data.displayFloatingText)
         {
             FloatingTextController.CreateFloatingText(damage.ToString(), transform);
+        }
+
+        if (hp <= 0)
+        {
+            DestroyBlock();
         }
     }
 
