@@ -26,7 +26,7 @@ public class UIButtonController : MonoBehaviour
     }
 
     public UnityAction onClick;
-    public void OnClicked()
+    private void OnClicked()
     {
         onClick?.Invoke();
     }

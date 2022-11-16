@@ -68,6 +68,7 @@ public class GameController : MonoBehaviour
     private void OnBlockDestroyed(double maxHp)
     {
         AddMoney(maxHp);
+        //TODO-FEATURE: Count destroyed blocks for upgrades/rewards
     }
 
     private int avgFrameRate;

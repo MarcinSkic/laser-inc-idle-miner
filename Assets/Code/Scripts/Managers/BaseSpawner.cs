@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Pool;
 
-public class BaseSpawner<T> : MonoBehaviour where T : MonoBehaviour, IPoolable<T>
+public abstract class BaseSpawner<T> : MonoBehaviour where T : MonoBehaviour, IPoolable<T>
 {
     [Header("BASE SPAWNER")]
     [SerializeField] protected T prefab;
