@@ -4,21 +4,16 @@ using UnityEngine;
 using UnityEngine.Events;
 using UnityEngine.Pool;
 
-public class BasicBlock : MonoBehaviour
+public class BasicBlock : MonoBehaviour, IPoolable<BasicBlock>
 {
     [SerializeField]
     private BoxCollider boxCollider;
     public BoxCollider BoxCollider { get => boxCollider; }
 
-    public ObjectPool<BasicBlock> Pool { private get; set; }
+    public ObjectPool<BasicBlock> Pool { get; set; }
 
     protected double hp;
     protected double maxHp;
-
-
-    [Header("TEMP")]
-    public GameController gameController;
-    public Data data;
 
     void OnMouseOver()
     {
@@ -33,10 +28,10 @@ public class BasicBlock : MonoBehaviour
         hp = maxHp;
     }
 
-    /*public void Update()
+    public void AssignEvents(UnityAction<double> onBlockDestroyed)
     {
-        
-    }*/
+        this.onBlockDestroyed = onBlockDestroyed;
+    }
 
     public void TakeDamage(double damage)
     {
@@ -44,23 +39,24 @@ public class BasicBlock : MonoBehaviour
 
         if (hp <= 0 && gameObject.activeSelf)
         {
-            DestroyBlock();
+            RemoveBlock();
         }
 
-        if (data.displayFloatingText)
+        //TODO: Add to Settings.Instance -> data.displayFloatingText
+        /*if (false)   
         {
             FloatingTextController.CreateFloatingText(damage.ToString(), transform);
-        }
-
+        }*/
         
     }
 
-    public UnityAction onBlockDestroyed;
-    private void DestroyBlock()
+    /// <summary>
+    /// Double is maxHp that is used to money calculations
+    /// </summary>
+    private UnityAction<double> onBlockDestroyed;  //TODO-FUTURE: Maybe change it to transfer data packet if it will be used for upgrades
+    private void RemoveBlock()
     {
-        onBlockDestroyed?.Invoke();
-
-        gameController.AddMoney(maxHp); //TODO-CURRENT: Connect to action
+        onBlockDestroyed?.Invoke(maxHp);
 
         Pool.Release(this);
     }

@@ -4,6 +4,7 @@ using UnityEngine;
 using TMPro;
 using UnityEngine.UI;
 using static System.Math;
+using UnityEngine.Events;
 
 public class GameController : MonoBehaviour
 {
@@ -58,9 +59,15 @@ public class GameController : MonoBehaviour
             DisplayWave();
             for (int i=0; i<Random.Range(80, 120); i++)
             {
-                blockSpawner.SpawnBlock();
+                var block = blockSpawner.Spawn();
+                block.AssignEvents(OnBlockDestroyed);
             }
         }
+    }
+
+    private void OnBlockDestroyed(double maxHp)
+    {
+        AddMoney(maxHp);
     }
 
     private int avgFrameRate;
