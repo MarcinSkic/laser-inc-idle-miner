@@ -138,7 +138,7 @@ public class Data : MonoBehaviour
     {
         return wave;
     }
-    public double GetBulletDamage()
+    public double GetBallDamage()
     {
         return ballDamage + upgrades["Damage"].upgradeLevel * dmgPerUpgrade;
     }

@@ -3,116 +3,34 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Pool;
 
-public class BallSpawner : MonoBehaviour
+public class BallSpawner<T> : BaseSpawner<T> where T : BasicBall, IPoolable<T>
 {
-    public enum BallType { Basic, Bomb, Sniper}
-
-    [SerializeField] private BasicBall basicPrefab;
-    [SerializeField] private BombBall bombPrefab;
-    [SerializeField] private SniperBall sniperPrefab;
-
-    
-
-    [SerializeField] private Transform ballsParent;
-    [SerializeField] private Vector2 spawnArea;
+    [Space(5)]
+    [Header("BALL SPAWNER")]
+    [SerializeField] protected Vector2 spawnArea;   //TODO: Make it universal for all balls in model
+    //TODO: Also make instantionsParent also universal for all balls
 
     [Header("TEMP")]
-    [SerializeField] private Data data;
-    [SerializeField] private GameController gameController;
+    [SerializeField] protected Data data;
+    [SerializeField] protected GameController gameController;
 
-    private ObjectPool<BasicBall> basicPool;
-    private ObjectPool<BombBall> bombPool;
-    private ObjectPool<SniperBall> sniperPool;
-
-    private void Awake()
+    public override T Spawn()
     {
-        basicPool = new ObjectPool<BasicBall>(CreateBasic, GetBasic, ReleaseUniversal);
-        bombPool = new ObjectPool<BombBall>(CreateBomb,GetBomb,ReleaseUniversal);
-        sniperPool = new ObjectPool<SniperBall>(CreateSniper, GetSniper, ReleaseUniversal);
-    }
-
-    public void Update()
-    {
-        //active = basicPool.CountActive;
-        //inactive = basicPool.CountInactive;
-    }
-
-    public void SpawnBall(BallType ballType)
-    {
-        BasicBall ball = null;
-        switch (ballType)
-        {
-            case BallType.Basic:
-                data.basicBallCount++;
-                ball = basicPool.Get();
-                break;
-            case BallType.Bomb:
-                ball = bombPool.Get();
-                data.bombBallCount++;
-                break;
-            case BallType.Sniper:
-                ball = sniperPool.Get();
-                data.sniperBallCount++;
-                break;
-        }
-        
+        T ball = base.Spawn();
         ball.transform.position = new Vector3(Random.Range(-spawnArea.x, spawnArea.x), Random.Range(-spawnArea.y, spawnArea.y), 0);
-    }
-
-    private BasicBall CreateBasic()
-    {
-        var ball = Instantiate(basicPrefab, ballsParent);
-     
-        return CreateUniversal(ball);
-    }
-
-    private BombBall CreateBomb()
-    {
-        var ball = Instantiate(bombPrefab, ballsParent);
-
-        return (BombBall)CreateUniversal(ball);
-    }
-
-    private SniperBall CreateSniper()
-    {
-        var ball = Instantiate(sniperPrefab, ballsParent);
-
-        return (SniperBall)CreateUniversal(ball);
-    }
-
-    private BasicBall CreateUniversal(BasicBall ball)
-    {
-        ball.gameController = gameController;
-        ball.Pool = basicPool;
-
         return ball;
     }
 
-    private void GetBasic(BasicBall ball)
+    protected override void Get(T ball)
     {
-        ball.InitBall(data.GetSpd(), data.GetBulletDamage());
-        GetUniversal(ball);
+        ball.InitBall();
+        base.Get(ball);
     }
 
-    private void GetBomb(BombBall ball)
+    protected override T Create()
     {
-        ball.InitBall(data.GetSpd(), data.GetBulletDamage(),data.explosionSize);
-        GetUniversal(ball);
-    }
-
-    private void GetSniper(SniperBall ball)
-    {
-        ball.InitBall(data.GetSpd(), data.GetBulletDamage(),data.speedBoost);
-        GetUniversal(ball);
-    }
-
-    private void GetUniversal(BasicBall ball)
-    {
-        ball.gameObject.SetActive(true);
-    }
-
-    private void ReleaseUniversal<T>(T ball) where T : BasicBall
-    {
-        ball.gameObject.SetActive(false);
+        T ball = base.Create();
+        ball.gameController = gameController;   //TODO: Remove when done architecture
+        return ball;
     }
 }

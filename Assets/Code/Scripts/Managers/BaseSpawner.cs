@@ -6,10 +6,10 @@ using UnityEngine.Pool;
 public class BaseSpawner<T> : MonoBehaviour where T : MonoBehaviour, IPoolable<T>
 {
     [Header("BASE SPAWNER")]
-    [SerializeField] private T prefab;
-    [SerializeField] private Transform instantionsParent;
+    [SerializeField] protected T prefab;
+    [SerializeField] protected Transform instantionsParent;
 
-    private ObjectPool<T> pool;
+    protected ObjectPool<T> pool;
 
     [Header("Debug")]
     public int active;
@@ -27,24 +27,24 @@ public class BaseSpawner<T> : MonoBehaviour where T : MonoBehaviour, IPoolable<T
         inactive = pool.CountInactive;
     }
 
-    public T Spawn()
+    public virtual T Spawn()
     {    
         return pool.Get();
     }
 
-    private T Create()
+    protected virtual T Create()
     {
         T element = Instantiate(prefab, instantionsParent);
         element.Pool = pool;
         return element;
     }
 
-    private void Get(T element)
+    protected virtual void Get(T element)
     {
         element.gameObject.SetActive(true);
     }
 
-    private void Release(T element)
+    protected virtual void Release(T element)
     {
         element.gameObject.SetActive(false);
     }

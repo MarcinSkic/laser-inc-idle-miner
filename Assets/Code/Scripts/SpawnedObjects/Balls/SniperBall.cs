@@ -1,13 +1,18 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Pool;
 
-public class SniperBall : BasicBall
+public class SniperBall : BasicBall, IPoolable<SniperBall>
 {
     protected float speedBoost;
-    public void InitBall(double speed, double damage, float speedBoost)
+
+    public new ObjectPool<SniperBall> Pool { get; set; }
+
+    public void LoadData(double speed, double damage, float speedBoost)
     {
-        base.InitBall(speed, damage);
+        this.speed = speed;
+        this.damage = damage;
         this.speedBoost = speedBoost;
     }
 

@@ -1,14 +1,19 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Pool;
 
-public class BombBall : BasicBall
+public class BombBall : BasicBall, IPoolable<BombBall>
 {
+    public new ObjectPool<BombBall> Pool { get; set; }
+
     private float explosionSize;
-    public void InitBall(double speed, double damage, float explosionSize)
+
+    public void LoadData(double speed, double damage, float explosionSize)
     {
+        this.speed = speed;
+        this.damage = damage;
         this.explosionSize = explosionSize;
-        base.InitBall(speed, damage);
     }
     protected override void TryDealDamage(Collision collision)
     {
