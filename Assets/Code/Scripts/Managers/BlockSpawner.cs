@@ -1,61 +1,30 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Events;
 using UnityEngine.Pool;
 
-public class BlockSpawner : MonoBehaviour
+public class BlockSpawner : BaseSpawner<BasicBlock>
 {
-    [SerializeField] private BasicBlock blockPrefab;
-    [SerializeField] private Transform blocksParent;
+    [Space(5)]
+    [Header("BLOCK SPAWNER")]
     [SerializeField] private Vector2 spawnArea;
 
-    [Header("DEBUG")]
-    [Header("Read Only")]
-    [SerializeField] private int active;
-    [SerializeField] private int inactive;
-
-    [Header("TEMP")]
+    [Header("Temp")]
     [SerializeField] private Data data;
     [SerializeField] private GameController gameController;
 
-    private ObjectPool<BasicBlock> pool;
-    private void Awake()
+    public override BasicBlock Spawn()
     {
-        pool = new ObjectPool<BasicBlock>(CreateBlock,BlockGet,BlockRelease);
-    }
-
-    public void SpawnBlock()
-    {
-        var block = pool.Get();
+        var block = base.Spawn();
         block.transform.position = new Vector3(Random.Range(-spawnArea.x, spawnArea.x), Random.Range(-spawnArea.y, spawnArea.y), 0);
-    }
-
-    public void Update()
-    {
-        active = pool.CountActive;
-        inactive = pool.CountInactive;
-    }
-
-    private BasicBlock CreateBlock()
-    {
-        var block = Instantiate(blockPrefab, blocksParent);
-        block.Pool = pool;
-
-        block.gameController = gameController;  //TODO-CURRENT: Remove
-        block.data = data;
-
         return block;
     }
 
-    private void BlockGet(BasicBlock block)
+    protected override void Get(BasicBlock block)
     {
         block.InitBlock(data.GetWaveEnemiesHealth());
 
-        block.gameObject.SetActive(true);
-    }
-
-    private void BlockRelease(BasicBlock block)
-    {
-        block.gameObject.SetActive(false);
+        base.Get(block);
     }
 }

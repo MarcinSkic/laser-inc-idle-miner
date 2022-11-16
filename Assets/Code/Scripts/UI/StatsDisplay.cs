@@ -24,7 +24,7 @@ public class StatsDisplay : MonoBehaviour
 
     public void SetDamageDisplay()
     {
-        damageDisplay.text = $"bullet damage: {data.GetBulletDamage()}";
+        damageDisplay.text = $"bullet damage: {data.GetBallDamage()}";
     }
     
     public void SetSpdDisplay()

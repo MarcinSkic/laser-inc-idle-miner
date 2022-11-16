@@ -4,6 +4,7 @@ using UnityEngine;
 using TMPro;
 using UnityEngine.UI;
 using static System.Math;
+using UnityEngine.Events;
 
 public class GameController : MonoBehaviour
 {
@@ -38,7 +39,10 @@ public class GameController : MonoBehaviour
 
     [Header("TEMP")]
     [SerializeField] private BlockSpawner blockSpawner;
-    [SerializeField] private BallSpawner ballsSpawner;
+
+    [SerializeField] private BasicBallSpawner basicBallSpawner;
+    [SerializeField] private BombBallSpawner bombBallSpawner;
+    [SerializeField] private SniperBallSpawner sniperBallSpawner;
 
     private void Update()
     {
@@ -55,9 +59,15 @@ public class GameController : MonoBehaviour
             DisplayWave();
             for (int i=0; i<Random.Range(80, 120); i++)
             {
-                blockSpawner.SpawnBlock();
+                var block = blockSpawner.Spawn();
+                block.AssignEvents(OnBlockDestroyed);
             }
         }
+    }
+
+    private void OnBlockDestroyed(double maxHp)
+    {
+        AddMoney(maxHp);
     }
 
     private int avgFrameRate;
@@ -189,17 +199,13 @@ public class GameController : MonoBehaviour
             {
                 statsDisplay.SetBallCountDisplay();
 
-                BallSpawner.BallType ballType = BallSpawner.BallType.Basic;
-                
-                if (name == "Bullet count") {   //TODO: Replace this switch
-                    ballType = BallSpawner.BallType.Basic;
+                if (name == "Bullet count") {   //TODO: Change it from string to enum probably 
+                    basicBallSpawner.Spawn();
                 } else if (name == "Bomb count") {
-                    ballType = BallSpawner.BallType.Bomb;
+                    bombBallSpawner.Spawn();
                 } else if (name == "Sniper count") {
-                    ballType = BallSpawner.BallType.Sniper;
+                    sniperBallSpawner.Spawn();
                 }
-
-                ballsSpawner.SpawnBall(ballType);
 
                 statsDisplay.SetBallCountDisplay();
             }
@@ -207,7 +213,7 @@ public class GameController : MonoBehaviour
             var balls = _dynamic_balls.GetComponentsInChildren<BasicBall>(true);    //TODO-HOTFIX
             foreach (var ball in balls)
             {
-                ball.UpgradeBall(data.GetSpd(), data.GetBulletDamage());
+                ball.UpgradeBall(data.GetSpd(), data.GetBallDamage());
             }
         }
         else if (data.money < Cost(name))

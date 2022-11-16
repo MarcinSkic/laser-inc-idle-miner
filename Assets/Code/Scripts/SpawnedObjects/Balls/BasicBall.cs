@@ -3,12 +3,12 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Pool;
 
-public class BasicBall : MonoBehaviour
+public class BasicBall : MonoBehaviour, IPoolable<BasicBall>
 {
     [SerializeField] protected Rigidbody rb;
     [SerializeField] protected Color laserColor;
     [SerializeField] protected float laserRotationSpeedDegrees;
-    public ObjectPool<BasicBall> Pool {protected get; set;}
+    public ObjectPool<BasicBall> Pool {get; set;}
 
 #region Upgradeable
     protected double speed;
@@ -20,14 +20,17 @@ public class BasicBall : MonoBehaviour
 
     private float laserRotationDirection;
 
-    public virtual void InitBall(double speed, double damage)
+    public virtual void InitBall()
     {
-        this.speed = speed;
-        this.damage = damage;
-
         SetLaserColor();
         InitLaserRotation();
         SetInitialVelocity();
+    }
+
+    public void LoadData(double speed, double damage)
+    {
+        this.speed = speed;
+        this.damage = damage;
     }
 
     public void UpgradeBall(double speed, double damage)    //TODO-HOTFIX
