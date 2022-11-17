@@ -2,12 +2,12 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class BombBallSpawner : BallSpawner<BombBall>
+public class BombBallSpawner : BallSpawner<BombBall,BombBallData>
 {
     protected override void Get(BombBall ball)
     {
         data.bombBallCount++;
-        ball.LoadData(data.GetSpd(), data.GetBallDamage(),data.explosionSize);
+        ball.SetDataReference(data.bombBallData);
         base.Get(ball);
     }
 

@@ -17,9 +17,6 @@ public class GameController : MonoBehaviour
     public TMP_Text moneyDisplay;
     public TMP_Text avgFpsDisplay;
     public TMP_Text fpsDisplay;
-    public BasicBall basicBall;
-    public BasicBall bombBall;
-    public BasicBall sniperBall;
     public BasicBlock basicBlock;
     public Slider healthBar;
     public GameObject ShopMenu;
@@ -211,10 +208,10 @@ public class GameController : MonoBehaviour
                 statsDisplay.SetBallCountDisplay();
             }
 
-            var balls = _dynamic_balls.GetComponentsInChildren<BasicBall>(true);    //TODO-HOTFIX
+            var balls = _dynamic_balls.GetComponentsInChildren<BaseBall<BaseBallData>>(true);    //TODO-HOTFIX
             foreach (var ball in balls)
             {
-                ball.UpgradeBall(data.GetSpd(), data.GetBallDamage());
+                ball.Upgrade();
             }
         }
         else if (data.money < Cost(name))

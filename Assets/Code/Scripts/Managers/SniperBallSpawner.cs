@@ -2,12 +2,12 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class SniperBallSpawner : BallSpawner<SniperBall>
+public class SniperBallSpawner : BallSpawner<SniperBall,SniperBallData>
 {
     protected override void Get(SniperBall ball)
     {
         data.sniperBallCount++;
-        ball.LoadData(data.GetSpd(), data.GetBallDamage(), data.speedBoost);
+        ball.SetDataReference(data.sniperBallData);
         base.Get(ball);
     }
     protected override void Release(SniperBall element)

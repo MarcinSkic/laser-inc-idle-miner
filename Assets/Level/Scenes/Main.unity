@@ -375,9 +375,6 @@ MonoBehaviour:
   moneyDisplay: {fileID: 2025944609}
   avgFpsDisplay: {fileID: 1126226993}
   fpsDisplay: {fileID: 133470415}
-  basicBall: {fileID: 2441469365506886252, guid: e0cd1037aff08914480e2affbf4e2fe6, type: 3}
-  bombBall: {fileID: -4590345092743506191, guid: e8eba36a7b4eb8b409dcffe03f6f91ed, type: 3}
-  sniperBall: {fileID: -7674619496783045030, guid: a7e5ea1c6a5ca2e439a96ac114dd2b07, type: 3}
   basicBlock: {fileID: 2128506963174872199, guid: cda635155749cf04184f488aaeaec66d, type: 3}
   healthBar: {fileID: 1207225453}
   ShopMenu: {fileID: 1704979494}
@@ -761,7 +758,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2a35125b2ac7357418c9ebd9be339770, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  prefab: {fileID: 2441469365506886252, guid: e0cd1037aff08914480e2affbf4e2fe6, type: 3}
+  prefab: {fileID: 4739044985203712074, guid: e0cd1037aff08914480e2affbf4e2fe6, type: 3}
   instantionsParent: {fileID: 54048869}
   active: 0
   inactive: 0
@@ -7246,10 +7243,19 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 869ac6ad55f1d16498f2c465f8b95556, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  basicBallData:
+    speed: 5
+    damage: 1
   ballDamage: 1
   ballSpeed: 5
-  explosionSize: 3
-  speedBoost: 2
+  bombBallData:
+    speed: 5
+    damage: 2
+    explosionSize: 4
+  sniperBallData:
+    speed: 7
+    damage: 1
+    speedBoost: 2
   money: 0
   earnedMoney: 0
   dmgPerUpgrade: 1

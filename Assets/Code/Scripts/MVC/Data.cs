@@ -10,14 +10,13 @@ public class Data : MonoBehaviour
     [Header("BALLS STATS")]
 
     [Header("Universal")]
+    public BasicBallData basicBallData;
     public double ballDamage;
     public double ballSpeed;
 
-    [Header("Bomb ball")]
-    public float explosionSize;
+    public BombBallData bombBallData;
 
-    [Header("Sniper ball")]
-    public float speedBoost;
+    public SniperBallData sniperBallData;
 
     [Space(10)]
 
