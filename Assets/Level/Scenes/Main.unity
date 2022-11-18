@@ -7244,16 +7244,31 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   basicBallData:
-    speed: 5
+    speed:
+      value: 5
+      upgradeBaseCost: 0
+      upgradeCostMultiplier: 0
+      upgradeMaxLevel: 0
+      upgradeLevel: 0
     damage: 1
   ballDamage: 1
   ballSpeed: 5
   bombBallData:
-    speed: 5
+    speed:
+      value: 3
+      upgradeBaseCost: 0
+      upgradeCostMultiplier: 0
+      upgradeMaxLevel: 0
+      upgradeLevel: 0
     damage: 2
     explosionSize: 4
   sniperBallData:
-    speed: 7
+    speed:
+      value: 10
+      upgradeBaseCost: 0
+      upgradeCostMultiplier: 0
+      upgradeMaxLevel: 0
+      upgradeLevel: 0
     damage: 1
     speedBoost: 2
   money: 0
