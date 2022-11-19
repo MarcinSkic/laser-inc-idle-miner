@@ -6,7 +6,7 @@ public class BasicBallSpawner : BallSpawner<BasicBall,BasicBallData>
 {
     protected override void Get(BasicBall ball)
     {
-        data.basicBallCount++;  //TODO: Move to model when done architecture
+        data.basicBallCount++;
         ball.SetDataReference(data.basicBallData);
         base.Get(ball);
     }

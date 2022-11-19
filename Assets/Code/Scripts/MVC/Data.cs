@@ -6,7 +6,7 @@ using System.IO;
 using System;
 
 public class Data : MonoBehaviour
-{
+{ 
     [Header("BALLS STATS")]
 
     [Header("Universal")]
@@ -32,7 +32,8 @@ public class Data : MonoBehaviour
 
     [Header("GAME STATS")]
 
-    public int basicBallCount;
+    //TODO-FT-SAVEFILE: change to property with set protection that while it is lower than active pool balls it should spawn more
+    public int basicBallCount;  
     public int bombBallCount;
     public int sniperBallCount;
 
@@ -73,9 +74,11 @@ public class Data : MonoBehaviour
         }
     }
 
+
+
     public Dictionary<string, bool> settings = new Dictionary<string, bool>() { };
 
-    public class Upgrade
+    public class LegacyUpgrade
     {
         public double upgradeBaseCost;
         public double upgradeMultCost;
@@ -83,15 +86,15 @@ public class Data : MonoBehaviour
         public int upgradeLevel = 0;
     }
 
-    public Dictionary<string, Upgrade> upgrades = new Dictionary<string, Upgrade>() { };
+    public Dictionary<string, LegacyUpgrade> upgrades = new Dictionary<string, LegacyUpgrade>() { };
 
     void Awake()
     {
-        upgrades.Add("Damage", new Upgrade() { upgradeBaseCost = 1, upgradeMultCost = 1.4, upgradeMaxLevel = 0 });
-        upgrades.Add("Bullet speed", new Upgrade() { upgradeBaseCost = 1, upgradeMultCost = 1.4, upgradeMaxLevel = 0 });
-        upgrades.Add("Bullet count", new Upgrade() { upgradeBaseCost = 5, upgradeMultCost = 1.7, upgradeMaxLevel = 10 });
-        upgrades.Add("Bomb count", new Upgrade() { upgradeBaseCost = 20, upgradeMultCost = 1.7, upgradeMaxLevel = 10 });
-        upgrades.Add("Sniper count", new Upgrade() { upgradeBaseCost = 20, upgradeMultCost = 1.7, upgradeMaxLevel = 10 });
+        upgrades.Add("Damage", new LegacyUpgrade() { upgradeBaseCost = 1, upgradeMultCost = 1.4, upgradeMaxLevel = 0 });
+        upgrades.Add("Bullet speed", new LegacyUpgrade() { upgradeBaseCost = 1, upgradeMultCost = 1.4, upgradeMaxLevel = 0 });
+        upgrades.Add("Bullet count", new LegacyUpgrade() { upgradeBaseCost = 5, upgradeMultCost = 1.7, upgradeMaxLevel = 10 });
+        upgrades.Add("Bomb count", new LegacyUpgrade() { upgradeBaseCost = 20, upgradeMultCost = 1.7, upgradeMaxLevel = 10 });
+        upgrades.Add("Sniper count", new LegacyUpgrade() { upgradeBaseCost = 20, upgradeMultCost = 1.7, upgradeMaxLevel = 10 });
         string[] settingsArray = { "Show maxed upgrades", "Show floating damage text", "Display 60 FPS" };
         foreach (string setting in settingsArray)
         {
@@ -128,14 +131,6 @@ public class Data : MonoBehaviour
             return 5;
         }
         return Math.Ceiling(wave*Math.Pow(1.07, wave));
-    }
-    public double GetWaveEnemiesSpeed()
-    {
-        return 4 + wave / 3;
-    }
-    public double GetWaveEnemiesMoney()
-    {
-        return wave;
     }
     public double GetBallDamage()
     {

@@ -13,7 +13,7 @@ public class BombBallSpawner : BallSpawner<BombBall,BombBallData>
 
     protected override void Release(BombBall element)
     {
-        data.bombBallCount--;
+        data.sniperBallCount--;
         base.Release(element);
     }
 }

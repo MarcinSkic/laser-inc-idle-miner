@@ -103,5 +103,5 @@ public class BaseBall<T> : MonoBehaviour, IPoolable<BaseBall<T>>, IUpgradeable<T
 public class BaseBallData
 {
     public UpgradeableData<double> speed;
-    public double damage;
+    public UpgradeableData<double> damage;
 }

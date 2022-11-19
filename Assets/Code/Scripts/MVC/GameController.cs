@@ -41,6 +41,8 @@ public class GameController : MonoBehaviour
     [SerializeField] private BombBallSpawner bombBallSpawner;
     [SerializeField] private SniperBallSpawner sniperBallSpawner;
 
+    [SerializeField] UpgradesManager upgradesManager;
+
     private void Update()
     {
         displayFPS();
@@ -91,6 +93,22 @@ public class GameController : MonoBehaviour
         HideMenus();
         GenerateBuyingBars();
         GenerateSettingBars();
+        SetupTestUpgrade();
+    }
+
+    [ContextMenu("\"Prestige\"")]
+    void SetupTestUpgrade()
+    {
+        //data.speedUpgrade = data.speedUpgradeScriptable.GetObjectCopy();
+        //data.speedUpgrade.AddUpgradeable(data.basicBallData.speed);
+
+
+    }
+
+    [ContextMenu("TestUpgrade")]
+    void TestUpgrade()
+    {
+        //data.speedUpgrade.TryUpgrade(out _);
     }
 
     void HideMenus()
@@ -108,7 +126,7 @@ public class GameController : MonoBehaviour
 
     void GenerateBuyingBars()
     {
-        foreach (KeyValuePair<string, Data.Upgrade> entry in data.upgrades)
+        foreach (KeyValuePair<string, Data.LegacyUpgrade> entry in data.upgrades)
         {
             UpgradeBuyingBar buying = Instantiate(upgradeBuyingBar, ShopContent);
             buying.upgradeName = entry.Key;
