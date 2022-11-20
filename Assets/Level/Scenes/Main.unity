@@ -391,7 +391,7 @@ MonoBehaviour:
   basicBallSpawner: {fileID: 231626582}
   bombBallSpawner: {fileID: 231626581}
   sniperBallSpawner: {fileID: 231626580}
-  upgradesManager: {fileID: 567613851}
+  upgradesModel: {fileID: 1947716357}
 --- !u!1 &133470413
 GameObject:
   m_ObjectHideFlags: 0
@@ -7389,7 +7389,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   basicBallData:
     speed:
-      value: 5
+      value: 3
     damage:
       value: 1
   ballDamage: 1

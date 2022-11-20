@@ -44,7 +44,7 @@ public class GameController : MonoBehaviour
     [SerializeField] private BombBallSpawner bombBallSpawner;
     [SerializeField] private SniperBallSpawner sniperBallSpawner;
 
-    [SerializeField] UpgradesManager upgradesManager;
+    [SerializeField] private UpgradesModel upgradesModel;
 
     private void Update()
     {
@@ -99,19 +99,12 @@ public class GameController : MonoBehaviour
         SetupTestUpgrade();
     }
 
-    [ContextMenu("\"Prestige\"")]
     void SetupTestUpgrade()
     {
         //data.speedUpgrade = data.speedUpgradeScriptable.GetObjectCopy();
         //data.speedUpgrade.AddUpgradeable(data.basicBallData.speed);
 
 
-    }
-
-    [ContextMenu("TestUpgrade")]
-    void TestUpgrade()
-    {
-        //data.speedUpgrade.TryUpgrade(out _);
     }
 
     void HideMenus()
@@ -197,7 +190,58 @@ public class GameController : MonoBehaviour
         }
     }
 
-    public void BuyUpgrade(string name)
+    private string boughtUpgradeName;   //TODO-FT-MVC
+    public void BuyUpgradeByName(string name)
+    {
+        boughtUpgradeName = name;
+        switch (name)
+        {
+            case "Damage":
+                TryBuyUpgrade(upgradesModel.universalDamage.upgrade);
+                break;
+            case "Bullet speed":
+                TryBuyUpgrade(upgradesModel.universalSpeed.upgrade);
+                break;
+            case var x when x.Contains("count"):
+                switch (x)
+                {
+                    case "Bullet count":
+                        TryBuyUpgrade(upgradesModel.basicBallCount.upgrade);
+                        break;
+                    case "Bomb count":
+                        TryBuyUpgrade(upgradesModel.bombBallCount.upgrade);
+                        break;
+                    case "Sniper count":
+                        TryBuyUpgrade(upgradesModel.sniperBallCount.upgrade);
+                        break;
+                }
+                break;
+        }
+    }
+
+    public bool TryBuyUpgrade<T>(Upgrade<T> upgrade)
+    {
+        var upgradeCost = upgrade.currentCost;
+
+        if(upgradeCost > data.money)
+        {
+            return false;
+        }
+
+        if(!upgrade.TryUpgrade(out var newCost))
+        {
+            return false;
+        }
+        data.money -= upgradeCost;
+
+        SetBuyingBarTexts(boughtUpgradeName);    //TODO-FT-MVC
+        moneyDisplay.text = $"Money: {Round(data.money)}";  //TODO-FT-MVC
+        statsDisplay.SetBallCountDisplay(); //TODO-FT-MVC
+
+        return true;
+    }
+
+    public void LegacyBuyUpgrade(string name)
     {
 
         if (data.money >= Cost(name) && (data.upgrades[name].upgradeLevel < data.upgrades[name].upgradeMaxLevel || data.upgrades[name].upgradeMaxLevel == 0))
@@ -229,7 +273,7 @@ public class GameController : MonoBehaviour
                 statsDisplay.SetBallCountDisplay();
             }
 
-            var balls = _dynamic_balls.GetComponentsInChildren<BaseBall<BaseBallData>>(true);    //TODO-HOTFIX
+            var balls = _dynamic_balls.GetComponentsInChildren<BaseBall<BaseBallData>>(true);    //TODO-FT-UPGRADES
             foreach (var ball in balls)
             {
                 ball.Upgrade();

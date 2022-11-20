@@ -17,8 +17,8 @@ public class UpgradesManager : MonoBehaviour
     private void Start()
     {
         LoadStartDataUpgrades();
-        AddUpgradeablesReferences();
-        AddUpgradesEvents();
+        AddUpgradeablesValues();
+        AddUpgradeableActions();
     }
 
     //TODO-FT-SAVEFILE: Here it will be changed to check for saved progress
@@ -31,25 +31,41 @@ public class UpgradesManager : MonoBehaviour
         model.sniperBallCount.LoadStartData();
     }
 
-    void AddUpgradeablesReferences()
+    void AddUpgradeablesValues()
     {
         model.universalSpeed.upgrade.AddUpgradeable(data.basicBallData.speed, data.bombBallData.speed,data.sniperBallData.speed);
         model.universalDamage.upgrade.AddUpgradeable(data.basicBallData.damage, data.bombBallData.damage, data.sniperBallData.damage);
     }
 
-    void AddUpgradesEvents()
+    void AddUpgradeableActions()
     {
-        model.basicBallCount.upgrade.AddUpgradeable(new UpgradeableData<UnityAction>(basicBallSpawner.Spawn));
-        model.bombBallCount.upgrade.AddUpgradeable(new UpgradeableData<UnityAction>(bombBallSpawner.Spawn));
-        model.sniperBallCount.upgrade.AddUpgradeable(new UpgradeableData<UnityAction>(sniperBallSpawner.Spawn));
+        model.basicBallCount.upgrade.AddUpgradeable(new UpgradeableData<UnityAction>(delegate { 
+            basicBallSpawner.Spawn(out var ball);
+            model.universalSpeed.upgrade.AddOnUpgrade(ball.Upgrade);
+        }));
+        model.bombBallCount.upgrade.AddUpgradeable(new UpgradeableData<UnityAction>(delegate {
+            bombBallSpawner.Spawn(out var ball);
+            model.universalSpeed.upgrade.AddOnUpgrade(ball.Upgrade);
+        }));
+        model.sniperBallCount.upgrade.AddUpgradeable(new UpgradeableData<UnityAction>(delegate {
+            sniperBallSpawner.Spawn(out var ball);
+            model.universalSpeed.upgrade.AddOnUpgrade(ball.Upgrade);
+        }));
     }
+
+
 
     [ContextMenu("TestUpgrade")]
     void TestUpgrade()
     {
-        //model.universalSpeed.upgrade.TryUpgrade(out _);
         model.basicBallCount.upgrade.TryUpgrade(out _);
         model.bombBallCount.upgrade.TryUpgrade(out _);
         model.sniperBallCount.upgrade.TryUpgrade(out _);
+    }
+
+    [ContextMenu("Speeeeeeeeeeeeed")]
+    void UpgradeSpeed()
+    {
+        model.universalSpeed.upgrade.TryUpgrade(out _);
     }
 }

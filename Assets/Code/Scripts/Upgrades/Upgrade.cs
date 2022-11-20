@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Events;
 
 [System.Serializable]
 public abstract class Upgrade<T>
@@ -18,9 +19,18 @@ public abstract class Upgrade<T>
     [Tooltip("Set to -1 for infinite levels")]
     public int maxLevel;
 
+    [HideInInspector]
+    public UnityAction onUpgrade;
     public void AddUpgradeable(params UpgradeableData<T>[] datas)
     {
         upgradeableDatas = datas;
+    }
+    public void AddOnUpgrade(params UnityAction[] actions)
+    {
+        foreach (var action in actions)
+        {
+            onUpgrade += action;
+        }
     }
 
     public bool TryUpgrade(out double newCost)
@@ -36,6 +46,7 @@ public abstract class Upgrade<T>
         newCost = currentCost;
 
         UpgradeValues();
+        onUpgrade?.Invoke();
         return true;
     }
 
