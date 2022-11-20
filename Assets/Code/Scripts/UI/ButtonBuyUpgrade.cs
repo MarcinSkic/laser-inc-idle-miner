@@ -6,5 +6,5 @@ public class ButtonBuyUpgrade : MonoBehaviour
 {
     public UpgradeBuyingBar upgradeBar;
     public GameController gameController;
-    public void BuyUpgrade() => gameController.BuyUpgrade(upgradeBar.upgradeName);
+    public void BuyUpgrade() => gameController.BuyUpgradeByName(upgradeBar.upgradeName);
 }

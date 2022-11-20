@@ -375,9 +375,6 @@ MonoBehaviour:
   moneyDisplay: {fileID: 2025944609}
   avgFpsDisplay: {fileID: 1126226993}
   fpsDisplay: {fileID: 133470415}
-  basicBall: {fileID: 2441469365506886252, guid: e0cd1037aff08914480e2affbf4e2fe6, type: 3}
-  bombBall: {fileID: -4590345092743506191, guid: e8eba36a7b4eb8b409dcffe03f6f91ed, type: 3}
-  sniperBall: {fileID: -7674619496783045030, guid: a7e5ea1c6a5ca2e439a96ac114dd2b07, type: 3}
   basicBlock: {fileID: 2128506963174872199, guid: cda635155749cf04184f488aaeaec66d, type: 3}
   healthBar: {fileID: 1207225453}
   ShopMenu: {fileID: 1704979494}
@@ -391,7 +388,10 @@ MonoBehaviour:
   settingBar: {fileID: 6728426492982927571, guid: f28fa603a8da54b4783702d8a52f4ebd, type: 3}
   spawnArea: {x: 15.4, y: 7.6}
   blockSpawner: {fileID: 231626579}
-  ballsSpawner: {fileID: 231626580}
+  basicBallSpawner: {fileID: 231626582}
+  bombBallSpawner: {fileID: 231626581}
+  sniperBallSpawner: {fileID: 231626580}
+  upgradesModel: {fileID: 1947716357}
 --- !u!1 &133470413
 GameObject:
   m_ObjectHideFlags: 0
@@ -665,9 +665,11 @@ GameObject:
   m_Component:
   - component: {fileID: 231626578}
   - component: {fileID: 231626579}
+  - component: {fileID: 231626582}
+  - component: {fileID: 231626581}
   - component: {fileID: 231626580}
   m_Layer: 0
-  m_Name: '@Managers'
+  m_Name: '@Spawners'
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -700,11 +702,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: abd991317406d1a40ba295b91ca8b5fd, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  blockPrefab: {fileID: 2128506963174872199, guid: cda635155749cf04184f488aaeaec66d, type: 3}
-  blocksParent: {fileID: 1235393438}
-  spawnArea: {x: 15.4, y: 7.6}
+  prefab: {fileID: 2128506963174872199, guid: cda635155749cf04184f488aaeaec66d, type: 3}
+  instantionsParent: {fileID: 1235393438}
   active: 0
   inactive: 0
+  spawnArea: {x: 15.4, y: 7.6}
   data: {fileID: 2078200401}
   gameController: {fileID: 103615904}
 --- !u!114 &231626580
@@ -716,16 +718,52 @@ MonoBehaviour:
   m_GameObject: {fileID: 231626577}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: f062230acb8de8c4b8160ff7d142c77b, type: 3}
+  m_Script: {fileID: 11500000, guid: 10dfc9bc5cec58a4f90b34fe7b1675f5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  basicPrefab: {fileID: 2441469365506886252, guid: e0cd1037aff08914480e2affbf4e2fe6, type: 3}
-  bombPrefab: {fileID: -4590345092743506191, guid: e8eba36a7b4eb8b409dcffe03f6f91ed, type: 3}
-  sniperPrefab: {fileID: -7674619496783045030, guid: a7e5ea1c6a5ca2e439a96ac114dd2b07, type: 3}
-  ballsParent: {fileID: 54048869}
-  spawnArea: {x: 15.4, y: 7.6}
+  prefab: {fileID: -7674619496783045030, guid: a7e5ea1c6a5ca2e439a96ac114dd2b07, type: 3}
+  instantionsParent: {fileID: 54048869}
   active: 0
   inactive: 0
+  spawnArea: {x: 15.4, y: 7.6}
+  data: {fileID: 2078200401}
+  gameController: {fileID: 103615904}
+--- !u!114 &231626581
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 231626577}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d3e5e00c879081341936a59332e97468, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  prefab: {fileID: -4590345092743506191, guid: e8eba36a7b4eb8b409dcffe03f6f91ed, type: 3}
+  instantionsParent: {fileID: 54048869}
+  active: 0
+  inactive: 0
+  spawnArea: {x: 15.4, y: 7.6}
+  data: {fileID: 2078200401}
+  gameController: {fileID: 103615904}
+--- !u!114 &231626582
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 231626577}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2a35125b2ac7357418c9ebd9be339770, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  prefab: {fileID: 4739044985203712074, guid: e0cd1037aff08914480e2affbf4e2fe6, type: 3}
+  instantionsParent: {fileID: 54048869}
+  active: 0
+  inactive: 0
+  spawnArea: {x: 15.4, y: 7.6}
   data: {fileID: 2078200401}
   gameController: {fileID: 103615904}
 --- !u!1 &240033865
@@ -1533,6 +1571,55 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 560701929}
   m_CullTransparentMesh: 1
+--- !u!1 &567613849
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 567613850}
+  - component: {fileID: 567613851}
+  m_Layer: 0
+  m_Name: '@Managers'
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &567613850
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 567613849}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 814282266}
+  m_RootOrder: 3
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &567613851
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 567613849}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 736807bb39369c54dafb170df98e96dd, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  model: {fileID: 1947716357}
+  data: {fileID: 2078200401}
+  basicBallSpawner: {fileID: 231626582}
+  bombBallSpawner: {fileID: 231626581}
+  sniperBallSpawner: {fileID: 231626580}
 --- !u!1 &653015909
 GameObject:
   m_ObjectHideFlags: 0
@@ -2149,6 +2236,8 @@ Transform:
   - {fileID: 103615903}
   - {fileID: 2078200400}
   - {fileID: 231626578}
+  - {fileID: 567613850}
+  - {fileID: 1947716356}
   m_Father: {fileID: 0}
   m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -5958,8 +6047,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: This is settings menu in some game by Filip Tarajko. Something may be here
-    in the future.
+  m_text: 
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
   m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
@@ -6648,6 +6736,99 @@ RectTransform:
   m_CorrespondingSourceObject: {fileID: 8249492183035129879, guid: 775c61d93e44ee34392b1f5812fedbbd, type: 3}
   m_PrefabInstance: {fileID: 1935193165}
   m_PrefabAsset: {fileID: 0}
+--- !u!1 &1947716355
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1947716356}
+  - component: {fileID: 1947716357}
+  m_Layer: 0
+  m_Name: '@Models'
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1947716356
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1947716355}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 814282266}
+  m_RootOrder: 4
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1947716357
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1947716355}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 535f1003da3e4c14d896c0587b6e13f7, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  universalSpeed:
+    scriptable: {fileID: 11400000, guid: 1911282bd24ed1b4cb4a569b96fe71f1, type: 2}
+    upgrade:
+      upgradeableDatas: []
+      costIncremental: 0
+      costMultiplier: 0
+      currentCost: 0
+      currentLevel: 0
+      maxLevel: 0
+      formula: 0
+      changeValue: 0
+  universalDamage:
+    scriptable: {fileID: 11400000, guid: 85ad254bffd31594fb78ee2ca4c0bb34, type: 2}
+    upgrade:
+      upgradeableDatas: []
+      costIncremental: 0
+      costMultiplier: 0
+      currentCost: 0
+      currentLevel: 0
+      maxLevel: 0
+      formula: 0
+      changeValue: 0
+  basicBallCount:
+    scriptable: {fileID: 11400000, guid: 30dd89ea0fcf0f7439bd945c6e718055, type: 2}
+    upgrade:
+      upgradeableDatas: []
+      costIncremental: 0
+      costMultiplier: 0
+      currentCost: 0
+      currentLevel: 0
+      maxLevel: 0
+  bombBallCount:
+    scriptable: {fileID: 11400000, guid: d3c8fd95a37cd6e4583824ff117bea4a, type: 2}
+    upgrade:
+      upgradeableDatas: []
+      costIncremental: 0
+      costMultiplier: 0
+      currentCost: 0
+      currentLevel: 0
+      maxLevel: 0
+  sniperBallCount:
+    scriptable: {fileID: 11400000, guid: e983c1a9f25817d47a365abd828bc723, type: 2}
+    upgrade:
+      upgradeableDatas: []
+      costIncremental: 0
+      costMultiplier: 0
+      currentCost: 0
+      currentLevel: 0
+      maxLevel: 0
 --- !u!1 &1974319181
 GameObject:
   m_ObjectHideFlags: 0
@@ -7206,10 +7387,25 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 869ac6ad55f1d16498f2c465f8b95556, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  basicBallData:
+    speed:
+      value: 3
+    damage:
+      value: 1
   ballDamage: 1
   ballSpeed: 5
-  explosionSize: 3
-  speedBoost: 2
+  bombBallData:
+    speed:
+      value: 5
+    damage:
+      value: 1
+    explosionSize: 4
+  sniperBallData:
+    speed:
+      value: 5
+    damage:
+      value: 1
+    speedBoost: 2
   money: 0
   earnedMoney: 0
   dmgPerUpgrade: 1

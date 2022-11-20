@@ -85,6 +85,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents:
     - {fileID: 2441469365506886252, guid: e0cd1037aff08914480e2affbf4e2fe6, type: 3}
+    - {fileID: 4739044985203712074, guid: e0cd1037aff08914480e2affbf4e2fe6, type: 3}
   m_SourcePrefab: {fileID: 100100000, guid: e0cd1037aff08914480e2affbf4e2fe6, type: 3}
 --- !u!1 &5487047700974830032 stripped
 GameObject:
@@ -103,11 +104,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e5de8dbe99c22224887b8c90724d7447, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  data: {fileID: 0}
-  gameController: {fileID: 0}
   rb: {fileID: 5487047700974830039}
-  laserRotationSpeedDegrees: 60
   laserColor: {r: 0.6431373, g: 0, b: 0, a: 1}
+  laserRotationSpeedDegrees: 60
+  gameController: {fileID: 0}
 --- !u!54 &5487047700974830039 stripped
 Rigidbody:
   m_CorrespondingSourceObject: {fileID: 2441469365506886253, guid: e0cd1037aff08914480e2affbf4e2fe6, type: 3}

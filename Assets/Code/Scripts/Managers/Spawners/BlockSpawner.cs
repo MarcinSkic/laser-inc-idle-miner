@@ -14,11 +14,11 @@ public class BlockSpawner : BaseSpawner<BasicBlock>
     [SerializeField] private Data data;
     [SerializeField] private GameController gameController;
 
-    public override BasicBlock Spawn()
+    public override void Spawn(out BasicBlock spawnedBlock)
     {
-        var block = base.Spawn();
+        base.Spawn(out BasicBlock block);
         block.transform.position = new Vector3(Random.Range(-spawnArea.x, spawnArea.x), Random.Range(-spawnArea.y, spawnArea.y), 0);
-        return block;
+        spawnedBlock = block;
     }
 
     protected override void Get(BasicBlock block)

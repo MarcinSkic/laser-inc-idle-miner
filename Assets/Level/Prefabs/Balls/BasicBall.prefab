@@ -12,7 +12,7 @@ GameObject:
   - component: {fileID: 2441469365506886255}
   - component: {fileID: 2441469365506886253}
   - component: {fileID: 7017461659481143617}
-  - component: {fileID: 2441469365506886252}
+  - component: {fileID: 4739044985203712074}
   m_Layer: 6
   m_Name: BasicBall
   m_TagString: Untagged
@@ -182,7 +182,7 @@ TrailRenderer:
   m_MinVertexDistance: 0.1
   m_Autodestruct: 0
   m_Emitting: 1
---- !u!114 &2441469365506886252
+--- !u!114 &4739044985203712074
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -191,14 +191,13 @@ MonoBehaviour:
   m_GameObject: {fileID: 2441469365506886250}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: b5a805819ac818041be36791d2ef4d2e, type: 3}
+  m_Script: {fileID: 11500000, guid: cfb3b6af50dd13846b10bcfc2f06a69e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  data: {fileID: 0}
-  gameController: {fileID: 0}
   rb: {fileID: 2441469365506886253}
-  laserRotationSpeedDegrees: 180
-  laserColor: {r: 1, g: 1, b: 1, a: 1}
+  laserColor: {r: 1, g: 1, b: 1, a: 0.7607843}
+  laserRotationSpeedDegrees: 90
+  gameController: {fileID: 0}
 --- !u!1001 &3117298957570745195
 PrefabInstance:
   m_ObjectHideFlags: 0

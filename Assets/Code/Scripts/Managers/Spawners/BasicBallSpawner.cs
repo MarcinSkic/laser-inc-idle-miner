@@ -2,12 +2,12 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class BasicBallSpawner : BallSpawner<BasicBall>
+public class BasicBallSpawner : BallSpawner<BasicBall,BasicBallData>
 {
     protected override void Get(BasicBall ball)
     {
-        data.basicBallCount++;  //TODO: Move to model when done architecture
-        ball.LoadData(data.GetSpd(), data.GetBallDamage());      
+        data.basicBallCount++;
+        ball.SetDataReference(data.basicBallData);
         base.Get(ball);
     }
 

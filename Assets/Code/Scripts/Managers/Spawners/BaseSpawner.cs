@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Pool;
 
-public class BaseSpawner<T> : MonoBehaviour where T : MonoBehaviour, IPoolable<T>
+public abstract class BaseSpawner<T> : MonoBehaviour where T : MonoBehaviour, IPoolable<T>
 {
     [Header("BASE SPAWNER")]
     [SerializeField] protected T prefab;
@@ -27,9 +27,9 @@ public class BaseSpawner<T> : MonoBehaviour where T : MonoBehaviour, IPoolable<T
         inactive = pool.CountInactive;
     }
 
-    public virtual T Spawn()
+    public virtual void Spawn(out T spawnedObject)
     {    
-        return pool.Get();
+        spawnedObject = pool.Get();
     }
 
     protected virtual T Create()

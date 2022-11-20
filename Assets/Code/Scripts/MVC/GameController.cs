@@ -6,6 +6,9 @@ using UnityEngine.UI;
 using static System.Math;
 using UnityEngine.Events;
 
+/// <summary>
+/// Methods from this object should not be called by other objects. When such action direction is needed (for example UI or world events) it should connect methods to events HERE.
+/// </summary>
 public class GameController : MonoBehaviour
 {
     [SerializeField] private Data data;
@@ -17,9 +20,6 @@ public class GameController : MonoBehaviour
     public TMP_Text moneyDisplay;
     public TMP_Text avgFpsDisplay;
     public TMP_Text fpsDisplay;
-    public BasicBall basicBall;
-    public BasicBall bombBall;
-    public BasicBall sniperBall;
     public BasicBlock basicBlock;
     public Slider healthBar;
     public GameObject ShopMenu;
@@ -44,6 +44,8 @@ public class GameController : MonoBehaviour
     [SerializeField] private BombBallSpawner bombBallSpawner;
     [SerializeField] private SniperBallSpawner sniperBallSpawner;
 
+    [SerializeField] private UpgradesModel upgradesModel;
+
     private void Update()
     {
         displayFPS();
@@ -59,7 +61,7 @@ public class GameController : MonoBehaviour
             DisplayWave();
             for (int i=0; i<Random.Range(80, 120); i++)
             {
-                var block = blockSpawner.Spawn();
+                blockSpawner.Spawn(out var block);
                 block.AssignEvents(OnBlockDestroyed);
             }
         }
@@ -68,6 +70,7 @@ public class GameController : MonoBehaviour
     private void OnBlockDestroyed(double maxHp)
     {
         AddMoney(maxHp);
+        //TODO-FEATURE: Count destroyed blocks for upgrades/rewards
     }
 
     private int avgFrameRate;
@@ -93,6 +96,15 @@ public class GameController : MonoBehaviour
         HideMenus();
         GenerateBuyingBars();
         GenerateSettingBars();
+        SetupTestUpgrade();
+    }
+
+    void SetupTestUpgrade()
+    {
+        //data.speedUpgrade = data.speedUpgradeScriptable.GetObjectCopy();
+        //data.speedUpgrade.AddUpgradeable(data.basicBallData.speed);
+
+
     }
 
     void HideMenus()
@@ -110,7 +122,7 @@ public class GameController : MonoBehaviour
 
     void GenerateBuyingBars()
     {
-        foreach (KeyValuePair<string, Data.Upgrade> entry in data.upgrades)
+        foreach (KeyValuePair<string, Data.LegacyUpgrade> entry in data.upgrades)
         {
             UpgradeBuyingBar buying = Instantiate(upgradeBuyingBar, ShopContent);
             buying.upgradeName = entry.Key;
@@ -178,7 +190,58 @@ public class GameController : MonoBehaviour
         }
     }
 
-    public void BuyUpgrade(string name)
+    private string boughtUpgradeName;   //TODO-FT-MVC
+    public void BuyUpgradeByName(string name)
+    {
+        boughtUpgradeName = name;
+        switch (name)
+        {
+            case "Damage":
+                TryBuyUpgrade(upgradesModel.universalDamage.upgrade);
+                break;
+            case "Bullet speed":
+                TryBuyUpgrade(upgradesModel.universalSpeed.upgrade);
+                break;
+            case var x when x.Contains("count"):
+                switch (x)
+                {
+                    case "Bullet count":
+                        TryBuyUpgrade(upgradesModel.basicBallCount.upgrade);
+                        break;
+                    case "Bomb count":
+                        TryBuyUpgrade(upgradesModel.bombBallCount.upgrade);
+                        break;
+                    case "Sniper count":
+                        TryBuyUpgrade(upgradesModel.sniperBallCount.upgrade);
+                        break;
+                }
+                break;
+        }
+    }
+
+    public bool TryBuyUpgrade<T>(Upgrade<T> upgrade)
+    {
+        var upgradeCost = upgrade.currentCost;
+
+        if(upgradeCost > data.money)
+        {
+            return false;
+        }
+
+        if(!upgrade.TryUpgrade(out var newCost))
+        {
+            return false;
+        }
+        data.money -= upgradeCost;
+
+        SetBuyingBarTexts(boughtUpgradeName);    //TODO-FT-MVC
+        moneyDisplay.text = $"Money: {Round(data.money)}";  //TODO-FT-MVC
+        statsDisplay.SetBallCountDisplay(); //TODO-FT-MVC
+
+        return true;
+    }
+
+    public void LegacyBuyUpgrade(string name)
     {
 
         if (data.money >= Cost(name) && (data.upgrades[name].upgradeLevel < data.upgrades[name].upgradeMaxLevel || data.upgrades[name].upgradeMaxLevel == 0))
@@ -210,10 +273,10 @@ public class GameController : MonoBehaviour
                 statsDisplay.SetBallCountDisplay();
             }
 
-            var balls = _dynamic_balls.GetComponentsInChildren<BasicBall>(true);    //TODO-HOTFIX
+            var balls = _dynamic_balls.GetComponentsInChildren<BaseBall<BaseBallData>>(true);    //TODO-FT-UPGRADES
             foreach (var ball in balls)
             {
-                ball.UpgradeBall(data.GetSpd(), data.GetBallDamage());
+                ball.Upgrade();
             }
         }
         else if (data.money < Cost(name))

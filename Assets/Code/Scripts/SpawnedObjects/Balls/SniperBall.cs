@@ -3,18 +3,9 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Pool;
 
-public class SniperBall : BasicBall, IPoolable<SniperBall>
+public class SniperBall : BaseBall<SniperBallData>, IPoolable<SniperBall>, IUpgradeable<SniperBallData>
 {
-    protected float speedBoost;
-
     public new ObjectPool<SniperBall> Pool { get; set; }
-
-    public void LoadData(double speed, double damage, float speedBoost)
-    {
-        this.speed = speed;
-        this.damage = damage;
-        this.speedBoost = speedBoost;
-    }
 
     protected override void OnCollisionEnter(Collision collision)
     {
@@ -25,7 +16,7 @@ public class SniperBall : BasicBall, IPoolable<SniperBall>
         {
             var target = FindTarget();
 
-            rb.velocity = (target.transform.position - transform.position).normalized * (float)speed * speedBoost;
+            rb.velocity = (target.transform.position - transform.position).normalized * (float)Data.speed * Data.speedBoost;
         }
     }
 
@@ -45,4 +36,10 @@ public class SniperBall : BasicBall, IPoolable<SniperBall>
 
         return target;
     }
+}
+
+[System.Serializable]
+public class SniperBallData : BaseBallData
+{
+    public float speedBoost;
 }
