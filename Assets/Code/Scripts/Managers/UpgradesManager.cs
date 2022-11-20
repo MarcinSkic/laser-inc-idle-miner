@@ -18,6 +18,7 @@ public class UpgradesManager : MonoBehaviour
     {
         LoadStartDataUpgrades();
         AddUpgradeablesReferences();
+        AddUpgradesEvents();
     }
 
     //TODO-FT-SAVEFILE: Here it will be changed to check for saved progress
@@ -34,12 +35,13 @@ public class UpgradesManager : MonoBehaviour
     {
         model.universalSpeed.upgrade.AddUpgradeable(data.basicBallData.speed, data.bombBallData.speed,data.sniperBallData.speed);
         model.universalDamage.upgrade.AddUpgradeable(data.basicBallData.damage, data.bombBallData.damage, data.sniperBallData.damage);
-        model.basicBallCount.upgrade.AddUpgradeable(new UpgradeableData<UnityAction>(SpawnBasicBall));
     }
 
-    private void SpawnBasicBall()
+    void AddUpgradesEvents()
     {
-        basicBallSpawner.Spawn();
+        model.basicBallCount.upgrade.AddUpgradeable(new UpgradeableData<UnityAction>(basicBallSpawner.Spawn));
+        model.bombBallCount.upgrade.AddUpgradeable(new UpgradeableData<UnityAction>(bombBallSpawner.Spawn));
+        model.sniperBallCount.upgrade.AddUpgradeable(new UpgradeableData<UnityAction>(sniperBallSpawner.Spawn));
     }
 
     [ContextMenu("TestUpgrade")]
@@ -47,5 +49,7 @@ public class UpgradesManager : MonoBehaviour
     {
         //model.universalSpeed.upgrade.TryUpgrade(out _);
         model.basicBallCount.upgrade.TryUpgrade(out _);
+        model.bombBallCount.upgrade.TryUpgrade(out _);
+        model.sniperBallCount.upgrade.TryUpgrade(out _);
     }
 }

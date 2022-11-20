@@ -27,9 +27,9 @@ public abstract class BaseSpawner<T> : MonoBehaviour where T : MonoBehaviour, IP
         inactive = pool.CountInactive;
     }
 
-    public virtual T Spawn()
+    public virtual void Spawn(out T spawnedObject)
     {    
-        return pool.Get();
+        spawnedObject = pool.Get();
     }
 
     protected virtual T Create()

@@ -6,6 +6,9 @@ using UnityEngine.UI;
 using static System.Math;
 using UnityEngine.Events;
 
+/// <summary>
+/// Methods from this object should not be called by other objects. When such action direction is needed (for example UI or world events) it should connect methods to events HERE.
+/// </summary>
 public class GameController : MonoBehaviour
 {
     [SerializeField] private Data data;
@@ -58,7 +61,7 @@ public class GameController : MonoBehaviour
             DisplayWave();
             for (int i=0; i<Random.Range(80, 120); i++)
             {
-                var block = blockSpawner.Spawn();
+                blockSpawner.Spawn(out var block);
                 block.AssignEvents(OnBlockDestroyed);
             }
         }

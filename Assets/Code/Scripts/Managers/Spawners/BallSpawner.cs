@@ -14,11 +14,16 @@ public class BallSpawner<Ball,Data> : BaseSpawner<Ball> where Ball : BaseBall<Da
     [SerializeField] protected global::Data data;
     [SerializeField] protected GameController gameController;
 
-    public override Ball Spawn()
+    public override void Spawn(out Ball spawnedBall)
     {
-        Ball ball = base.Spawn();
-        ball.transform.position = new Vector3(Random.Range(-spawnArea.x, spawnArea.x), Random.Range(-spawnArea.y, spawnArea.y), 0);
-        return ball;
+       base.Spawn(out Ball ball);
+       ball.transform.position = new Vector3(Random.Range(-spawnArea.x, spawnArea.x), Random.Range(-spawnArea.y, spawnArea.y), 0);
+       spawnedBall = ball;
+    }
+
+    public virtual void Spawn()
+    {
+        Spawn(out _);
     }
 
     protected override void Get(Ball ball)
