@@ -48,6 +48,8 @@ public class GameController : MonoBehaviour
 
     [SerializeField] private UpgradesModel upgradesModel;
 
+    private bool isMoving = true;
+
     private void Update()
     {
         displayFPS();
@@ -58,16 +60,29 @@ public class GameController : MonoBehaviour
 
     private void MoveBlocks(BasicBlock[] blocks)
     {
-        if (!CheckForBlocksAboveY(blocks))
+        bool condition;
+        if (isMoving)
+        {
+            condition = CheckForBlocksAboveY(blocks, 5f);
+        } else
+        {
+            condition = CheckForBlocksAboveY(blocks, 4.5f);
+        }
+
+        if (!condition)
         {
             foreach (BasicBlock block in blocks)
             {
                 block.transform.position += new Vector3(0, 5.0f, 0) * Time.deltaTime; // TODO: temp
             }
+            isMoving = true;
+        } else
+        {
+            isMoving = false;
         }
     }
 
-    bool CheckForBlocksAboveY(BasicBlock[] blocks, float y = 5)
+    bool CheckForBlocksAboveY(BasicBlock[] blocks, float y)
     {
         foreach (BasicBlock block in blocks)
         {
