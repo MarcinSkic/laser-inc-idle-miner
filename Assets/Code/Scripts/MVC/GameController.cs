@@ -62,7 +62,7 @@ public class GameController : MonoBehaviour
         {
             foreach (BasicBlock block in blocks)
             {
-                block.transform.position += new Vector3(0, 0.03f, 0); // TODO: temp
+                block.transform.position += new Vector3(0, 5.0f, 0) * Time.deltaTime; // TODO: temp
             }
         }
     }
@@ -99,10 +99,12 @@ public class GameController : MonoBehaviour
             data.depth += data.depthPerWave;
             statsDisplay.SetWaveDisplay();
             DisplayWave();
-            for (int i=0; i<UnityEngine.Random.Range(10, 15); i++)
+
+            blockSpawner.SpawnBlockRow(out BasicBlock[] spawnedBlocks);
+
+            for (int i=0; i<spawnedBlocks.Length; i++)
             {
-                blockSpawner.Spawn(out var block);
-                block.AssignEvents(OnBlockDestroyed);
+                spawnedBlocks[i].AssignEvents(OnBlockDestroyed);
             }
         }
     }
