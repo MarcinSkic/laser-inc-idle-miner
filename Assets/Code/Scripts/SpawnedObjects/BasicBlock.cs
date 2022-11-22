@@ -17,7 +17,7 @@ public class BasicBlock : MonoBehaviour, IPoolable<BasicBlock>
 
     void OnMouseOver()
     {
-        if (Input.GetMouseButtonDown(0)){   //TODO: Check on mobile
+        if (Input.GetMouseButtonDown(0)){
             TakeDamage(1);
         }
     }

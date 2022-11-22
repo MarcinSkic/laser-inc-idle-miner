@@ -706,7 +706,8 @@ MonoBehaviour:
   instantionsParent: {fileID: 1235393438}
   active: 0
   inactive: 0
-  spawnArea: {x: 7.2, y: 10.5}
+  spawnArea: {x: 7.2, y: 0.5}
+  spawnOffset: {x: 0, y: -12.5, z: 0}
   data: {fileID: 2078200401}
   gameController: {fileID: 103615904}
 --- !u!114 &231626580
@@ -725,7 +726,7 @@ MonoBehaviour:
   instantionsParent: {fileID: 54048869}
   active: 0
   inactive: 0
-  spawnArea: {x: 15.4, y: 7.6}
+  spawnArea: {x: 7.2, y: 0.5}
   data: {fileID: 2078200401}
   gameController: {fileID: 103615904}
 --- !u!114 &231626581
@@ -744,7 +745,7 @@ MonoBehaviour:
   instantionsParent: {fileID: 54048869}
   active: 0
   inactive: 0
-  spawnArea: {x: 15.4, y: 7.6}
+  spawnArea: {x: 7.2, y: 0.5}
   data: {fileID: 2078200401}
   gameController: {fileID: 103615904}
 --- !u!114 &231626582
@@ -763,7 +764,7 @@ MonoBehaviour:
   instantionsParent: {fileID: 54048869}
   active: 0
   inactive: 0
-  spawnArea: {x: 15.4, y: 7.6}
+  spawnArea: {x: 7.2, y: 0.5}
   data: {fileID: 2078200401}
   gameController: {fileID: 103615904}
 --- !u!1 &240033865
@@ -4288,7 +4289,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: 'Wave: 0'
+  m_text: 'Depth: 0'
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
   m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
@@ -7428,7 +7429,8 @@ MonoBehaviour:
   basicBallCount: 0
   bombBallCount: 0
   sniperBallCount: 0
-  wave: 0
+  depthPerWave: 0.1
+  depth: 0
   roundNumber: 0
   roundTime: 0
   displayFloatingText: 0

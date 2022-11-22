@@ -6,6 +6,8 @@ using UnityEngine.UI;
 using static System.Math;
 using UnityEngine.Events;
 
+using System; // TODO@MARTIN w czym jest Math??
+
 /// <summary>
 /// Methods from this object should not be called by other objects. When such action direction is needed (for example UI or world events) it should connect methods to events HERE.
 /// </summary>
@@ -49,17 +51,55 @@ public class GameController : MonoBehaviour
     private void Update()
     {
         displayFPS();
-        checkIfWaveFinished();  //TODO: Make it event activated for each block broken
+        var blocks = _dynamic_blocks.GetComponentsInChildren<BasicBlock>(false); //TODO: Very Temp
+        MoveBlocks(blocks); // TODO: not optimal
+        checkIfWaveFinished(blocks); // TODO: not optimal
     }
 
-    private void checkIfWaveFinished(){
-        var blocks = _dynamic_blocks.GetComponentsInChildren<BasicBlock>(false);    //TODO: Very Temp
-        if (blocks.Length == 0)
+    private void MoveBlocks(BasicBlock[] blocks)
+    {
+        if (!CheckForBlocksAboveY(blocks))
         {
-            data.wave++;
+            foreach (BasicBlock block in blocks)
+            {
+                block.transform.position += new Vector3(0, 0.03f, 0); // TODO: temp
+            }
+        }
+    }
+
+    bool CheckForBlocksAboveY(BasicBlock[] blocks, float y = 5)
+    {
+        foreach (BasicBlock block in blocks)
+        {
+            if (block.transform.position.y > y)
+            {
+                return true;
+            }
+        }
+        return false;
+    }
+
+
+    bool CheckForBlocksBelowY(BasicBlock[] blocks, float y = -12)
+    {
+        foreach (BasicBlock block in blocks)
+        {
+            if (block.transform.position.y < y)
+            {
+                return true;
+            }
+        }
+        return false;
+    }
+
+    private void checkIfWaveFinished(BasicBlock[] blocks)
+    {
+        if (!CheckForBlocksBelowY(blocks))
+        {
+            data.depth += data.depthPerWave;
             statsDisplay.SetWaveDisplay();
             DisplayWave();
-            for (int i=0; i<Random.Range(80, 120); i++)
+            for (int i=0; i<UnityEngine.Random.Range(10, 15); i++)
             {
                 blockSpawner.Spawn(out var block);
                 block.AssignEvents(OnBlockDestroyed);
@@ -71,6 +111,7 @@ public class GameController : MonoBehaviour
     {
         AddMoney(maxHp);
         //TODO-FEATURE: Count destroyed blocks for upgrades/rewards
+
     }
 
     private int avgFrameRate;
@@ -291,7 +332,7 @@ public class GameController : MonoBehaviour
 
     public void DisplayWave()
     {
-        waveDisplay.text = $"Wave: {data.wave}";
+        waveDisplay.text = $"Depth: {Math.Round(data.depth,1)}m";
     }
 
     public void ShowMenu(GameObject menu)

@@ -39,6 +39,6 @@ public class StatsDisplay : MonoBehaviour
 
     public void SetWaveDisplay()
     {
-        enemyHpDisplay.text = $"block hp: {Math.Round(data.GetWaveEnemiesHealth(),2)}";
+        enemyHpDisplay.text = $"block hp: {Math.Round(data.GetDepthBlocksHealth(),2)}";
     }
 }

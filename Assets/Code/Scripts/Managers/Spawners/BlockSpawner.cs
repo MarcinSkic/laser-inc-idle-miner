@@ -9,6 +9,7 @@ public class BlockSpawner : BaseSpawner<BasicBlock>
     [Space(5)]
     [Header("BLOCK SPAWNER")]
     [SerializeField] private Vector2 spawnArea;
+    [SerializeField] private Vector3 spawnOffset;
 
     [Header("Temp")]
     [SerializeField] private Data data;
@@ -17,13 +18,13 @@ public class BlockSpawner : BaseSpawner<BasicBlock>
     public override void Spawn(out BasicBlock spawnedBlock)
     {
         base.Spawn(out BasicBlock block);
-        block.transform.position = new Vector3(Random.Range(-spawnArea.x, spawnArea.x), Random.Range(-spawnArea.y, spawnArea.y), 0);
+        block.transform.position = spawnOffset + new Vector3(Random.Range(-spawnArea.x, spawnArea.x), Random.Range(-spawnArea.y, spawnArea.y), 0);
         spawnedBlock = block;
     }
 
     protected override void Get(BasicBlock block)
     {
-        block.InitBlock(data.GetWaveEnemiesHealth());
+        block.InitBlock(data.GetDepthBlocksHealth());
 
         base.Get(block);
     }

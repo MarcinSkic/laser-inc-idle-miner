@@ -39,7 +39,8 @@ public class Data : MonoBehaviour
 
     [Header("Rounds stats")]
 
-    public double wave;
+    public double depthPerWave;
+    public double depth;
     public int roundNumber;
     public double roundTime;
 
@@ -120,8 +121,9 @@ public class Data : MonoBehaviour
             return false;
         }
     }
-    public double GetWaveEnemiesHealth()
+    public double GetDepthBlocksHealth()
     {
+        /*
         if (wave < 4)
         {
             return wave;
@@ -131,6 +133,8 @@ public class Data : MonoBehaviour
             return 5;
         }
         return Math.Ceiling(wave*Math.Pow(1.07, wave));
+        */
+        return depth*Math.Pow(1.03, depth);
     }
     public double GetBallDamage()
     {
