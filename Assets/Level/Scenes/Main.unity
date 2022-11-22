@@ -386,7 +386,7 @@ MonoBehaviour:
   SettingsContent: {fileID: 916326390}
   upgradeBuyingBar: {fileID: 5887169020256829844, guid: 11d795ac25a9d484281b97f92b6e08c8, type: 3}
   settingBar: {fileID: 6728426492982927571, guid: f28fa603a8da54b4783702d8a52f4ebd, type: 3}
-  spawnArea: {x: 15.4, y: 7.6}
+  spawnArea: {x: 7.5, y: 10.5}
   blockSpawner: {fileID: 231626579}
   basicBallSpawner: {fileID: 231626582}
   bombBallSpawner: {fileID: 231626581}
@@ -706,7 +706,7 @@ MonoBehaviour:
   instantionsParent: {fileID: 1235393438}
   active: 0
   inactive: 0
-  spawnArea: {x: 15.4, y: 7.6}
+  spawnArea: {x: 7.2, y: 10.5}
   data: {fileID: 2078200401}
   gameController: {fileID: 103615904}
 --- !u!114 &231626580
@@ -1714,6 +1714,7 @@ GameObject:
   - component: {fileID: 726198939}
   - component: {fileID: 726198938}
   - component: {fileID: 726198941}
+  - component: {fileID: 726198942}
   m_Layer: 0
   m_Name: Main Camera
   m_TagString: MainCamera
@@ -1742,10 +1743,10 @@ Camera:
   m_BackGroundColor: {r: 0.16078432, g: 0.16078432, b: 0.16078432, a: 0}
   m_projectionMatrixMode: 1
   m_GateFitMode: 2
-  m_FOVAxisMode: 0
+  m_FOVAxisMode: 1
   m_SensorSize: {x: 36, y: 24}
   m_LensShift: {x: 0, y: 0}
-  m_FocalLength: 50
+  m_FocalLength: 60.76698
   m_NormalizedViewPortRect:
     serializedVersion: 2
     x: 0
@@ -1754,7 +1755,7 @@ Camera:
     height: 1
   near clip plane: 0.3
   far clip plane: 1000
-  field of view: 40
+  field of view: 53.68814
   orthographic: 0
   orthographic size: 5
   m_Depth: -1
@@ -1820,6 +1821,20 @@ MonoBehaviour:
   m_RequiresDepthTexture: 0
   m_RequiresColorTexture: 0
   m_Version: 2
+--- !u!114 &726198942
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 726198937}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: be6a5d15f7f47e54a8a959cb1806bcd0, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  this_camera: {fileID: 726198939}
+  target_fov: 32
 --- !u!1 &735673255
 GameObject:
   m_ObjectHideFlags: 0
@@ -2988,9 +3003,9 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1064644889}
-  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalRotation: {x: 0, y: 0, z: 0.7071068, w: 0.7071068}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 2, y: 2, z: 2}
+  m_LocalScale: {x: 1.4, y: 2, z: 2}
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 411517789}
@@ -3011,7 +3026,7 @@ Transform:
   - {fileID: 9314945}
   m_Father: {fileID: 1833445684}
   m_RootOrder: 2
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 90}
 --- !u!1 &1071319428
 GameObject:
   m_ObjectHideFlags: 0
