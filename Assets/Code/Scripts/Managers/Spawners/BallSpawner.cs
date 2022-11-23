@@ -17,7 +17,7 @@ public class BallSpawner<Ball,Data> : BaseSpawner<Ball> where Ball : BaseBall<Da
     public override void Spawn(out Ball spawnedBall)
     {
        base.Spawn(out Ball ball);
-       ball.transform.position = new Vector3(Random.Range(-spawnArea.x, spawnArea.x), Random.Range(-spawnArea.y, spawnArea.y), 0);
+       ball.transform.position = new Vector3(0, 6, 0) + new Vector3(Random.Range(-spawnArea.x, spawnArea.x), Random.Range(-spawnArea.y, spawnArea.y), 0);
        spawnedBall = ball;
     }
 
