@@ -47,6 +47,7 @@ public class GameController : MonoBehaviour
     [SerializeField] private SniperBallSpawner sniperBallSpawner;
 
     [SerializeField] private UpgradesModel upgradesModel;
+    [SerializeField] private GameObject movingBorderTexturesParent;
 
     private bool isMoving = true;
 
@@ -75,6 +76,16 @@ public class GameController : MonoBehaviour
             {
                 block.transform.position += new Vector3(0, 5.0f, 0) * Time.deltaTime; // TODO: temp
             }
+            var bgTextures = movingBorderTexturesParent.GetComponentsInChildren<Transform>(false); //TODO: Very Temp
+            for (int i=1; i< bgTextures.Length; i++) // i=1 żeby nie łapało parenta
+            {
+                // Translate byłby zły bo parent ma scale i rotation
+                bgTextures[i].position += new Vector3(0, 5.0f, 0) * Time.deltaTime ; // TODO: temp
+                if (bgTextures[i].position.y >= 28f)
+                {
+                    bgTextures[i].position -= new Vector3(0, 67.2f, 0);
+                }
+            }
             isMoving = true;
         } else
         {
@@ -95,7 +106,7 @@ public class GameController : MonoBehaviour
     }
 
 
-    bool CheckForBlocksBelowY(BasicBlock[] blocks, float y = -12)
+    bool CheckForBlocksBelowY(BasicBlock[] blocks, float y = -21)
     {
         foreach (BasicBlock block in blocks)
         {

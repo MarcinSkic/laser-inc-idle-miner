@@ -25,7 +25,7 @@ public class BlockSpawner : BaseSpawner<BasicBlock>
         //base.Spawn(out BasicBlock block);
         spawnedBlocks = new BasicBlock[] { };
 
-        columns = Random.Range(6, 9);
+        columns = Random.Range(7, 10);
 
         for (column = 0; column<columns; column++)
         {
