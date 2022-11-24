@@ -102,6 +102,7 @@ public class BaseBall<T> : MonoBehaviour, IPoolable<BaseBall<T>>, IUpgradeable<T
 [System.Serializable]
 public class BaseBallData
 {
+    public string ballName;
     public UpgradeableData<double> speed;
     public UpgradeableData<double> damage;
 }

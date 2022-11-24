@@ -33,13 +33,13 @@ public class UpgradesManager : MonoBehaviour
 
     void AddUpgradeablesValues()
     {
-        model.universalSpeed.upgrade.AddUpgradeable(data.basicBallData.speed, data.bombBallData.speed,data.sniperBallData.speed);
-        model.universalDamage.upgrade.AddUpgradeable(data.basicBallData.damage, data.bombBallData.damage, data.sniperBallData.damage);
+        //model.universalSpeed.upgrade.AddUpgradeable(data.basicBallData.speed, data.bombBallData.speed,data.sniperBallData.speed);
+        //model.universalDamage.upgrade.AddUpgradeable(data.basicBallData.damage, data.bombBallData.damage, data.sniperBallData.damage);
     }
 
     void AddUpgradeableActions()
     {
-        model.basicBallCount.upgrade.AddUpgradeable(new UpgradeableData<UnityAction>(delegate { 
+        /*model.basicBallCount.upgrade.AddUpgradeable(new UpgradeableData<UnityAction>(delegate { 
             basicBallSpawner.Spawn(out var ball);
             model.universalSpeed.upgrade.AddOnUpgrade(ball.Upgrade);
         }));
@@ -50,7 +50,7 @@ public class UpgradesManager : MonoBehaviour
         model.sniperBallCount.upgrade.AddUpgradeable(new UpgradeableData<UnityAction>(delegate {
             sniperBallSpawner.Spawn(out var ball);
             model.universalSpeed.upgrade.AddOnUpgrade(ball.Upgrade);
-        }));
+        }));*/
     }
 
 
