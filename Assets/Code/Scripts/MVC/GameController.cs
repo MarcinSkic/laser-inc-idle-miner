@@ -266,31 +266,31 @@ public class GameController : MonoBehaviour
         switch (name)
         {
             case "Damage":
-                TryBuyUpgrade(upgradesModel.universalDamage.upgrade);
+                TryBuyUpgrade(upgradesModel.getUpgrade("UniversalDamage"));
                 break;
             case "Bullet speed":
-                TryBuyUpgrade(upgradesModel.universalSpeed.upgrade);
+                TryBuyUpgrade(upgradesModel.getUpgrade("UniversalSpeed"));
                 break;
             case var x when x.Contains("count"):
                 switch (x)
                 {
                     case "Bullet count":
-                        TryBuyUpgrade(upgradesModel.basicBallCount.upgrade);
+                        TryBuyUpgrade(upgradesModel.getUpgrade("BasicCount"));
                         break;
                     case "Bomb count":
-                        TryBuyUpgrade(upgradesModel.bombBallCount.upgrade);
+                        TryBuyUpgrade(upgradesModel.getUpgrade("BombCount"));
                         break;
                     case "Sniper count":
-                        TryBuyUpgrade(upgradesModel.sniperBallCount.upgrade);
+                        TryBuyUpgrade(upgradesModel.getUpgrade("SniperCount"));
                         break;
                 }
                 break;
         }
     }
 
-    public bool TryBuyUpgrade<T>(Upgrade<T> upgrade)
+    public bool TryBuyUpgrade(Upgrade upgrade)
     {
-        var upgradeCost = upgrade.currentCost;
+        var upgradeCost = upgrade.cost;
 
         if(upgradeCost > data.money)
         {
@@ -340,12 +340,6 @@ public class GameController : MonoBehaviour
                 }
 
                 statsDisplay.SetBallCountDisplay();
-            }
-
-            var balls = _dynamic_balls.GetComponentsInChildren<BaseBall<BaseBallData>>(true);    //TODO-FT-UPGRADES
-            foreach (var ball in balls)
-            {
-                ball.Upgrade();
             }
         }
         else if (data.money < Cost(name))

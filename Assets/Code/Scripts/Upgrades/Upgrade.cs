@@ -3,16 +3,16 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Events;
 
-public enum UpgradeType { ValuesUgprade, CustomFunction}
-public enum UpgradedObjects { Balls, SpecifiedBelow}
+public enum UpgradeType { ValuesUpgrade, SpawnUpgrade, CustomFunction}
+public enum UpgradedObjects { AllBalls, SpecifiedBalls}
 public enum ValueUpgradeFormula { Add, Multiply };
 
 [System.Serializable]
 public class Upgrade
 {
     [Header("Fill: Always")]
-    public string upgradeName;
-    public UpgradeType upgradeType;
+    public string name;
+    public UpgradeType type;
 
     public double cost;
     [Tooltip("Formula: currentCost = currentCost*costMultiplier+costIncremental")]
@@ -21,13 +21,14 @@ public class Upgrade
     public double costMultiplier;
 
     [Tooltip("Set to -1 for infinite levels")]
-    public int maxLevel;
+    public int maxLevel = -1;
 
     [Space(5)]
 
-    [Header("Fill: Values Upgrade")]
+    [Header("Fill: Values Upgrade & Spawn Upgrade")]
     public UpgradedObjects upgradedObjects;
-    public List<string> upgradedObjectsNames;
+    public List<string> specifiedObjects;
+    [Header("Fill: Values Upgrade")]
     public List<string> upgradedValuesNames;
     [Tooltip("Effect depends on used formula")]
     public double changeValue;
@@ -36,10 +37,10 @@ public class Upgrade
     [Header("Debug")]
     public int currentLevel = 0;
 
-    [HideInInspector]
-    public UnityAction onUpgrade;
+    public UnityAction<Upgrade> onUpgrade;
+    public Upgrade initialUpgrade;
 
-    public void AddOnUpgrade(params UnityAction[] actions)
+    public void AddOnUpgrade(params UnityAction<Upgrade>[] actions)
     {
         foreach (var action in actions)
         {
@@ -59,7 +60,7 @@ public class Upgrade
         currentLevel++;
         newCost = cost;
 
-        onUpgrade?.Invoke();
+        onUpgrade?.Invoke(this);
         return true;
     }
 }

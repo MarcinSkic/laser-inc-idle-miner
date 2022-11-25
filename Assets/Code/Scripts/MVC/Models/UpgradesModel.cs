@@ -5,26 +5,38 @@ using UnityEngine;
 
 public class UpgradesModel : MonoBehaviour
 {
-    //TODO-DISCUSS: Keep it in some collection? Also they probably should have some internal string name
-    public List<UpgradeScriptable> upgrades;    //TODO: target - assign here only scriptable, on game launch it will connect / transform into a pair or copy it starting values... somewhere :D
+    [SerializeField]
+    private List<UpgradeScriptable> upgradesScriptable;
 
-    public UpgradePair universalSpeed;
-    public UpgradePair universalDamage;
-    public UpgradePair basicBallCount;
-    public UpgradePair bombBallCount;
-    public UpgradePair sniperBallCount;
-}
+    [Header("Debug")]
+    public List<Upgrade> upgrades;
 
-[System.Serializable]
-public class UpgradePair
-{
-    public UpgradeScriptable scriptable;
-    public Upgrade upgrade;
-
-    public static implicit operator Upgrade(UpgradePair upgradePair) => upgradePair.upgrade;
-
-    public void LoadStartData()
+    public Upgrade getUpgrade(string name)
     {
-        upgrade = Functions.GetObjectCopy(scriptable.upgrade);
+        return upgrades.Find(upgrade => upgrade.name == name);
+    }
+
+    private void Awake()
+    {
+        TransformScriptablesIntoUpgrades();
+    }
+
+    private void TransformScriptablesIntoUpgrades()
+    {
+        upgrades = new List<Upgrade>();
+
+        foreach(var scriptable in upgradesScriptable)
+        {
+            upgrades.Add(scriptable.Upgrade);
+        }
+    }
+
+    [ContextMenu("Full upgrades prestige")]
+    private void TestFullPrestige()
+    {
+        for(int i = 0; i < upgrades.Count; i++)
+        {
+            upgrades[i] = Functions.GetObjectCopy(upgrades[i].initialUpgrade);
+        }
     }
 }

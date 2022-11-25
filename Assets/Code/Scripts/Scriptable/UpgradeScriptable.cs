@@ -2,9 +2,18 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-[CreateAssetMenu(fileName = "Upgrade", menuName = "ScriptableObjects/UpgradeAction", order = 1)]
+[CreateAssetMenu(fileName = "Upgrade", menuName = "ScriptableObjects/Upgrade", order = 1)]
 public class UpgradeScriptable : ScriptableObject
 {
-    public Upgrade upgrade;
-    public static implicit operator Upgrade(UpgradeScriptable scriptable) => scriptable.upgrade;
+    [SerializeField]
+    private Upgrade upgrade;
+    public Upgrade Upgrade { 
+        get
+        {
+            var up = Functions.GetObjectCopy(upgrade);
+            up.initialUpgrade = Functions.GetObjectCopy(upgrade);
+            return up;
+        }
+        set => upgrade = value;
+    }
 }
