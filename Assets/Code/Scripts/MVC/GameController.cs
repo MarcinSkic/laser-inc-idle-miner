@@ -11,8 +11,10 @@ using System; // TODO@MARTIN w czym jest Math??
 /// <summary>
 /// Methods from this object should not be called by other objects. When such action direction is needed (for example UI or world events) it should connect methods to events HERE.
 /// </summary>
-public class GameController : MonoBehaviour
+public class GameController : BaseController<GameView>
 {
+
+    [Header("Junkyard")]
     [SerializeField] private Data data;
     [SerializeField] private StatsDisplay statsDisplay;
     public Data NewData => data;
@@ -50,6 +52,17 @@ public class GameController : MonoBehaviour
     [SerializeField] private GameObject movingBorderTexturesParent;
 
     private bool isMoving = true;
+
+    //KEEP MONOBEHAVIOUR METHODS ON TOP
+    void Start()
+    {
+
+
+        HideMenus();
+        GenerateBuyingBars();
+        GenerateSettingBars();
+        SetupTestUpgrade();
+    }
 
     private void Update()
     {
@@ -158,14 +171,6 @@ public class GameController : MonoBehaviour
         {
             fpsRefreshCounter--;
         }
-    }
-
-    void Start()
-    {
-        HideMenus();
-        GenerateBuyingBars();
-        GenerateSettingBars();
-        SetupTestUpgrade();
     }
 
     void SetupTestUpgrade()

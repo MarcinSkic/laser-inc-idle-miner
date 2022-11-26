@@ -7,8 +7,8 @@ using UnityEngine.UI;
 
 public class UIButtonController : MonoBehaviour
 {
-    [SerializeField] private Button button;
-    [SerializeField] private TMP_Text text;
+    [SerializeField] protected Button button;
+    [SerializeField] protected TMP_Text text;
     public void Awake()
     {
         button.onClick.AddListener(OnClicked);
@@ -26,7 +26,7 @@ public class UIButtonController : MonoBehaviour
     }
 
     public UnityAction onClick;
-    private void OnClicked()
+    protected virtual void OnClicked()
     {
         onClick?.Invoke();
     }

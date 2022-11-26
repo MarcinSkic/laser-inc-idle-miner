@@ -2,17 +2,31 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class GameView : MonoBehaviour
+public class GameView : BaseView
 {
-    // Start is called before the first frame update
-    void Start()
+    [SerializeField] private List<GameObject> topButtonsTabs;
+    [SerializeField] private List<UIButtonWithStringController> bottomButtons;
+
+    private void Start()
     {
-        
+        AssignBottomButtonsEvent();
     }
 
-    // Update is called once per frame
-    void Update()
+    private void AssignBottomButtonsEvent()
     {
-        
+        foreach (var button in bottomButtons)
+        {
+            button.onClick += SwitchTab;
+        }
+    }
+
+    private void SwitchTab(string name)
+    {
+        foreach(var tab in topButtonsTabs)
+        {
+            tab.SetActive(false);
+        }
+
+        topButtonsTabs.Find(tab => tab.name == name).SetActive(true);
     }
 }
