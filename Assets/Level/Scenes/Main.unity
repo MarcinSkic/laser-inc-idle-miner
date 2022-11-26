@@ -1848,7 +1848,7 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 567613849}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
@@ -7401,55 +7401,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 535f1003da3e4c14d896c0587b6e13f7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  universalSpeed:
-    scriptable: {fileID: 11400000, guid: 1911282bd24ed1b4cb4a569b96fe71f1, type: 2}
-    upgrade:
-      upgradeableDatas: []
-      costIncremental: 0
-      costMultiplier: 0
-      currentCost: 0
-      currentLevel: 0
-      maxLevel: 0
-      formula: 0
-      changeValue: 0
-  universalDamage:
-    scriptable: {fileID: 11400000, guid: 85ad254bffd31594fb78ee2ca4c0bb34, type: 2}
-    upgrade:
-      upgradeableDatas: []
-      costIncremental: 0
-      costMultiplier: 0
-      currentCost: 0
-      currentLevel: 0
-      maxLevel: 0
-      formula: 0
-      changeValue: 0
-  basicBallCount:
-    scriptable: {fileID: 11400000, guid: 30dd89ea0fcf0f7439bd945c6e718055, type: 2}
-    upgrade:
-      upgradeableDatas: []
-      costIncremental: 0
-      costMultiplier: 0
-      currentCost: 0
-      currentLevel: 0
-      maxLevel: 0
-  bombBallCount:
-    scriptable: {fileID: 11400000, guid: d3c8fd95a37cd6e4583824ff117bea4a, type: 2}
-    upgrade:
-      upgradeableDatas: []
-      costIncremental: 0
-      costMultiplier: 0
-      currentCost: 0
-      currentLevel: 0
-      maxLevel: 0
-  sniperBallCount:
-    scriptable: {fileID: 11400000, guid: e983c1a9f25817d47a365abd828bc723, type: 2}
-    upgrade:
-      upgradeableDatas: []
-      costIncremental: 0
-      costMultiplier: 0
-      currentCost: 0
-      currentLevel: 0
-      maxLevel: 0
+  upgradesScriptable:
+  - {fileID: 11400000, guid: 68348eecfa340cc42a86e3e2a7801692, type: 2}
+  - {fileID: 11400000, guid: 68d5846c8042cb54eab81d41335a91b1, type: 2}
+  - {fileID: 11400000, guid: e22a5b184ca2ae74c8a77e52a0882d7f, type: 2}
+  - {fileID: 11400000, guid: 87c4dd4ba17df9842b5925eab17869c8, type: 2}
+  - {fileID: 11400000, guid: 150a26e47bf7008428974c85a0a64b47, type: 2}
+  upgrades: []
 --- !u!1 &1974319181
 GameObject:
   m_ObjectHideFlags: 0
@@ -8257,29 +8215,35 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 869ac6ad55f1d16498f2c465f8b95556, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  ballsData: []
   basicBallData:
+    name: basic
     speed:
+      name: speed
       value: 3
     damage:
+      name: damage
       value: 1
-  ballDamage: 1
-  ballSpeed: 5
   bombBallData:
+    name: bomb
     speed:
+      name: speed
       value: 5
     damage:
+      name: damage
       value: 1
     explosionSize: 4
   sniperBallData:
+    name: sniper
     speed:
+      name: speed
       value: 5
     damage:
+      name: damage
       value: 1
     speedBoost: 2
   money: 0
   earnedMoney: 0
-  dmgPerUpgrade: 1
-  bulletSpdPerUpgrade: 10
   basicBallCount: 0
   bombBallCount: 0
   sniperBallCount: 0

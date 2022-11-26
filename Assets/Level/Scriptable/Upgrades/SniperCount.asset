@@ -9,15 +9,20 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 270ee6729a1ff384e9bc9ccf94834ba5, type: 3}
-  m_Name: UnivDamage
+  m_Script: {fileID: 11500000, guid: 5400be14b10cc7e47a7f3024d24c25bb, type: 3}
+  m_Name: SniperCount
   m_EditorClassIdentifier: 
   upgrade:
-    upgradeableDatas: []
+    name: SniperCount
+    type: 1
+    cost: 100
     costIncremental: 0
-    costMultiplier: 5
-    currentCost: 50
-    currentLevel: 0
+    costMultiplier: 3
     maxLevel: -1
-    formula: 1
-    changeValue: 2
+    upgradedObjects: 1
+    specifiedObjects:
+    - sniper
+    upgradedValuesNames: []
+    changeValue: 0
+    formula: 0
+    currentLevel: 0

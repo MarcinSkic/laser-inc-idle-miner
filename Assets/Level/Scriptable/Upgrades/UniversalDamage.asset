@@ -9,13 +9,20 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 8426e61af03840c4a938c15760bf0256, type: 3}
-  m_Name: BombBallCount
+  m_Script: {fileID: 11500000, guid: 5400be14b10cc7e47a7f3024d24c25bb, type: 3}
+  m_Name: UniversalDamage
   m_EditorClassIdentifier: 
   upgrade:
-    upgradeableDatas: []
+    name: UniversalDamage
+    type: 0
+    cost: 50
     costIncremental: 0
-    costMultiplier: 2
-    currentCost: 50
+    costMultiplier: 4
+    maxLevel: -1
+    upgradedObjects: 0
+    specifiedObjects: []
+    upgradedValuesNames:
+    - damage
+    changeValue: 2
+    formula: 1
     currentLevel: 0
-    maxLevel: 10

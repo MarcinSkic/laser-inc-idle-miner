@@ -9,15 +9,20 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 270ee6729a1ff384e9bc9ccf94834ba5, type: 3}
-  m_Name: UnivSpeed
+  m_Script: {fileID: 11500000, guid: 5400be14b10cc7e47a7f3024d24c25bb, type: 3}
+  m_Name: UniversalSpeed
   m_EditorClassIdentifier: 
   upgrade:
-    upgradeableDatas: []
+    name: UniversalSpeed
+    type: 0
+    cost: 100
     costIncremental: 0
     costMultiplier: 2
-    currentCost: 1
-    currentLevel: 0
     maxLevel: -1
-    formula: 0
+    upgradedObjects: 0
+    specifiedObjects: []
+    upgradedValuesNames:
+    - speed
     changeValue: 5
+    formula: 0
+    currentLevel: 0

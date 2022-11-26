@@ -23,7 +23,7 @@ public class BaseBall<T> : MonoBehaviour, IPoolable<BaseBall<T>>, IUpgradeable<T
         SetInitialVelocity();
     }
 
-    public virtual void Upgrade()
+    public virtual void Upgrade(Upgrade upgrade)
     {
         SetVelocity();
     }
@@ -102,6 +102,7 @@ public class BaseBall<T> : MonoBehaviour, IPoolable<BaseBall<T>>, IUpgradeable<T
 [System.Serializable]
 public class BaseBallData
 {
+    public string name;
     public UpgradeableData<double> speed;
     public UpgradeableData<double> damage;
 }
