@@ -7,12 +7,16 @@ public class GameView : BaseView
     [SerializeField] private List<GameObject> topButtonsTabs;
     [SerializeField] private List<UIButtonWithStringController> bottomButtons;
 
+    public List<UIBallBar> ballBars;
+    public UIBallBar ballBarPrefab;
+    public Transform ballBarsContent;
+
     private void Start()
     {
-        AssignBottomButtonsEvent();
+        AssignBottomButtonsEvent(); //TODO-FT-CURRENT: Should be in GameController
     }
 
-    private void AssignBottomButtonsEvent()
+    public void AssignBottomButtonsEvent()
     {
         foreach (var button in bottomButtons)
         {
@@ -28,5 +32,13 @@ public class GameView : BaseView
         }
 
         topButtonsTabs.Find(tab => tab.name == name).SetActive(true);
+    }
+
+    public void GenerateBallBar()
+    {
+        var bar = Instantiate(ballBarPrefab, ballBarsContent);
+        ballBars.Add(bar);
+
+
     }
 }

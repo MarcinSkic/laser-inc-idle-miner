@@ -38,8 +38,14 @@ public class Upgrade
     public int currentLevel = 0;
 
     public UnityAction<Upgrade> onUpgrade;
+    public UnityAction<Upgrade> onTryUpgrade;
     public Upgrade initialUpgrade;
+    public string textValue;
 
+    /// <summary>
+    /// This method is to streamline assigning functions to events
+    /// </summary>
+    /// <param name="actions"></param>
     public void AddOnUpgrade(params UnityAction<Upgrade>[] actions)
     {
         foreach (var action in actions)
@@ -48,19 +54,36 @@ public class Upgrade
         }
     }
 
-    public bool TryUpgrade(out double newCost)
+    public void AddOnTryUpgrade(params UnityAction<Upgrade>[] actions)
+    {
+        foreach (var action in actions)
+        {
+            onTryUpgrade += action;
+        }
+    }
+
+    /// <summary>
+    /// This should be called by UI and event onTryUpgrade should be connected to further validations
+    /// </summary>
+    /// <returns></returns>
+    public void TryUpgrade()
     {
         if (currentLevel == maxLevel)
         {
-            newCost = cost;
-            return false;
+            return;
         }
 
+        onTryUpgrade?.Invoke(this);
+    }
+
+    /// <summary>
+    /// This should be called after final validation
+    /// </summary>
+    public void DoUpgrade()
+    {
         cost = cost * costMultiplier + costIncremental;
         currentLevel++;
-        newCost = cost;
 
         onUpgrade?.Invoke(this);
-        return true;
     }
 }

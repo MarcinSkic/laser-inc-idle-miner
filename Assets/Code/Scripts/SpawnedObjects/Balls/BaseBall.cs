@@ -58,7 +58,7 @@ public class BaseBall<T> : MonoBehaviour, IPoolable<BaseBall<T>>, IUpgradeable<T
 
     protected virtual void SetLaserColor()
     {
-        SpriteRenderer circle = transform.GetChild(0).GetChild(1).GetComponent<SpriteRenderer>();   //TODO unnecessary getComponent
+        SpriteRenderer circle = transform.GetChild(0).GetChild(1).GetComponent<SpriteRenderer>();   //TODO: unnecessary getComponent
         circle.color = laserColor;
 
         var arms = transform.GetChild(0).GetChild(0).GetComponentsInChildren<SpriteRenderer>();
@@ -67,7 +67,7 @@ public class BaseBall<T> : MonoBehaviour, IPoolable<BaseBall<T>>, IUpgradeable<T
             arm.color = laserColor;
         }
 
-        TrailRenderer tr = GetComponent<TrailRenderer>();    //TODO unnecessary getComponent
+        TrailRenderer tr = GetComponent<TrailRenderer>();    //TODO: unnecessary getComponent
         tr.startColor = new Color(laserColor.r, laserColor.g, laserColor.b, 0.3f);
     }
 

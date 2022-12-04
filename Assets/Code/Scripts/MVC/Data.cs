@@ -89,15 +89,15 @@ public class Data : MonoBehaviour
         public int upgradeLevel = 0;
     }
 
-    public Dictionary<string, LegacyUpgrade> upgrades = new Dictionary<string, LegacyUpgrade>() { };
+    public Dictionary<string, LegacyUpgrade> legacyUpgrades = new Dictionary<string, LegacyUpgrade>() { };
 
     void Awake()
     {
-        upgrades.Add("Damage", new LegacyUpgrade() { upgradeBaseCost = 1, upgradeMultCost = 1.4, upgradeMaxLevel = 0 });
-        upgrades.Add("Bullet speed", new LegacyUpgrade() { upgradeBaseCost = 1, upgradeMultCost = 1.4, upgradeMaxLevel = 0 });
-        upgrades.Add("Bullet count", new LegacyUpgrade() { upgradeBaseCost = 5, upgradeMultCost = 1.7, upgradeMaxLevel = 10 });
-        upgrades.Add("Bomb count", new LegacyUpgrade() { upgradeBaseCost = 20, upgradeMultCost = 1.7, upgradeMaxLevel = 10 });
-        upgrades.Add("Sniper count", new LegacyUpgrade() { upgradeBaseCost = 20, upgradeMultCost = 1.7, upgradeMaxLevel = 10 });
+        legacyUpgrades.Add("Damage", new LegacyUpgrade() { upgradeBaseCost = 1, upgradeMultCost = 1.4, upgradeMaxLevel = 0 });
+        legacyUpgrades.Add("Bullet speed", new LegacyUpgrade() { upgradeBaseCost = 1, upgradeMultCost = 1.4, upgradeMaxLevel = 0 });
+        legacyUpgrades.Add("Bullet count", new LegacyUpgrade() { upgradeBaseCost = 5, upgradeMultCost = 1.7, upgradeMaxLevel = 10 });
+        legacyUpgrades.Add("Bomb count", new LegacyUpgrade() { upgradeBaseCost = 20, upgradeMultCost = 1.7, upgradeMaxLevel = 10 });
+        legacyUpgrades.Add("Sniper count", new LegacyUpgrade() { upgradeBaseCost = 20, upgradeMultCost = 1.7, upgradeMaxLevel = 10 });
         string[] settingsArray = { "Show maxed upgrades", "Show floating damage text", "Display 60 FPS" };
         foreach (string setting in settingsArray)
         {
@@ -140,10 +140,10 @@ public class Data : MonoBehaviour
     }
     public double GetBallDamage()
     {
-        return basicBallData.damage + upgrades["Damage"].upgradeLevel * 1;
+        return basicBallData.damage + legacyUpgrades["Damage"].upgradeLevel * 1;
     }
     public double GetSpd()
     {
-        return basicBallData.speed + 1 * upgrades["Bullet speed"].upgradeLevel;
+        return basicBallData.speed + 1 * legacyUpgrades["Bullet speed"].upgradeLevel;
     }
 }

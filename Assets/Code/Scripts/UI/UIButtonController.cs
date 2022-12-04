@@ -7,6 +7,7 @@ using UnityEngine.UI;
 
 public class UIButtonController : MonoBehaviour
 {
+    [Header("BUTTON BASE")]
     [SerializeField] protected Button button;
     [SerializeField] protected TMP_Text text;
     public void Awake()

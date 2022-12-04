@@ -26,3 +26,4 @@ MonoBehaviour:
     changeValue: 0
     formula: 0
     currentLevel: 0
+    textValue: 
