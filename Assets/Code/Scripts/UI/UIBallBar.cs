@@ -1,9 +1,11 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class UIBallBar : MonoBehaviour
 {
+    public Image ballIcon;
     public List<UIButtonUpgradeController> buttonUpgrades;
 
     public void SetUpgradesName(string ballType)

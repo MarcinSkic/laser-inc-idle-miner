@@ -103,6 +103,7 @@ public class BaseBall<T> : MonoBehaviour, IPoolable<BaseBall<T>>, IUpgradeable<T
 public class BaseBallData
 {
     public string name;
+    public Sprite sprite;
     public UpgradeableData<double> speed;
     public UpgradeableData<double> damage;
 }

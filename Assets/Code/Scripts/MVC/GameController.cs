@@ -83,6 +83,7 @@ public class GameController : BaseController<GameView>
         {
             var ballBar = Instantiate(view.ballBarPrefab, view.ballBarsParent);
             ballBar.SetUpgradesName(ballType.name);
+            ballBar.ballIcon.sprite = ballType.sprite;
 
             view.ballBars.Add(ballBar);
         }
