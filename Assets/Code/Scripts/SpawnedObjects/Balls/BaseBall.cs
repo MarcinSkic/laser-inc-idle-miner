@@ -69,6 +69,8 @@ public class BaseBall<T> : MonoBehaviour, IPoolable<BaseBall<T>>, IUpgradeable<T
 
         TrailRenderer tr = GetComponent<TrailRenderer>();    //TODO unnecessary getComponent
         tr.startColor = new Color(laserColor.r, laserColor.g, laserColor.b, 0.3f);
+
+        transform.GetChild(0).GetChild(2).GetComponent<Light>().color = new Color(laserColor.r, laserColor.g, laserColor.b);
     }
 
     private void RotateLaser()
