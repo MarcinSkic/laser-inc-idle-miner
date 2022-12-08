@@ -13,15 +13,15 @@ MonoBehaviour:
   m_Name: SniperDamage
   m_EditorClassIdentifier: 
   upgrade:
-    name: BombDamage
+    name: SniperDamage
     type: 0
-    cost: 10
+    cost: 11.97
     costIncremental: 5
     costMultiplier: 1.1
     maxLevel: -1
     upgradedObjects: 1
     specifiedObjects:
-    - Bomb
+    - Sniper
     upgradedValuesNames:
     - Damage
     changeValue: 1.5

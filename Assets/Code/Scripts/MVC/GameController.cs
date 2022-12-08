@@ -58,6 +58,7 @@ public class GameController : BaseController<GameView>
     {
         ConnectUpgrades();  //TODO-FT-CURRENT: Move this functionality to upgrade manager?
 
+        CreateBallBars();
         InitBallBars();
         // TEMP
         // | | |
@@ -74,6 +75,18 @@ public class GameController : BaseController<GameView>
         var blocks = _dynamic_blocks.GetComponentsInChildren<BasicBlock>(false); //TODO: Very Temp
         MoveBlocks(blocks); // TODO: not optimal
         checkIfWaveFinished(blocks); // TODO: not optimal
+    }
+
+    private void CreateBallBars()
+    {
+        foreach(var ballType in data.ballsData)
+        {
+            Debug.Log("Hej");
+            var ballBar = Instantiate(view.ballBarPrefab, view.ballBarsParent);
+            ballBar.SetUpgradesName(ballType.name);
+
+            view.ballBars.Add(ballBar);
+        }
     }
 
     private void InitBallBars()

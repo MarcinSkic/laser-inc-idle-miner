@@ -9,7 +9,7 @@ public class GameView : BaseView
 
     public List<UIBallBar> ballBars;
     public UIBallBar ballBarPrefab;
-    public Transform ballBarsContent;
+    public Transform ballBarsParent;
 
     private void Start()
     {
@@ -36,7 +36,7 @@ public class GameView : BaseView
 
     public void GenerateBallBar()
     {
-        var bar = Instantiate(ballBarPrefab, ballBarsContent);
+        var bar = Instantiate(ballBarPrefab, ballBarsParent);
         ballBars.Add(bar);
 
 

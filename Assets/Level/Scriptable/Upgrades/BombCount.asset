@@ -21,7 +21,7 @@ MonoBehaviour:
     maxLevel: -1
     upgradedObjects: 1
     specifiedObjects:
-    - bomb
+    - Bomb
     upgradedValuesNames: []
     changeValue: 0
     formula: 0

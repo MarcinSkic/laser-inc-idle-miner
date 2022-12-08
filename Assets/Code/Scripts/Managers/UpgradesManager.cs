@@ -63,25 +63,28 @@ public class UpgradesManager : MonoBehaviour
 
             switch (ballType)
             {
-                case "basic":
+                case "Basic":
                     {   //TODO-FT-CURRENT: Check if everything works properly
                         basicBallSpawner.Spawn(out var ball);
                         upgrade.textValue = basicBallSpawner.active.ToString(); //TODO-FT-CURRENT: Pull from Data
                         model.getUpgrade("UniversalSpeed").AddOnUpgrade(ball.Upgrade);
                         break;
                     }
-                case "bomb":
+                case "Bomb":
                     {
                         bombBallSpawner.Spawn(out var ball);
                         model.getUpgrade("UniversalSpeed").AddOnUpgrade(ball.Upgrade);
                         break;
                     }   
-                case "sniper":
+                case "Sniper":
                     {
                         sniperBallSpawner.Spawn(out var ball3);
                         model.getUpgrade("UniversalSpeed").AddOnUpgrade(ball3.Upgrade);
                         break;
-                    }      
+                    }
+                default:
+                    Debug.LogWarningFormat("Missing ball of type {0} to spawn ", ballType);
+                    break;
             }
         }
     }
@@ -92,11 +95,11 @@ public class UpgradesManager : MonoBehaviour
         {
             switch (valueType)  //TODO-FT-DICTIONARIES
             {
-                case "speed":
+                case "Speed":
                     UpgradeValue(upgrade, ball.speed);
                     upgrade.textValue = ball.speed.value.ToString();
                     break;
-                case "damage":
+                case "Damage":
                     UpgradeValue(upgrade, ball.damage);
                     upgrade.textValue = ball.damage.value.ToString();
                     break;
