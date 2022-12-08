@@ -399,6 +399,9 @@ MonoBehaviour:
   - {fileID: 1708393936}
   - {fileID: 1952372093}
   - {fileID: 1156127960}
+  tabs:
+  - {fileID: 200777127}
+  - {fileID: 1184489654}
   ballBars:
   - {fileID: 1669260618}
   ballBarPrefab: {fileID: 916111741661999725, guid: 0515818992f6b704aa8d333efc629d72, type: 3}
@@ -920,7 +923,7 @@ GameObject:
   m_Component:
   - component: {fileID: 200777128}
   m_Layer: 5
-  m_Name: UpgradesTab
+  m_Name: UpgradeTab
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1086,7 +1089,7 @@ MonoBehaviour:
   randomOffset: {x: 0.2, y: 0.2}
   spawnOffset: {x: 0, y: -22, z: 0}
   data: {fileID: 2078200401}
-  gameController: {fileID: 0}
+  gameController: {fileID: 383171360}
 --- !u!114 &231626580
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1105,7 +1108,7 @@ MonoBehaviour:
   inactive: 0
   spawnArea: {x: 7.2, y: 0.5}
   data: {fileID: 2078200401}
-  gameController: {fileID: 0}
+  gameController: {fileID: 383171360}
 --- !u!114 &231626581
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1124,7 +1127,7 @@ MonoBehaviour:
   inactive: 0
   spawnArea: {x: 7.2, y: 0.5}
   data: {fileID: 2078200401}
-  gameController: {fileID: 0}
+  gameController: {fileID: 383171360}
 --- !u!114 &231626582
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1143,7 +1146,7 @@ MonoBehaviour:
   inactive: 0
   spawnArea: {x: 7.2, y: 0.5}
   data: {fileID: 2078200401}
-  gameController: {fileID: 0}
+  gameController: {fileID: 383171360}
 --- !u!1 &231668855
 GameObject:
   m_ObjectHideFlags: 0
@@ -2442,7 +2445,19 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 448288065}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 2129758561}
+        m_TargetAssemblyTypeName: TEMPCloseTab, Assembly-CSharp
+        m_MethodName: Clicked
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &448288065
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2515,7 +2530,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   button: {fileID: 448288064}
   text: {fileID: 2078716647}
-  parameter: 
+  parameter: BallsTab
 --- !u!1 &463867909
 GameObject:
   m_ObjectHideFlags: 0
@@ -3970,7 +3985,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8249492183035129879, guid: 775c61d93e44ee34392b1f5812fedbbd, type: 3}
       propertyPath: m_SizeDelta.x
-      value: 233.3
+      value: 296.47
       objectReference: {fileID: 0}
     - target: {fileID: 8249492183035129879, guid: 775c61d93e44ee34392b1f5812fedbbd, type: 3}
       propertyPath: m_SizeDelta.y
@@ -4006,7 +4021,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8249492183035129879, guid: 775c61d93e44ee34392b1f5812fedbbd, type: 3}
       propertyPath: m_AnchoredPosition.x
-      value: -533.76996
+      value: -502.18
       objectReference: {fileID: 0}
     - target: {fileID: 8249492183035129879, guid: 775c61d93e44ee34392b1f5812fedbbd, type: 3}
       propertyPath: m_AnchoredPosition.y
@@ -4131,7 +4146,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &807554629
 RectTransform:
   m_ObjectHideFlags: 0
@@ -4149,7 +4164,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 0, y: 1}
-  m_AnchoredPosition: {x: 175, y: -32.5}
+  m_AnchoredPosition: {x: 175, y: -65}
   m_SizeDelta: {x: 350, y: 65}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &807554630
@@ -4301,7 +4316,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &844705883
 RectTransform:
   m_ObjectHideFlags: 0
@@ -4319,8 +4334,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 0, y: 1}
-  m_AnchoredPosition: {x: 525, y: -32.5}
-  m_SizeDelta: {x: 350, y: 65}
+  m_AnchoredPosition: {x: 350, y: -32.5}
+  m_SizeDelta: {x: 700, y: 65}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &844705884
 MonoBehaviour:
@@ -4369,7 +4384,7 @@ MonoBehaviour:
   m_faceColor:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontSize: 37.3
+  m_fontSize: 58.15
   m_fontSizeBase: 36
   m_fontWeight: 400
   m_enableAutoSizing: 1
@@ -4609,7 +4624,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6d68667b63d970642a57a1f7bfe3a5f3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  gameController: {fileID: 0}
+  gameController: {fileID: 383171360}
   data: {fileID: 2078200401}
   damageDisplay: {fileID: 807554630}
   SpdDisplay: {fileID: 1445338049}
@@ -7022,8 +7037,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 1}
   m_AnchorMax: {x: 0.5, y: 1}
-  m_AnchoredPosition: {x: -533.7687, y: 570}
-  m_SizeDelta: {x: 333.3025, y: 130}
+  m_AnchoredPosition: {x: -502.1835, y: 570}
+  m_SizeDelta: {x: 396.4728, y: 130}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &1341246692
 CanvasRenderer:
@@ -7080,10 +7095,10 @@ MonoBehaviour:
   m_faceColor:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontSize: 80
+  m_fontSize: 72
   m_fontSizeBase: 80
   m_fontWeight: 400
-  m_enableAutoSizing: 0
+  m_enableAutoSizing: 1
   m_fontSizeMin: 18
   m_fontSizeMax: 72
   m_fontStyle: 32
@@ -7491,7 +7506,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8249492183035129879, guid: 775c61d93e44ee34392b1f5812fedbbd, type: 3}
       propertyPath: m_SizeDelta.x
-      value: 210.77
+      value: 279.1406
       objectReference: {fileID: 0}
     - target: {fileID: 8249492183035129879, guid: 775c61d93e44ee34392b1f5812fedbbd, type: 3}
       propertyPath: m_SizeDelta.y
@@ -7527,7 +7542,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8249492183035129879, guid: 775c61d93e44ee34392b1f5812fedbbd, type: 3}
       propertyPath: m_AnchoredPosition.x
-      value: 555.385
+      value: 521.1997
       objectReference: {fileID: 0}
     - target: {fileID: 8249492183035129879, guid: 775c61d93e44ee34392b1f5812fedbbd, type: 3}
       propertyPath: m_AnchoredPosition.y
@@ -7587,8 +7602,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 0, y: 1}
-  m_AnchoredPosition: {x: 525, y: -97.5}
-  m_SizeDelta: {x: 350, y: 65}
+  m_AnchoredPosition: {x: 346.61584, y: -65}
+  m_SizeDelta: {x: 539.8179, y: 130}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1443704482
 MonoBehaviour:
@@ -7637,7 +7652,7 @@ MonoBehaviour:
   m_faceColor:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontSize: 37.1
+  m_fontSize: 57.3
   m_fontSizeBase: 36
   m_fontWeight: 400
   m_enableAutoSizing: 1
@@ -7704,7 +7719,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &1445338048
 RectTransform:
   m_ObjectHideFlags: 0
@@ -10266,7 +10281,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8249492183035129879, guid: 775c61d93e44ee34392b1f5812fedbbd, type: 3}
       propertyPath: m_SizeDelta.x
-      value: 0
+      value: -160.18
       objectReference: {fileID: 0}
     - target: {fileID: 8249492183035129879, guid: 775c61d93e44ee34392b1f5812fedbbd, type: 3}
       propertyPath: m_SizeDelta.y
@@ -10302,7 +10317,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8249492183035129879, guid: 775c61d93e44ee34392b1f5812fedbbd, type: 3}
       propertyPath: m_AnchoredPosition.x
-      value: 0
+      value: -3.3844
       objectReference: {fileID: 0}
     - target: {fileID: 8249492183035129879, guid: 775c61d93e44ee34392b1f5812fedbbd, type: 3}
       propertyPath: m_AnchoredPosition.y
@@ -11242,8 +11257,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 1}
   m_AnchorMax: {x: 0.5, y: 1}
-  m_AnchoredPosition: {x: 555.39, y: 570}
-  m_SizeDelta: {x: 310.77, y: 130}
+  m_AnchoredPosition: {x: 521.2, y: 570}
+  m_SizeDelta: {x: 379.15, y: 130}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &2025944608
 CanvasRenderer:
@@ -11904,6 +11919,7 @@ GameObject:
   - component: {fileID: 2129758560}
   - component: {fileID: 2129758559}
   - component: {fileID: 2129758557}
+  - component: {fileID: 2129758561}
   m_Layer: 5
   m_Name: BallsTab
   m_TagString: Untagged
@@ -11958,7 +11974,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Content: {fileID: 1293810467}
-  m_Horizontal: 1
+  m_Horizontal: 0
   m_Vertical: 1
   m_MovementType: 1
   m_Elasticity: 0.1
@@ -12013,6 +12029,18 @@ MonoBehaviour:
   m_FillOrigin: 0
   m_UseSpriteMesh: 0
   m_PixelsPerUnitMultiplier: 1
+--- !u!114 &2129758561
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2129758555}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2b2463c4ad7fde34eb67cc71507f29d1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1001 &7506337588380844519
 PrefabInstance:
   m_ObjectHideFlags: 0

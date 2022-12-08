@@ -81,7 +81,6 @@ public class GameController : BaseController<GameView>
     {
         foreach(var ballType in data.ballsData)
         {
-            Debug.Log("Hej");
             var ballBar = Instantiate(view.ballBarPrefab, view.ballBarsParent);
             ballBar.SetUpgradesName(ballType.name);
 
