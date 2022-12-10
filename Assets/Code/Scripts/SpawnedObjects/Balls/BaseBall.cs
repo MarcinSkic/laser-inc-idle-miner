@@ -23,7 +23,12 @@ public class BaseBall<T> : MonoBehaviour, IPoolable<BaseBall<T>>, IUpgradeable<T
         SetInitialVelocity();
     }
 
-    public virtual void Upgrade(Upgrade upgrade)
+    public void Upgrade(Upgrade upgrade)
+    {
+        SetVelocity();
+    }
+
+    public virtual void Upgrade(string value)
     {
         SetVelocity();
     }

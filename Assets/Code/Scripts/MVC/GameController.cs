@@ -66,15 +66,15 @@ public class GameController : BaseController<GameView>
         HideMenus();
         GenerateBuyingBars();
         GenerateSettingBars();
-        SetupTestUpgrade();
     }
 
     private void Update()
     {
-        displayFPS();
+        DisplayFPS();
+
         var blocks = _dynamic_blocks.GetComponentsInChildren<BasicBlock>(false); //TODO: Very Temp
         MoveBlocks(blocks); // TODO: not optimal
-        checkIfWaveFinished(blocks); // TODO: not optimal
+        CheckIfWaveFinished(blocks); // TODO: not optimal
     }
 
     private void CreateBallBars()
@@ -100,13 +100,14 @@ public class GameController : BaseController<GameView>
                 {
                     buttonUpgrade.onClick += upgrade.TryUpgrade;    //Button -> Tries to upgrade an Upgrade
 
-                    buttonUpgrade.SetUpgradesValues(upgrade);   //Set initial values
-                    upgrade.AddOnUpgrade(buttonUpgrade.SetUpgradesValues);  //Upgrade -> Updates Button values
+                    buttonUpgrade.SetUpgradeCost(upgrade);   //Set initial values
+                    upgrade.AddDoUpgrade(buttonUpgrade.SetUpgradeCost);  //Upgrade -> Updates Button values
+                    upgrade.onValueUpdate += buttonUpgrade.SetUpgradeValue;  //TODO-FUTURE-BUG: There should be check if the button uses upgrade internal value or universal value, if universal then it should connect to not yet existing system of sending event on value change
                 } 
                 else
                 {
-                    Debug.LogWarning(String.Format("ButtonUpgrade needs: \"{0}\" upgrade, but it couldn't find it in upgrades collection.\n " +
-                        "Maybe UpgradesModel misses scriptable upgrade instance or there is a typo in upgrade name?",buttonUpgrade.upgradeName));
+                    Debug.LogWarningFormat("ButtonUpgrade needs: \"{0}\" upgrade, but it couldn't find it in upgrades collection.\n " +
+                        "Maybe UpgradesModel misses scriptable upgrade instance or there is a typo in upgrade name?",buttonUpgrade.upgradeName);
                 }   
             }
         }
@@ -179,7 +180,7 @@ public class GameController : BaseController<GameView>
         return false;
     }
 
-    private void checkIfWaveFinished(BasicBlock[] blocks)
+    private void CheckIfWaveFinished(BasicBlock[] blocks)
     {
         if (!CheckForBlocksBelowY(blocks))
         {
@@ -203,12 +204,11 @@ public class GameController : BaseController<GameView>
 
     }
 
-    private int avgFrameRate;
     private int fpsRefreshCounter = 0;
 
-    void displayFPS()
+    void DisplayFPS()
     {
-        float current = 0;
+        float current;
         if (fpsRefreshCounter == 0)
         {
             fpsRefreshCounter = 100;
@@ -219,14 +219,6 @@ public class GameController : BaseController<GameView>
         {
             fpsRefreshCounter--;
         }
-    }
-
-    void SetupTestUpgrade()
-    {
-        //data.speedUpgrade = data.speedUpgradeScriptable.GetObjectCopy();
-        //data.speedUpgrade.AddUpgradeable(data.basicBallData.speed);
-
-
     }
 
     void HideMenus()
@@ -282,7 +274,7 @@ public class GameController : BaseController<GameView>
         }
     }
 
-    private double Cost(string name)
+    private double LegacyGetUpgradeCost(string name)
     {
         return data.legacyUpgrades[name].upgradeBaseCost * System.Math.Pow(data.legacyUpgrades[name].upgradeMultCost, data.legacyUpgrades[name].upgradeLevel);
     }
@@ -308,7 +300,7 @@ public class GameController : BaseController<GameView>
         }
         else //can still be bought
         {
-            buyingBars[name].upgradeButtonText.text = $"+1 level for {System.Math.Round(Cost(name), 2)}";
+            buyingBars[name].upgradeButtonText.text = $"+1 level for {System.Math.Round(LegacyGetUpgradeCost(name), 2)}";
         }
     }
 
@@ -362,9 +354,9 @@ public class GameController : BaseController<GameView>
     public void LegacyBuyUpgrade(string name)
     {
 
-        if (data.money >= Cost(name) && (data.legacyUpgrades[name].upgradeLevel < data.legacyUpgrades[name].upgradeMaxLevel || data.legacyUpgrades[name].upgradeMaxLevel == 0))
+        if (data.money >= LegacyGetUpgradeCost(name) && (data.legacyUpgrades[name].upgradeLevel < data.legacyUpgrades[name].upgradeMaxLevel || data.legacyUpgrades[name].upgradeMaxLevel == 0))
         {
-            data.money -= Cost(name);
+            data.money -= LegacyGetUpgradeCost(name);
             data.legacyUpgrades[name].upgradeLevel += 1;
             SetBuyingBarTexts(name);
             moneyDisplay.text = $"Money: {Round(data.money)}";
@@ -391,7 +383,7 @@ public class GameController : BaseController<GameView>
                 statsDisplay.SetBallCountDisplay();
             }
         }
-        else if (data.money < Cost(name))
+        else if (data.money < LegacyGetUpgradeCost(name))
         {
             //print($"not enough money to buy {name}!");
         }

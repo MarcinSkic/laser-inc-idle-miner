@@ -11,9 +11,8 @@ public class UIButtonUpgradeController : UIButtonController
     private TMP_Text costText;  //TODO-FT-RESOURCES
     private double cost;    //TODO-FT-RESOURCES
 
-    public void SetUpgradesValues(Upgrade upgrade)
+    public void SetUpgradeCost(Upgrade upgrade)
     {
-        text.text = "0"; //TODO-CURRENT upgrade.value.toString()? I mean even if upgrade changes a lot stats it should display smth
         cost = upgrade.cost;
         costText.text = upgrade.cost.ToString();
 
@@ -21,5 +20,10 @@ public class UIButtonUpgradeController : UIButtonController
         {
             //TODO-CURRENT: Do smth
         }
+    }
+
+    public void SetUpgradeValue(string value)
+    {
+        text.text = value;
     }
 }

@@ -23,6 +23,10 @@ public class Upgrade
     [Tooltip("Set to -1 for infinite levels")]
     public int maxLevel = -1;
 
+    public bool onUpgradeButtonsShowThisValue = false;
+    [Header("Fill: On UpgradeButtons Show This Value = true")]
+    public double upgradeValue = 0;
+
     [Space(5)]
 
     [Header("Fill: Values Upgrade & Spawn Upgrade")]
@@ -34,23 +38,27 @@ public class Upgrade
     public double changeValue;
     public ValueUpgradeFormula formula;
 
+    
+
+
     [Header("Debug")]
     public int currentLevel = 0;
 
-    public UnityAction<Upgrade> onUpgrade;
-    public UnityAction<Upgrade> onTryUpgrade;
+    public UnityAction<Upgrade> doTryUpgrade;
+    public UnityAction<Upgrade> doUpgrade;
+    public UnityAction<string> onValueUpdate;
     public Upgrade initialUpgrade;
-    public string textValue;
+
 
     /// <summary>
     /// This method is to streamline assigning functions to events
     /// </summary>
     /// <param name="actions"></param>
-    public void AddOnUpgrade(params UnityAction<Upgrade>[] actions)
+    public void AddDoUpgrade(params UnityAction<Upgrade>[] actions)
     {
         foreach (var action in actions)
         {
-            onUpgrade += action;
+            doUpgrade += action;
         }
     }
 
@@ -58,7 +66,7 @@ public class Upgrade
     {
         foreach (var action in actions)
         {
-            onTryUpgrade += action;
+            doTryUpgrade += action;
         }
     }
 
@@ -73,7 +81,7 @@ public class Upgrade
             return;
         }
 
-        onTryUpgrade?.Invoke(this);
+        doTryUpgrade?.Invoke(this);
     }
 
     /// <summary>
@@ -84,6 +92,6 @@ public class Upgrade
         cost = cost * costMultiplier + costIncremental;
         currentLevel++;
 
-        onUpgrade?.Invoke(this);
+        doUpgrade?.Invoke(this);
     }
 }

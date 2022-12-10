@@ -20,9 +20,8 @@ public abstract class BaseSpawner<T> : MonoBehaviour where T : MonoBehaviour, IP
         pool = new ObjectPool<T>(Create, Get, Release);
     }
 
-    private void Update()
+    private void RefreshObjectsCount()
     {
-        //TODO: Add if isDebugging parameter, it should be in Settings.Instance in future
         active = pool.CountActive;
         inactive = pool.CountInactive;
     }
@@ -30,6 +29,7 @@ public abstract class BaseSpawner<T> : MonoBehaviour where T : MonoBehaviour, IP
     public virtual void Spawn(out T spawnedObject)
     {    
         spawnedObject = pool.Get();
+        RefreshObjectsCount();
     }
 
     protected virtual T Create()
@@ -47,5 +47,6 @@ public abstract class BaseSpawner<T> : MonoBehaviour where T : MonoBehaviour, IP
     protected virtual void Release(T element)
     {
         element.gameObject.SetActive(false);
+        RefreshObjectsCount();
     }
 }
