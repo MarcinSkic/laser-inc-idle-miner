@@ -27,10 +27,12 @@ public class UpgradesManager : MonoBehaviour
             switch (upgrade.type)
             {
                 case UpgradeType.ValuesUpgrade:
-                    upgrade.onUpgrade += OnValuesUpgrade;
+                    upgrade.AddDoUpgrade(OnValuesUpgrade);
+                    SetFirstUpgradeButtonValue(upgrade);    //UI setup
                     break;
                 case UpgradeType.SpawnUpgrade:
-                    upgrade.onUpgrade += OnSpawnUpgrade;
+                    upgrade.AddDoUpgrade(OnSpawnUpgrade);
+                    upgrade.onValueUpdate.Invoke("0");  //UI setup
                     break;
             }
         }
@@ -60,22 +62,63 @@ public class UpgradesManager : MonoBehaviour
     {
         foreach(var ballType in upgrade.specifiedObjects)
         {
-
             switch (ballType)
             {
-                case "basic":
-                    basicBallSpawner.Spawn(out var ball);
-                    model.getUpgrade("UniversalSpeed").AddOnUpgrade(ball.Upgrade);
-                    break;
-                case "bomb":
-                    bombBallSpawner.Spawn(out var ball2);
-                    model.getUpgrade("UniversalSpeed").AddOnUpgrade(ball2.Upgrade);
-                    break;
-                case "sniper":
-                    sniperBallSpawner.Spawn(out var ball3);
-                    model.getUpgrade("UniversalSpeed").AddOnUpgrade(ball3.Upgrade);
+                case "Basic":
+                    {   
+                        basicBallSpawner.Spawn(out var ball);
+                        model.getUpgrade("UniversalSpeed").onValueUpdate += ball.Upgrade;
+                        model.getUpgrade("BasicSpeed").onValueUpdate += ball.Upgrade;
+                        upgrade.onValueUpdate.Invoke(basicBallSpawner.active.ToString()); //TODO-FT-CURRENT: Pull from Data?;
+                        break;
+                    }
+                case "Bomb":
+                    {
+                        bombBallSpawner.Spawn(out var ball);
+                        model.getUpgrade("UniversalSpeed").onValueUpdate += ball.Upgrade;
+                        model.getUpgrade("BombSpeed").onValueUpdate += ball.Upgrade;
+                        upgrade.onValueUpdate.Invoke(bombBallSpawner.active.ToString()); //TODO-FT-CURRENT: Pull from Data?;
+                        break;
+                    }   
+                case "Sniper":
+                    {
+                        sniperBallSpawner.Spawn(out var ball);
+                        model.getUpgrade("UniversalSpeed").onValueUpdate += ball.Upgrade;
+                        model.getUpgrade("SniperSpeed").onValueUpdate += ball.Upgrade;
+                        upgrade.onValueUpdate.Invoke(sniperBallSpawner.active.ToString()); //TODO-FT-CURRENT: Pull from Data?;
+                        break;
+                    }
+                default:
+                    Debug.LogWarningFormat("Missing ball of type {0} to spawn ", ballType);
                     break;
             }
+        }
+    }
+
+    private void SetFirstUpgradeButtonValue(Upgrade upgrade)
+    {
+        if(upgrade.specifiedObjects.Count == 1 && upgrade.upgradedValuesNames.Count == 1 && upgrade.upgradedObjects == UpgradedObjects.SpecifiedBalls)
+        {
+            var value = GetValueByName(upgrade.upgradedValuesNames[0], data.ballsData.Find(ball => ball.name == upgrade.specifiedObjects[0]));
+            upgrade.onValueUpdate.Invoke(value.value.ToString());
+        } 
+        else
+        {
+            upgrade.onValueUpdate?.Invoke(upgrade.upgradeValue.ToString());
+        }
+    }
+
+    private UpgradeableData<double> GetValueByName(string name, BaseBallData ball)
+    {
+        switch (name)  //TODO-FT-DICTIONARIES
+        {
+            case "Speed":
+                return ball.speed;
+            case "Damage":
+                return ball.damage;
+            default:
+                Debug.LogWarning(string.Format("Ball upgrade abort, missing case for {0} value", name));
+                return null;
         }
     }
 
@@ -83,18 +126,9 @@ public class UpgradesManager : MonoBehaviour
     {
         foreach(var valueType in upgrade.upgradedValuesNames)
         {
-            switch (valueType)  //TODO-FT-VALUES_INTO_DICTIONARY
-            {
-                case "speed":
-                    UpgradeValue(upgrade, ball.speed);
-                    break;
-                case "damage":
-                    UpgradeValue(upgrade, ball.damage);
-                    break;
-                default:
-                    Debug.LogWarning(string.Format("Ball upgrade abort, missing case for {0} value",valueType));
-                    break;
-            }
+            var value = GetValueByName(valueType, ball);
+            if(value == null) return;
+            UpgradeValue(upgrade, value);
         }
     }
 
@@ -104,24 +138,20 @@ public class UpgradesManager : MonoBehaviour
         {
             case ValueUpgradeFormula.Add:
                 value.value += upgrade.changeValue;
+                upgrade.upgradeValue += upgrade.changeValue;
                 break;
             case ValueUpgradeFormula.Multiply:
                 value.value *= upgrade.changeValue;
+                upgrade.upgradeValue *= upgrade.changeValue;
                 break;
         }
-    }
-
-    [ContextMenu("TestUpgrade")]
-    void TestUpgrade()
-    {
-        /*model.basicBallCount.upgrade.TryUpgrade(out _);
-        model.bombBallCount.upgrade.TryUpgrade(out _);
-        model.sniperBallCount.upgrade.TryUpgrade(out _);*/
-    }
-
-    [ContextMenu("Speeeeeeeeeeeeed")]
-    void UpgradeSpeed()
-    {
-        //model.universalSpeed.upgrade.TryUpgrade(out _);
+        if (upgrade.onUpgradeButtonsShowThisValue)
+        {
+            upgrade.onValueUpdate.Invoke(upgrade.upgradeValue.ToString());
+        } 
+        else
+        {
+            upgrade.onValueUpdate.Invoke(value.value.ToString());
+        }
     }
 }

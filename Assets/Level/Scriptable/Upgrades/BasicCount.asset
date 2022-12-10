@@ -21,8 +21,9 @@ MonoBehaviour:
     maxLevel: -1
     upgradedObjects: 1
     specifiedObjects:
-    - basic
+    - Basic
     upgradedValuesNames: []
     changeValue: 0
     formula: 0
     currentLevel: 0
+    textValue: 

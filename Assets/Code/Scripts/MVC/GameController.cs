@@ -6,13 +6,15 @@ using UnityEngine.UI;
 using static System.Math;
 using UnityEngine.Events;
 
-using System; // TODO@MARTIN w czym jest Math??
+using System;
 
 /// <summary>
 /// Methods from this object should not be called by other objects. When such action direction is needed (for example UI or world events) it should connect methods to events HERE.
 /// </summary>
-public class GameController : MonoBehaviour
+public class GameController : BaseController<GameView>
 {
+
+    [Header("Junkyard")]
     [SerializeField] private Data data;
     [SerializeField] private StatsDisplay statsDisplay;
     public Data NewData => data;
@@ -51,12 +53,72 @@ public class GameController : MonoBehaviour
 
     private bool isMoving = true;
 
+    //KEEP MONOBEHAVIOUR METHODS (Start, Update etc.) ON TOP
+    void Start()
+    {
+        ConnectUpgrades();  //TODO-FT-CURRENT: Move this functionality to upgrade manager?
+
+        CreateBallBars();
+        InitBallBars();
+        // TEMP
+        // | | |
+        // v v v
+        HideMenus();
+        GenerateBuyingBars();
+        GenerateSettingBars();
+    }
+
     private void Update()
     {
-        displayFPS();
+        DisplayFPS();
+
         var blocks = _dynamic_blocks.GetComponentsInChildren<BasicBlock>(false); //TODO: Very Temp
         MoveBlocks(blocks); // TODO: not optimal
-        checkIfWaveFinished(blocks); // TODO: not optimal
+        CheckIfWaveFinished(blocks); // TODO: not optimal
+    }
+
+    private void CreateBallBars()
+    {
+        foreach(var ballType in data.ballsData)
+        {
+            var ballBar = Instantiate(view.ballBarPrefab, view.ballBarsParent);
+            ballBar.SetUpgradesName(ballType.name);
+            ballBar.ballIcon.sprite = ballType.sprite;
+
+            view.ballBars.Add(ballBar);
+        }
+    }
+
+    private void InitBallBars()
+    {
+        foreach(var ballBar in view.ballBars)
+        {
+            foreach(var buttonUpgrade in ballBar.buttonUpgrades)
+            {
+                var upgrade = upgradesModel.getUpgrade(buttonUpgrade.upgradeName);
+                if(upgrade != null)
+                {
+                    buttonUpgrade.onClick += upgrade.TryUpgrade;    //Button -> Tries to upgrade an Upgrade
+
+                    buttonUpgrade.SetUpgradeCost(upgrade);   //Set initial values
+                    upgrade.AddDoUpgrade(buttonUpgrade.SetUpgradeCost);  //Upgrade -> Updates Button values
+                    upgrade.onValueUpdate += buttonUpgrade.SetUpgradeValue;  //TODO-FUTURE-BUG: There should be check if the button uses upgrade internal value or universal value, if universal then it should connect to not yet existing system of sending event on value change
+                } 
+                else
+                {
+                    Debug.LogWarningFormat("ButtonUpgrade needs: \"{0}\" upgrade, but it couldn't find it in upgrades collection.\n " +
+                        "Maybe UpgradesModel misses scriptable upgrade instance or there is a typo in upgrade name?",buttonUpgrade.upgradeName);
+                }   
+            }
+        }
+    }
+
+    private void ConnectUpgrades()
+    {
+        foreach(var upgrade in upgradesModel.upgrades)
+        {
+            upgrade.AddOnTryUpgrade(TryBuyUpgrade);
+        }
     }
 
     private void MoveBlocks(BasicBlock[] blocks)
@@ -118,7 +180,7 @@ public class GameController : MonoBehaviour
         return false;
     }
 
-    private void checkIfWaveFinished(BasicBlock[] blocks)
+    private void CheckIfWaveFinished(BasicBlock[] blocks)
     {
         if (!CheckForBlocksBelowY(blocks))
         {
@@ -142,12 +204,11 @@ public class GameController : MonoBehaviour
 
     }
 
-    private int avgFrameRate;
     private int fpsRefreshCounter = 0;
 
-    void displayFPS()
+    void DisplayFPS()
     {
-        float current = 0;
+        float current;
         if (fpsRefreshCounter == 0)
         {
             fpsRefreshCounter = 100;
@@ -158,22 +219,6 @@ public class GameController : MonoBehaviour
         {
             fpsRefreshCounter--;
         }
-    }
-
-    void Start()
-    {
-        HideMenus();
-        GenerateBuyingBars();
-        GenerateSettingBars();
-        SetupTestUpgrade();
-    }
-
-    void SetupTestUpgrade()
-    {
-        //data.speedUpgrade = data.speedUpgradeScriptable.GetObjectCopy();
-        //data.speedUpgrade.AddUpgradeable(data.basicBallData.speed);
-
-
     }
 
     void HideMenus()
@@ -191,7 +236,7 @@ public class GameController : MonoBehaviour
 
     void GenerateBuyingBars()
     {
-        foreach (KeyValuePair<string, Data.LegacyUpgrade> entry in data.upgrades)
+        foreach (KeyValuePair<string, Data.LegacyUpgrade> entry in data.legacyUpgrades)
         {
             UpgradeBuyingBar buying = Instantiate(upgradeBuyingBar, ShopContent);
             buying.upgradeName = entry.Key;
@@ -229,23 +274,23 @@ public class GameController : MonoBehaviour
         }
     }
 
-    private double Cost(string name)
+    private double LegacyGetUpgradeCost(string name)
     {
-        return data.upgrades[name].upgradeBaseCost * System.Math.Pow(data.upgrades[name].upgradeMultCost, data.upgrades[name].upgradeLevel);
+        return data.legacyUpgrades[name].upgradeBaseCost * System.Math.Pow(data.legacyUpgrades[name].upgradeMultCost, data.legacyUpgrades[name].upgradeLevel);
     }
 
     public void SetBuyingBarTexts(string name)
     {
         buyingBars[name].upgradeNameText.text = name;
-        if (data.upgrades[name].upgradeMaxLevel == 0)
+        if (data.legacyUpgrades[name].upgradeMaxLevel == 0)
         {
-            buyingBars[name].upgradeLevelsText.text = $"{data.upgrades[name].upgradeLevel}";
+            buyingBars[name].upgradeLevelsText.text = $"{data.legacyUpgrades[name].upgradeLevel}";
         }
         else
         {
-            buyingBars[name].upgradeLevelsText.text = $"{data.upgrades[name].upgradeLevel}/{data.upgrades[name].upgradeMaxLevel}";
+            buyingBars[name].upgradeLevelsText.text = $"{data.legacyUpgrades[name].upgradeLevel}/{data.legacyUpgrades[name].upgradeMaxLevel}";
         }
-        if (data.upgrades[name].upgradeMaxLevel > 0 && data.upgrades[name].upgradeLevel == data.upgrades[name].upgradeMaxLevel) //max level reached
+        if (data.legacyUpgrades[name].upgradeMaxLevel > 0 && data.legacyUpgrades[name].upgradeLevel == data.legacyUpgrades[name].upgradeMaxLevel) //max level reached
         {
             if (!data.settings["Show maxed upgrades"])
             {
@@ -255,68 +300,64 @@ public class GameController : MonoBehaviour
         }
         else //can still be bought
         {
-            buyingBars[name].upgradeButtonText.text = $"+1 level for {System.Math.Round(Cost(name), 2)}";
+            buyingBars[name].upgradeButtonText.text = $"+1 level for {System.Math.Round(LegacyGetUpgradeCost(name), 2)}";
         }
     }
 
     private string boughtUpgradeName;   //TODO-FT-MVC
-    public void BuyUpgradeByName(string name)
+    public void LegacyBuyUpgradeByName(string name)
     {
         boughtUpgradeName = name;
         switch (name)
         {
             case "Damage":
-                TryBuyUpgrade(upgradesModel.getUpgrade("UniversalDamage"));
+                upgradesModel.getUpgrade("UniversalDamage").TryUpgrade();
                 break;
             case "Bullet speed":
-                TryBuyUpgrade(upgradesModel.getUpgrade("UniversalSpeed"));
+                upgradesModel.getUpgrade("UniversalSpeed").TryUpgrade();
                 break;
             case var x when x.Contains("count"):
                 switch (x)
                 {
                     case "Bullet count":
-                        TryBuyUpgrade(upgradesModel.getUpgrade("BasicCount"));
+                        upgradesModel.getUpgrade("BasicCount").TryUpgrade();
                         break;
                     case "Bomb count":
-                        TryBuyUpgrade(upgradesModel.getUpgrade("BombCount"));
+                        upgradesModel.getUpgrade("BombCount").TryUpgrade();
                         break;
                     case "Sniper count":
-                        TryBuyUpgrade(upgradesModel.getUpgrade("SniperCount"));
+                        upgradesModel.getUpgrade("SniperCount").TryUpgrade();
                         break;
                 }
                 break;
         }
     }
 
-    public bool TryBuyUpgrade(Upgrade upgrade)
+    public void TryBuyUpgrade(Upgrade upgrade)
     {
         var upgradeCost = upgrade.cost;
 
         if(upgradeCost > data.money)
         {
-            return false;
+            return;
         }
 
-        if(!upgrade.TryUpgrade(out var newCost))
-        {
-            return false;
-        }
         data.money -= upgradeCost;
 
-        SetBuyingBarTexts(boughtUpgradeName);    //TODO-FT-MVC
+        //SetBuyingBarTexts(boughtUpgradeName);    //TODO-FT-MVC
         moneyDisplay.text = $"Money: {Round(data.money)}";  //TODO-FT-MVC
         statsDisplay.SetBallCountDisplay(); //TODO-FT-MVC
 
-        return true;
+        upgrade.DoUpgrade();
     }
 
     public void LegacyBuyUpgrade(string name)
     {
 
-        if (data.money >= Cost(name) && (data.upgrades[name].upgradeLevel < data.upgrades[name].upgradeMaxLevel || data.upgrades[name].upgradeMaxLevel == 0))
+        if (data.money >= LegacyGetUpgradeCost(name) && (data.legacyUpgrades[name].upgradeLevel < data.legacyUpgrades[name].upgradeMaxLevel || data.legacyUpgrades[name].upgradeMaxLevel == 0))
         {
-            data.money -= Cost(name);
-            data.upgrades[name].upgradeLevel += 1;
+            data.money -= LegacyGetUpgradeCost(name);
+            data.legacyUpgrades[name].upgradeLevel += 1;
             SetBuyingBarTexts(name);
             moneyDisplay.text = $"Money: {Round(data.money)}";
             if (name == "Damage")
@@ -342,7 +383,7 @@ public class GameController : MonoBehaviour
                 statsDisplay.SetBallCountDisplay();
             }
         }
-        else if (data.money < Cost(name))
+        else if (data.money < LegacyGetUpgradeCost(name))
         {
             //print($"not enough money to buy {name}!");
         }
@@ -404,7 +445,7 @@ public class GameController : MonoBehaviour
         {
             foreach (KeyValuePair<string, UpgradeBuyingBar> entry in buyingBars)
             {
-                if (data.upgrades[entry.Key].upgradeMaxLevel > 0 && data.upgrades[entry.Key].upgradeLevel == data.upgrades[entry.Key].upgradeMaxLevel)
+                if (data.legacyUpgrades[entry.Key].upgradeMaxLevel > 0 && data.legacyUpgrades[entry.Key].upgradeLevel == data.legacyUpgrades[entry.Key].upgradeMaxLevel)
                 {
                     buyingBars[entry.Key].gameObject.SetActive(value);
                 }

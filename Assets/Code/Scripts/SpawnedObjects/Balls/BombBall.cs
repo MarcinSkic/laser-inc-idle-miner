@@ -15,7 +15,7 @@ public class BombBall : BaseBall<BombBallData>, IPoolable<BombBall>, IUpgradeabl
             foreach (var block in blocks) {
                 if(Vector3.Distance(block.BoxCollider.ClosestPoint(transform.position),transform.position) < Data.explosionSize)
                 {
-                    block.TakeDamage(Data.damage); //TODO better damage pick
+                    block.TakeDamage(Data.damage);
                 } 
             }
         }
