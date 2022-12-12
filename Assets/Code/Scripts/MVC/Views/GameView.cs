@@ -22,26 +22,21 @@ public class GameView : BaseView
 
     public void AssignBottomButtonsEvent()
     {
-        foreach(var tabButtonContainer in tabButtonsContainers)
+        foreach(var tabButtonsContainer in tabButtonsContainers)
         {
-            Debug.Log(tabButtonContainer, tabButtonContainer);
-
-            foreach(var button in tabButtonContainer.GetComponentsInChildren<UIButtonWithStringController>())
+            foreach(var tabButton in tabButtonsContainer.GetComponentsInChildren<UIButtonWithStringController>())
             {
-                Debug.Log(button, button);
-                button.onClick += SwitchWindow;
+                tabButton.onClick += SwitchTab;
             }
         }
 
-        foreach (var button in windowButtons)
+        foreach (var windowButton in windowButtons)
         {
-            button.onClick += SwitchButtonTab;
+            windowButton.onClick += SwitchWindowButtons;
         }
     }
 
-    
-
-    private void SwitchWindow(string name)
+    private void SwitchTab(string name)
     {
         bool tabState;
 
@@ -72,21 +67,13 @@ public class GameView : BaseView
         }
     }
 
-    private void SwitchButtonTab(string name)
+    private void SwitchWindowButtons(string name)
     {
-        foreach(var windowTabButtons in tabButtonsContainers)
+        foreach(var tabButtonsContainer in tabButtonsContainers)
         {
-            windowTabButtons.SetActive(false);
+            tabButtonsContainer.SetActive(false);
         }
 
-        tabButtonsContainers.Find(windowTabButtons => windowTabButtons.name == name).SetActive(true);
-    }
-
-    public void GenerateBallBar()
-    {
-        var bar = Instantiate(ballBarPrefab, ballBarsParent);
-        ballBars.Add(bar);
-
-
+        tabButtonsContainers.Find(tabButtonsContainer => tabButtonsContainer.name == name).SetActive(true);
     }
 }
