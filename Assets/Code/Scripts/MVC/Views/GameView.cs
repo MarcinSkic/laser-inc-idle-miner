@@ -2,12 +2,16 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using System.Linq;
+using UnityEngine.Events;
 
 public class GameView : BaseView
 {
     [SerializeField] private List<GameObject> tabButtonsContainers;
     [SerializeField] private List<UIButtonWithStringController> windowButtons;
     [SerializeField] private List<GameObject> windows;
+
+    public Color bottomButton_Default;
+    public Color bottomButton_Activated;
 
     public UIBallBar ballBarPrefab;
     public Transform ballBarsParent;
@@ -20,6 +24,7 @@ public class GameView : BaseView
         AssignBottomButtonsEvent(); //TODO-FT-CURRENT: Should be in GameController
     }
 
+    UnityAction<Color> onTabClosing;
     public void AssignBottomButtonsEvent()
     {
         foreach(var tabButtonsContainer in tabButtonsContainers)
@@ -27,6 +32,7 @@ public class GameView : BaseView
             foreach(var tabButton in tabButtonsContainer.GetComponentsInChildren<UIButtonWithStringController>())
             {
                 tabButton.onClick += SwitchTab;
+                onTabClosing += tabButton.SetColor;
             }
         }
 
@@ -36,19 +42,27 @@ public class GameView : BaseView
         }
     }
 
-    private void SwitchTab(string name)
+    private void SwitchTab(UIButtonController button,string name)
     {
-        bool tabState;
-
         foreach (var window in windows)
         {
             var foundTab = window.transform.Find(name).gameObject;
 
             if (foundTab != null)
             {
-                tabState = foundTab.activeSelf;
+                bool previousTabState = foundTab.activeSelf;
                 DisableAllTabs();
-                foundTab.SetActive(!tabState);
+
+                if (!previousTabState)
+                {
+                    foundTab.SetActive(true);
+                    button.SetColor(bottomButton_Activated);
+                } 
+                else
+                {
+                    foundTab.SetActive(false);
+                    button.SetColor(bottomButton_Default);
+                }
                 return;
             }
         }
@@ -65,14 +79,17 @@ public class GameView : BaseView
                 tab.gameObject.SetActive(false);
             }
         }
+
+        onTabClosing.Invoke(bottomButton_Default);
     }
 
-    private void SwitchWindowButtons(string name)
+    private void SwitchWindowButtons(UIButtonController button,string name)
     {
         foreach(var tabButtonsContainer in tabButtonsContainers)
         {
             tabButtonsContainer.SetActive(false);
         }
+        DisableAllTabs();
 
         tabButtonsContainers.Find(tabButtonsContainer => tabButtonsContainer.name == name).SetActive(true);
     }

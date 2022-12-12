@@ -5,11 +5,12 @@ using UnityEngine.Events;
 
 public class UIButtonWithStringController : UIButtonController
 {
+    [Header("BUTTON WITH STRING")]
     [SerializeField] protected string parameter;
-    public new UnityAction<string> onClick;
+    public new UnityAction<UIButtonController,string> onClick;
 
     protected override void OnClicked()
     {
-        onClick?.Invoke(parameter);
+        onClick?.Invoke(this,parameter);
     }
 }
