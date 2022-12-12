@@ -5,13 +5,15 @@ using System.Linq;
 
 public class GameView : BaseView
 {
-    [SerializeField] private List<GameObject> topButtonsTabs;
-    [SerializeField] private List<UIButtonWithStringController> bottomButtons;
-    [SerializeField] private List<GameObject> tabs;
+    [SerializeField] private List<GameObject> tabButtonsContainers;
+    [SerializeField] private List<UIButtonWithStringController> windowButtons;
+    [SerializeField] private List<GameObject> windows;
 
-    public List<UIBallBar> ballBars;
     public UIBallBar ballBarPrefab;
     public Transform ballBarsParent;
+
+    [Header("Debug")]
+    public List<UIBallBar> ballBars;
 
     private void Start()
     {
@@ -20,45 +22,64 @@ public class GameView : BaseView
 
     public void AssignBottomButtonsEvent()
     {
-        /*foreach(var topButtonsTab in topButtonsTabs)
+        foreach(var tabButtonContainer in tabButtonsContainers)
         {
-            foreach(var button in topButtonsTab.GetComponentsInChildren<UIButtonWithStringController>())
+            Debug.Log(tabButtonContainer, tabButtonContainer);
+
+            foreach(var button in tabButtonContainer.GetComponentsInChildren<UIButtonWithStringController>())
             {
+                Debug.Log(button, button);
                 button.onClick += SwitchWindow;
             }
-        }*/
+        }
 
-        foreach (var button in bottomButtons)
+        foreach (var button in windowButtons)
         {
             button.onClick += SwitchButtonTab;
         }
     }
 
+    
+
     private void SwitchWindow(string name)
     {
-        foreach(var tab in tabs)
+        bool tabState;
+
+        foreach (var window in windows)
         {
-            foreach(var insideTab in tab.GetComponentsInChildren<GameObject>())
+            var foundTab = window.transform.Find(name).gameObject;
+
+            if (foundTab != null)
             {
-                insideTab.SetActive(false);
+                tabState = foundTab.activeSelf;
+                DisableAllTabs();
+                foundTab.SetActive(!tabState);
+                return;
             }
         }
 
-        foreach (var tab in tabs)
+        Debug.LogWarningFormat("Couldn't find tab of name {} to be activated by SwitchWindow method", name);
+    }
+
+    private void DisableAllTabs()
+    {
+        foreach (var window in windows)
         {
-            var insideTab = tab.GetComponentsInChildren<GameObject>().ToList().Find(insideTab => insideTab.name == name);
-            insideTab.SetActive(!insideTab.activeSelf);
+            foreach (Transform tab in window.transform)
+            {
+                tab.gameObject.SetActive(false);
+            }
         }
     }
 
     private void SwitchButtonTab(string name)
     {
-        foreach(var tab in topButtonsTabs)
+        foreach(var windowTabButtons in tabButtonsContainers)
         {
-            tab.SetActive(false);
+            windowTabButtons.SetActive(false);
         }
 
-        topButtonsTabs.Find(tab => tab.name == name).SetActive(true);
+        tabButtonsContainers.Find(windowTabButtons => windowTabButtons.name == name).SetActive(true);
     }
 
     public void GenerateBallBar()

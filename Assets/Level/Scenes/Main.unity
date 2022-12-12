@@ -389,22 +389,24 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c2e4f60e78bbe4644af6fcf75b3476f2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  topButtonsTabs:
+  tabButtonsContainers:
   - {fileID: 486182656}
   - {fileID: 1191495520}
   - {fileID: 1703861117}
   - {fileID: 534356405}
-  bottomButtons:
+  windowButtons:
   - {fileID: 263808474}
   - {fileID: 1708393936}
   - {fileID: 1952372093}
   - {fileID: 1156127960}
-  tabs:
+  windows:
   - {fileID: 200777127}
   - {fileID: 1184489654}
-  ballBars: []
+  - {fileID: 330403551}
+  - {fileID: 1248136541}
   ballBarPrefab: {fileID: 916111741661999725, guid: 0515818992f6b704aa8d333efc629d72, type: 3}
   ballBarsParent: {fileID: 1293810467}
+  ballBars: []
 --- !u!1 &54048868
 GameObject:
   m_ObjectHideFlags: 0
@@ -922,7 +924,7 @@ GameObject:
   m_Component:
   - component: {fileID: 200777128}
   m_Layer: 5
-  m_Name: UpgradeTab
+  m_Name: UpgradeWindow
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1366,7 +1368,7 @@ GameObject:
   - component: {fileID: 263808470}
   - component: {fileID: 263808474}
   m_Layer: 5
-  m_Name: UpgradeTab
+  m_Name: UpgradeWindow
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1509,7 +1511,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   button: {fileID: 263808471}
   text: {fileID: 231668857}
-  parameter: UpgradeTab
+  parameter: UpgradeWindow
 --- !u!1 &280554346
 GameObject:
   m_ObjectHideFlags: 0
@@ -1993,7 +1995,7 @@ GameObject:
   m_Component:
   - component: {fileID: 330403552}
   m_Layer: 5
-  m_Name: AchievementsTab
+  m_Name: AchievementsWindow
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -2412,7 +2414,7 @@ GameObject:
   - component: {fileID: 448288069}
   - component: {fileID: 448288068}
   m_Layer: 5
-  m_Name: LaserUpgradesTab
+  m_Name: LasersTab
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -2483,18 +2485,6 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 2129758561}
-        m_TargetAssemblyTypeName: TEMPCloseTab, Assembly-CSharp
-        m_MethodName: Clicked
-        m_Mode: 1
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
       - m_Target: {fileID: 448288069}
         m_TargetAssemblyTypeName: TEMPChangeColor, Assembly-CSharp
         m_MethodName: ChangeColor
@@ -2579,7 +2569,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   button: {fileID: 448288064}
   text: {fileID: 2078716647}
-  parameter: BallsTab
+  parameter: LasersTab
 --- !u!114 &448288069
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2809,7 +2799,7 @@ GameObject:
   - component: {fileID: 486182657}
   - component: {fileID: 486182658}
   m_Layer: 5
-  m_Name: UpgradeTab
+  m_Name: UpgradeWindow
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -3144,7 +3134,7 @@ GameObject:
   - component: {fileID: 534356406}
   - component: {fileID: 534356407}
   m_Layer: 5
-  m_Name: SettingsTab
+  m_Name: SettingsWindow
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -3483,8 +3473,9 @@ GameObject:
   - component: {fileID: 599832830}
   - component: {fileID: 599832829}
   - component: {fileID: 599832828}
+  - component: {fileID: 599832831}
   m_Layer: 5
-  m_Name: OtherUpgradesTab
+  m_Name: OtherTab
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -3593,6 +3584,21 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 599832826}
   m_CullTransparentMesh: 1
+--- !u!114 &599832831
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 599832826}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4a7ad4db0481b934faf83686967d807b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  button: {fileID: 599832828}
+  text: {fileID: 1529589222}
+  parameter: OtherTab
 --- !u!1 &653015909
 GameObject:
   m_ObjectHideFlags: 0
@@ -5240,7 +5246,7 @@ GameObject:
   m_Component:
   - component: {fileID: 987493134}
   m_Layer: 5
-  m_Name: TopButtons
+  m_Name: TabButtonsContainers
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -5826,7 +5832,7 @@ GameObject:
   - component: {fileID: 1156127956}
   - component: {fileID: 1156127960}
   m_Layer: 5
-  m_Name: SettingsTab
+  m_Name: SettingsWindow
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -5969,7 +5975,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   button: {fileID: 1156127957}
   text: {fileID: 506492056}
-  parameter: SettingsTab
+  parameter: SettingsWindow
 --- !u!1 &1176356504
 GameObject:
   m_ObjectHideFlags: 0
@@ -6115,7 +6121,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1184489655}
   m_Layer: 5
-  m_Name: PrestigeTab
+  m_Name: PrestigeWindow
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -6152,7 +6158,7 @@ GameObject:
   - component: {fileID: 1191495521}
   - component: {fileID: 1191495522}
   m_Layer: 5
-  m_Name: PrestigeTab
+  m_Name: PrestigeWindow
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -6465,7 +6471,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1248136542}
   m_Layer: 5
-  m_Name: SettingsTab
+  m_Name: SettingsWindow
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -8561,7 +8567,7 @@ GameObject:
   - component: {fileID: 1525024119}
   - component: {fileID: 1525024120}
   m_Layer: 5
-  m_Name: BottomButtons
+  m_Name: WindowButtons
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -9208,7 +9214,7 @@ GameObject:
   - component: {fileID: 1703861118}
   - component: {fileID: 1703861119}
   m_Layer: 5
-  m_Name: AchievementsTab
+  m_Name: AchievementsWindow
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -9322,7 +9328,7 @@ GameObject:
   - component: {fileID: 1708393932}
   - component: {fileID: 1708393936}
   m_Layer: 5
-  m_Name: PrestigeTab
+  m_Name: PrestigeWindow
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -9465,7 +9471,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   button: {fileID: 1708393933}
   text: {fileID: 1775733680}
-  parameter: PrestigeTab
+  parameter: PrestigeWindow
 --- !u!1 &1719632676
 GameObject:
   m_ObjectHideFlags: 0
@@ -10750,7 +10756,7 @@ GameObject:
   - component: {fileID: 1952372089}
   - component: {fileID: 1952372093}
   m_Layer: 5
-  m_Name: AchievementsTab
+  m_Name: AchievementsWindow
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -10893,7 +10899,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   button: {fileID: 1952372090}
   text: {fileID: 474908546}
-  parameter: AchievementsTab
+  parameter: AchievementsWindow
 --- !u!1 &1952714537
 GameObject:
   m_ObjectHideFlags: 0
@@ -11335,7 +11341,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1992481516}
   m_Layer: 5
-  m_Name: MinerTab
+  m_Name: OtherTab
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -12223,7 +12229,7 @@ GameObject:
   m_Component:
   - component: {fileID: 2096271704}
   m_Layer: 5
-  m_Name: OpenedWindows
+  m_Name: Windows
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -12528,9 +12534,8 @@ GameObject:
   - component: {fileID: 2129758560}
   - component: {fileID: 2129758559}
   - component: {fileID: 2129758557}
-  - component: {fileID: 2129758561}
   m_Layer: 5
-  m_Name: BallsTab
+  m_Name: LasersTab
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -12638,15 +12643,3 @@ MonoBehaviour:
   m_FillOrigin: 0
   m_UseSpriteMesh: 0
   m_PixelsPerUnitMultiplier: 1
---- !u!114 &2129758561
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2129758555}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 2b2463c4ad7fde34eb67cc71507f29d1, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
