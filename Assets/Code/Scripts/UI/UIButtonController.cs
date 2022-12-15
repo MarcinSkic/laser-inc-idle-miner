@@ -10,10 +10,29 @@ public class UIButtonController : MonoBehaviour
     [Header("BUTTON BASE")]
     [SerializeField] protected Button button;
     [SerializeField] protected TMP_Text text;
+
+    [SerializeField] Color @default;
+    [SerializeField] Color activated;
+
     public void Awake()
     {
         button.onClick.AddListener(OnClicked);
         Activate();
+    }
+
+    public void SetActivatedColor()
+    {
+        button.targetGraphic.color = activated;
+    }
+
+    public void SetDefaultColor()
+    {
+        button.targetGraphic.color = @default;
+    }
+
+    public void SetColor(Color color)
+    {
+        button.targetGraphic.color = color;
     }
 
     public void Activate()

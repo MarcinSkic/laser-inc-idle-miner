@@ -2,70 +2,95 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using System.Linq;
+using UnityEngine.Events;
 
 public class GameView : BaseView
 {
-    [SerializeField] private List<GameObject> topButtonsTabs;
-    [SerializeField] private List<UIButtonWithStringController> bottomButtons;
-    [SerializeField] private List<GameObject> tabs;
+    [SerializeField] private List<GameObject> tabButtonsContainers;
+    [SerializeField] private List<UIButtonWithStringController> windowButtons;
+    [SerializeField] private List<GameObject> windows;
 
-    public List<UIBallBar> ballBars;
+    public Color bottomButton_Default;
+    public Color bottomButton_Activated;
+
     public UIBallBar ballBarPrefab;
     public Transform ballBarsParent;
+
+    [Header("Debug")]
+    public List<UIBallBar> ballBars;
 
     private void Start()
     {
         AssignBottomButtonsEvent(); //TODO-FT-CURRENT: Should be in GameController
     }
 
+    UnityAction<Color> onTabClosing;
     public void AssignBottomButtonsEvent()
     {
-        /*foreach(var topButtonsTab in topButtonsTabs)
+        foreach(var tabButtonsContainer in tabButtonsContainers)
         {
-            foreach(var button in topButtonsTab.GetComponentsInChildren<UIButtonWithStringController>())
+            foreach(var tabButton in tabButtonsContainer.GetComponentsInChildren<UIButtonWithStringController>())
             {
-                button.onClick += SwitchWindow;
-            }
-        }*/
-
-        foreach (var button in bottomButtons)
-        {
-            button.onClick += SwitchButtonTab;
-        }
-    }
-
-    private void SwitchWindow(string name)
-    {
-        foreach(var tab in tabs)
-        {
-            foreach(var insideTab in tab.GetComponentsInChildren<GameObject>())
-            {
-                insideTab.SetActive(false);
+                tabButton.onClick += SwitchTab;
+                onTabClosing += tabButton.SetColor;
             }
         }
 
-        foreach (var tab in tabs)
+        foreach (var windowButton in windowButtons)
         {
-            var insideTab = tab.GetComponentsInChildren<GameObject>().ToList().Find(insideTab => insideTab.name == name);
-            insideTab.SetActive(!insideTab.activeSelf);
+            windowButton.onClick += SwitchWindowButtons;
         }
     }
 
-    private void SwitchButtonTab(string name)
+    private void SwitchTab(UIButtonController button,string name)
     {
-        foreach(var tab in topButtonsTabs)
+        foreach (var window in windows)
         {
-            tab.SetActive(false);
+            var foundTab = window.transform.Find(name).gameObject;
+
+            if (foundTab != null)
+            {
+                bool previousTabState = foundTab.activeSelf;
+                DisableAllTabs();
+
+                if (!previousTabState)
+                {
+                    foundTab.SetActive(true);
+                    button.SetColor(bottomButton_Activated);
+                } 
+                else
+                {
+                    foundTab.SetActive(false);
+                    button.SetColor(bottomButton_Default);
+                }
+                return;
+            }
         }
 
-        topButtonsTabs.Find(tab => tab.name == name).SetActive(true);
+        Debug.LogWarningFormat("Couldn't find tab of name {} to be activated by SwitchWindow method", name);
     }
 
-    public void GenerateBallBar()
+    private void DisableAllTabs()
     {
-        var bar = Instantiate(ballBarPrefab, ballBarsParent);
-        ballBars.Add(bar);
+        foreach (var window in windows)
+        {
+            foreach (Transform tab in window.transform)
+            {
+                tab.gameObject.SetActive(false);
+            }
+        }
 
+        onTabClosing.Invoke(bottomButton_Default);
+    }
 
+    private void SwitchWindowButtons(UIButtonController button,string name)
+    {
+        foreach(var tabButtonsContainer in tabButtonsContainers)
+        {
+            tabButtonsContainer.SetActive(false);
+        }
+        DisableAllTabs();
+
+        tabButtonsContainers.Find(tabButtonsContainer => tabButtonsContainer.name == name).SetActive(true);
     }
 }
