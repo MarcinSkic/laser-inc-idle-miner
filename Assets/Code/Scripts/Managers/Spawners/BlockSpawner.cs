@@ -20,17 +20,41 @@ public class BlockSpawner : BaseSpawner<BasicBlock>
     private int column;
     private int columns;
 
-    public void SpawnBlockRow(out BasicBlock[] spawnedBlocks)
+    [System.Serializable]
+    public class BlockType
+    {
+        public string name;
+        public Material material;
+        public double hpMultiplier;
+        public double rewardMultiplier;
+
+        public BlockType(string name, Material material, double hpMultiplier, double rewardMultiplier) {
+            this.name = name;
+            this.material = material;
+            this.hpMultiplier = hpMultiplier;
+            this.rewardMultiplier = rewardMultiplier;
+        }
+    }
+    
+  
+    public BlockType[] blockTypes;
+
+/*    public void Start()
+    {
+        blockTypes.Append(new BlockType("normal", materials[0], ))
+    }*/
+
+    public void SpawnBlockRow(out List <BasicBlock> spawnedBlocks)
     {
         //base.Spawn(out BasicBlock block);
-        spawnedBlocks = new BasicBlock[] { };
+        spawnedBlocks = new List <BasicBlock>();
 
         columns = Random.Range(7, 10);
 
         for (column = 0; column<columns; column++)
         {
             Spawn(out BasicBlock spawnedBlock);
-            spawnedBlocks.Append(spawnedBlock);
+            spawnedBlocks.Add(spawnedBlock);
             
         }
     }
@@ -51,7 +75,10 @@ public class BlockSpawner : BaseSpawner<BasicBlock>
 
     protected override void Get(BasicBlock block)
     {
-        block.InitBlock(data.GetDepthBlocksHealth());
+        int typeId = Random.Range(0, 3);
+        block.InitBlock(data.GetDepthBlocksHealth(), blockTypes[typeId].hpMultiplier, blockTypes[typeId].rewardMultiplier);
+        block.gameObject.GetComponent<Renderer>().material = blockTypes[typeId].material;
+
 
         base.Get(block);
     }

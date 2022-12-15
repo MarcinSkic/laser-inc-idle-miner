@@ -1089,6 +1089,19 @@ MonoBehaviour:
   spawnOffset: {x: 0, y: -22, z: 0}
   data: {fileID: 2078200401}
   gameController: {fileID: 383171360}
+  blockTypes:
+  - name: normal
+    material: {fileID: 2100000, guid: 246e6ab83377d23479e4f81877d58001, type: 2}
+    hpMultiplier: 1
+    rewardMultiplier: 1
+  - name: diamond
+    material: {fileID: 2100000, guid: 726fcaaf930bee6469e02a4a9639857c, type: 2}
+    hpMultiplier: 10
+    rewardMultiplier: 25
+  - name: normal
+    material: {fileID: 2100000, guid: ee16a907398389f4c8d6ebb732e215c3, type: 2}
+    hpMultiplier: 3
+    rewardMultiplier: 5
 --- !u!114 &231626580
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -11990,7 +12003,7 @@ MonoBehaviour:
   roundNumber: 0
   roundTime: 0
   displayFloatingText: 0
-  debugSettings: 1
+  debugSettings: 0
   additionalStartingMoney: 1234567
   additionalStartingRound: 0
   additionalStartingBalls: 0
