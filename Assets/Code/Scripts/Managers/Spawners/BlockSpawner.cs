@@ -27,13 +27,9 @@ public class BlockSpawner : BaseSpawner<BasicBlock>
         public Material material;
         public double hpMultiplier;
         public double rewardMultiplier;
-
-        public BlockType(string name, Material material, double hpMultiplier, double rewardMultiplier) {
-            this.name = name;
-            this.material = material;
-            this.hpMultiplier = hpMultiplier;
-            this.rewardMultiplier = rewardMultiplier;
-        }
+        public double minDepth;
+        public double fullDepth;
+        public double maxChance;
     }
     
   
@@ -75,7 +71,25 @@ public class BlockSpawner : BaseSpawner<BasicBlock>
 
     protected override void Get(BasicBlock block)
     {
-        int typeId = Random.Range(0, 3);
+        int typeId = 0;
+        for (int i=blockTypes.Length-1; i>=0; i--)
+        {
+            double chance = 0;
+            if (data.depth >= blockTypes[i].fullDepth) {
+                chance = blockTypes[i].maxChance;
+            } else if (data.depth >= blockTypes[i].minDepth)
+            {
+                double part = (data.depth - blockTypes[i].minDepth) / (blockTypes[i].fullDepth - blockTypes[i].minDepth);
+                Debug.Log($"{part}");
+                chance = part * blockTypes[i].maxChance;
+            }
+            if (chance > Random.Range(0f, 1f))
+            {
+                typeId = i;
+                break;
+            }
+        }
+        // int typeId = Random.Range(0, blockTypes.Length);
         block.InitBlock(data.GetDepthBlocksHealth(), blockTypes[typeId].hpMultiplier, blockTypes[typeId].rewardMultiplier);
         block.gameObject.GetComponent<Renderer>().material = blockTypes[typeId].material;
 
