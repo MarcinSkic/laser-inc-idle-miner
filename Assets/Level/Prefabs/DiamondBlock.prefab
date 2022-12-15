@@ -14,7 +14,7 @@ GameObject:
   - component: {fileID: 4917961403807289779}
   - component: {fileID: 2128506963174872199}
   m_Layer: 0
-  m_Name: BasicBlock
+  m_Name: DiamondBlock
   m_TagString: block
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -63,7 +63,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: 246e6ab83377d23479e4f81877d58001, type: 2}
+  - {fileID: 2100000, guid: 726fcaaf930bee6469e02a4a9639857c, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -111,6 +111,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   boxCollider: {fileID: 4917961403807289779}
-  rewardMultiplier: 1
-  hpMultiplier: 1
+  rewardMultiplier: 25
+  hpMultiplier: 10
   data: {fileID: 0}

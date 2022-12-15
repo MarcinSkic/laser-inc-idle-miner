@@ -188,18 +188,18 @@ public class GameController : BaseController<GameView>
             statsDisplay.SetWaveDisplay();
             DisplayWave();
 
-            blockSpawner.SpawnBlockRow(out BasicBlock[] spawnedBlocks);
+            blockSpawner.SpawnBlockRow(out List <BasicBlock> spawnedBlocks);
 
-            for (int i=0; i<spawnedBlocks.Length; i++)
+            for (int i=0; i<spawnedBlocks.Count; i++)
             {
                 spawnedBlocks[i].AssignEvents(OnBlockDestroyed);
             }
         }
     }
 
-    private void OnBlockDestroyed(double maxHp)
+    private void OnBlockDestroyed(double money)
     {
-        AddMoney(maxHp);
+        AddMoney(money);
         //TODO-FEATURE: Count destroyed blocks for upgrades/rewards
 
     }
@@ -229,6 +229,10 @@ public class GameController : BaseController<GameView>
 
     public void AddMoney(double amount)
     {
+        if (amount < 1)
+        {
+            amount = 1;
+        }
         data.money += amount;
         data.earnedMoney += amount;
         moneyDisplay.text = $"Money: {Round(data.money)}";
