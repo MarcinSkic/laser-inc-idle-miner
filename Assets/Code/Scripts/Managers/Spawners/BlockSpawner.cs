@@ -80,7 +80,6 @@ public class BlockSpawner : BaseSpawner<BasicBlock>
             } else if (data.depth >= blockTypes[i].minDepth)
             {
                 double part = (data.depth - blockTypes[i].minDepth) / (blockTypes[i].fullDepth - blockTypes[i].minDepth);
-                Debug.Log($"{part}");
                 chance = part * blockTypes[i].maxChance;
             }
             if (chance > Random.Range(0f, 1f))
