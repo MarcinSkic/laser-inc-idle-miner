@@ -9,21 +9,24 @@ public class UIButtonUpgradeController : UIButtonController
     public string upgradeName;  //TODO-FT-DICTIONARIES: Should be enum
     [SerializeField]
     private TMP_Text costText;  //TODO-FT-RESOURCES
+
     private double cost;    //TODO-FT-RESOURCES
 
     public void SetUpgradeCost(Upgrade upgrade)
     {
         cost = upgrade.cost;
-        costText.text = upgrade.cost.ToString();
+        costText.text = string.Format("{0:f0}$", upgrade.cost);
 
-        if(upgrade.currentLevel == upgrade.maxLevel)
+        if (upgrade.currentLevel == upgrade.maxLevel)
         {
-            //TODO-CURRENT: Do smth
+            costText.text = "Maxed";
+            Deactivate();
+            RemoveAllEvents();
         }
     }
 
     public void SetUpgradeValue(string value)
     {
-        text.text = value;
+        ChangeText(value);
     }
 }
