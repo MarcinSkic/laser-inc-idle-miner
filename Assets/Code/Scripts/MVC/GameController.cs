@@ -145,7 +145,7 @@ public class GameController : BaseController<GameView>
                 bgTextures[i].position += new Vector3(0, 5.0f, 0) * Time.deltaTime ; // TODO: temp
                 if (bgTextures[i].position.y >= 28f)
                 {
-                    bgTextures[i].position -= new Vector3(0, 67.2f, 0);
+                    bgTextures[i].position -= new Vector3(0, 16.8f, 0);
                 }
             }
             isMoving = true;
