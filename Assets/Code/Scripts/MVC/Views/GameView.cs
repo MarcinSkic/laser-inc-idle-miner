@@ -12,6 +12,7 @@ public class GameView : BaseView
 
     public Color bottomButton_Default;
     public Color bottomButton_Activated;
+    public Color upgradeButton_MaxedUpgrades;
 
     public UIBallBar ballBarPrefab;
     public Transform ballBarsParent;

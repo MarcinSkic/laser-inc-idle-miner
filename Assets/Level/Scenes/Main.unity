@@ -151,10 +151,10 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
-  - {fileID: 190056608}
   - {fileID: 662815920}
-  - {fileID: 1719632677}
   - {fileID: 9314945}
+  - {fileID: 190056608}
+  - {fileID: 1719632677}
   m_Father: {fileID: 1064644890}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -169,7 +169,7 @@ GameObject:
   - component: {fileID: 9314945}
   - component: {fileID: 9314946}
   m_Layer: 0
-  m_Name: BottomBorder
+  m_Name: Right
   m_TagString: border
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -183,12 +183,12 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 9314944}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0, y: -4.500001, z: 0}
-  m_LocalScale: {x: 20, y: 1, z: 1}
+  m_LocalPosition: {x: -4, y: -4.5, z: 0}
+  m_LocalScale: {x: 26, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 3573453}
-  m_RootOrder: 3
+  m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!65 &9314946
 BoxCollider:
@@ -883,7 +883,7 @@ GameObject:
   - component: {fileID: 190056608}
   - component: {fileID: 190056609}
   m_Layer: 0
-  m_Name: TopBorder
+  m_Name: Left
   m_TagString: border
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -897,12 +897,12 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 190056607}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0, y: 4.500001, z: 0}
-  m_LocalScale: {x: 20, y: 1, z: 1}
+  m_LocalPosition: {x: -4, y: 4.500001, z: 0}
+  m_LocalScale: {x: 26, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 3573453}
-  m_RootOrder: 0
+  m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!65 &190056609
 BoxCollider:
@@ -1099,22 +1099,37 @@ MonoBehaviour:
     material: {fileID: 2100000, guid: 246e6ab83377d23479e4f81877d58001, type: 2}
     hpMultiplier: 1
     rewardMultiplier: 1
+    minDepth: 0
+    fullDepth: 0
+    maxChance: 0
   - name: copper
     material: {fileID: 2100000, guid: 43a17562d6f770941b40b6965aaab7a7, type: 2}
     hpMultiplier: 2
     rewardMultiplier: 3
+    minDepth: 0
+    fullDepth: 0
+    maxChance: 0
   - name: iron
     material: {fileID: 2100000, guid: ee16a907398389f4c8d6ebb732e215c3, type: 2}
     hpMultiplier: 3
     rewardMultiplier: 5
+    minDepth: 0
+    fullDepth: 0
+    maxChance: 0
   - name: diamond
     material: {fileID: 2100000, guid: 726fcaaf930bee6469e02a4a9639857c, type: 2}
     hpMultiplier: 10
     rewardMultiplier: 25
+    minDepth: 0
+    fullDepth: 0
+    maxChance: 0
   - name: uranium
     material: {fileID: 2100000, guid: f7de71a7c6eed6d47b1fc3c682714a6d, type: 2}
     hpMultiplier: 15
     rewardMultiplier: 100
+    minDepth: 0
+    fullDepth: 0
+    maxChance: 0
 --- !u!114 &231626580
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -3649,7 +3664,7 @@ GameObject:
   - component: {fileID: 662815920}
   - component: {fileID: 662815921}
   m_Layer: 0
-  m_Name: RightBorder
+  m_Name: Top
   m_TagString: border
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -3668,7 +3683,7 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 3573453}
-  m_RootOrder: 1
+  m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!65 &662815921
 BoxCollider:
@@ -9489,7 +9504,7 @@ GameObject:
   - component: {fileID: 1719632677}
   - component: {fileID: 1719632678}
   m_Layer: 0
-  m_Name: LeftBorder
+  m_Name: Bottom
   m_TagString: border
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -9508,7 +9523,7 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 3573453}
-  m_RootOrder: 2
+  m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!65 &1719632678
 BoxCollider:

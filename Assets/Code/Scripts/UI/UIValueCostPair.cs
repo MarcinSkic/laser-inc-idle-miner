@@ -6,9 +6,9 @@ using UnityEngine;
 public class UIValueCostPair : MonoBehaviour
 {
     [SerializeField]
-    private TMP_Text value;
+    private TMP_Text value;  //TODO-FUTURE-BUG: This class should be responsible for updating values changed by more than one upgrade, like speed, damage etc.
     [SerializeField]
-    private TMP_Text cost;  //TODO-CURRENT: ButtonUpgradeController?
+    private TMP_Text cost; 
 
     public double currentCost;  //TODO-FT-RESOURCES
 
