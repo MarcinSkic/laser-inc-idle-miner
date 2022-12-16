@@ -19,26 +19,31 @@ public class BlockSpawner : BaseSpawner<BasicBlock>
 
     private int column;
     private int columns;
-
-    [System.Serializable]
-    public class BlockType
-    {
-        public string name;
-        public Material material;
-        public double hpMultiplier;
-        public double rewardMultiplier;
-        public double minDepth;
-        public double fullDepth;
-        public double maxChance;
-    }
-    
   
-    public BlockType[] blockTypes;
+    public List<BlockType> blockTypes;
+    public List<BlockTypeScriptable> blockTypeScriptables;
 
-/*    public void Start()
+    protected override void Awake()
     {
-        blockTypes.Append(new BlockType("normal", materials[0], ))
-    }*/
+        base.Awake();
+        TransformScriptablesIntoBlockTypes();
+    }
+
+    private void TransformScriptablesIntoBlockTypes()
+    {
+        blockTypes = new List<BlockType>();
+
+        foreach (var scriptable in blockTypeScriptables)
+        {
+            blockTypes.Add(scriptable.BlockType);
+        }
+    }
+
+
+    /*    public void Start()
+        {
+            blockTypes.Append(new BlockType("normal", materials[0], ))
+        }*/
 
     public void SpawnBlockRow(out List <BasicBlock> spawnedBlocks)
     {
@@ -72,7 +77,7 @@ public class BlockSpawner : BaseSpawner<BasicBlock>
     protected override void Get(BasicBlock block)
     {
         int typeId = 0;
-        for (int i=blockTypes.Length-1; i>=0; i--)
+        for (int i=blockTypes.Count-1; i>=0; i--)
         {
             double chance = 0;
             if (data.depth >= blockTypes[i].fullDepth) {

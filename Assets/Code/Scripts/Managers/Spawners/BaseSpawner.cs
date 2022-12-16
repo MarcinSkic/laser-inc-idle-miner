@@ -15,7 +15,7 @@ public abstract class BaseSpawner<T> : MonoBehaviour where T : MonoBehaviour, IP
     public int active;
     public int inactive;
 
-    private void Awake()
+    protected virtual void Awake()
     {
         pool = new ObjectPool<T>(Create, Get, Release);
     }
