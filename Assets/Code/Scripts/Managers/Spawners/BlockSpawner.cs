@@ -23,8 +23,9 @@ public class BlockSpawner : BaseSpawner<BasicBlock>
     public List<BlockType> blockTypes;
     public List<BlockTypeScriptable> blockTypeScriptables;
 
-    private void Awake()
+    protected override void Awake()
     {
+        base.Awake();
         TransformScriptablesIntoBlockTypes();
     }
 
