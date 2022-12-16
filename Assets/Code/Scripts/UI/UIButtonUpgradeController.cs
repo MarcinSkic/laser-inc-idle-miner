@@ -12,6 +12,12 @@ public class UIButtonUpgradeController : UIButtonController
 
     private double cost;    //TODO-FT-RESOURCES
 
+    public override void Init()
+    {
+        base.Init();
+        Deactivate();
+    }
+
     public void SetUpgradeCost(Upgrade upgrade)
     {
         cost = upgrade.cost;
@@ -20,8 +26,19 @@ public class UIButtonUpgradeController : UIButtonController
         if (upgrade.currentLevel == upgrade.maxLevel)
         {
             costText.text = "Maxed";
-            Deactivate();
             RemoveAllEvents();
+        }
+    }
+
+    public void ChangeStateBasedOnMoney(double money)
+    {
+        if(money < cost)
+        {
+            Deactivate();
+        } 
+        else
+        {
+            Activate();
         }
     }
 

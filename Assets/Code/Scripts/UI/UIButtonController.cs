@@ -14,7 +14,7 @@ public class UIButtonController : MonoBehaviour
     [SerializeField] Color @default;
     [SerializeField] Color activated;
 
-    public void Awake()
+    public virtual void Init()
     {
         button.onClick.AddListener(OnClicked);
         Activate();

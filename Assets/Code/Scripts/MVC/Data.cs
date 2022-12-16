@@ -86,12 +86,6 @@ public class Data : MonoBehaviour
         {
             displayFloatingText = IntToBool(PlayerPrefs.GetInt("Show floating damage text"));
         }
-        if (debugSettings)
-        {
-            money += additionalStartingMoney;
-            roundNumber += additionalStartingRound;
-            basicBallCount += additionalStartingBalls;
-        }
     }
 
     private void CreateListOfBalls()
@@ -124,6 +118,7 @@ public class Data : MonoBehaviour
             return false;
         }
     }
+
     public double GetDepthBlocksHealth()
     {
         /*
@@ -139,10 +134,12 @@ public class Data : MonoBehaviour
         */
         return depth*Math.Pow(1.03, depth);
     }
+
     public double GetBallDamage()
     {
         return basicBallData.damage + legacyUpgrades["Damage"].upgradeLevel * 1;
     }
+
     public double GetSpd()
     {
         return basicBallData.speed + 1 * legacyUpgrades["Bullet speed"].upgradeLevel;
