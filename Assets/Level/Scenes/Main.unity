@@ -1003,35 +1003,35 @@ MonoBehaviour:
     rewardMultiplier: 1
     minDepth: 0
     fullDepth: 0
-    maxChance: 0
+    maxChance: 1
   - name: copper
     material: {fileID: 2100000, guid: 43a17562d6f770941b40b6965aaab7a7, type: 2}
     hpMultiplier: 2
     rewardMultiplier: 3
-    minDepth: 0
-    fullDepth: 0
-    maxChance: 0
+    minDepth: 1
+    fullDepth: 5
+    maxChance: 0.2
   - name: iron
     material: {fileID: 2100000, guid: ee16a907398389f4c8d6ebb732e215c3, type: 2}
     hpMultiplier: 3
     rewardMultiplier: 5
-    minDepth: 0
-    fullDepth: 0
-    maxChance: 0
+    minDepth: 3
+    fullDepth: 10
+    maxChance: 0.1
   - name: diamond
     material: {fileID: 2100000, guid: 726fcaaf930bee6469e02a4a9639857c, type: 2}
     hpMultiplier: 10
     rewardMultiplier: 25
-    minDepth: 0
-    fullDepth: 0
-    maxChance: 0
+    minDepth: 5
+    fullDepth: 15
+    maxChance: 0.03
   - name: uranium
     material: {fileID: 2100000, guid: f7de71a7c6eed6d47b1fc3c682714a6d, type: 2}
     hpMultiplier: 15
     rewardMultiplier: 100
-    minDepth: 0
-    fullDepth: 0
-    maxChance: 0
+    minDepth: 10
+    fullDepth: 30
+    maxChance: 0.01
 --- !u!114 &231626580
 MonoBehaviour:
   m_ObjectHideFlags: 0
