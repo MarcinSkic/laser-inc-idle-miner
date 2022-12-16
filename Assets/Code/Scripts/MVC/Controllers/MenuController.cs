@@ -14,6 +14,7 @@ public class MenuController : BaseController<MenuView>
     public override void Activate()
     {
         base.Activate();
+        view.GameStartButton.Init();
         view.GameStartButton.onClick += StartGame;
     }
 

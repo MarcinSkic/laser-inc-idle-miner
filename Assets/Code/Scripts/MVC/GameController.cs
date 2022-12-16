@@ -64,8 +64,16 @@ public class GameController : BaseController<GameView>
         // | | |
         // v v v
         HideMenus();
-        GenerateBuyingBars();
-        GenerateSettingBars();
+        LegacyGenerateBuyingBars();
+        LegacyGenerateSettingBars();
+
+        if (data.debugSettings)
+        {
+            data.money += data.additionalStartingMoney;   //TODO-FT-RESOURCES
+            onMoneyChange.Invoke(data.money);
+            data.roundNumber += data.additionalStartingRound;
+            data.basicBallCount += data.additionalStartingBalls;
+        }
     }
 
     private void Update()
@@ -98,9 +106,12 @@ public class GameController : BaseController<GameView>
                 var upgrade = upgradesModel.getUpgrade(buttonUpgrade.upgradeName);
                 if(upgrade != null)
                 {
+                    buttonUpgrade.Init();
                     buttonUpgrade.onClick += upgrade.TryUpgrade;    //Button -> Tries to upgrade an Upgrade
 
                     buttonUpgrade.SetUpgradeCost(upgrade);   //Set initial values
+                    onMoneyChange += buttonUpgrade.ChangeStateBasedOnMoney;
+
                     upgrade.AddDoUpgrade(buttonUpgrade.SetUpgradeCost);  //Upgrade -> Updates Button values
                     upgrade.onValueUpdate += buttonUpgrade.SetUpgradeValue;  //TODO-FUTURE-BUG: There should be check if the button uses upgrade internal value or universal value, if universal then it should connect to not yet existing system of sending event on value change
                 } 
@@ -227,6 +238,7 @@ public class GameController : BaseController<GameView>
         SettingsMenu.SetActive(false);
     }
 
+    public UnityAction<double> onMoneyChange;
     public void AddMoney(double amount)
     {
         if (amount < 1)
@@ -236,16 +248,18 @@ public class GameController : BaseController<GameView>
         data.money += amount;
         data.earnedMoney += amount;
         moneyDisplay.text = $"Money: {Round(data.money)}";
+
+        onMoneyChange?.Invoke(data.money);
     }
 
-    void GenerateBuyingBars()
+    void LegacyGenerateBuyingBars()
     {
         foreach (KeyValuePair<string, Data.LegacyUpgrade> entry in data.legacyUpgrades)
         {
             UpgradeBuyingBar buying = Instantiate(upgradeBuyingBar, ShopContent);
             buying.upgradeName = entry.Key;
             buyingBars.Add(entry.Key, buying);
-            SetBuyingBarTexts(entry.Key);
+            LegacySetBuyingBarTexts(entry.Key);
             buying.GetComponentInChildren<ButtonBuyUpgrade>().gameController = this;
             
         }
@@ -255,7 +269,7 @@ public class GameController : BaseController<GameView>
         }
     }
 
-    void GenerateSettingBars()
+    void LegacyGenerateSettingBars()
     {
         foreach (KeyValuePair<string, bool> entry in data.settings)
         {
@@ -283,7 +297,7 @@ public class GameController : BaseController<GameView>
         return data.legacyUpgrades[name].upgradeBaseCost * System.Math.Pow(data.legacyUpgrades[name].upgradeMultCost, data.legacyUpgrades[name].upgradeLevel);
     }
 
-    public void SetBuyingBarTexts(string name)
+    public void LegacySetBuyingBarTexts(string name)
     {
         buyingBars[name].upgradeNameText.text = name;
         if (data.legacyUpgrades[name].upgradeMaxLevel == 0)
@@ -341,12 +355,13 @@ public class GameController : BaseController<GameView>
     {
         var upgradeCost = upgrade.cost;
 
-        if(upgradeCost > data.money)
+        if(upgradeCost > data.money)    //TODO-FT-RESOURCES: Subtracting money should be as function for control
         {
             return;
         }
 
-        data.money -= upgradeCost;
+        data.money -= upgradeCost;  //TODO-FT-RESOURCES: Subtracting money should be as function for control
+        onMoneyChange?.Invoke(data.money);
 
         //SetBuyingBarTexts(boughtUpgradeName);    //TODO-FT-MVC
         moneyDisplay.text = $"Money: {Round(data.money)}";  //TODO-FT-MVC
@@ -362,7 +377,7 @@ public class GameController : BaseController<GameView>
         {
             data.money -= LegacyGetUpgradeCost(name);
             data.legacyUpgrades[name].upgradeLevel += 1;
-            SetBuyingBarTexts(name);
+            LegacySetBuyingBarTexts(name);
             moneyDisplay.text = $"Money: {Round(data.money)}";
             if (name == "Damage")
             {

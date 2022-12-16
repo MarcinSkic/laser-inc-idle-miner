@@ -22,16 +22,17 @@ public class GameView : BaseView
 
     private void Start()
     {
-        AssignBottomButtonsEvent(); //TODO-FT-CURRENT: Should be in GameController
+        InitBottomButtonsEvent(); //TODO-FT-CURRENT: Should be in GameController
     }
 
     UnityAction<Color> onTabClosing;
-    public void AssignBottomButtonsEvent()
+    public void InitBottomButtonsEvent()
     {
         foreach(var tabButtonsContainer in tabButtonsContainers)
         {
             foreach(var tabButton in tabButtonsContainer.GetComponentsInChildren<UIButtonWithStringController>())
             {
+                tabButton.Init();
                 tabButton.onClick += SwitchTab;
                 onTabClosing += tabButton.SetColor;
             }
@@ -39,6 +40,7 @@ public class GameView : BaseView
 
         foreach (var windowButton in windowButtons)
         {
+            windowButton.Init();
             windowButton.onClick += SwitchWindowButtons;
         }
     }
