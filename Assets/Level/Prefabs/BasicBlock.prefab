@@ -110,8 +110,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8ba623de469ed0141926edca23e5f1f6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  hp: 1
-  maxHp: 0
-  gameController: {fileID: 0}
-  data: {fileID: 0}
   boxCollider: {fileID: 4917961403807289779}
+  rewardMultiplier: 1
+  hpMultiplier: 1
+  data: {fileID: 0}

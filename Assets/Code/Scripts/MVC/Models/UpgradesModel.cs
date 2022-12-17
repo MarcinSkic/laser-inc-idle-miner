@@ -5,52 +5,38 @@ using UnityEngine;
 
 public class UpgradesModel : MonoBehaviour
 {
-    //TODO-DISCUSS: Keep it in some collection? Also they probably should have some internal string name
-    public UpgradePairDouble universalSpeed;
-    public UpgradePairDouble universalDamage;
-    public UpgradePairAction basicBallCount;
-    public UpgradePairAction bombBallCount;
-    public UpgradePairAction sniperBallCount;
-}
+    [SerializeField]
+    private List<UpgradeScriptable> upgradesScriptable;
 
-[System.Serializable]
-public class UpgradePairInt 
-{
-    public UpgradeIntScriptable scriptable;
-    public UpgradeInt upgrade;
+    [Header("Debug")]
+    public List<Upgrade> upgrades;
 
-    public static implicit operator UpgradeInt(UpgradePairInt upgradePair) => upgradePair.upgrade;
-
-    public void LoadStartData()
+    public Upgrade getUpgrade(string name)
     {
-        upgrade = Functions.GetObjectCopy(scriptable.upgrade);
+        return upgrades.Find(upgrade => upgrade.name == name);
     }
-}
 
-[System.Serializable]
-public class UpgradePairDouble
-{
-    public UpgradeDoubleScriptable scriptable;
-    public UpgradeDouble upgrade;
-
-    public static implicit operator UpgradeDouble(UpgradePairDouble upgradePair) => upgradePair.upgrade;
-
-    public void LoadStartData()
+    private void Awake()
     {
-        upgrade = Functions.GetObjectCopy(scriptable.upgrade);
+        TransformScriptablesIntoUpgrades();
     }
-}
 
-[System.Serializable]
-public class UpgradePairAction
-{
-    public UpgradeActionScriptable scriptable;
-    public UpgradeAction upgrade;
-
-    public static implicit operator UpgradeAction(UpgradePairAction upgradePair) => upgradePair.upgrade;
-
-    public void LoadStartData()
+    private void TransformScriptablesIntoUpgrades()
     {
-        upgrade = Functions.GetObjectCopy(scriptable.upgrade);
+        upgrades = new List<Upgrade>();
+
+        foreach(var scriptable in upgradesScriptable)
+        {
+            upgrades.Add(scriptable.Upgrade);
+        }
+    }
+
+    [ContextMenu("Full upgrades prestige")]
+    private void TestFullPrestige()
+    {
+        for(int i = 0; i < upgrades.Count; i++)
+        {
+            upgrades[i] = Functions.GetObjectCopy(upgrades[i].initialUpgrade);
+        }
     }
 }

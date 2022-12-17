@@ -6,27 +6,23 @@ using System.IO;
 using System;
 
 public class Data : MonoBehaviour
-{ 
+{
     [Header("BALLS STATS")]
 
     [Header("Universal")]
+    [HideInInspector]
+    public List<BaseBallData> ballsData;    //Every new ball must be added here (CreateListOfBalls method)
+
     public BasicBallData basicBallData;
-    public double ballDamage;
-    public double ballSpeed;
-
     public BombBallData bombBallData;
-
     public SniperBallData sniperBallData;
+
 
     [Space(10)]
 
     [Header("PLAYER STATS")]
     public double money;
     public double earnedMoney;
-
-    [Header("Upgrades")]
-    public double dmgPerUpgrade;
-    public double bulletSpdPerUpgrade;
 
     [Space(10)]
 
@@ -54,48 +50,22 @@ public class Data : MonoBehaviour
     [Header("DEBUG")]
     public bool debugSettings;
     public double additionalStartingMoney;
+    
 
     [Header("UNIMPLEMENTED")]
     public int additionalStartingRound;
     public int additionalStartingBalls;
     public bool displayFpsStats;
 
-
-    private void Start()
-    {
-        if (PlayerPrefs.HasKey("Show floating damage text"))
-        {
-            displayFloatingText = IntToBool(PlayerPrefs.GetInt("Show floating damage text"));
-        }
-        if (debugSettings)
-        {
-            money += additionalStartingMoney;
-            roundNumber += additionalStartingRound;
-            basicBallCount += additionalStartingBalls;
-        }
-    }
-
-
-
-    public Dictionary<string, bool> settings = new Dictionary<string, bool>() { };
-
-    public class LegacyUpgrade
-    {
-        public double upgradeBaseCost;
-        public double upgradeMultCost;
-        public int upgradeMaxLevel;
-        public int upgradeLevel = 0;
-    }
-
-    public Dictionary<string, LegacyUpgrade> upgrades = new Dictionary<string, LegacyUpgrade>() { };
-
     void Awake()
     {
-        upgrades.Add("Damage", new LegacyUpgrade() { upgradeBaseCost = 1, upgradeMultCost = 1.4, upgradeMaxLevel = 0 });
-        upgrades.Add("Bullet speed", new LegacyUpgrade() { upgradeBaseCost = 1, upgradeMultCost = 1.4, upgradeMaxLevel = 0 });
-        upgrades.Add("Bullet count", new LegacyUpgrade() { upgradeBaseCost = 5, upgradeMultCost = 1.7, upgradeMaxLevel = 10 });
-        upgrades.Add("Bomb count", new LegacyUpgrade() { upgradeBaseCost = 20, upgradeMultCost = 1.7, upgradeMaxLevel = 10 });
-        upgrades.Add("Sniper count", new LegacyUpgrade() { upgradeBaseCost = 20, upgradeMultCost = 1.7, upgradeMaxLevel = 10 });
+        CreateListOfBalls();
+
+        legacyUpgrades.Add("Damage", new LegacyUpgrade() { upgradeBaseCost = 1, upgradeMultCost = 1.4, upgradeMaxLevel = 0 });
+        legacyUpgrades.Add("Bullet speed", new LegacyUpgrade() { upgradeBaseCost = 1, upgradeMultCost = 1.4, upgradeMaxLevel = 0 });
+        legacyUpgrades.Add("Bullet count", new LegacyUpgrade() { upgradeBaseCost = 5, upgradeMultCost = 1.7, upgradeMaxLevel = 10 });
+        legacyUpgrades.Add("Bomb count", new LegacyUpgrade() { upgradeBaseCost = 20, upgradeMultCost = 1.7, upgradeMaxLevel = 10 });
+        legacyUpgrades.Add("Sniper count", new LegacyUpgrade() { upgradeBaseCost = 20, upgradeMultCost = 1.7, upgradeMaxLevel = 10 });
         string[] settingsArray = { "Show maxed upgrades", "Show floating damage text", "Display 60 FPS" };
         foreach (string setting in settingsArray)
         {
@@ -110,6 +80,33 @@ public class Data : MonoBehaviour
         }
     }
 
+    private void Start()
+    {
+        if (PlayerPrefs.HasKey("Show floating damage text"))
+        {
+            displayFloatingText = IntToBool(PlayerPrefs.GetInt("Show floating damage text"));
+        }
+    }
+
+    private void CreateListOfBalls()
+    {
+        ballsData = new List<BaseBallData>{ basicBallData,bombBallData,sniperBallData};
+    }
+
+    public Dictionary<string, bool> settings = new Dictionary<string, bool>() { };
+
+    public class LegacyUpgrade
+    {
+        public double upgradeBaseCost;
+        public double upgradeMultCost;
+        public int upgradeMaxLevel;
+        public int upgradeLevel = 0;
+    }
+
+    public Dictionary<string, LegacyUpgrade> legacyUpgrades = new Dictionary<string, LegacyUpgrade>() { };
+
+
+
     private bool IntToBool(int value)
     {
         if (value == 1)
@@ -121,6 +118,7 @@ public class Data : MonoBehaviour
             return false;
         }
     }
+
     public double GetDepthBlocksHealth()
     {
         /*
@@ -136,12 +134,14 @@ public class Data : MonoBehaviour
         */
         return depth*Math.Pow(1.03, depth);
     }
+
     public double GetBallDamage()
     {
-        return ballDamage + upgrades["Damage"].upgradeLevel * dmgPerUpgrade;
+        return basicBallData.damage + legacyUpgrades["Damage"].upgradeLevel * 1;
     }
+
     public double GetSpd()
     {
-        return ballSpeed + bulletSpdPerUpgrade * upgrades["Bullet speed"].upgradeLevel;
+        return basicBallData.speed + 1 * legacyUpgrades["Bullet speed"].upgradeLevel;
     }
 }

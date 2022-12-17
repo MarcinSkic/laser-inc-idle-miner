@@ -17,6 +17,7 @@ public class BaseController : MonoBehaviour
 
 public class BaseController<T> : BaseController where T : BaseView
 {
+    [Header("BASE CONTROLLER")]
     [SerializeField] protected T view;
 
     public override void Activate()

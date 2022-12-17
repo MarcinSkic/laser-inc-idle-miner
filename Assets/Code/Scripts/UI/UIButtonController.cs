@@ -7,12 +7,32 @@ using UnityEngine.UI;
 
 public class UIButtonController : MonoBehaviour
 {
-    [SerializeField] private Button button;
-    [SerializeField] private TMP_Text text;
-    public void Awake()
+    [Header("BUTTON BASE")]
+    [SerializeField] protected Button button;
+    [SerializeField] protected TMP_Text text;
+
+    [SerializeField] Color @default;
+    [SerializeField] Color activated;
+
+    public virtual void Init()
     {
         button.onClick.AddListener(OnClicked);
         Activate();
+    }
+
+    public void SetActivatedColor()
+    {
+        button.targetGraphic.color = activated;
+    }
+
+    public void SetDefaultColor()
+    {
+        button.targetGraphic.color = @default;
+    }
+
+    public void SetColor(Color color)
+    {
+        button.targetGraphic.color = color;
     }
 
     public void Activate()
@@ -26,7 +46,7 @@ public class UIButtonController : MonoBehaviour
     }
 
     public UnityAction onClick;
-    private void OnClicked()
+    protected virtual void OnClicked()
     {
         onClick?.Invoke();
     }

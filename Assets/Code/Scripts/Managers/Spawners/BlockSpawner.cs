@@ -19,18 +19,43 @@ public class BlockSpawner : BaseSpawner<BasicBlock>
 
     private int column;
     private int columns;
+  
+    public List<BlockType> blockTypes;
+    public List<BlockTypeScriptable> blockTypeScriptables;
 
-    public void SpawnBlockRow(out BasicBlock[] spawnedBlocks)
+    protected override void Awake()
+    {
+        base.Awake();
+        TransformScriptablesIntoBlockTypes();
+    }
+
+    private void TransformScriptablesIntoBlockTypes()
+    {
+        blockTypes = new List<BlockType>();
+
+        foreach (var scriptable in blockTypeScriptables)
+        {
+            blockTypes.Add(scriptable.BlockType);
+        }
+    }
+
+
+    /*    public void Start()
+        {
+            blockTypes.Append(new BlockType("normal", materials[0], ))
+        }*/
+
+    public void SpawnBlockRow(out List <BasicBlock> spawnedBlocks)
     {
         //base.Spawn(out BasicBlock block);
-        spawnedBlocks = new BasicBlock[] { };
+        spawnedBlocks = new List <BasicBlock>();
 
         columns = Random.Range(7, 10);
 
         for (column = 0; column<columns; column++)
         {
             Spawn(out BasicBlock spawnedBlock);
-            spawnedBlocks.Append(spawnedBlock);
+            spawnedBlocks.Add(spawnedBlock);
             
         }
     }
@@ -51,7 +76,27 @@ public class BlockSpawner : BaseSpawner<BasicBlock>
 
     protected override void Get(BasicBlock block)
     {
-        block.InitBlock(data.GetDepthBlocksHealth());
+        int typeId = 0;
+        for (int i=blockTypes.Count-1; i>=0; i--)
+        {
+            double chance = 0;
+            if (data.depth >= blockTypes[i].fullDepth) {
+                chance = blockTypes[i].maxChance;
+            } else if (data.depth >= blockTypes[i].minDepth)
+            {
+                double part = (data.depth - blockTypes[i].minDepth) / (blockTypes[i].fullDepth - blockTypes[i].minDepth);
+                chance = part * blockTypes[i].maxChance;
+            }
+            if (chance > Random.Range(0f, 1f))
+            {
+                typeId = i;
+                break;
+            }
+        }
+        // int typeId = Random.Range(0, blockTypes.Length);
+        block.InitBlock(data.GetDepthBlocksHealth(), blockTypes[typeId].hpMultiplier, blockTypes[typeId].rewardMultiplier);
+        block.gameObject.GetComponent<Renderer>().material = blockTypes[typeId].material;
+
 
         base.Get(block);
     }
