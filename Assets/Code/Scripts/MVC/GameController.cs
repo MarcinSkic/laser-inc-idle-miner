@@ -19,15 +19,16 @@ public class GameController : BaseController<GameView>
     [SerializeField] private StatsDisplay statsDisplay;
     public Data NewData => data;
 
-    public TMP_Text healthDisplay;
-    public TMP_Text waveDisplay;
+    [Header("<For replacement>")]
+    public TMP_Text depthDisplay;
     public TMP_Text moneyDisplay;
-    public TMP_Text avgFpsDisplay;
-    public TMP_Text fpsDisplay;
-    public BasicBlock basicBlock;
-    public Slider healthBar;
+    [Header("</For replacement>")]
+
+    [Header("<For removal>")]
     public GameObject ShopMenu;
     public GameObject SettingsMenu;
+    [Header("</For removal>")]
+
     [SerializeField] private Transform _dynamic;
     public Transform Dynamic => _dynamic;
     public Transform _dynamic_balls;
@@ -83,17 +84,23 @@ public class GameController : BaseController<GameView>
         var blocks = _dynamic_blocks.GetComponentsInChildren<BasicBlock>(false); //TODO: Very Temp
         MoveBlocks(blocks); // TODO: not optimal
         CheckIfWaveFinished(blocks); // TODO: not optimal
+
+        DebugInputSwitch();
+    }
+
+    private void DebugInputSwitch()
+    {
+        if (Input.GetKeyDown(KeyCode.D))
+        {
+            view.debugWindow.SetActive(!view.debugWindow.activeSelf);
+        }
     }
 
     private void CreateBallBars()
     {
         foreach(var ballType in data.ballsData)
         {
-            var ballBar = Instantiate(view.ballBarPrefab, view.ballBarsParent);
-            ballBar.SetUpgradesName(ballType.name);
-            ballBar.ballIcon.sprite = ballType.sprite;
-
-            view.ballBars.Add(ballBar);
+            view.CreateBallBar(ballType);
         }
     }
 
@@ -224,8 +231,8 @@ public class GameController : BaseController<GameView>
         {
             fpsRefreshCounter = 100;
             current = Time.frameCount / Time.time;
-            avgFpsDisplay.text = $"avg FPS: {Mathf.Round(current*10)/10f}";
-            fpsDisplay.text = $"FPS: {Mathf.Round(1 / Time.deltaTime)}";
+            view.avg_FpsDisplay.text = $"avg FPS: {Mathf.Round(current*10)/10f}";
+            view.fpsDisplay.text = $"FPS: {Mathf.Round(1 / Time.deltaTime)}";
         } else
         {
             fpsRefreshCounter--;
@@ -414,7 +421,7 @@ public class GameController : BaseController<GameView>
 
     public void DisplayWave()
     {
-        waveDisplay.text = $"Depth: {Math.Round(data.depth,1)}m";
+        depthDisplay.text = $"Depth: {Math.Round(data.depth,1)}m";
     }
 
     public void ShowMenu(GameObject menu)

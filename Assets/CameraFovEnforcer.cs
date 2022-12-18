@@ -7,12 +7,6 @@ public class CameraFovEnforcer : MonoBehaviour
     [SerializeField] Camera this_camera;
     [SerializeField] float target_fov;
 
-    // Start is called before the first frame update
-    void Start()
-    {
-        
-    }
-
     // Update is called once per frame
     void Update()
     {
