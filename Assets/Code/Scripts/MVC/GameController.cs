@@ -16,7 +16,6 @@ public class GameController : BaseController<GameView>
 
     [Header("Junkyard")]
     [SerializeField] private Data data;
-    [SerializeField] private StatsDisplay statsDisplay;
     public Data NewData => data;
 
     [Header("<For replacement>")]
@@ -81,6 +80,7 @@ public class GameController : BaseController<GameView>
     private void Update()
     {
         DisplayFPS();
+        
 
         var blocks = _dynamic_blocks.GetComponentsInChildren<BasicBlock>(false); //TODO: Very Temp
         MoveBlocks(blocks); // TODO: not optimal
@@ -209,7 +209,7 @@ public class GameController : BaseController<GameView>
         if (!CheckForBlocksBelowY(blocks))
         {
             data.depth += data.depthPerWave;
-            statsDisplay.SetWaveDisplay();
+            view.SetBlocksHpDisplay(data.GetDepthBlocksHealth());
             DisplayWave();
 
             blockSpawner.SpawnBlockRow(out List <BasicBlock> spawnedBlocks);
@@ -355,14 +355,10 @@ public class GameController : BaseController<GameView>
 
     public void TryBuyUpgrade(Upgrade upgrade)
     {
-
         if (!resourcesManager.TryDecreaseMoney(upgrade.cost))
         {
             return;
         }
-
-        //SetBuyingBarTexts(boughtUpgradeName);    //TODO-FT-MVC
-        statsDisplay.SetBallCountDisplay(); //TODO-FT-MVC
 
         upgrade.DoUpgrade();
     }
@@ -378,15 +374,15 @@ public class GameController : BaseController<GameView>
 
             if (name == "Damage")
             {
-                statsDisplay.SetDamageDisplay();
+                //statsDisplay.SetDamageDisplay();
             }
             if (name == "Bullet speed")
             {
-                statsDisplay.SetSpdDisplay();
+                //statsDisplay.SetSpdDisplay();
             }
             if (name.Contains("count"))
             {
-                statsDisplay.SetBallCountDisplay();
+                //statsDisplay.SetBallCountDisplay();
 
                 if (name == "Bullet count") {   //TODO: Change it from string to enum probably 
                     basicBallSpawner.Spawn();
@@ -396,7 +392,7 @@ public class GameController : BaseController<GameView>
                     sniperBallSpawner.Spawn();
                 }
 
-                statsDisplay.SetBallCountDisplay();
+                //statsDisplay.SetBallCountDisplay();
             }
         }
         else if (data.legacyMoney < LegacyGetUpgradeCost(name))

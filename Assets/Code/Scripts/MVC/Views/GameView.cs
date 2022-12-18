@@ -29,6 +29,7 @@ public class GameView : BaseView
     public GameObject debugWindow;
     public TMP_Text fpsDisplay;
     public TMP_Text avg_FpsDisplay;
+    public TMP_Text blocksHpDisplay;
 
     [Header("DEBUG")]
     public List<UIBallBar> ballBars;
@@ -122,5 +123,10 @@ public class GameView : BaseView
     public void SetMoneyDisplay(double value)
     {
         moneyDisplay.text = string.Format("Money: {0:F0}",value);
+    }
+
+    public void SetBlocksHpDisplay(double value)
+    {
+        blocksHpDisplay.text = string.Format("block hp: {0:F2}", value);
     }
 }
