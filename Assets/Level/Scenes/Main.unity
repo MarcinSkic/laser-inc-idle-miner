@@ -389,6 +389,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c2e4f60e78bbe4644af6fcf75b3476f2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  upgradeButton_MaxedUpgrades: {r: 0, g: 0, b: 0, a: 0}
+  moneyDisplay: {fileID: 2025944609}
   tabButtonsContainers:
   - {fileID: 486182656}
   - {fileID: 1191495520}
@@ -406,9 +408,11 @@ MonoBehaviour:
   - {fileID: 1248136541}
   bottomButton_Default: {r: 0.9607843, g: 1, b: 0.39215687, a: 1}
   bottomButton_Activated: {r: 0.99215686, g: 0.7647059, b: 0.16470589, a: 1}
-  upgradeButton_MaxedUpgrades: {r: 0, g: 0, b: 0, a: 0}
   ballBarPrefab: {fileID: 916111741661999725, guid: 0515818992f6b704aa8d333efc629d72, type: 3}
   ballBarsParent: {fileID: 1293810467}
+  debugWindow: {fileID: 1312679215}
+  fpsDisplay: {fileID: 1411531043}
+  avg_FpsDisplay: {fileID: 2108675812}
   ballBars: []
 --- !u!1 &54048868
 GameObject:
@@ -1852,9 +1856,7 @@ MonoBehaviour:
   data: {fileID: 2078200401}
   statsDisplay: {fileID: 893195232}
   depthDisplay: {fileID: 1341246693}
-  moneyDisplay: {fileID: 2025944609}
-  avgFpsDisplay: {fileID: 2108675812}
-  fpsDisplay: {fileID: 1411531043}
+  bombiDisplay: {fileID: 0}
   ShopMenu: {fileID: 1704979494}
   SettingsMenu: {fileID: 344643263}
   _dynamic: {fileID: 240033866}
@@ -1870,6 +1872,7 @@ MonoBehaviour:
   bombBallSpawner: {fileID: 231626581}
   sniperBallSpawner: {fileID: 231626580}
   upgradesModel: {fileID: 1947716357}
+  resourcesManager: {fileID: 567613852}
   movingBorderTexturesParent: {fileID: 74388550}
 --- !u!4 &383171361
 Transform:
@@ -3141,6 +3144,7 @@ GameObject:
   m_Component:
   - component: {fileID: 567613850}
   - component: {fileID: 567613851}
+  - component: {fileID: 567613852}
   m_Layer: 0
   m_Name: '@Managers'
   m_TagString: Untagged
@@ -3180,6 +3184,19 @@ MonoBehaviour:
   basicBallSpawner: {fileID: 231626582}
   bombBallSpawner: {fileID: 231626581}
   sniperBallSpawner: {fileID: 231626580}
+--- !u!114 &567613852
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 567613849}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b325fb5b87700514c8ef66636f88d7be, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  model: {fileID: 1947716358}
 --- !u!1 &599832826
 GameObject:
   m_ObjectHideFlags: 0
@@ -6496,7 +6513,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &1312679216
 RectTransform:
   m_ObjectHideFlags: 0
@@ -6517,7 +6534,7 @@ RectTransform:
   m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 0.4, y: 1}
   m_AnchoredPosition: {x: 0, y: 0}
-  m_SizeDelta: {x: 0, y: 0}
+  m_SizeDelta: {x: -130.88002, y: 160}
   m_Pivot: {x: 0, y: 1}
 --- !u!114 &1312679217
 MonoBehaviour:
@@ -7474,10 +7491,10 @@ RectTransform:
   m_Father: {fileID: 1312679216}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0, y: 0}
-  m_AnchorMax: {x: 0, y: 0}
-  m_AnchoredPosition: {x: 20.000015, y: 0}
-  m_SizeDelta: {x: 0, y: 70}
+  m_AnchorMin: {x: 0, y: 1}
+  m_AnchorMax: {x: 0, y: 1}
+  m_AnchoredPosition: {x: 20.000015, y: -90}
+  m_SizeDelta: {x: 282.33, y: 70}
   m_Pivot: {x: 0, y: 0}
 --- !u!114 &1411531041
 MonoBehaviour:
@@ -10192,6 +10209,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1947716356}
   - component: {fileID: 1947716357}
+  - component: {fileID: 1947716358}
   m_Layer: 0
   m_Name: '@Models'
   m_TagString: Untagged
@@ -10239,6 +10257,20 @@ MonoBehaviour:
   - {fileID: 11400000, guid: b5fdc013a36388b45895d5becc4fddbe, type: 2}
   - {fileID: 11400000, guid: f0e5e0837f17ef043a33c7f6088f04a8, type: 2}
   upgrades: []
+--- !u!114 &1947716358
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1947716355}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1022a0af8d55c234cb66ce793825cb04, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  money: 0
+  earnedMoney: 0
 --- !u!1 &1952372087
 GameObject:
   m_ObjectHideFlags: 0
@@ -11378,10 +11410,10 @@ RectTransform:
   m_Father: {fileID: 1312679216}
   m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0, y: 0}
-  m_AnchorMax: {x: 0, y: 0}
-  m_AnchoredPosition: {x: 20.000015, y: 0}
-  m_SizeDelta: {x: 0, y: 70}
+  m_AnchorMin: {x: 0, y: 1}
+  m_AnchorMax: {x: 0, y: 1}
+  m_AnchoredPosition: {x: 20.000015, y: -160}
+  m_SizeDelta: {x: 405.12, y: 70}
   m_Pivot: {x: 0, y: 0}
 --- !u!114 &2108675810
 MonoBehaviour:

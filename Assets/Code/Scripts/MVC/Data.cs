@@ -21,8 +21,8 @@ public class Data : MonoBehaviour
     [Space(10)]
 
     [Header("PLAYER STATS")]
-    public double money;
-    public double earnedMoney;
+    public double legacyMoney;
+    public double legacyEarnedMoney;
 
     [Space(10)]
 

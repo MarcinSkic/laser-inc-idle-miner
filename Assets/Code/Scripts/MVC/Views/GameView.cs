@@ -10,6 +10,9 @@ public class GameView : BaseView
     [Header("Universal")]
     public Color upgradeButton_MaxedUpgrades;
 
+    [Header("Top Bar")]
+    [SerializeField] private TMP_Text moneyDisplay;
+
     [Header("Tabs Switching")]
     [SerializeField] private List<GameObject> tabButtonsContainers;
     [SerializeField] private List<UIButtonWithStringController> windowButtons;
@@ -114,5 +117,10 @@ public class GameView : BaseView
         ballBar.ballIcon.sprite = ballType.sprite;
 
         ballBars.Add(ballBar);
+    }
+
+    public void SetMoneyDisplay(double value)
+    {
+        moneyDisplay.text = string.Format("Money: {0:F0}",value);
     }
 }
