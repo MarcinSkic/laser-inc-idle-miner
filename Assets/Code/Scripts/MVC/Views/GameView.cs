@@ -7,9 +7,11 @@ using TMPro;
 
 public class GameView : BaseView
 {
-    [Header("Universal")]
+    [Header("UNIVERSAL")]
     public Color upgradeButton_MaxedUpgrades;
 
+    [Space(10)]
+    [Header("IN GAME")]
     [Header("Top Bar")]
     [SerializeField] private TMP_Text moneyDisplay;
 
@@ -21,6 +23,11 @@ public class GameView : BaseView
     public Color bottomButton_Default;
     public Color bottomButton_Activated;
 
+    [Header("Depth Meter")]
+    public UIDepthMeter depthMeter;
+
+    [Space(10)]
+    [Header("TABS/WINDOWS")]
     [Header("Lasers Tab")]
     public UIBallBar ballBarPrefab;
     public Transform ballBarsParent;

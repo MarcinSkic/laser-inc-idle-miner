@@ -50,6 +50,7 @@ public class Data : MonoBehaviour
     [Header("DEBUG")]
     public bool debugSettings;
     public double additionalStartingMoney;
+    public double realDepth = 0;
     
 
     [Header("UNIMPLEMENTED")]

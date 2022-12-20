@@ -172,8 +172,13 @@ public class GameController : BaseController<GameView>
                     bgTextures[i].position -= new Vector3(0, 16.8f, 0);
                 }
             }
+
+            data.realDepth += 5f * Time.deltaTime;
+            view.depthMeter.SetDepth(data.realDepth);
+
             isMoving = true;
-        } else
+        } 
+        else
         {
             isMoving = false;
         }
@@ -208,6 +213,7 @@ public class GameController : BaseController<GameView>
     {
         if (!CheckForBlocksBelowY(blocks))
         {
+
             data.depth += data.depthPerWave;
             view.SetBlocksHpDisplay(data.GetDepthBlocksHealth());
             DisplayWave();

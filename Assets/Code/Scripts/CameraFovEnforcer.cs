@@ -7,6 +7,8 @@ public class CameraFovEnforcer : MonoBehaviour
     [SerializeField] Camera this_camera;
     [SerializeField] float target_fov;
 
+    public static float calculatedFov;
+
     // Update is called once per frame
     void Update()
     {
@@ -15,7 +17,10 @@ public class CameraFovEnforcer : MonoBehaviour
 
     private void pSetFOV(float f)
     {
-        f = 2 * Mathf.Atan(Mathf.Tan(f * Mathf.Deg2Rad * 0.5f) / this_camera.aspect) * Mathf.Rad2Deg;
-        this_camera.fieldOfView = f;
+        calculatedFov = 2 * Mathf.Atan(Mathf.Tan(f * Mathf.Deg2Rad * 0.5f) / this_camera.aspect) * Mathf.Rad2Deg;
+        this_camera.fieldOfView = calculatedFov;
+       
     }
+
+
 }
