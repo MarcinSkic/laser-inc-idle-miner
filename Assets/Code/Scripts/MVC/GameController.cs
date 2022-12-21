@@ -75,6 +75,8 @@ public class GameController : BaseController<GameView>
             data.roundNumber += data.additionalStartingRound;
             data.basicBallCount += data.additionalStartingBalls;
         }
+
+        Application.targetFrameRate = 60;
     }
 
     private void Update()
@@ -94,6 +96,15 @@ public class GameController : BaseController<GameView>
         if (Input.GetKeyDown(KeyCode.D))
         {
             view.debugWindow.SetActive(!view.debugWindow.activeSelf);
+
+            if (view.debugWindow.activeSelf)
+            {
+                Time.timeScale = data.timeScale;
+            }
+            else
+            {
+                Time.timeScale = 1f;
+            }
         }
     }
 
@@ -216,7 +227,6 @@ public class GameController : BaseController<GameView>
 
             data.depth += data.depthPerWave;
             view.SetBlocksHpDisplay(data.GetDepthBlocksHealth());
-            DisplayWave();
 
             blockSpawner.SpawnBlockRow(out List <BasicBlock> spawnedBlocks);
 
@@ -409,11 +419,6 @@ public class GameController : BaseController<GameView>
         {
             //print($"upgrade {name} already at max level!");
         }
-    }
-
-    public void DisplayWave()
-    {
-        depthDisplay.text = $"Depth: {Math.Round(data.depth,1)}m";
     }
 
     public void ShowMenu(GameObject menu)

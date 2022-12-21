@@ -51,6 +51,8 @@ public class Data : MonoBehaviour
     public bool debugSettings;
     public double additionalStartingMoney;
     public double realDepth = 0;
+    [Tooltip("Actived only when opening debug window")]
+    public float timeScale = 1;
     
 
     [Header("UNIMPLEMENTED")]
