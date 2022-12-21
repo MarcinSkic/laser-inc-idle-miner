@@ -16,18 +16,18 @@ public class GameController : BaseController<GameView>
 
     [Header("Junkyard")]
     [SerializeField] private Data data;
-    [SerializeField] private StatsDisplay statsDisplay;
     public Data NewData => data;
 
-    public TMP_Text healthDisplay;
-    public TMP_Text waveDisplay;
-    public TMP_Text moneyDisplay;
-    public TMP_Text avgFpsDisplay;
-    public TMP_Text fpsDisplay;
-    public BasicBlock basicBlock;
-    public Slider healthBar;
+    [Header("<For replacement>")]
+    public TMP_Text depthDisplay;
+    public TMP_Text bombiDisplay;
+    [Header("</For replacement>")]
+
+    [Header("<For removal>")]
     public GameObject ShopMenu;
     public GameObject SettingsMenu;
+    [Header("</For removal>")]
+
     [SerializeField] private Transform _dynamic;
     public Transform Dynamic => _dynamic;
     public Transform _dynamic_balls;
@@ -49,6 +49,7 @@ public class GameController : BaseController<GameView>
     [SerializeField] private SniperBallSpawner sniperBallSpawner;
 
     [SerializeField] private UpgradesModel upgradesModel;
+    [SerializeField] private ResourcesManager resourcesManager;
     [SerializeField] private GameObject movingBorderTexturesParent;
 
     private bool isMoving = true;
@@ -60,6 +61,7 @@ public class GameController : BaseController<GameView>
 
         CreateBallBars();
         InitBallBars();
+        AssignEventsToUI();
         // TEMP
         // | | |
         // v v v
@@ -69,31 +71,53 @@ public class GameController : BaseController<GameView>
 
         if (data.debugSettings)
         {
-            data.money += data.additionalStartingMoney;   //TODO-FT-RESOURCES
-            onMoneyChange.Invoke(data.money);
+            resourcesManager.Money = data.additionalStartingMoney;   //TODO-FT-RESOURCES
             data.roundNumber += data.additionalStartingRound;
             data.basicBallCount += data.additionalStartingBalls;
         }
+
+        Application.targetFrameRate = 60;
     }
 
     private void Update()
     {
         DisplayFPS();
+        
 
         var blocks = _dynamic_blocks.GetComponentsInChildren<BasicBlock>(false); //TODO: Very Temp
         MoveBlocks(blocks); // TODO: not optimal
         CheckIfWaveFinished(blocks); // TODO: not optimal
+
+        DebugInputSwitch();
+    }
+
+    private void DebugInputSwitch()
+    {
+        if (Input.GetKeyDown(KeyCode.D))
+        {
+            view.debugWindow.SetActive(!view.debugWindow.activeSelf);
+
+            if (view.debugWindow.activeSelf)
+            {
+                Time.timeScale = data.timeScale;
+            }
+            else
+            {
+                Time.timeScale = 1f;
+            }
+        }
+    }
+
+    public void AssignEventsToUI()
+    {
+        resourcesManager.onMoneyChange += view.SetMoneyDisplay;
     }
 
     private void CreateBallBars()
     {
         foreach(var ballType in data.ballsData)
         {
-            var ballBar = Instantiate(view.ballBarPrefab, view.ballBarsParent);
-            ballBar.SetUpgradesName(ballType.name);
-            ballBar.ballIcon.sprite = ballType.sprite;
-
-            view.ballBars.Add(ballBar);
+            view.CreateBallBar(ballType);
         }
     }
 
@@ -110,7 +134,7 @@ public class GameController : BaseController<GameView>
                     buttonUpgrade.onClick += upgrade.TryUpgrade;    //Button -> Tries to upgrade an Upgrade
 
                     buttonUpgrade.SetUpgradeCost(upgrade);   //Set initial values
-                    onMoneyChange += buttonUpgrade.ChangeStateBasedOnMoney;
+                    resourcesManager.onMoneyChange += buttonUpgrade.ChangeStateBasedOnMoney;
 
                     upgrade.AddDoUpgrade(buttonUpgrade.SetUpgradeCost);  //Upgrade -> Updates Button values
                     upgrade.onValueUpdate += buttonUpgrade.SetUpgradeValue;  //TODO-FUTURE-BUG: There should be check if the button uses upgrade internal value or universal value, if universal then it should connect to not yet existing system of sending event on value change
@@ -159,8 +183,13 @@ public class GameController : BaseController<GameView>
                     bgTextures[i].position -= new Vector3(0, 16.8f, 0);
                 }
             }
+
+            data.realDepth += 5f * Time.deltaTime;
+            view.depthMeter.SetDepth(data.realDepth);
+
             isMoving = true;
-        } else
+        } 
+        else
         {
             isMoving = false;
         }
@@ -195,9 +224,9 @@ public class GameController : BaseController<GameView>
     {
         if (!CheckForBlocksBelowY(blocks))
         {
+
             data.depth += data.depthPerWave;
-            statsDisplay.SetWaveDisplay();
-            DisplayWave();
+            view.SetBlocksHpDisplay(data.GetDepthBlocksHealth());
 
             blockSpawner.SpawnBlockRow(out List <BasicBlock> spawnedBlocks);
 
@@ -210,7 +239,7 @@ public class GameController : BaseController<GameView>
 
     private void OnBlockDestroyed(double money)
     {
-        AddMoney(money);
+        resourcesManager.IncreaseMoney(money);
         //TODO-FEATURE: Count destroyed blocks for upgrades/rewards
 
     }
@@ -224,8 +253,8 @@ public class GameController : BaseController<GameView>
         {
             fpsRefreshCounter = 100;
             current = Time.frameCount / Time.time;
-            avgFpsDisplay.text = $"avg FPS: {Mathf.Round(current*10)/10f}";
-            fpsDisplay.text = $"FPS: {Mathf.Round(1 / Time.deltaTime)}";
+            view.avg_FpsDisplay.text = $"avg FPS: {Mathf.Round(current*10)/10f}";
+            view.fpsDisplay.text = $"FPS: {Mathf.Round(1 / Time.deltaTime)}";
         } else
         {
             fpsRefreshCounter--;
@@ -239,18 +268,7 @@ public class GameController : BaseController<GameView>
     }
 
     public UnityAction<double> onMoneyChange;
-    public void AddMoney(double amount)
-    {
-        if (amount < 1)
-        {
-            amount = 1;
-        }
-        data.money += amount;
-        data.earnedMoney += amount;
-        moneyDisplay.text = $"Money: {Round(data.money)}";
 
-        onMoneyChange?.Invoke(data.money);
-    }
 
     void LegacyGenerateBuyingBars()
     {
@@ -353,19 +371,10 @@ public class GameController : BaseController<GameView>
 
     public void TryBuyUpgrade(Upgrade upgrade)
     {
-        var upgradeCost = upgrade.cost;
-
-        if(upgradeCost > data.money)    //TODO-FT-RESOURCES: Subtracting money should be as function for control
+        if (!resourcesManager.TryDecreaseMoney(upgrade.cost))
         {
             return;
         }
-
-        data.money -= upgradeCost;  //TODO-FT-RESOURCES: Subtracting money should be as function for control
-        onMoneyChange?.Invoke(data.money);
-
-        //SetBuyingBarTexts(boughtUpgradeName);    //TODO-FT-MVC
-        moneyDisplay.text = $"Money: {Round(data.money)}";  //TODO-FT-MVC
-        statsDisplay.SetBallCountDisplay(); //TODO-FT-MVC
 
         upgrade.DoUpgrade();
     }
@@ -373,23 +382,23 @@ public class GameController : BaseController<GameView>
     public void LegacyBuyUpgrade(string name)
     {
 
-        if (data.money >= LegacyGetUpgradeCost(name) && (data.legacyUpgrades[name].upgradeLevel < data.legacyUpgrades[name].upgradeMaxLevel || data.legacyUpgrades[name].upgradeMaxLevel == 0))
+        if (data.legacyMoney >= LegacyGetUpgradeCost(name) && (data.legacyUpgrades[name].upgradeLevel < data.legacyUpgrades[name].upgradeMaxLevel || data.legacyUpgrades[name].upgradeMaxLevel == 0))
         {
-            data.money -= LegacyGetUpgradeCost(name);
+            data.legacyMoney -= LegacyGetUpgradeCost(name);
             data.legacyUpgrades[name].upgradeLevel += 1;
             LegacySetBuyingBarTexts(name);
-            moneyDisplay.text = $"Money: {Round(data.money)}";
+
             if (name == "Damage")
             {
-                statsDisplay.SetDamageDisplay();
+                //statsDisplay.SetDamageDisplay();
             }
             if (name == "Bullet speed")
             {
-                statsDisplay.SetSpdDisplay();
+                //statsDisplay.SetSpdDisplay();
             }
             if (name.Contains("count"))
             {
-                statsDisplay.SetBallCountDisplay();
+                //statsDisplay.SetBallCountDisplay();
 
                 if (name == "Bullet count") {   //TODO: Change it from string to enum probably 
                     basicBallSpawner.Spawn();
@@ -399,10 +408,10 @@ public class GameController : BaseController<GameView>
                     sniperBallSpawner.Spawn();
                 }
 
-                statsDisplay.SetBallCountDisplay();
+                //statsDisplay.SetBallCountDisplay();
             }
         }
-        else if (data.money < LegacyGetUpgradeCost(name))
+        else if (data.legacyMoney < LegacyGetUpgradeCost(name))
         {
             //print($"not enough money to buy {name}!");
         }
@@ -410,11 +419,6 @@ public class GameController : BaseController<GameView>
         {
             //print($"upgrade {name} already at max level!");
         }
-    }
-
-    public void DisplayWave()
-    {
-        waveDisplay.text = $"Depth: {Math.Round(data.depth,1)}m";
     }
 
     public void ShowMenu(GameObject menu)

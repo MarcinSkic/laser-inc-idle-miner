@@ -3,21 +3,42 @@ using System.Collections.Generic;
 using UnityEngine;
 using System.Linq;
 using UnityEngine.Events;
+using TMPro;
 
 public class GameView : BaseView
 {
+    [Header("UNIVERSAL")]
+    public Color upgradeButton_MaxedUpgrades;
+
+    [Space(10)]
+    [Header("IN GAME")]
+    [Header("Top Bar")]
+    [SerializeField] private TMP_Text moneyDisplay;
+
+    [Header("Tabs Switching")]
     [SerializeField] private List<GameObject> tabButtonsContainers;
     [SerializeField] private List<UIButtonWithStringController> windowButtons;
     [SerializeField] private List<GameObject> windows;
 
     public Color bottomButton_Default;
     public Color bottomButton_Activated;
-    public Color upgradeButton_MaxedUpgrades;
 
+    [Header("Depth Meter")]
+    public UIDepthMeter depthMeter;
+
+    [Space(10)]
+    [Header("TABS/WINDOWS")]
+    [Header("Lasers Tab")]
     public UIBallBar ballBarPrefab;
     public Transform ballBarsParent;
 
-    [Header("Debug")]
+    [Header("Debug Window")]
+    public GameObject debugWindow;
+    public TMP_Text fpsDisplay;
+    public TMP_Text avg_FpsDisplay;
+    public TMP_Text blocksHpDisplay;
+
+    [Header("DEBUG")]
     public List<UIBallBar> ballBars;
 
     private void Start()
@@ -95,5 +116,24 @@ public class GameView : BaseView
         DisableAllTabs();
 
         tabButtonsContainers.Find(tabButtonsContainer => tabButtonsContainer.name == name).SetActive(true);
+    }
+
+    public void CreateBallBar(BaseBallData ballType)
+    {
+        var ballBar = Instantiate(ballBarPrefab, ballBarsParent);
+        ballBar.SetUpgradesName(ballType.name);
+        ballBar.ballIcon.sprite = ballType.sprite;
+
+        ballBars.Add(ballBar);
+    }
+
+    public void SetMoneyDisplay(double value)
+    {
+        moneyDisplay.text = string.Format("Money: {0:F0}",value);
+    }
+
+    public void SetBlocksHpDisplay(double value)
+    {
+        blocksHpDisplay.text = string.Format("block hp: {0:F2}", value);
     }
 }
