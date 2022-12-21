@@ -21,8 +21,8 @@ public class Data : MonoBehaviour
     [Space(10)]
 
     [Header("PLAYER STATS")]
-    public double money;
-    public double earnedMoney;
+    public double legacyMoney;
+    public double legacyEarnedMoney;
 
     [Space(10)]
 
@@ -50,6 +50,9 @@ public class Data : MonoBehaviour
     [Header("DEBUG")]
     public bool debugSettings;
     public double additionalStartingMoney;
+    public double realDepth = 0;
+    [Tooltip("Actived only when opening debug window")]
+    public float timeScale = 1;
     
 
     [Header("UNIMPLEMENTED")]
