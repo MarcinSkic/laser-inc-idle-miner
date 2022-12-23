@@ -14,6 +14,8 @@ public class UpgradesManager : MonoBehaviour
     [SerializeField] private BombBallSpawner bombBallSpawner;
     [SerializeField] private SniperBallSpawner sniperBallSpawner;
 
+    [SerializeField] private Transform blocksParent;
+
     private void Start()
     {
         ProcessUpgrades();
@@ -77,6 +79,7 @@ public class UpgradesManager : MonoBehaviour
                         bombBallSpawner.Spawn(out var ball);
                         model.getUpgrade("UniversalSpeed").onValueUpdate += ball.Upgrade;
                         model.getUpgrade("BombSpeed").onValueUpdate += ball.Upgrade;
+                        ball.SetVariables(blocksParent);
                         upgrade.onValueUpdate.Invoke(bombBallSpawner.active.ToString()); //TODO-FT-CURRENT: Pull from Data?;
                         break;
                     }   
@@ -85,6 +88,7 @@ public class UpgradesManager : MonoBehaviour
                         sniperBallSpawner.Spawn(out var ball);
                         model.getUpgrade("UniversalSpeed").onValueUpdate += ball.Upgrade;
                         model.getUpgrade("SniperSpeed").onValueUpdate += ball.Upgrade;
+                        ball.SetVariables(blocksParent);
                         upgrade.onValueUpdate.Invoke(sniperBallSpawner.active.ToString()); //TODO-FT-CURRENT: Pull from Data?;
                         break;
                     }

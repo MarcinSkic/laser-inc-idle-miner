@@ -13,37 +13,24 @@ using System;
 /// </summary>
 public class GameController : BaseController<GameView>
 {
-
-    [Header("Junkyard")]
+    [Header("Models")]
     [SerializeField] private Data data;
-
-    [SerializeField] private Transform _dynamic;
-    public Transform Dynamic => _dynamic;
-    public Transform _dynamic_balls;
-    public Transform _dynamic_blocks;
-    public Transform ShopContent;
-    public Transform SettingsContent;
-    public UpgradeBuyingBar upgradeBuyingBar;
-    public SettingBar settingBar;
-
-    public Dictionary<string, UpgradeBuyingBar> buyingBars = new Dictionary<string, UpgradeBuyingBar>() { };
-
-    public Vector2 spawnArea;
-
-    [Header("TEMP")]
-    [SerializeField] private BlockSpawner blockSpawner;
-
-    [SerializeField] private BasicBallSpawner basicBallSpawner;
-    [SerializeField] private BombBallSpawner bombBallSpawner;
-    [SerializeField] private SniperBallSpawner sniperBallSpawner;
-
     [SerializeField] private UpgradesModel upgradesModel;
+
+    [Header("Managers")]
+    [SerializeField] private BlockSpawner blockSpawner;
     [SerializeField] private ResourcesManager resourcesManager;
+
+    [Header("Other")]   //Probably if you feel of putting something here, then it should have its own manager. This script should interact only with managers and his UI 
+    [SerializeField] private Transform _dynamic_blocks;   //TODO-FT-ARCHITECTURE
     [SerializeField] private GameObject movingBorderTexturesParent;
 
     private bool isMoving = true;
 
     //KEEP MONOBEHAVIOUR METHODS (Start, Update etc.) ON TOP
+    /// <summary>
+    /// This Start should be considered root Start of game, all inits where order of operations is important should originate from here
+    /// </summary>
     void Start()
     {
         ConnectUpgrades();  //TODO-FT-CURRENT: Move this functionality to upgrade manager?
@@ -51,17 +38,11 @@ public class GameController : BaseController<GameView>
         CreateBallBars();
         InitBallBars();
         AssignEventsToUI();
-        // TEMP
-        // | | |
-        // v v v
-        LegacyGenerateBuyingBars();
-        LegacyGenerateSettingBars();
 
         if (data.debugSettings)
         {
             resourcesManager.Money = data.additionalStartingMoney;   //TODO-FT-RESOURCES
             data.roundNumber += data.additionalStartingRound;
-            data.basicBallCount += data.additionalStartingBalls;
         }
 
         Application.targetFrameRate = 60;
@@ -243,108 +224,10 @@ public class GameController : BaseController<GameView>
             current = Time.frameCount / Time.time;
             view.avg_FpsDisplay.text = $"avg FPS: {Mathf.Round(current*10)/10f}";
             view.fpsDisplay.text = $"FPS: {Mathf.Round(1 / Time.deltaTime)}";
-        } else
-        {
-            fpsRefreshCounter--;
-        }
-    }
-
-    void LegacyGenerateBuyingBars()
-    {
-        foreach (KeyValuePair<string, Data.LegacyUpgrade> entry in data.legacyUpgrades)
-        {
-            UpgradeBuyingBar buying = Instantiate(upgradeBuyingBar, ShopContent);
-            buying.upgradeName = entry.Key;
-            buyingBars.Add(entry.Key, buying);
-            LegacySetBuyingBarTexts(entry.Key);
-            buying.GetComponentInChildren<ButtonBuyUpgrade>().gameController = this;
-            
-        }
-        foreach (KeyValuePair<string, UpgradeBuyingBar> entry in buyingBars)
-        {
-            //print(entry.Key);
-        }
-    }
-
-    void LegacyGenerateSettingBars()
-    {
-        foreach (KeyValuePair<string, bool> entry in data.settings)
-        {
-            SettingBar setting = Instantiate(settingBar, SettingsContent);
-            setting.gameController = this;
-            setting.settingName = entry.Key;
-            if (PlayerPrefs.HasKey(entry.Key))
-            {
-                if (!IntToBool(PlayerPrefs.GetInt(entry.Key)))
-                {
-                    setting.ignore = 1;
-                    setting.GetComponentInChildren<Toggle>().isOn = false;
-                }
-
-                // so this thing actually uses 60 fps if it's supposed to
-                if (setting.settingName == "Display 60 FPS" && IntToBool(PlayerPrefs.GetInt(entry.Key))){
-                    Application.targetFrameRate = 60;
-                }
-            }
-        }
-    }
-
-    private double LegacyGetUpgradeCost(string name)
-    {
-        return data.legacyUpgrades[name].upgradeBaseCost * System.Math.Pow(data.legacyUpgrades[name].upgradeMultCost, data.legacyUpgrades[name].upgradeLevel);
-    }
-
-    public void LegacySetBuyingBarTexts(string name)
-    {
-        buyingBars[name].upgradeNameText.text = name;
-        if (data.legacyUpgrades[name].upgradeMaxLevel == 0)
-        {
-            buyingBars[name].upgradeLevelsText.text = $"{data.legacyUpgrades[name].upgradeLevel}";
-        }
+        } 
         else
         {
-            buyingBars[name].upgradeLevelsText.text = $"{data.legacyUpgrades[name].upgradeLevel}/{data.legacyUpgrades[name].upgradeMaxLevel}";
-        }
-        if (data.legacyUpgrades[name].upgradeMaxLevel > 0 && data.legacyUpgrades[name].upgradeLevel == data.legacyUpgrades[name].upgradeMaxLevel) //max level reached
-        {
-            if (!data.settings["Show maxed upgrades"])
-            {
-                buyingBars[name].gameObject.SetActive(false);
-            }
-            buyingBars[name].upgradeButton.SetActive(false);
-        }
-        else //can still be bought
-        {
-            buyingBars[name].upgradeButtonText.text = $"+1 level for {System.Math.Round(LegacyGetUpgradeCost(name), 2)}";
-        }
-    }
-
-    private string boughtUpgradeName;   //TODO-FT-MVC
-    public void LegacyBuyUpgradeByName(string name)
-    {
-        boughtUpgradeName = name;
-        switch (name)
-        {
-            case "Damage":
-                upgradesModel.getUpgrade("UniversalDamage").TryUpgrade();
-                break;
-            case "Bullet speed":
-                upgradesModel.getUpgrade("UniversalSpeed").TryUpgrade();
-                break;
-            case var x when x.Contains("count"):
-                switch (x)
-                {
-                    case "Bullet count":
-                        upgradesModel.getUpgrade("BasicCount").TryUpgrade();
-                        break;
-                    case "Bomb count":
-                        upgradesModel.getUpgrade("BombCount").TryUpgrade();
-                        break;
-                    case "Sniper count":
-                        upgradesModel.getUpgrade("SniperCount").TryUpgrade();
-                        break;
-                }
-                break;
+            fpsRefreshCounter--;
         }
     }
 
@@ -356,102 +239,5 @@ public class GameController : BaseController<GameView>
         }
 
         upgrade.DoUpgrade();
-    }
-
-    public void LegacyBuyUpgrade(string name)
-    {
-
-        if (data.legacyMoney >= LegacyGetUpgradeCost(name) && (data.legacyUpgrades[name].upgradeLevel < data.legacyUpgrades[name].upgradeMaxLevel || data.legacyUpgrades[name].upgradeMaxLevel == 0))
-        {
-            data.legacyMoney -= LegacyGetUpgradeCost(name);
-            data.legacyUpgrades[name].upgradeLevel += 1;
-            LegacySetBuyingBarTexts(name);
-
-            if (name == "Damage")
-            {
-                //statsDisplay.SetDamageDisplay();
-            }
-            if (name == "Bullet speed")
-            {
-                //statsDisplay.SetSpdDisplay();
-            }
-            if (name.Contains("count"))
-            {
-                //statsDisplay.SetBallCountDisplay();
-
-                if (name == "Bullet count") {   //TODO: Change it from string to enum probably 
-                    basicBallSpawner.Spawn();
-                } else if (name == "Bomb count") {
-                    bombBallSpawner.Spawn();
-                } else if (name == "Sniper count") {
-                    sniperBallSpawner.Spawn();
-                }
-
-                //statsDisplay.SetBallCountDisplay();
-            }
-        }
-        else if (data.legacyMoney < LegacyGetUpgradeCost(name))
-        {
-            //print($"not enough money to buy {name}!");
-        }
-        else
-        {
-            //print($"upgrade {name} already at max level!");
-        }
-    }
-
-    public int BoolToInt(bool value)
-    {
-        if (value)
-        {
-            return 1;
-        }
-        else
-        {
-            return 0;
-        }
-    }
-
-    public bool IntToBool(int value)
-    {
-        if (value == 1)
-        {
-            return true;
-        }
-        else
-        {
-            return false;
-        }
-    }
-
-    public void ChangeSetting(bool value, string settingName)
-    {
-        data.settings[settingName] = value;
-        PlayerPrefs.SetInt(settingName, BoolToInt(value));
-        PlayerPrefs.Save();
-        if (settingName == "Show maxed upgrades")
-        {
-            foreach (KeyValuePair<string, UpgradeBuyingBar> entry in buyingBars)
-            {
-                if (data.legacyUpgrades[entry.Key].upgradeMaxLevel > 0 && data.legacyUpgrades[entry.Key].upgradeLevel == data.legacyUpgrades[entry.Key].upgradeMaxLevel)
-                {
-                    buyingBars[entry.Key].gameObject.SetActive(value);
-                }
-            }
-        }
-        if (settingName == "Show floating damage text")
-        {
-            data.displayFloatingText = value;
-        }
-        if (settingName == "Display 60 FPS")
-        {
-            if (value)
-            {
-                Application.targetFrameRate = 60;
-            } else
-            {
-                Application.targetFrameRate = 30;
-            }
-        }
     }
 }

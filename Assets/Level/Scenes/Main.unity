@@ -985,7 +985,6 @@ MonoBehaviour:
   inactive: 0
   spawnArea: {x: 7.2, y: 0.5}
   data: {fileID: 2078200401}
-  gameController: {fileID: 383171360}
 --- !u!114 &231626581
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1004,7 +1003,6 @@ MonoBehaviour:
   inactive: 0
   spawnArea: {x: 7.2, y: 0.5}
   data: {fileID: 2078200401}
-  gameController: {fileID: 383171360}
 --- !u!114 &231626582
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1023,7 +1021,6 @@ MonoBehaviour:
   inactive: 0
   spawnArea: {x: 7.2, y: 0.5}
   data: {fileID: 2078200401}
-  gameController: {fileID: 383171360}
 --- !u!1 &231668855
 GameObject:
   m_ObjectHideFlags: 0
@@ -1457,20 +1454,10 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   view: {fileID: 48386113}
   data: {fileID: 2078200401}
-  _dynamic: {fileID: 240033866}
-  _dynamic_balls: {fileID: 54048869}
-  _dynamic_blocks: {fileID: 1235393438}
-  ShopContent: {fileID: 0}
-  SettingsContent: {fileID: 0}
-  upgradeBuyingBar: {fileID: 5887169020256829844, guid: 11d795ac25a9d484281b97f92b6e08c8, type: 3}
-  settingBar: {fileID: 6728426492982927571, guid: f28fa603a8da54b4783702d8a52f4ebd, type: 3}
-  spawnArea: {x: 7.5, y: 10.5}
-  blockSpawner: {fileID: 231626579}
-  basicBallSpawner: {fileID: 231626582}
-  bombBallSpawner: {fileID: 231626581}
-  sniperBallSpawner: {fileID: 231626580}
   upgradesModel: {fileID: 1947716357}
+  blockSpawner: {fileID: 231626579}
   resourcesManager: {fileID: 567613852}
+  _dynamic_blocks: {fileID: 1235393438}
   movingBorderTexturesParent: {fileID: 74388550}
 --- !u!4 &383171361
 Transform:
@@ -2738,6 +2725,7 @@ MonoBehaviour:
   basicBallSpawner: {fileID: 231626582}
   bombBallSpawner: {fileID: 231626581}
   sniperBallSpawner: {fileID: 231626580}
+  blocksParent: {fileID: 1235393438}
 --- !u!114 &567613852
 MonoBehaviour:
   m_ObjectHideFlags: 0
