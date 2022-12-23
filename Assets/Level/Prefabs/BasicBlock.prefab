@@ -13,7 +13,7 @@ GameObject:
   - component: {fileID: 1230601375060110141}
   - component: {fileID: 4917961403807289779}
   - component: {fileID: 2128506963174872199}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: BasicBlock
   m_TagString: block
   m_Icon: {fileID: 0}
@@ -111,6 +111,4 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   boxCollider: {fileID: 4917961403807289779}
-  rewardMultiplier: 1
-  hpMultiplier: 1
   data: {fileID: 0}
