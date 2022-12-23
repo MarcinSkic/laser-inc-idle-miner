@@ -15,7 +15,6 @@ public class BasicBlock : MonoBehaviour, IPoolable<BasicBlock>
     protected double hp;
     protected double maxHp;
     protected double reward;
-    public Data data;
 
     void OnMouseOver()
     {

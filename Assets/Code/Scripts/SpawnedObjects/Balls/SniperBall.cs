@@ -7,11 +7,18 @@ public class SniperBall : BaseBall<SniperBallData>, IPoolable<SniperBall>, IUpgr
 {
     public new ObjectPool<SniperBall> Pool { get; set; }
 
+    private Transform blocksParent;
+
+    public void SetVariables(Transform blocksParent)
+    {
+        this.blocksParent = blocksParent;
+    }
+
     protected override void OnCollisionEnter(Collision collision)
     {
         base.OnCollisionEnter(collision);
 
-        var blocks = gameController._dynamic_blocks.GetComponentsInChildren<BasicBlock>(false);
+        var blocks = blocksParent.GetComponentsInChildren<BasicBlock>(false);
         if (collision.gameObject.tag == "border" && blocks.Length > 0)
         {
             var target = FindTarget();
@@ -22,7 +29,7 @@ public class SniperBall : BaseBall<SniperBallData>, IPoolable<SniperBall>, IUpgr
 
     private BasicBlock FindTarget()
     {
-        var blocks = gameController._dynamic_blocks.GetComponentsInChildren<BasicBlock>(false);
+        var blocks = blocksParent.GetComponentsInChildren<BasicBlock>(false);
         
         var target = blocks[0];
 

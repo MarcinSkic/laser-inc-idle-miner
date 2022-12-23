@@ -11,9 +11,6 @@ public class BaseBall<T> : MonoBehaviour, IPoolable<BaseBall<T>>, IUpgradeable<T
     public T Data { get; set; }
     public ObjectPool<BaseBall<T>> Pool { get ; set; }
 
-    [Header("TEMP")]
-    public GameController gameController;
-
     private float laserRotationDirection;
 
     public virtual void InitBall()
@@ -31,6 +28,11 @@ public class BaseBall<T> : MonoBehaviour, IPoolable<BaseBall<T>>, IUpgradeable<T
     public virtual void Upgrade(string value)
     {
         SetVelocity();
+    }
+
+    public virtual void SetVariables()
+    {
+
     }
 
     public virtual void SetDataReference(T Data)
