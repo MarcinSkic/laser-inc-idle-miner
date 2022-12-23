@@ -291,6 +291,10 @@ PrefabInstance:
       value: Circle
       objectReference: {fileID: 0}
     - target: {fileID: 5177457686998633214, guid: c35cd99ce9bba3d4eb5a54a4ef2cf230, type: 3}
+      propertyPath: m_Layer
+      value: 6
+      objectReference: {fileID: 0}
+    - target: {fileID: 5177457686998633214, guid: c35cd99ce9bba3d4eb5a54a4ef2cf230, type: 3}
       propertyPath: m_IsActive
       value: 1
       objectReference: {fileID: 0}
