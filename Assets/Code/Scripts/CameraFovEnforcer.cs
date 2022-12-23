@@ -6,7 +6,6 @@ public class CameraFovEnforcer : MonoBehaviour
 {
     [SerializeField] Camera this_camera;
     [SerializeField] float target_fov;
-    [SerializeField] GameObject cameraParent;
     public static float calculatedFov;
 
     [Header("a")]
@@ -29,7 +28,7 @@ public class CameraFovEnforcer : MonoBehaviour
 
     private void SetCameraOffset()
     {
-        float x = a*(0.5f / this_camera.aspect) * 16f - b;
-        this_camera.transform.localPosition = new Vector3(0, -x, 0);
+        float y = a*(0.5f / this_camera.aspect) * 16f - b;
+        this_camera.transform.localPosition = new Vector3(this_camera.transform.localPosition.x, -y, this_camera.transform.localPosition.z);
     }
 }

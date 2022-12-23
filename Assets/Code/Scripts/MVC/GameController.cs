@@ -16,17 +16,6 @@ public class GameController : BaseController<GameView>
 
     [Header("Junkyard")]
     [SerializeField] private Data data;
-    public Data NewData => data;
-
-    [Header("<For replacement>")]
-    public TMP_Text depthDisplay;
-    public TMP_Text bombiDisplay;
-    [Header("</For replacement>")]
-
-    [Header("<For removal>")]
-    public GameObject ShopMenu;
-    public GameObject SettingsMenu;
-    [Header("</For removal>")]
 
     [SerializeField] private Transform _dynamic;
     public Transform Dynamic => _dynamic;
@@ -65,7 +54,6 @@ public class GameController : BaseController<GameView>
         // TEMP
         // | | |
         // v v v
-        HideMenus();
         LegacyGenerateBuyingBars();
         LegacyGenerateSettingBars();
 
@@ -261,15 +249,6 @@ public class GameController : BaseController<GameView>
         }
     }
 
-    void HideMenus()
-    {
-        ShopMenu.SetActive(false);
-        SettingsMenu.SetActive(false);
-    }
-
-    public UnityAction<double> onMoneyChange;
-
-
     void LegacyGenerateBuyingBars()
     {
         foreach (KeyValuePair<string, Data.LegacyUpgrade> entry in data.legacyUpgrades)
@@ -418,20 +397,6 @@ public class GameController : BaseController<GameView>
         else
         {
             //print($"upgrade {name} already at max level!");
-        }
-    }
-
-    public void ShowMenu(GameObject menu)
-    {
-        bool shouldBeShown = true;
-        if (menu.activeInHierarchy)
-        {
-            shouldBeShown = false;
-        }
-        HideMenus();
-        if (shouldBeShown)
-        {
-            menu.SetActive(true);
         }
     }
 
