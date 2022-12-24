@@ -1,22 +1,20 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using TMPro;
 using System;
 using System.IO;
 using System.Runtime.Serialization.Formatters.Binary;
+using UnityEngine.Events;
 
 public class OfflineManager : MonoBehaviour
 {
-    public GameObject OfflinePopup;
-    public TextMeshProUGUI offlineText;
+    [SerializeField] private string fileName;
+    [SerializeField] private double minimumOfflineTimeInSeconds;
+    
 
     private DateTime lastOfflineCountCheck = DateTime.MinValue;
     private DateTime lastActivitySaveTime = DateTime.MinValue;
-    public DateTime oldTime;
-
-    [SerializeField] string fileName;
-    [SerializeField] double minimumOfflineTime;
+    private DateTime oldTime;
 
     // TODO ZABEZPIECZENIA
 
@@ -33,6 +31,7 @@ public class OfflineManager : MonoBehaviour
         }
     }
 
+    public UnityAction<double> onReturnFromOffline;
     public void CountOfflineTime()
     {
         string destination = Application.persistentDataPath + "/" + fileName;
@@ -45,20 +44,23 @@ public class OfflineManager : MonoBehaviour
             return;
         }
 
-        BinaryFormatter bf = new BinaryFormatter();
+        BinaryFormatter bf = new();
         oldTime = (DateTime) bf.Deserialize(file);
         file.Close();
         double offlineSeconds = (DateTime.Now - oldTime).TotalSeconds;
         //Debug.Log(offlineSeconds);
         lastOfflineCountCheck = DateTime.Now;
 
-        if (offlineSeconds > minimumOfflineTime)
+        if (offlineSeconds > minimumOfflineTimeInSeconds)
         {
             double offlineSecondsRounded = Math.Round(offlineSeconds, 1);
-            // TODO ACTUALLY COUNT AND ADD MONEY
-            double moneyMade = Math.Round(3 * offlineSeconds, 1);
+
+            onReturnFromOffline.Invoke(offlineSecondsRounded);
+            //TODO-FILIP Money and popup will not be here, event will handle forwarding the info about that
+
+            /*double moneyMade = Math.Round(3 * offlineSeconds, 1);
             offlineText.text = $"You were offline for <color=#0bf>{offlineSecondsRounded}</color>! You made <color=#da0>{moneyMade}</color> when away!";
-            OfflinePopup.SetActive(true);
+            OfflinePopup.SetActive(true);*/
         }
     }
 
@@ -70,7 +72,7 @@ public class OfflineManager : MonoBehaviour
         if (File.Exists(destination)) file = File.OpenWrite(destination);
         else file = File.Create(destination);
 
-        BinaryFormatter bf = new BinaryFormatter();
+        BinaryFormatter bf = new();
         bf.Serialize(file, DateTime.Now);
         file.Close();
         //Debug.LogWarning("activity DateTime saved!");
