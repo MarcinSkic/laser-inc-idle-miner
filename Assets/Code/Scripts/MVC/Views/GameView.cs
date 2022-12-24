@@ -78,7 +78,7 @@ public class GameView : BaseView
     {
         foreach (var window in windows)
         {
-            var foundTab = window.transform.Find(name).gameObject;
+            var foundTab = window.transform.Find(name)?.gameObject;
 
             if (foundTab != null)
             {
@@ -117,13 +117,21 @@ public class GameView : BaseView
 
     private void SwitchWindowButtons(UIButtonController button,string name)
     {
-        foreach(var tabButtonsContainer in tabButtonsContainers)
+        foreach(var tabButtonsContainerInForeach in tabButtonsContainers)
         {
-            tabButtonsContainer.SetActive(false);
+            tabButtonsContainerInForeach.SetActive(false);
         }
         DisableAllTabs();
 
-        tabButtonsContainers.Find(tabButtonsContainer => tabButtonsContainer.name == name).SetActive(true);
+        var tabButtonsContainer = tabButtonsContainers.Find(tabButtonsContainer => tabButtonsContainer.name == name);
+        tabButtonsContainer.SetActive(true);
+
+        //If in window there is only one tab, it should be automatically opened
+        if (tabButtonsContainer.transform.childCount == 1)   
+        {
+            var tabButton = tabButtonsContainer.GetComponentInChildren<UIButtonWithStringController>();
+            SwitchTab(tabButton, tabButton.name);
+        }
     }
 
     public void CreateBallBar(BaseBallData ballType)
