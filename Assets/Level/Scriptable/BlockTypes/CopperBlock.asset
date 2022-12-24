@@ -1,0 +1,22 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: cb6241cc6da16104f8ace39a9092abab, type: 3}
+  m_Name: CopperBlock
+  m_EditorClassIdentifier: 
+  blockType:
+    name: copper
+    material: {fileID: 2100000, guid: 43a17562d6f770941b40b6965aaab7a7, type: 2}
+    hpMultiplier: 2
+    rewardMultiplier: 3
+    minDepth: 1
+    fullDepth: 5
+    maxChance: 0.2

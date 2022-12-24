@@ -110,13 +110,13 @@ TrailRenderer:
   m_Time: 0.4
   m_Parameters:
     serializedVersion: 3
-    widthMultiplier: 0.15
+    widthMultiplier: 1
     widthCurve:
       serializedVersion: 2
       m_Curve:
       - serializedVersion: 3
         time: 0
-        value: 0.67935103
+        value: 0.6172592
         inSlope: 0.0068623894
         outSlope: 0.0068623894
         tangentMode: 0
@@ -124,22 +124,31 @@ TrailRenderer:
         inWeight: 0.33333334
         outWeight: 0.99403054
       - serializedVersion: 3
-        time: 0.76222503
-        value: 0.63586724
-        inSlope: -0.0943124
-        outSlope: -0.0943124
+        time: 0.30894744
+        value: 0.24698174
+        inSlope: -0.51909643
+        outSlope: -0.51909643
         tangentMode: 0
         weightedMode: 0
         inWeight: 0
-        outWeight: 0.7966524
+        outWeight: 0.10442824
+      - serializedVersion: 3
+        time: 0.5851363
+        value: 0.18026634
+        inSlope: -0.118556775
+        outSlope: -0.118556775
+        tangentMode: 0
+        weightedMode: 0
+        inWeight: 0.33333334
+        outWeight: 0.36183372
       - serializedVersion: 3
         time: 0.82598037
         value: 0
-        inSlope: -2.9347832
-        outSlope: -2.9347832
+        inSlope: -1.6895604
+        outSlope: -1.6895604
         tangentMode: 0
         weightedMode: 0
-        inWeight: 0.42495987
+        inWeight: 0.22486761
         outWeight: 0
       m_PreInfinity: 2
       m_PostInfinity: 2
@@ -257,9 +266,21 @@ PrefabInstance:
       propertyPath: m_Name
       value: Arm
       objectReference: {fileID: 0}
+    - target: {fileID: 342123548197328252, guid: c35cd99ce9bba3d4eb5a54a4ef2cf230, type: 3}
+      propertyPath: m_Intensity
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 353127531237132267, guid: c35cd99ce9bba3d4eb5a54a4ef2cf230, type: 3}
       propertyPath: m_Name
       value: RotatingArms
+      objectReference: {fileID: 0}
+    - target: {fileID: 353127531237132267, guid: c35cd99ce9bba3d4eb5a54a4ef2cf230, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1220447692677183321, guid: c35cd99ce9bba3d4eb5a54a4ef2cf230, type: 3}
+      propertyPath: m_IsActive
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 1384007506414443237, guid: c35cd99ce9bba3d4eb5a54a4ef2cf230, type: 3}
       propertyPath: m_Name
@@ -269,6 +290,18 @@ PrefabInstance:
       propertyPath: m_Name
       value: Circle
       objectReference: {fileID: 0}
+    - target: {fileID: 5177457686998633214, guid: c35cd99ce9bba3d4eb5a54a4ef2cf230, type: 3}
+      propertyPath: m_Layer
+      value: 6
+      objectReference: {fileID: 0}
+    - target: {fileID: 5177457686998633214, guid: c35cd99ce9bba3d4eb5a54a4ef2cf230, type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 7106949148862563902, guid: c35cd99ce9bba3d4eb5a54a4ef2cf230, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 7121848933269851417, guid: c35cd99ce9bba3d4eb5a54a4ef2cf230, type: 3}
       propertyPath: m_Name
       value: LaserGraphics
@@ -276,6 +309,10 @@ PrefabInstance:
     - target: {fileID: 7121848933269851417, guid: c35cd99ce9bba3d4eb5a54a4ef2cf230, type: 3}
       propertyPath: m_Layer
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 9219797088604648300, guid: c35cd99ce9bba3d4eb5a54a4ef2cf230, type: 3}
+      propertyPath: m_Intensity
+      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: c35cd99ce9bba3d4eb5a54a4ef2cf230, type: 3}

@@ -13,7 +13,7 @@ GameObject:
   - component: {fileID: 1230601375060110141}
   - component: {fileID: 4917961403807289779}
   - component: {fileID: 2128506963174872199}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: BasicBlock
   m_TagString: block
   m_Icon: {fileID: 0}
@@ -110,8 +110,5 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8ba623de469ed0141926edca23e5f1f6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  hp: 1
-  maxHp: 0
-  gameController: {fileID: 0}
-  data: {fileID: 0}
   boxCollider: {fileID: 4917961403807289779}
+  data: {fileID: 0}

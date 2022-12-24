@@ -12,7 +12,6 @@ public class BallSpawner<Ball,Data> : BaseSpawner<Ball> where Ball : BaseBall<Da
 
     [Header("TEMP")]
     [SerializeField] protected global::Data data;
-    [SerializeField] protected GameController gameController;
 
     public override void Spawn(out Ball spawnedBall)
     {
@@ -35,7 +34,6 @@ public class BallSpawner<Ball,Data> : BaseSpawner<Ball> where Ball : BaseBall<Da
     protected override Ball Create()
     {
         Ball ball = base.Create();
-        ball.gameController = gameController;   //TODO: Remove when done architecture
         return ball;
     }
 }

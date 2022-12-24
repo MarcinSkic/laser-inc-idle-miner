@@ -14,6 +14,7 @@ public class BasicBlock : MonoBehaviour, IPoolable<BasicBlock>
 
     protected double hp;
     protected double maxHp;
+    protected double reward;
 
     void OnMouseOver()
     {
@@ -22,10 +23,11 @@ public class BasicBlock : MonoBehaviour, IPoolable<BasicBlock>
         }
     }
 
-    public void InitBlock(double maxHp)
+    public void InitBlock(double baseHp, double hpMultiplier, double rewardMultiplier)
     {
-        this.maxHp = maxHp;
+        maxHp = baseHp*hpMultiplier;
         hp = maxHp;
+        reward = maxHp * rewardMultiplier;
     }
 
     public void AssignEvents(UnityAction<double> onBlockDestroyed)
@@ -56,8 +58,7 @@ public class BasicBlock : MonoBehaviour, IPoolable<BasicBlock>
     private UnityAction<double> onBlockDestroyed;  //TODO-FUTURE: Maybe change it to transfer data packet if it will be used for upgrades
     private void RemoveBlock()
     {
-        onBlockDestroyed?.Invoke(maxHp);
-
+        onBlockDestroyed?.Invoke(reward);
         Pool.Release(this);
     }
 }
