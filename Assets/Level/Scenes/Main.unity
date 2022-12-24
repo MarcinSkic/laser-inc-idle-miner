@@ -1710,6 +1710,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 152daf9a98683d041b614596423fd706, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  OfflinePopup: {fileID: 796445156}
+  offlineText: {fileID: 454678055}
+  fileName: idledata
+  minimumOfflineTime: 3
 --- !u!1 &463867909
 GameObject:
   m_ObjectHideFlags: 0
@@ -2535,7 +2539,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &796445157
 RectTransform:
   m_ObjectHideFlags: 0
@@ -3068,7 +3072,7 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 1570952665}
   m_HandleRect: {fileID: 1570952664}
   m_Direction: 2
-  m_Value: 0
+  m_Value: 1
   m_Size: 1
   m_NumberOfSteps: 0
   m_OnValueChanged:
@@ -4266,7 +4270,7 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 1680778475}
   m_HandleRect: {fileID: 1680778474}
   m_Direction: 2
-  m_Value: 0
+  m_Value: 1
   m_Size: 1
   m_NumberOfSteps: 0
   m_OnValueChanged:
