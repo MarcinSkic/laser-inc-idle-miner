@@ -56,11 +56,6 @@ public class OfflineManager : MonoBehaviour
             double offlineSecondsRounded = Math.Round(offlineSeconds, 1);
 
             onReturnFromOffline.Invoke(offlineSecondsRounded);
-            //TODO-FILIP Money and popup will not be here, event will handle forwarding the info about that
-
-            /*double moneyMade = Math.Round(3 * offlineSeconds, 1);
-            offlineText.text = $"You were offline for <color=#0bf>{offlineSecondsRounded}</color>! You made <color=#da0>{moneyMade}</color> when away!";
-            OfflinePopup.SetActive(true);*/
         }
     }
 
