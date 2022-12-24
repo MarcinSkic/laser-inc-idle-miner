@@ -16,10 +16,12 @@ public class GameController : BaseController<GameView>
     [Header("Models")]
     [SerializeField] private Data data;
     [SerializeField] private UpgradesModel upgradesModel;
+    [SerializeField] private ResourcesModel resourcesModel;
 
     [Header("Managers")]
     [SerializeField] private BlockSpawner blockSpawner;
     [SerializeField] private ResourcesManager resourcesManager;
+    [SerializeField] private OfflineManager offlineManager;
 
     [Header("Other")]   //Probably if you feel of putting something here, then it should have its own manager. This script should interact only with managers and his UI 
     [SerializeField] private Transform _dynamic_blocks;   //TODO-FT-ARCHITECTURE
@@ -33,18 +35,24 @@ public class GameController : BaseController<GameView>
     /// </summary>
     void Start()
     {
-        ConnectUpgrades();  //TODO-FT-CURRENT: Move this functionality to upgrade manager?
-
         CreateBallBars();
-        InitBallBars();
-        AssignEventsToUI();
 
+        ConnectToUpgradesEvents();  //TODO-FT-CURRENT: Move this functionality to upgrade manager?
+        ConnectToResourceManagerEvents();
+        ConnectToOfflineManagerEvents();
+        ConnectToViewButtons();
+
+        view.InitBottomButtonsEvent();
+        ConnectBallBarsWithEvents();
+
+        //------TEMP------
+        //  |   |   |   |
+        //  v   v   v   v
         if (data.debugSettings)
         {
             resourcesManager.Money = data.additionalStartingMoney;   //TODO-FT-RESOURCES
             data.roundNumber += data.additionalStartingRound;
         }
-
         Application.targetFrameRate = 60;
     }
 
@@ -77,9 +85,38 @@ public class GameController : BaseController<GameView>
         }
     }
 
-    public void AssignEventsToUI()
+    public void ConnectToResourceManagerEvents()
     {
         resourcesManager.onMoneyChange += view.SetMoneyDisplay;
+    }
+
+    private void ConnectToOfflineManagerEvents()
+    {
+        offlineManager.onReturnFromOffline += OnReturnFromOffline;
+    }
+
+    private void ConnectToViewButtons()
+    {
+        view.InitButtons();
+
+        view.offlineConfirmButton.onClick += delegate {
+            resourcesManager.IncreaseMoney(resourcesModel.offlineMoney);
+            view.offlineGetBonusButton.Activate();
+            view.offlinePopup.SetActive(false); 
+        };
+
+        view.offlineGetBonusButton.onClick += delegate {
+            //TODO-FEATURE: Play AD, and do bonus if successful
+            view.offlineGetBonusButton.Deactivate();
+            resourcesModel.offlineMoney *= 2;
+            view.SetOfflineMoney(resourcesModel.offlineMoney); 
+        };
+    }
+
+    private void OnReturnFromOffline(double seconds)
+    {
+        resourcesModel.offlineMoney = 420*seconds;    //TODO-FEATURE: CalculateOfflineMoney()
+        view.ShowOfflineTimePopup(seconds, resourcesModel.offlineMoney);
     }
 
     private void CreateBallBars()
@@ -90,7 +127,7 @@ public class GameController : BaseController<GameView>
         }
     }
 
-    private void InitBallBars()
+    private void ConnectBallBarsWithEvents()
     {
         foreach(var ballBar in view.ballBars)
         {
@@ -117,7 +154,7 @@ public class GameController : BaseController<GameView>
         }
     }
 
-    private void ConnectUpgrades()
+    private void ConnectToUpgradesEvents()
     {
         foreach(var upgrade in upgradesModel.upgrades)
         {

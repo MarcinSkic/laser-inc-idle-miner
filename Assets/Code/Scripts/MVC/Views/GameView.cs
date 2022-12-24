@@ -26,6 +26,13 @@ public class GameView : BaseView
     [Header("Depth Meter")]
     public UIDepthMeter depthMeter;
 
+    [Header("Offline popup")]
+    public GameObject offlinePopup;
+    public TMP_Text offlineText;
+    public TMP_Text offlineMoney;
+    public UIButtonController offlineConfirmButton;
+    public UIButtonController offlineGetBonusButton;
+
     [Space(10)]
     [Header("TABS/WINDOWS")]
     [Header("Lasers Tab")]
@@ -40,11 +47,6 @@ public class GameView : BaseView
 
     [Header("DEBUG")]
     public List<UIBallBar> ballBars;
-
-    private void Start()
-    {
-        InitBottomButtonsEvent(); //TODO-FT-CURRENT: Should be in GameController
-    }
 
     UnityAction<Color> onTabClosing;
     public void InitBottomButtonsEvent()
@@ -64,6 +66,12 @@ public class GameView : BaseView
             windowButton.Init();
             windowButton.onClick += SwitchWindowButtons;
         }
+    }
+
+    public void InitButtons()
+    {
+        offlineConfirmButton.Init();
+        offlineGetBonusButton.Init();
     }
 
     private void SwitchTab(UIButtonController button,string name)
@@ -125,6 +133,18 @@ public class GameView : BaseView
         ballBar.ballIcon.sprite = ballType.sprite;
 
         ballBars.Add(ballBar);
+    }
+
+    public void ShowOfflineTimePopup(double seconds,double earnedMoney)
+    {
+        offlinePopup.SetActive(true);
+        offlineText.text = $"You were offline for <color=#0bf>{seconds}</color>!";
+        SetOfflineMoney(earnedMoney);
+    }
+
+    public void SetOfflineMoney(double earnedMoney)
+    {
+        offlineMoney.text = string.Format("You made <color=#da0>{0:F0}</color>$ when away!", earnedMoney);
     }
 
     public void SetMoneyDisplay(double value)
