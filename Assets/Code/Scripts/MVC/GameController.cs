@@ -40,20 +40,14 @@ public class GameController : BaseController<GameView>
         ConnectToUpgradesEvents();  //TODO-FT-CURRENT: Move this functionality to upgrade manager?
         ConnectToResourceManagerEvents();
         ConnectToOfflineManagerEvents();
-        ConnectToViewButtons();
+        ConnectToSettingsModelEvents();
+        ConnectToViewElements();
 
         view.InitBottomButtonsEvent();
+        view.SwitchWindowButtons(null, "UpgradeWindow");
         ConnectBallBarsWithEvents();
 
-        //------TEMP------
-        //  |   |   |   |
-        //  v   v   v   v
-        if (data.debugSettings)
-        {
-            resourcesManager.Money = data.additionalStartingMoney;   //TODO-FT-RESOURCES
-            data.roundNumber += data.additionalStartingRound;
-        }
-        Application.targetFrameRate = 60;
+        UpdateSettings();
     }
 
     private void Update()
@@ -64,26 +58,9 @@ public class GameController : BaseController<GameView>
         var blocks = _dynamic_blocks.GetComponentsInChildren<BasicBlock>(false); //TODO: Very Temp
         MoveBlocks(blocks); // TODO: not optimal
         CheckIfWaveFinished(blocks); // TODO: not optimal
-
-        DebugInputSwitch();
     }
 
-    private void DebugInputSwitch()
-    {
-        if (Input.GetKeyDown(KeyCode.D))
-        {
-            view.debugWindow.SetActive(!view.debugWindow.activeSelf);
 
-            if (view.debugWindow.activeSelf)
-            {
-                Time.timeScale = data.timeScale;
-            }
-            else
-            {
-                Time.timeScale = 1f;
-            }
-        }
-    }
 
     public void ConnectToResourceManagerEvents()
     {
@@ -95,7 +72,30 @@ public class GameController : BaseController<GameView>
         offlineManager.onReturnFromOffline += OnReturnFromOffline;
     }
 
-    private void ConnectToViewButtons()
+    private void ConnectToSettingsModelEvents()
+    {
+        SettingsModel.Instance.onSettingsChange += UpdateSettings;
+    }
+
+    private void UpdateSettings()
+    {
+        if (SettingsModel.Instance.addDebugMoney)
+        {
+            resourcesManager.IncreaseMoney(SettingsModel.Instance.debugMoney);
+        }
+
+        view.debugWindow.SetActive(SettingsModel.Instance.showDebugWindow);
+
+        if (SettingsModel.Instance.changeTimeScale)
+        {
+            Time.timeScale = SettingsModel.Instance.timeScale;
+        } else
+        {
+            Time.timeScale = 1f;
+        }
+    }
+
+    private void ConnectToViewElements()
     {
         view.InitButtons();
 
@@ -111,12 +111,26 @@ public class GameController : BaseController<GameView>
             resourcesModel.offlineMoney *= 2;
             view.SetOfflineMoney(resourcesModel.offlineMoney); 
         };
+
+        view.is60fps.onValueChanged.AddListener(Set60FPS);
+        Set60FPS(view.is60fps.isOn);
     }
 
     private void OnReturnFromOffline(double seconds)
     {
         resourcesModel.offlineMoney = 420*seconds;    //TODO-FEATURE: CalculateOfflineMoney()
         view.ShowOfflineTimePopup(seconds, resourcesModel.offlineMoney);
+    }
+
+    public void Set60FPS(bool value)
+    {
+        if (value)
+        {
+            Application.targetFrameRate = 60;
+        } else
+        {
+            Application.targetFrameRate = 30;
+        }
     }
 
     private void CreateBallBars()

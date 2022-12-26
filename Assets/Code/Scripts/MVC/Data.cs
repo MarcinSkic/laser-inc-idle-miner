@@ -42,23 +42,12 @@ public class Data : MonoBehaviour
 
     [Space(10)]
 
-    [Header("SETTINGS")]
-    public bool displayFloatingText;
-
-    [Space(10)]
-
     [Header("DEBUG")]
-    public bool debugSettings;
-    public double additionalStartingMoney;
     public double realDepth = 0;
-    [Tooltip("Actived only when opening debug window")]
-    public float timeScale = 1;
     
-
     [Header("UNIMPLEMENTED")]
     public int additionalStartingRound;
     public int additionalStartingBalls;
-    public bool displayFpsStats;
 
     void Awake()
     {
@@ -80,14 +69,6 @@ public class Data : MonoBehaviour
             {
                 settings.Add(setting, true);
             }
-        }
-    }
-
-    private void Start()
-    {
-        if (PlayerPrefs.HasKey("Show floating damage text"))
-        {
-            displayFloatingText = IntToBool(PlayerPrefs.GetInt("Show floating damage text"));
         }
     }
 

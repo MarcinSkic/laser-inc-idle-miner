@@ -44,11 +44,10 @@ public class BasicBlock : MonoBehaviour, IPoolable<BasicBlock>
             RemoveBlock();
         }
 
-        //TODO: Add to Settings.Instance -> data.displayFloatingText
-        /*if (false)   
+        if (SettingsModel.Instance.displayFloatingText)   
         {
-            FloatingTextController.CreateFloatingText(damage.ToString(), transform);
-        }*/
+            FloatingTextController.Instance.CreateFloatingText(damage.ToString(), transform);
+        }
         
     }
 

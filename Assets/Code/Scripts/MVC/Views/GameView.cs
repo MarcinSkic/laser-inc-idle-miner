@@ -4,6 +4,7 @@ using UnityEngine;
 using System.Linq;
 using UnityEngine.Events;
 using TMPro;
+using UnityEngine.UI;
 
 public class GameView : BaseView
 {
@@ -38,6 +39,9 @@ public class GameView : BaseView
     [Header("Lasers Tab")]
     public UIBallBar ballBarPrefab;
     public Transform ballBarsParent;
+
+    [Header("Settings Tab")]
+    public Toggle is60fps;
 
     [Header("Debug Window")]
     public GameObject debugWindow;
@@ -78,7 +82,7 @@ public class GameView : BaseView
     {
         foreach (var window in windows)
         {
-            var foundTab = window.transform.Find(name).gameObject;
+            var foundTab = window.transform.Find(name)?.gameObject;
 
             if (foundTab != null)
             {
@@ -102,7 +106,7 @@ public class GameView : BaseView
         Debug.LogWarningFormat("Couldn't find tab of name {} to be activated by SwitchWindow method", name);
     }
 
-    private void DisableAllTabs()
+    public void DisableAllTabs()
     {
         foreach (var window in windows)
         {
@@ -115,15 +119,23 @@ public class GameView : BaseView
         onTabClosing.Invoke(bottomButton_Default);
     }
 
-    private void SwitchWindowButtons(UIButtonController button,string name)
+    public void SwitchWindowButtons(UIButtonController button,string name)
     {
-        foreach(var tabButtonsContainer in tabButtonsContainers)
+        foreach(var tabButtonsContainerInForeach in tabButtonsContainers)
         {
-            tabButtonsContainer.SetActive(false);
+            tabButtonsContainerInForeach.SetActive(false);
         }
         DisableAllTabs();
 
-        tabButtonsContainers.Find(tabButtonsContainer => tabButtonsContainer.name == name).SetActive(true);
+        var tabButtonsContainer = tabButtonsContainers.Find(tabButtonsContainer => tabButtonsContainer.name == name);
+        tabButtonsContainer.SetActive(true);
+
+        //If in window there is only one tab, it should be automatically opened
+        if (tabButtonsContainer.transform.childCount == 1)   
+        {
+            var tabButton = tabButtonsContainer.GetComponentInChildren<UIButtonWithStringController>();
+            SwitchTab(tabButton, tabButton.name);
+        }
     }
 
     public void CreateBallBar(BaseBallData ballType)
