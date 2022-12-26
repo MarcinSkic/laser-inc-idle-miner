@@ -4,6 +4,7 @@ using UnityEngine;
 using System.Linq;
 using UnityEngine.Events;
 using TMPro;
+using UnityEngine.UI;
 
 public class GameView : BaseView
 {
@@ -38,6 +39,9 @@ public class GameView : BaseView
     [Header("Lasers Tab")]
     public UIBallBar ballBarPrefab;
     public Transform ballBarsParent;
+
+    [Header("Settings Tab")]
+    public Toggle is60fps;
 
     [Header("Debug Window")]
     public GameObject debugWindow;
@@ -102,7 +106,7 @@ public class GameView : BaseView
         Debug.LogWarningFormat("Couldn't find tab of name {} to be activated by SwitchWindow method", name);
     }
 
-    private void DisableAllTabs()
+    public void DisableAllTabs()
     {
         foreach (var window in windows)
         {
@@ -115,7 +119,7 @@ public class GameView : BaseView
         onTabClosing.Invoke(bottomButton_Default);
     }
 
-    private void SwitchWindowButtons(UIButtonController button,string name)
+    public void SwitchWindowButtons(UIButtonController button,string name)
     {
         foreach(var tabButtonsContainerInForeach in tabButtonsContainers)
         {

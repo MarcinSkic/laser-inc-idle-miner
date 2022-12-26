@@ -4,27 +4,27 @@ using UnityEngine;
 
 public class FloatingTextController : MonoBehaviour
 {
-    private static FloatingText popupText;
-    private static GameObject parent;
+    [SerializeField] private FloatingText popupText;
+    [SerializeField] private Transform parent;
 
-    public static void Initialize()
+    public static FloatingTextController Instance;
+    private void Awake()
     {
-        if (!parent)
+        if (Instance != null)
         {
-            parent = GameObject.Find("Canvas/PopupTexts");
+            Destroy(gameObject);
         }
-        if (!popupText)
+        else
         {
-            popupText = Resources.Load<FloatingText>("Prefabs/PopupTextParent");
+            Instance = this;
+            DontDestroyOnLoad(gameObject);
         }
     }
 
-    public static void CreateFloatingText(string text, Transform location)
+    public void CreateFloatingText(string text, Transform location)
     {
-        Initialize();
-        FloatingText instance = Instantiate(popupText);
+        FloatingText instance = Instantiate(popupText,parent);
         Vector2 screenPosition = Camera.main.WorldToScreenPoint(location.position);
-        instance.transform.SetParent(parent.transform, false);
         instance.transform.position = screenPosition;
         instance.SetText(text);
     }
