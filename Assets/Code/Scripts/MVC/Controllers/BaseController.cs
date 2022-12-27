@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using MyBox;
 
 public class BaseController : MonoBehaviour
 {
@@ -18,6 +19,7 @@ public class BaseController : MonoBehaviour
 public class BaseController<T> : BaseController where T : BaseView
 {
     [Header("BASE CONTROLLER")]
+    [DisplayInspector]
     [SerializeField] protected T view;
 
     public override void Activate()

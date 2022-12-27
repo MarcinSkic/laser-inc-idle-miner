@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Events;
 using UnityEngine.Pool;
-using System.Linq;
+using MyBox;
 
 public class BlockSpawner : BaseSpawner<BasicBlock>
 {
@@ -15,13 +15,15 @@ public class BlockSpawner : BaseSpawner<BasicBlock>
 
     [Header("Temp")]
     [SerializeField] private Data data;
-    [SerializeField] private GameController gameController;
 
     private int column;
     private int columns;
-  
-    public List<BlockType> blockTypes;
+
+    [InitializationField]
     public List<BlockTypeScriptable> blockTypeScriptables;
+    [ReadOnly]
+    public List<BlockType> blockTypes;
+    
 
     protected override void Awake()
     {

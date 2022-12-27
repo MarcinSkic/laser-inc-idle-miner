@@ -5,6 +5,7 @@ using System.Linq;
 using UnityEngine.Events;
 using TMPro;
 using UnityEngine.UI;
+using MyBox;
 
 public class GameView : BaseView
 {
@@ -50,6 +51,7 @@ public class GameView : BaseView
     public TMP_Text blocksHpDisplay;
 
     [Header("DEBUG")]
+    [ReadOnly]
     public List<UIBallBar> ballBars;
 
     UnityAction<Color> onTabClosing;

@@ -149,7 +149,7 @@ public class UpgradesManager : MonoBehaviour
                 upgrade.upgradeValue *= upgrade.changeValue;
                 break;
         }
-        if (upgrade.onUpgradeButtonsShowThisValue)
+        if (upgrade.onUpgradeButtonsShowUpgradeInternalValue)
         {
             upgrade.onValueUpdate.Invoke(string.Format("{0:f2}", upgrade.upgradeValue));
             //upgrade.onValueUpdate.Invoke(string.Format("{0:#.0e0}", upgrade.upgradeValue));

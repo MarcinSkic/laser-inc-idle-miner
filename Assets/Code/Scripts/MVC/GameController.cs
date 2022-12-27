@@ -48,6 +48,7 @@ public class GameController : BaseController<GameView>
         ConnectBallBarsWithEvents();
 
         UpdateSettings();
+        resourcesManager.LoadInitialMoney();
     }
 
     private void Update()
@@ -79,11 +80,6 @@ public class GameController : BaseController<GameView>
 
     private void UpdateSettings()
     {
-        if (SettingsModel.Instance.addDebugMoney)
-        {
-            resourcesManager.IncreaseMoney(SettingsModel.Instance.debugMoney);
-        }
-
         view.debugWindow.SetActive(SettingsModel.Instance.showDebugWindow);
 
         if (SettingsModel.Instance.changeTimeScale)

@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Events;
+using MyBox;
 
 public class SettingsModel : MonoBehaviour
 {
@@ -22,10 +23,8 @@ public class SettingsModel : MonoBehaviour
     public bool displayFloatingText;
     public bool showDebugWindow;
     [Space(5)]
-    public bool addDebugMoney;
-    public double debugMoney = 0;
-    [Space(5)]
     public bool changeTimeScale;
+    [ConditionalField(nameof(changeTimeScale))]
     public float timeScale = 1f;
 
     public UnityAction onSettingsChange;
