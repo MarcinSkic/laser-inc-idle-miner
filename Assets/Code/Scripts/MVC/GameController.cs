@@ -143,7 +143,7 @@ public class GameController : BaseController<GameView>
         {
             foreach(var buttonUpgrade in ballBar.buttonUpgrades)
             {
-                var upgrade = upgradesModel.getUpgrade(buttonUpgrade.upgradeName);
+                var upgrade = upgradesModel.GetUpgrade(buttonUpgrade.upgradeName);
                 if(upgrade != null)
                 {
                     buttonUpgrade.Init();

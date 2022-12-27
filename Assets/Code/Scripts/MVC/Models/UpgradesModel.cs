@@ -1,17 +1,19 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using MyBox;
 
 
 public class UpgradesModel : MonoBehaviour
 {
     [SerializeField]
+    [InitializationField]
     private List<UpgradeScriptable> upgradesScriptable;
 
     [Header("Debug")]
     public List<Upgrade> upgrades;
 
-    public Upgrade getUpgrade(string name)
+    public Upgrade GetUpgrade(string name)
     {
         return upgrades.Find(upgrade => upgrade.name == name);
     }

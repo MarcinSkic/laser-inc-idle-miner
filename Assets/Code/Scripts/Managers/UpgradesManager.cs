@@ -69,16 +69,16 @@ public class UpgradesManager : MonoBehaviour
                 case "Basic":
                     {   
                         basicBallSpawner.Spawn(out var ball);
-                        model.getUpgrade("UniversalSpeed").onValueUpdate += ball.Upgrade;
-                        model.getUpgrade("BasicSpeed").onValueUpdate += ball.Upgrade;
+                        model.GetUpgrade("UniversalSpeed").onValueUpdate += ball.Upgrade;
+                        model.GetUpgrade("BasicSpeed").onValueUpdate += ball.Upgrade;
                         upgrade.onValueUpdate.Invoke(basicBallSpawner.active.ToString()); //TODO-FT-CURRENT: Pull from Data?;
                         break;
                     }
                 case "Bomb":
                     {
                         bombBallSpawner.Spawn(out var ball);
-                        model.getUpgrade("UniversalSpeed").onValueUpdate += ball.Upgrade;
-                        model.getUpgrade("BombSpeed").onValueUpdate += ball.Upgrade;
+                        model.GetUpgrade("UniversalSpeed").onValueUpdate += ball.Upgrade;
+                        model.GetUpgrade("BombSpeed").onValueUpdate += ball.Upgrade;
                         ball.SetVariables(blocksParent);
                         upgrade.onValueUpdate.Invoke(bombBallSpawner.active.ToString()); //TODO-FT-CURRENT: Pull from Data?;
                         break;
@@ -86,8 +86,8 @@ public class UpgradesManager : MonoBehaviour
                 case "Sniper":
                     {
                         sniperBallSpawner.Spawn(out var ball);
-                        model.getUpgrade("UniversalSpeed").onValueUpdate += ball.Upgrade;
-                        model.getUpgrade("SniperSpeed").onValueUpdate += ball.Upgrade;
+                        model.GetUpgrade("UniversalSpeed").onValueUpdate += ball.Upgrade;
+                        model.GetUpgrade("SniperSpeed").onValueUpdate += ball.Upgrade;
                         ball.SetVariables(blocksParent);
                         upgrade.onValueUpdate.Invoke(sniperBallSpawner.active.ToString()); //TODO-FT-CURRENT: Pull from Data?;
                         break;
