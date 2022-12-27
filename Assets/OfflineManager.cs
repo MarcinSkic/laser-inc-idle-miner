@@ -5,9 +5,11 @@ using System;
 using System.IO;
 using System.Runtime.Serialization.Formatters.Binary;
 using UnityEngine.Events;
+using MyBox;
 
 public class OfflineManager : MonoBehaviour
 {
+    [InitializationField]
     [SerializeField] private string fileName;
     [SerializeField] private double minimumOfflineTimeInSeconds;
     

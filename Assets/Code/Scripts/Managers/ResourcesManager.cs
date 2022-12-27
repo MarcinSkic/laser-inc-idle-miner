@@ -22,6 +22,12 @@ public class ResourcesManager : MonoBehaviour
         }
     }
 
+    //TODO-FT-SAVEFILE
+    public void LoadInitialMoney()
+    {
+        Money = model.money;
+    }
+
     public void IncreaseMoney(double value)
     {
         if (value < 1)

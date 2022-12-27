@@ -4,6 +4,7 @@ using UnityEngine;
 using System.Runtime.Serialization.Formatters.Binary;
 using System.IO;
 using System;
+using MyBox;
 
 public class Data : MonoBehaviour
 {
@@ -29,8 +30,11 @@ public class Data : MonoBehaviour
     [Header("GAME STATS")]
 
     //TODO-FT-SAVEFILE: change to property with set protection that while it is lower than active pool balls it should spawn more
-    public int basicBallCount;  
+    [ReadOnly]
+    public int basicBallCount;
+    [ReadOnly]
     public int bombBallCount;
+    [ReadOnly]
     public int sniperBallCount;
 
     [Header("Rounds stats")]
@@ -43,9 +47,10 @@ public class Data : MonoBehaviour
     [Space(10)]
 
     [Header("DEBUG")]
+    [ReadOnly]
     public double realDepth = 0;
     
-    [Header("UNIMPLEMENTED")]
+    [Foldout("UNIMPLEMENTED",true)]
     public int additionalStartingRound;
     public int additionalStartingBalls;
 

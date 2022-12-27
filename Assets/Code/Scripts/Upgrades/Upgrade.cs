@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using MyBox;
 using UnityEngine;
 using UnityEngine.Events;
 
@@ -10,7 +11,6 @@ public enum ValueUpgradeFormula { Add, Multiply };
 [System.Serializable]
 public class Upgrade
 {
-    [Header("Fill: Always")]
     public string name;
     public UpgradeType type;
 
@@ -23,25 +23,33 @@ public class Upgrade
     [Tooltip("Set to -1 for infinite levels")]
     public int maxLevel = -1;
 
-    public bool onUpgradeButtonsShowThisValue = false;
-    [Header("Fill: On UpgradeButtons Show This Value = true")]
+    public bool onUpgradeButtonsShowUpgradeInternalValue = false;
+
+    [ConditionalField(nameof(onUpgradeButtonsShowUpgradeInternalValue))]
     public double upgradeValue = 0;
 
     [Space(5)]
 
-    [Header("Fill: Values Upgrade & Spawn Upgrade")]
+    [ConditionalField(nameof(type),false,UpgradeType.ValuesUpgrade, UpgradeType.SpawnUpgrade)]
     public UpgradedObjects upgradedObjects;
+
+    [ConditionalField(nameof(type), false, UpgradeType.ValuesUpgrade, UpgradeType.SpawnUpgrade)]
     public List<string> specifiedObjects;
-    [Header("Fill: Values Upgrade")]
+
+
+    [ConditionalField(nameof(type), false, UpgradeType.ValuesUpgrade)]
     public List<string> upgradedValuesNames;
+
+    [ConditionalField(nameof(type), false, UpgradeType.ValuesUpgrade)]
     [Tooltip("Effect depends on used formula")]
     public double changeValue;
-    public ValueUpgradeFormula formula;
 
-    
+    [ConditionalField(nameof(type), false, UpgradeType.ValuesUpgrade)]
+    public ValueUpgradeFormula formula;
 
 
     [Header("Debug")]
+    [ReadOnly]
     public int currentLevel = 0;
 
     public UnityAction<Upgrade> doTryUpgrade;

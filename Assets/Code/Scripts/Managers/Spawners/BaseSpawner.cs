@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Pool;
+using MyBox;
 
 public abstract class BaseSpawner<T> : MonoBehaviour where T : MonoBehaviour, IPoolable<T>
 {
@@ -12,7 +13,9 @@ public abstract class BaseSpawner<T> : MonoBehaviour where T : MonoBehaviour, IP
     protected ObjectPool<T> pool;
 
     [Header("Debug")]
+    [ReadOnly]
     public int active;
+    [ReadOnly]
     public int inactive;
 
     protected virtual void Awake()

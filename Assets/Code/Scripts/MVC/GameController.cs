@@ -48,6 +48,7 @@ public class GameController : BaseController<GameView>
         ConnectBallBarsWithEvents();
 
         UpdateSettings();
+        resourcesManager.LoadInitialMoney();
     }
 
     private void Update()
@@ -79,11 +80,6 @@ public class GameController : BaseController<GameView>
 
     private void UpdateSettings()
     {
-        if (SettingsModel.Instance.addDebugMoney)
-        {
-            resourcesManager.IncreaseMoney(SettingsModel.Instance.debugMoney);
-        }
-
         view.debugWindow.SetActive(SettingsModel.Instance.showDebugWindow);
 
         if (SettingsModel.Instance.changeTimeScale)
@@ -147,7 +143,7 @@ public class GameController : BaseController<GameView>
         {
             foreach(var buttonUpgrade in ballBar.buttonUpgrades)
             {
-                var upgrade = upgradesModel.getUpgrade(buttonUpgrade.upgradeName);
+                var upgrade = upgradesModel.GetUpgrade(buttonUpgrade.upgradeName);
                 if(upgrade != null)
                 {
                     buttonUpgrade.Init();
