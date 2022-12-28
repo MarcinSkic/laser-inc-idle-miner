@@ -19,7 +19,9 @@ MonoBehaviour:
     costIncremental: 7
     costMultiplier: 1.1
     maxLevel: -1
-    upgradedObjects: 1
+    onUpgradeButtonsShowUpgradeInternalValue: 0
+    upgradeValue: 0
+    upgradedObjects: 4
     specifiedObjects:
     - Bomb
     upgradedValuesNames:
@@ -27,4 +29,3 @@ MonoBehaviour:
     changeValue: 0.4
     formula: 0
     currentLevel: 0
-    textValue: 

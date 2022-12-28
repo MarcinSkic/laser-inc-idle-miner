@@ -44,17 +44,13 @@ public class UpgradesManager : MonoBehaviour
     {
         switch (upgrade.upgradedObjects)
         {
-            case UpgradedObjects.AllBalls:
-                foreach(var ballData in data.ballsData)
-                {
-                    UpgradeBall(upgrade, ballData);
-                }
-                break;
+            case <= UpgradeableObjects.AllBalls:
 
-            case UpgradedObjects.SpecifiedBalls:
-                foreach(var ballType in upgrade.specifiedObjects)
-                {
-                    UpgradeBall(upgrade, data.ballsData.Find(ball => ball.name == ballType));
+                foreach (var pair in data.ballsData) {
+                    if (upgrade.upgradedObjects.HasFlag(pair.Key))
+                    {
+                        UpgradeBall(upgrade, pair.Value);
+                    }
                 }
                 break;
         }
@@ -62,48 +58,45 @@ public class UpgradesManager : MonoBehaviour
 
     private void OnSpawnUpgrade(Upgrade upgrade)
     {
-        foreach(var ballType in upgrade.specifiedObjects)
+        if(upgrade.upgradedObjects <= UpgradeableObjects.AllBalls)
         {
-            switch (ballType)
+            if (upgrade.upgradedObjects.HasFlag(UpgradeableObjects.BasicBall))
             {
-                case "Basic":
-                    {   
-                        basicBallSpawner.Spawn(out var ball);
-                        model.GetUpgrade("UniversalSpeed").onValueUpdate += ball.Upgrade;
-                        model.GetUpgrade("BasicSpeed").onValueUpdate += ball.Upgrade;
-                        upgrade.onValueUpdate.Invoke(basicBallSpawner.active.ToString()); //TODO-FT-CURRENT: Pull from Data?;
-                        break;
-                    }
-                case "Bomb":
-                    {
-                        bombBallSpawner.Spawn(out var ball);
-                        model.GetUpgrade("UniversalSpeed").onValueUpdate += ball.Upgrade;
-                        model.GetUpgrade("BombSpeed").onValueUpdate += ball.Upgrade;
-                        ball.SetVariables(blocksParent);
-                        upgrade.onValueUpdate.Invoke(bombBallSpawner.active.ToString()); //TODO-FT-CURRENT: Pull from Data?;
-                        break;
-                    }   
-                case "Sniper":
-                    {
-                        sniperBallSpawner.Spawn(out var ball);
-                        model.GetUpgrade("UniversalSpeed").onValueUpdate += ball.Upgrade;
-                        model.GetUpgrade("SniperSpeed").onValueUpdate += ball.Upgrade;
-                        ball.SetVariables(blocksParent);
-                        upgrade.onValueUpdate.Invoke(sniperBallSpawner.active.ToString()); //TODO-FT-CURRENT: Pull from Data?;
-                        break;
-                    }
-                default:
-                    Debug.LogWarningFormat("Missing ball of type {0} to spawn ", ballType);
-                    break;
+                basicBallSpawner.Spawn(out var ball);
+                model.GetUpgrade("UniversalSpeed").onValueUpdate += ball.Upgrade;
+                model.GetUpgrade("BasicSpeed").onValueUpdate += ball.Upgrade;
+                upgrade.onValueUpdate.Invoke(basicBallSpawner.active.ToString()); //TODO-FT-CURRENT: Pull from Data?;
             }
+
+            if (upgrade.upgradedObjects.HasFlag(UpgradeableObjects.BombBall))
+            {
+                bombBallSpawner.Spawn(out var ball);
+                model.GetUpgrade("UniversalSpeed").onValueUpdate += ball.Upgrade;
+                model.GetUpgrade("BombSpeed").onValueUpdate += ball.Upgrade;
+                ball.SetVariables(blocksParent);
+                upgrade.onValueUpdate.Invoke(bombBallSpawner.active.ToString());
+            }
+
+            if (upgrade.upgradedObjects.HasFlag(UpgradeableObjects.SniperBall))
+            {
+                sniperBallSpawner.Spawn(out var ball);
+                model.GetUpgrade("UniversalSpeed").onValueUpdate += ball.Upgrade;
+                model.GetUpgrade("SniperSpeed").onValueUpdate += ball.Upgrade;
+                ball.SetVariables(blocksParent);
+                upgrade.onValueUpdate.Invoke(sniperBallSpawner.active.ToString());
+            }
+        } 
+        else
+        {
+            Debug.LogWarningFormat("Missing ball of type {0} to spawn ", upgrade.upgradedObjects);
         }
     }
 
     private void SetFirstUpgradeButtonValue(Upgrade upgrade)
     {
-        if(upgrade.specifiedObjects.Count == 1 && upgrade.upgradedValuesNames.Count == 1 && upgrade.upgradedObjects == UpgradedObjects.SpecifiedBalls)
+        if((upgrade.upgradedObjects <= UpgradeableObjects.AllBalls && ((int)upgrade.upgradedObjects % 2 == 0 || upgrade.upgradedObjects == UpgradeableObjects.BasicBall)) && upgrade.upgradedValuesNames.Count == 1)
         {
-            var value = GetValueByName(upgrade.upgradedValuesNames[0], data.ballsData.Find(ball => ball.name == upgrade.specifiedObjects[0]));
+            var value = GetValueByName(upgrade.upgradedValuesNames[0], data.ballsData[upgrade.upgradedObjects]);
             upgrade.onValueUpdate.Invoke(value.value.ToString());
         } 
         else

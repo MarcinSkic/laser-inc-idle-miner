@@ -5,7 +5,6 @@ using UnityEngine;
 using UnityEngine.Events;
 
 public enum UpgradeType { ValuesUpgrade, SpawnUpgrade, CustomFunction}
-public enum UpgradedObjects { AllBalls, SpecifiedBalls}
 public enum ValueUpgradeFormula { Add, Multiply };
 
 [System.Serializable]
@@ -31,10 +30,7 @@ public class Upgrade
     [Space(5)]
 
     [ConditionalField(nameof(type),false,UpgradeType.ValuesUpgrade, UpgradeType.SpawnUpgrade)]
-    public UpgradedObjects upgradedObjects;
-
-    [ConditionalField(nameof(type), false, UpgradeType.ValuesUpgrade, UpgradeType.SpawnUpgrade)]
-    public List<string> specifiedObjects;
+    public UpgradeableObjects upgradedObjects;
 
 
     [ConditionalField(nameof(type), false, UpgradeType.ValuesUpgrade)]

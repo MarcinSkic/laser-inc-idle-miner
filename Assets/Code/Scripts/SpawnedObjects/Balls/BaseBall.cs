@@ -111,6 +111,7 @@ public class BaseBall<T> : MonoBehaviour, IPoolable<BaseBall<T>>, IUpgradeable<T
 [System.Serializable]
 public class BaseBallData
 {
+    public UpgradeableObjects type;
     public string name;
     public Sprite sprite;
     public UpgradeableData<double> speed;
