@@ -44,7 +44,18 @@ public class ColorChanger : MonoBehaviour
     public float VRock;
     public List<RockMaterialListPosition> rockMaterials;
 
-
+    void OnApplicationQuit()
+    {
+        Debug.Log("OnApplicationQuit");
+        foreach (Material material in materials)
+        {
+            material.color = new Color(1,1,1,1);
+        }
+        foreach (RockMaterialListPosition rockMaterial in rockMaterials)
+        {
+            rockMaterial.material.color = new Color(1, 1, 1, 1);
+        }
+    }
     void Update()
     {
         //float lightness = Math.Max(0f, (255f - 50*(float)data.depth)/255f);
