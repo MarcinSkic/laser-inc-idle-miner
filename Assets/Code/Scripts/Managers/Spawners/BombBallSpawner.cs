@@ -2,11 +2,11 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class BombBallSpawner : BallSpawner<BombBall,BombBallData>
+public class BombBallSpawner : BallSpawner<BombBall, BallData>
 {
     protected override void Get(BombBall ball)
     {
-        ball.SetDataReference(data.bombBallData);
+        ball.SetDataReference(data.ballsData[UpgradeableObjects.BombBall]);
         base.Get(ball);
     }
 

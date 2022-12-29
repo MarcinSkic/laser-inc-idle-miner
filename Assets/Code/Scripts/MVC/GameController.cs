@@ -131,7 +131,7 @@ public class GameController : BaseController<GameView>
 
     private void CreateBallBars()
     {
-        foreach(var ballType in data.inspectorBallsData)
+        foreach(var ballType in data.ballsDataList)
         {
             view.CreateBallBar(ballType);
         }

@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: BasicCount
   m_EditorClassIdentifier: 
   upgrade:
-    name: BasicCount
+    name: BasicBallCount
     type: 1
     cost: 10
     costIncremental: 0
@@ -22,9 +22,7 @@ MonoBehaviour:
     onUpgradeButtonsShowUpgradeInternalValue: 0
     upgradeValue: 0
     upgradedObjects: 1
-    specifiedObjects:
-    - Basic
-    upgradedValuesNames: []
+    upgradedValues: 0
     changeValue: 0
     formula: 0
     currentLevel: 0

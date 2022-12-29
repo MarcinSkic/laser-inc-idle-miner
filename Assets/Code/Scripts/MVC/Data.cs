@@ -12,13 +12,8 @@ public class Data : MonoBehaviour
 
     [Header("Universal")]
 
-    public List<BaseBallData> inspectorBallsData;    //Every new ball must be added here (CreateListOfBalls method)
-    public Dictionary<UpgradeableObjects, BaseBallData> ballsData;
-
-    public BasicBallData basicBallData;
-    public BombBallData bombBallData;
-    public SniperBallData sniperBallData;
-
+    public List<BallData> ballsDataList;
+    public Dictionary<UpgradeableObjects, BallData> ballsData;
 
     [Space(10)]
 
@@ -80,12 +75,13 @@ public class Data : MonoBehaviour
 
     private void CreateListOfBalls()
     {
-        inspectorBallsData = new List<BaseBallData>{ basicBallData,bombBallData,sniperBallData};
+        ballsData = new Dictionary<UpgradeableObjects, BallData>() { };
 
-        ballsData = new Dictionary<UpgradeableObjects, BaseBallData>() { };
-        ballsData.Add(basicBallData.type, basicBallData);
-        ballsData.Add(bombBallData.type, bombBallData);
-        ballsData.Add(sniperBallData.type, sniperBallData);
+        foreach (var data in ballsDataList)
+        {
+            data.Init();
+            ballsData.Add(data.type, data);
+        }
     }
 
     public Dictionary<string, bool> settings = new Dictionary<string, bool>() { };

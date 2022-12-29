@@ -22,7 +22,7 @@ MonoBehaviour:
     onUpgradeButtonsShowUpgradeInternalValue: 0
     upgradeValue: 0
     upgradedObjects: 7
-    specifiedObjects: []
+    upgradedValues: 1
     upgradedValuesNames:
     - speed
     changeValue: 5

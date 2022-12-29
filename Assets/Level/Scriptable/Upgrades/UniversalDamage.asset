@@ -22,7 +22,7 @@ MonoBehaviour:
     onUpgradeButtonsShowUpgradeInternalValue: 0
     upgradeValue: 0
     upgradedObjects: 7
-    specifiedObjects: []
+    upgradedValues: 2
     upgradedValuesNames:
     - damage
     changeValue: 2

@@ -22,8 +22,7 @@ MonoBehaviour:
     onUpgradeButtonsShowUpgradeInternalValue: 0
     upgradeValue: 0
     upgradedObjects: 2
-    specifiedObjects:
-    - Sniper
+    upgradedValues: 2
     upgradedValuesNames:
     - Damage
     changeValue: 1.5
