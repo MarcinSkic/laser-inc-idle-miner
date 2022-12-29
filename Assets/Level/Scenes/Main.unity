@@ -4558,6 +4558,7 @@ Transform:
   - {fileID: 231626578}
   - {fileID: 567613850}
   - {fileID: 1947716356}
+  - {fileID: 1508174524}
   m_Father: {fileID: 0}
   m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -7186,6 +7187,74 @@ RectTransform:
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 100, y: 100}
   m_Pivot: {x: 0.5, y: 0.5}
+--- !u!1 &1508174523
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1508174524}
+  - component: {fileID: 1508174525}
+  m_Layer: 0
+  m_Name: '@ColorChanger'
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1508174524
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1508174523}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 814282266}
+  m_RootOrder: 4
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1508174525
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1508174523}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4477b10dc399cbb4b9fcc575e45f2f15, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  H: 0
+  S: 1
+  V: 1
+  Hperiod: 60
+  SPeriod: 30
+  SMax: 0.3
+  SMin: 0
+  VPeriod: 30
+  VMax: 1
+  VMin: 0.9
+  color: {r: 1, g: 1, b: 1, a: 1}
+  rockColor: {r: 0, g: 0, b: 0, a: 0}
+  data: {fileID: 2078200401}
+  materials:
+  - {fileID: 2100000, guid: 9f23987b9b0297a4792b5241f01a6cee, type: 2}
+  - {fileID: 2100000, guid: 91df68dff793ae141bb292cf189112db, type: 2}
+  HRockOffset: 180
+  customRocksSV: 0
+  SRock: 0.6
+  VRock: 0.6
+  rockMaterials:
+  - material: {fileID: 2100000, guid: 246e6ab83377d23479e4f81877d58001, type: 2}
+    baseColor: {r: 0.8207547, g: 0.8207547, b: 0.8207547, a: 1}
+    baseWeight: 0.5
 --- !u!1 &1513135931
 GameObject:
   m_ObjectHideFlags: 0
