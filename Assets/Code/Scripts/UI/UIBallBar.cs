@@ -11,7 +11,7 @@ public class UIBallBar : MonoBehaviour
     public void SetUpgradesName(UpgradeableObjects type)
     {
         buttonUpgrades[0].upgradeName = type.ToString() + "Count";
-        buttonUpgrades[1].upgradeName = type.ToString() + "Speed";
-        buttonUpgrades[2].upgradeName = type.ToString() + "Damage";
+        buttonUpgrades[1].upgradeName = type.ToString() + UpgradeableValues.Speed.ToString();
+        buttonUpgrades[2].upgradeName = type.ToString() + UpgradeableValues.Damage.ToString();
     }
 }
