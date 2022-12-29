@@ -2,8 +2,9 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Pool;
+using MyBox;
 
-public class BaseBall<T> : MonoBehaviour, IPoolable<BaseBall<T>>, IUpgradeable<T> where T : BaseBallData
+public class BaseBall<T> : MonoBehaviour, IPoolable<BaseBall<T>>, IUpgradeable<T> where T : BallData
 {
     [SerializeField] protected Rigidbody rb;
     [SerializeField] protected Color laserColor;
@@ -60,7 +61,7 @@ public class BaseBall<T> : MonoBehaviour, IPoolable<BaseBall<T>>, IUpgradeable<T
 
     private void SetInitialVelocity()
     {
-        rb.velocity = Vector3.Normalize(new Vector3(Random.Range(-1f, 1f), Random.Range(-1f, 1f), 0)) * (float)Data.speed;
+        rb.velocity = Vector3.Normalize(new Vector3(Random.Range(-1f, 1f), Random.Range(-1f, 1f), 0)) * (float)Data.values[UpgradeableValues.Speed];
     }
 
     protected virtual void SetLaserColor()
@@ -87,17 +88,17 @@ public class BaseBall<T> : MonoBehaviour, IPoolable<BaseBall<T>>, IUpgradeable<T
 
     protected virtual void TryDealDamage(Collision collision){
         if(collision.gameObject.TryGetComponent<BasicBlock>(out var block)){
-            block.TakeDamage(Data.damage);
+            block.TakeDamage(Data.values[UpgradeableValues.Damage]);
         }
     }
 
     protected void SetVelocity(){
         if(rb.velocity.magnitude <= 0.000001f)
         {
-            rb.velocity = Vector3.Normalize(new Vector3(Random.Range(-1f, 1f), Random.Range(-1f, 1f), 0)) * (float)Data.speed;
+            rb.velocity = Vector3.Normalize(new Vector3(Random.Range(-1f, 1f), Random.Range(-1f, 1f), 0)) * (float)Data.values[UpgradeableValues.Speed];
             //Debug.Log("Ball has been unstuck");
         }
-        rb.velocity = rb.velocity.normalized * (float)Data.speed;
+        rb.velocity = rb.velocity.normalized * (float)Data.values[UpgradeableValues.Speed];
     }
 
     private void UpdateLaserRotation()
@@ -106,13 +107,4 @@ public class BaseBall<T> : MonoBehaviour, IPoolable<BaseBall<T>>, IUpgradeable<T
         rb.angularVelocity = new Vector3(0, 0, 0);
         laserRotationSpeedDegrees = Mathf.Abs(laserRotationSpeedDegrees) * laserRotationDirection;
     }
-}
-
-[System.Serializable]
-public class BaseBallData
-{
-    public string name;
-    public Sprite sprite;
-    public UpgradeableData<double> speed;
-    public UpgradeableData<double> damage;
 }

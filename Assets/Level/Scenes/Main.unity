@@ -9485,33 +9485,78 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 869ac6ad55f1d16498f2c465f8b95556, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  ballsData: []
+  ballsDataList:
+  - type: 1
+    nameForUI: 
+    sprite: {fileID: 21300000, guid: 3c0201ab08b7a554082f6d7da400c58b, type: 3}
+    valuesList:
+    - type: 1
+      name: 
+      value: 3
+    - type: 2
+      name: 
+      value: 1
+  - type: 2
+    nameForUI: 
+    sprite: {fileID: 21300000, guid: 0192c9fd2f408024fa0f75adeca8c000, type: 3}
+    valuesList:
+    - type: 1
+      name: 
+      value: 4
+    - type: 2
+      name: 
+      value: 1
+    - type: 4
+      name: SpeedBoost
+      value: 2
+  - type: 4
+    nameForUI: 
+    sprite: {fileID: 21300000, guid: 96c5a551b5e64bd4b93fe972d4acd642, type: 3}
+    valuesList:
+    - type: 1
+      name: 
+      value: 2
+    - type: 2
+      name: 
+      value: 3
+    - type: 4
+      name: ExplosionSize
+      value: 3
   basicBallData:
+    type: 1
     name: Basic
     sprite: {fileID: 21300000, guid: 3c0201ab08b7a554082f6d7da400c58b, type: 3}
     speed:
+      type: 1
       name: Speed
       value: 3
     damage:
+      type: 2
       name: Damage
       value: 1
   bombBallData:
+    type: 4
     name: Bomb
     sprite: {fileID: 21300000, guid: 96c5a551b5e64bd4b93fe972d4acd642, type: 3}
     speed:
+      type: 1
       name: Speed
       value: 5
     damage:
+      type: 2
       name: Damage
       value: 1
     explosionSize: 4
   sniperBallData:
+    type: 2
     name: Sniper
     sprite: {fileID: 21300000, guid: 0192c9fd2f408024fa0f75adeca8c000, type: 3}
     speed:
+      type: 1
       name: Speed
       value: 5
     damage:
+      type: 2
       name: Damage
       value: 1
     speedBoost: 2

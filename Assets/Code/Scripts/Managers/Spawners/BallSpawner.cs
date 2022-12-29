@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Pool;
 
-public class BallSpawner<Ball,Data> : BaseSpawner<Ball> where Ball : BaseBall<Data>, IPoolable<Ball> where Data : BaseBallData
+public class BallSpawner<Ball,Data> : BaseSpawner<Ball> where Ball : BaseBall<Data>, IPoolable<Ball> where Data : BallData
 {
     [Space(5)]
     [Header("BALL SPAWNER")]

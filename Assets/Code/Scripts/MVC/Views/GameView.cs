@@ -140,10 +140,10 @@ public class GameView : BaseView
         }
     }
 
-    public void CreateBallBar(BaseBallData ballType)
+    public void CreateBallBar(BallData ballType)
     {
         var ballBar = Instantiate(ballBarPrefab, ballBarsParent);
-        ballBar.SetUpgradesName(ballType.name);
+        ballBar.SetUpgradesName(ballType.type);
         ballBar.ballIcon.sprite = ballType.sprite;
 
         ballBars.Add(ballBar);

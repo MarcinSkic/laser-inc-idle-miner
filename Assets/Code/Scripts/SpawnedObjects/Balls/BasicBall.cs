@@ -3,10 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Pool;
 
-public class BasicBall : BaseBall<BasicBallData>, IPoolable<BasicBall>, IUpgradeable<BasicBallData>
+public class BasicBall : BaseBall<BallData>, IPoolable<BasicBall>, IUpgradeable<BallData>
 {
     public new ObjectPool<BasicBall> Pool { get; set ; }
 }
-
-[System.Serializable]
-public class BasicBallData : BaseBallData{}

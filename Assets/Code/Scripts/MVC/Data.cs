@@ -11,13 +11,9 @@ public class Data : MonoBehaviour
     [Header("BALLS STATS")]
 
     [Header("Universal")]
-    [HideInInspector]
-    public List<BaseBallData> ballsData;    //Every new ball must be added here (CreateListOfBalls method)
 
-    public BasicBallData basicBallData;
-    public BombBallData bombBallData;
-    public SniperBallData sniperBallData;
-
+    public List<BallData> ballsDataList;
+    public Dictionary<UpgradeableObjects, BallData> ballsData;
 
     [Space(10)]
 
@@ -79,7 +75,13 @@ public class Data : MonoBehaviour
 
     private void CreateListOfBalls()
     {
-        ballsData = new List<BaseBallData>{ basicBallData,bombBallData,sniperBallData};
+        ballsData = new Dictionary<UpgradeableObjects, BallData>() { };
+
+        foreach (var data in ballsDataList)
+        {
+            data.Init();
+            ballsData.Add(data.type, data);
+        }
     }
 
     public Dictionary<string, bool> settings = new Dictionary<string, bool>() { };
@@ -122,15 +124,5 @@ public class Data : MonoBehaviour
         return Math.Ceiling(wave*Math.Pow(1.07, wave));
         */
         return depth*Math.Pow(1.03, depth);
-    }
-
-    public double GetBallDamage()
-    {
-        return basicBallData.damage + legacyUpgrades["Damage"].upgradeLevel * 1;
-    }
-
-    public double GetSpd()
-    {
-        return basicBallData.speed + 1 * legacyUpgrades["Bullet speed"].upgradeLevel;
     }
 }

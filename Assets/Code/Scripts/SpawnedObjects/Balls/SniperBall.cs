@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Pool;
 
-public class SniperBall : BaseBall<SniperBallData>, IPoolable<SniperBall>, IUpgradeable<SniperBallData>
+public class SniperBall : BaseBall<BallData>, IPoolable<SniperBall>, IUpgradeable<BallData>
 {
     public new ObjectPool<SniperBall> Pool { get; set; }
 
@@ -19,11 +19,11 @@ public class SniperBall : BaseBall<SniperBallData>, IPoolable<SniperBall>, IUpgr
         base.OnCollisionEnter(collision);
 
         var blocks = blocksParent.GetComponentsInChildren<BasicBlock>(false);
-        if (collision.gameObject.tag == "border" && blocks.Length > 0)
+        if (collision.gameObject.CompareTag("border") && blocks.Length > 0)
         {
             var target = FindTarget();
 
-            rb.velocity = (target.transform.position - transform.position).normalized * (float)Data.speed * Data.speedBoost;
+            rb.velocity = (float)Data.values[UpgradeableValues.Special] * (float)Data.values[UpgradeableValues.Speed] * (target.transform.position - transform.position).normalized;
         }
     }
 
@@ -43,10 +43,4 @@ public class SniperBall : BaseBall<SniperBallData>, IPoolable<SniperBall>, IUpgr
 
         return target;
     }
-}
-
-[System.Serializable]
-public class SniperBallData : BaseBallData
-{
-    public float speedBoost;
 }

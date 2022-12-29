@@ -29,7 +29,9 @@ public class UpgradesModel : MonoBehaviour
 
         foreach(var scriptable in upgradesScriptable)
         {
-            upgrades.Add(scriptable.Upgrade);
+            var upgrade = scriptable.Upgrade;
+            upgrade.GenerateName();
+            upgrades.Add(upgrade);
         }
     }
 

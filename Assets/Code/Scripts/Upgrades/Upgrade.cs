@@ -5,15 +5,15 @@ using UnityEngine;
 using UnityEngine.Events;
 
 public enum UpgradeType { ValuesUpgrade, SpawnUpgrade, CustomFunction}
-public enum UpgradedObjects { AllBalls, SpecifiedBalls}
 public enum ValueUpgradeFormula { Add, Multiply };
 
 [System.Serializable]
 public class Upgrade
 {
-    public string name;
     public UpgradeType type;
 
+    [ConditionalField(nameof(type), false, UpgradeType.CustomFunction)]
+    public string name;
     public double cost;
     [Tooltip("Formula: currentCost = currentCost*costMultiplier+costIncremental")]
     public double costIncremental;
@@ -31,14 +31,10 @@ public class Upgrade
     [Space(5)]
 
     [ConditionalField(nameof(type),false,UpgradeType.ValuesUpgrade, UpgradeType.SpawnUpgrade)]
-    public UpgradedObjects upgradedObjects;
-
-    [ConditionalField(nameof(type), false, UpgradeType.ValuesUpgrade, UpgradeType.SpawnUpgrade)]
-    public List<string> specifiedObjects;
-
+    public UpgradeableObjects upgradedObjects;
 
     [ConditionalField(nameof(type), false, UpgradeType.ValuesUpgrade)]
-    public List<string> upgradedValuesNames;
+    public UpgradeableValues upgradedValues;
 
     [ConditionalField(nameof(type), false, UpgradeType.ValuesUpgrade)]
     [Tooltip("Effect depends on used formula")]
@@ -56,6 +52,21 @@ public class Upgrade
     public UnityAction<Upgrade> doUpgrade;
     public UnityAction<string> onValueUpdate;
     public Upgrade initialUpgrade;
+
+    public void GenerateName()
+    {
+        switch (type)
+        {
+            case UpgradeType.ValuesUpgrade:
+                name = $"{upgradedObjects}{upgradedValues}";
+                break;
+            case UpgradeType.SpawnUpgrade:
+                name = $"{upgradedObjects}Count";
+                break;
+            case UpgradeType.CustomFunction:
+                return;
+        }
+    }
 
 
     /// <summary>
