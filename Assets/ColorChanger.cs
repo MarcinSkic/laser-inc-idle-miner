@@ -34,6 +34,7 @@ public class ColorChanger : MonoBehaviour
     /*[ReadOnly]*/ public Color color;
     /*[ReadOnly]*/ public Color rockColor;
     public Data data;
+    public List<Material> copiedMaterials;
     public List<Material> materials;
     public float HRockOffset;
     public bool customRocksSV;
@@ -44,13 +45,22 @@ public class ColorChanger : MonoBehaviour
     public float VRock;
     public List<RockMaterialListPosition> rockMaterials;
 
-    void OnApplicationQuit()
+    private void Start()
     {
-        Debug.Log("OnApplicationQuit");
         foreach (Material material in materials)
         {
-            material.color = new Color(1,1,1,1);
+            Material newMat = new Material(material);
+            copiedMaterials.Add(newMat);
         }
+    }
+
+    void OnApplicationQuit()
+    {
+        for (int i=0; i<materials.Count; i++)
+        {
+            materials[i].CopyPropertiesFromMaterial(copiedMaterials[i]);
+        }
+
         foreach (RockMaterialListPosition rockMaterial in rockMaterials)
         {
             rockMaterial.material.color = new Color(1, 1, 1, 1);
