@@ -7236,11 +7236,11 @@ MonoBehaviour:
   V: 1
   Hperiod: 60
   SPeriod: 30
-  SMax: 1
-  SMin: 0.5
+  SMax: 0.3
+  SMin: 0
   VPeriod: 30
   VMax: 1
-  VMin: 0.5
+  VMin: 0.9
   color: {r: 1, g: 1, b: 1, a: 1}
   rockColor: {r: 0, g: 0, b: 0, a: 0}
   data: {fileID: 2078200401}
@@ -7248,10 +7248,13 @@ MonoBehaviour:
   - {fileID: 2100000, guid: 9f23987b9b0297a4792b5241f01a6cee, type: 2}
   - {fileID: 2100000, guid: 91df68dff793ae141bb292cf189112db, type: 2}
   HRockOffset: 180
+  customRocksSV: 0
   SRock: 0.6
   VRock: 0.6
   rockMaterials:
-  - {fileID: 2100000, guid: 246e6ab83377d23479e4f81877d58001, type: 2}
+  - material: {fileID: 2100000, guid: 246e6ab83377d23479e4f81877d58001, type: 2}
+    baseColor: {r: 0.8207547, g: 0.8207547, b: 0.8207547, a: 1}
+    baseWeight: 0.5
 --- !u!1 &1513135931
 GameObject:
   m_ObjectHideFlags: 0

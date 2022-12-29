@@ -6,6 +6,14 @@ using MyBox;
 
 public class ColorChanger : MonoBehaviour
 {
+    [Serializable]
+    public class RockMaterialListPosition
+    {
+        public Material material;
+        public Color baseColor;
+        public float baseWeight;
+    }
+
     [ReadOnly] public float H;
     [ReadOnly] public float S;
     [ReadOnly] public float V;
@@ -28,9 +36,10 @@ public class ColorChanger : MonoBehaviour
     public Data data;
     public List<Material> materials;
     public float HRockOffset;
+    public bool customRocksSV;
     public float SRock;
     public float VRock;
-    public List<Material> rockMaterials;
+    public List<RockMaterialListPosition> rockMaterials;
 
 
     void Update()
@@ -49,15 +58,24 @@ public class ColorChanger : MonoBehaviour
         V = VMax - (VMax - VMin) * Math.Abs(VPeriod/2f - VCounter)/(VPeriod/2f);
 
         color = Color.HSVToRGB(H/360, S, V);
-        rockColor = Color.HSVToRGB((H+HRockOffset)%360 / 360, SRock, VRock);
+        Color rockColor;
+        if (customRocksSV) {
+            rockColor = Color.HSVToRGB((H+HRockOffset)%360 / 360, SRock, VRock);
+        } else {
+            rockColor = Color.HSVToRGB((H + HRockOffset) % 360 / 360, S, V);
+        }
 
         foreach (Material material in materials)
         {
             material.color = color;
         }
-        foreach (Material material in rockMaterials)
+        foreach (RockMaterialListPosition rockMaterial in rockMaterials)
         {
-            material.color = rockColor;
+            float r = rockColor.r * (1 - rockMaterial.baseWeight) + rockMaterial.baseColor.r * rockMaterial.baseWeight;
+            float g = rockColor.g * (1 - rockMaterial.baseWeight) + rockMaterial.baseColor.g * rockMaterial.baseWeight;
+            float b = rockColor.b * (1 - rockMaterial.baseWeight) + rockMaterial.baseColor.b * rockMaterial.baseWeight;
+            Color finalColor = new Color(r, g, b);
+            rockMaterial.material.color = finalColor;
         }
     }
 }
