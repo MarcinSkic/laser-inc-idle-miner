@@ -37,7 +37,10 @@ public class ColorChanger : MonoBehaviour
     public List<Material> materials;
     public float HRockOffset;
     public bool customRocksSV;
+
+    [ConditionalField(nameof(customRocksSV))]
     public float SRock;
+    [ConditionalField(nameof(customRocksSV))]
     public float VRock;
     public List<RockMaterialListPosition> rockMaterials;
 
