@@ -11,6 +11,8 @@ public class UIDepthMeter : MonoBehaviour
     [SerializeField]
     List<TMP_Text> labels;
     [SerializeField]
+    private float depthHeightToRectHeightDivider = 400;
+    [SerializeField]
     private float depthToUVDivider;
     [SerializeField]
     private int gapsBeetwenLabels = 5;
@@ -20,6 +22,8 @@ public class UIDepthMeter : MonoBehaviour
     private float labelsBottomPadding = 30;
     [SerializeField]
     private int labelsWithHigherThanCurrentDepth = 2;
+    [SerializeField]
+    private int depthOffset = 20;
 
     private Rect slidingImageUvRect;
 
@@ -30,8 +34,9 @@ public class UIDepthMeter : MonoBehaviour
 
     public void SetDepth(double depth)
     {
+        depth += depthOffset;
         slidingImageUvRect.y = -(float)depth/depthToUVDivider;
-        slidingImageUvRect.height = CameraFovEnforcer.calculatedFov/11f;
+        slidingImageUvRect.height = ((RectTransform)transform).rect.height/ depthHeightToRectHeightDivider;
         slidingImage.uvRect = slidingImageUvRect;
 
         int labeledDepth = (int)depth-((int)depth)% gapsBeetwenLabels;

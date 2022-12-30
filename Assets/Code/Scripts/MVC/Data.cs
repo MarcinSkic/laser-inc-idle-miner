@@ -43,6 +43,7 @@ public class Data : MonoBehaviour
     [Space(10)]
 
     [Header("DEBUG")]
+    public double depthOffset = -18;
     [ReadOnly]
     public double realDepth = 0;
     
@@ -53,6 +54,7 @@ public class Data : MonoBehaviour
     void Awake()
     {
         CreateListOfBalls();
+        //realDepth += depthOffset;
 
         legacyUpgrades.Add("Damage", new LegacyUpgrade() { upgradeBaseCost = 1, upgradeMultCost = 1.4, upgradeMaxLevel = 0 });
         legacyUpgrades.Add("Bullet speed", new LegacyUpgrade() { upgradeBaseCost = 1, upgradeMultCost = 1.4, upgradeMaxLevel = 0 });
