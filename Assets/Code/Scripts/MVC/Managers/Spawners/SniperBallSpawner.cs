@@ -6,7 +6,7 @@ public class SniperBallSpawner : BallSpawner<SniperBall,BallData>
 {
     protected override void Get(SniperBall ball)
     {
-        ball.SetDataReference(data.ballsData[UpgradeableObjects.SniperBall]);
+        ball.SetDataReference(ballsModel.ballsData[UpgradeableObjects.SniperBall]);
         base.Get(ball);
     }
     protected override void Release(SniperBall element)

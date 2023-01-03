@@ -11,7 +11,7 @@ public class BallSpawner<Ball,Data> : BaseSpawner<Ball> where Ball : BaseBall<Da
     //TODO: Also make instantionsParent also universal for all balls
 
     [Header("TEMP")]
-    [SerializeField] protected global::Data data;
+    [SerializeField] protected BallsModel ballsModel;
 
     public override void Spawn(out Ball spawnedBall)
     {

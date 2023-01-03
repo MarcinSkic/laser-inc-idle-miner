@@ -14,7 +14,9 @@ public class BlockSpawner : BaseSpawner<BasicBlock>
     [SerializeField] private Vector3 spawnOffset;
 
     [Header("Temp")]
-    [SerializeField] private Data data;
+    [SerializeField] private BlocksModel model;
+    [SerializeField] private GameModel gameModel;
+    [SerializeField] private BlocksManager manager;
 
     private int column;
     private int columns;
@@ -82,11 +84,11 @@ public class BlockSpawner : BaseSpawner<BasicBlock>
         for (int i=blockTypes.Count-1; i>=0; i--)
         {
             double chance = 0;
-            if (data.depth >= blockTypes[i].fullDepth) {
+            if (gameModel.Depth >= blockTypes[i].fullDepth) {
                 chance = blockTypes[i].maxChance;
-            } else if (data.depth >= blockTypes[i].minDepth)
+            } else if (gameModel.Depth >= blockTypes[i].minDepth)
             {
-                double part = (data.depth - blockTypes[i].minDepth) / (blockTypes[i].fullDepth - blockTypes[i].minDepth);
+                double part = (gameModel.Depth - blockTypes[i].minDepth) / (blockTypes[i].fullDepth - blockTypes[i].minDepth);
                 chance = part * blockTypes[i].maxChance;
             }
             if (chance > Random.Range(0f, 1f))
@@ -95,8 +97,8 @@ public class BlockSpawner : BaseSpawner<BasicBlock>
                 break;
             }
         }
-        // int typeId = Random.Range(0, blockTypes.Length);
-        block.InitBlock(data.GetDepthBlocksHealth(), blockTypes[typeId].hpMultiplier, blockTypes[typeId].rewardMultiplier);
+
+        block.InitBlock(manager.GetDepthBlocksHealth(), blockTypes[typeId].hpMultiplier, blockTypes[typeId].rewardMultiplier);
         block.gameObject.GetComponent<Renderer>().material = blockTypes[typeId].material;
 
 
