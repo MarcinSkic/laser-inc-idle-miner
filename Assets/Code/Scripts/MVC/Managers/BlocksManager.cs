@@ -26,24 +26,24 @@ public class BlocksManager : MonoBehaviour
         bool condition;
         if (isMoving)
         {
-            condition = CheckForBlocksAboveY(blocks, 5f);   //TODO-FILIP Magic number
+            condition = CheckForBlocksAboveY(blocks, model.maximum_block_movement_y);
         }
         else
         {
-            condition = CheckForBlocksAboveY(blocks, 4.5f); //TODO-FILIP Magic number
+            condition = CheckForBlocksAboveY(blocks, model.maximum_block_movement_y - model.block_movement_trigger_difference_y);
         }
 
         if (!condition)
         {
             foreach (BasicBlock block in blocks)
             {
-                block.transform.position += new Vector3(0, model.speed, 0) * Time.deltaTime; // TODO: temp
+                block.transform.position += new Vector3(0, model.speed, 0) * Time.deltaTime;
             }
-            var bgTextures = model.movingBorderTexturesParent.GetComponentsInChildren<Transform>(false); //TODO: Very Temp
-            for (int i = 1; i < bgTextures.Length; i++) // i=1 ¿eby nie ³apa³o parenta
+            var bgTextures = model.movingBorderTexturesParent.GetComponentsInChildren<Transform>(false);
+            for (int i = 1; i < bgTextures.Length; i++)
             {
                 // Translate by³by z³y bo parent ma scale i rotation
-                bgTextures[i].position += new Vector3(0, model.speed, 0) * Time.deltaTime; // TODO: temp
+                bgTextures[i].position += new Vector3(0, model.speed, 0) * Time.deltaTime;
                 if (bgTextures[i].position.y >= 28f)
                 {
                     bgTextures[i].position -= new Vector3(0, 16.8f, 0);
@@ -73,7 +73,7 @@ public class BlocksManager : MonoBehaviour
     }
 
 
-    bool CheckForBlocksBelowY(BasicBlock[] blocks, float y = -21)   //TODO-FILIP Magic number
+    bool CheckForBlocksBelowY(BasicBlock[] blocks, float y)
     {
         foreach (BasicBlock block in blocks)
         {
@@ -87,7 +87,7 @@ public class BlocksManager : MonoBehaviour
 
     private void CheckIfWaveFinished(BasicBlock[] blocks)
     {
-        if (!CheckForBlocksBelowY(blocks))
+        if (!CheckForBlocksBelowY(blocks, model.block_spawning_trigger_minimum_y))
         {
 
             blockSpawner.SpawnBlockRow(out List<BasicBlock> spawnedBlocks);
@@ -100,6 +100,6 @@ public class BlocksManager : MonoBehaviour
     }
     public double GetDepthBlocksHealth()
     {
-        return (gameModel.Depth/10) * Math.Pow(1.03, gameModel.Depth / 10);  //TODO-FILIP 1.03 = Magic number
+        return (gameModel.Depth/10) * Math.Pow(model.block_health_exponentiation_base, gameModel.Depth / 10);
     }
 }
