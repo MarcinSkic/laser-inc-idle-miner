@@ -17,6 +17,6 @@ MonoBehaviour:
     material: {fileID: 2100000, guid: 43a17562d6f770941b40b6965aaab7a7, type: 2}
     hpMultiplier: 2
     rewardMultiplier: 3
-    minDepth: 1
-    fullDepth: 5
+    minDepth: 10
+    fullDepth: 50
     maxChance: 0.2

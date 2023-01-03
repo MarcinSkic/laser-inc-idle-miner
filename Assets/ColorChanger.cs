@@ -33,7 +33,7 @@ public class ColorChanger : MonoBehaviour
 
     /*[ReadOnly]*/ public Color color;
     /*[ReadOnly]*/ public Color rockColor;
-    public Data data;
+    public GameModel gameModel;
     public List<Material> copiedMaterials;
     public List<Material> materials;
     public float HRockOffset;
@@ -71,13 +71,13 @@ public class ColorChanger : MonoBehaviour
         //float lightness = Math.Max(0f, (255f - 50*(float)data.depth)/255f);
         //color = new Color(lightness, 1f, lightness, 1f);
 
-        H=((360f/Hperiod)*(float)data.depth)%360;
+        H=((360f/Hperiod)*(float)gameModel.Depth) %360;
 
-        SCounter = (float)data.depth % SPeriod;
+        SCounter = (float)gameModel.Depth % SPeriod;
 
         S = SMax - (SMax-SMin) * Math.Abs(SPeriod/2f - SCounter)/(SPeriod/2f);
 
-        VCounter = (float)data.depth % VPeriod;
+        VCounter = (float)gameModel.Depth % VPeriod;
 
         V = VMax - (VMax - VMin) * Math.Abs(VPeriod/2f - VCounter)/(VPeriod/2f);
 

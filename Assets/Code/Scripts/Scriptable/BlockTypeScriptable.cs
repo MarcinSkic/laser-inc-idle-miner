@@ -26,7 +26,6 @@ public class BlockTypeScriptable : ScriptableObject
         get
         {
             var block = Functions.GetObjectCopy(blockType);
-            // block.initialBlockType = Functions.GetObjectCopy(blockType);
             return block;
         }
         set => blockType = value;

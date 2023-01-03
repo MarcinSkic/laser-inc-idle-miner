@@ -14,7 +14,8 @@ using System;
 public class GameController : BaseController<GameView>
 {
     [Header("Models")]
-    [SerializeField] private Data data;
+    [SerializeField] private GameModel model;
+    [SerializeField] private BallsModel ballsModel;
     [SerializeField] private UpgradesModel upgradesModel;
     [SerializeField] private ResourcesModel resourcesModel;
 
@@ -22,12 +23,7 @@ public class GameController : BaseController<GameView>
     [SerializeField] private BlockSpawner blockSpawner;
     [SerializeField] private ResourcesManager resourcesManager;
     [SerializeField] private OfflineManager offlineManager;
-
-    [Header("Other")]   //Probably if you feel of putting something here, then it should have its own manager. This script should interact only with managers and his UI 
-    [SerializeField] private Transform _dynamic_blocks;   //TODO-FT-ARCHITECTURE
-    [SerializeField] private GameObject movingBorderTexturesParent;
-
-    private bool isMoving = true;
+    [SerializeField] private BlocksManager blocksManager;
 
     //KEEP MONOBEHAVIOUR METHODS (Start, Update etc.) ON TOP
     /// <summary>
@@ -40,7 +36,9 @@ public class GameController : BaseController<GameView>
         ConnectToUpgradesEvents();  //TODO-FT-CURRENT: Move this functionality to upgrade manager?
         ConnectToResourceManagerEvents();
         ConnectToOfflineManagerEvents();
-        ConnectToSettingsModelEvents();
+        ConnectToBlocksManagerEvents();
+        ConnectToGameModelEvents();
+        ConnectToSettingsModelEvents();      
         ConnectToViewElements();
 
         view.InitBottomButtonsEvent();
@@ -53,15 +51,16 @@ public class GameController : BaseController<GameView>
 
     private void Update()
     {
-        DisplayFPS();
-        
-
-        var blocks = _dynamic_blocks.GetComponentsInChildren<BasicBlock>(false); //TODO: Very Temp
-        MoveBlocks(blocks); // TODO: not optimal
-        CheckIfWaveFinished(blocks); // TODO: not optimal
+        DisplayFPS();      
     }
 
-
+    private void ConnectToUpgradesEvents()
+    {
+        foreach (var upgrade in upgradesModel.upgrades)
+        {
+            upgrade.AddOnTryUpgrade(TryBuyUpgrade);
+        }
+    }
 
     public void ConnectToResourceManagerEvents()
     {
@@ -73,22 +72,19 @@ public class GameController : BaseController<GameView>
         offlineManager.onReturnFromOffline += OnReturnFromOffline;
     }
 
+    private void ConnectToBlocksManagerEvents()
+    {
+        blocksManager.onBlockDestroyed += OnBlockDestroyed;
+    }
+
+    private void ConnectToGameModelEvents()
+    {
+        model.onDepthChange += OnDepthChange;  
+    }
+
     private void ConnectToSettingsModelEvents()
     {
         SettingsModel.Instance.onSettingsChange += UpdateSettings;
-    }
-
-    private void UpdateSettings()
-    {
-        view.debugWindow.SetActive(SettingsModel.Instance.showDebugWindow);
-
-        if (SettingsModel.Instance.changeTimeScale)
-        {
-            Time.timeScale = SettingsModel.Instance.timeScale;
-        } else
-        {
-            Time.timeScale = 1f;
-        }
     }
 
     private void ConnectToViewElements()
@@ -112,10 +108,18 @@ public class GameController : BaseController<GameView>
         Set60FPS(view.is60fps.isOn);
     }
 
-    private void OnReturnFromOffline(double seconds)
+    private void UpdateSettings()
     {
-        resourcesModel.offlineMoney = 420*seconds;    //TODO-FEATURE: CalculateOfflineMoney()
-        view.ShowOfflineTimePopup(seconds, resourcesModel.offlineMoney);
+        view.debugWindow.SetActive(SettingsModel.Instance.showDebugWindow);
+
+        if (SettingsModel.Instance.changeTimeScale)
+        {
+            Time.timeScale = SettingsModel.Instance.timeScale;
+        }
+        else
+        {
+            Time.timeScale = 1f;
+        }
     }
 
     public void Set60FPS(bool value)
@@ -131,7 +135,7 @@ public class GameController : BaseController<GameView>
 
     private void CreateBallBars()
     {
-        foreach(var ballType in data.ballsDataList)
+        foreach(var ballType in ballsModel.ballsDataList)
         {
             view.CreateBallBar(ballType);
         }
@@ -164,100 +168,23 @@ public class GameController : BaseController<GameView>
         }
     }
 
-    private void ConnectToUpgradesEvents()
-    {
-        foreach(var upgrade in upgradesModel.upgrades)
-        {
-            upgrade.AddOnTryUpgrade(TryBuyUpgrade);
-        }
-    }
-
-    private void MoveBlocks(BasicBlock[] blocks)
-    {
-        bool condition;
-        if (isMoving)
-        {
-            condition = CheckForBlocksAboveY(blocks, 5f);
-        } else
-        {
-            condition = CheckForBlocksAboveY(blocks, 4.5f);
-        }
-
-        if (!condition)
-        {
-            foreach (BasicBlock block in blocks)
-            {
-                block.transform.position += new Vector3(0, 5.0f, 0) * Time.deltaTime; // TODO: temp
-            }
-            var bgTextures = movingBorderTexturesParent.GetComponentsInChildren<Transform>(false); //TODO: Very Temp
-            for (int i=1; i< bgTextures.Length; i++) // i=1 żeby nie łapało parenta
-            {
-                // Translate byłby zły bo parent ma scale i rotation
-                bgTextures[i].position += new Vector3(0, 5.0f, 0) * Time.deltaTime ; // TODO: temp
-                if (bgTextures[i].position.y >= 28f)
-                {
-                    bgTextures[i].position -= new Vector3(0, 16.8f, 0);
-                }
-            }
-
-            data.realDepth += 5f * Time.deltaTime;
-            view.depthMeter.SetDepth(data.realDepth);
-
-            isMoving = true;
-        } 
-        else
-        {
-            isMoving = false;
-        }
-    }
-
-    bool CheckForBlocksAboveY(BasicBlock[] blocks, float y)
-    {
-        foreach (BasicBlock block in blocks)
-        {
-            if (block.transform.position.y > y)
-            {
-                return true;
-            }
-        }
-        return false;
-    }
-
-
-    bool CheckForBlocksBelowY(BasicBlock[] blocks, float y = -21)
-    {
-        foreach (BasicBlock block in blocks)
-        {
-            if (block.transform.position.y < y)
-            {
-                return true;
-            }
-        }
-        return false;
-    }
-
-    private void CheckIfWaveFinished(BasicBlock[] blocks)
-    {
-        if (!CheckForBlocksBelowY(blocks))
-        {
-
-            data.depth += data.depthPerWave;
-            view.SetBlocksHpDisplay(data.GetDepthBlocksHealth());
-
-            blockSpawner.SpawnBlockRow(out List <BasicBlock> spawnedBlocks);
-
-            for (int i=0; i<spawnedBlocks.Count; i++)
-            {
-                spawnedBlocks[i].AssignEvents(OnBlockDestroyed);
-            }
-        }
-    }
-
     private void OnBlockDestroyed(double money)
     {
         resourcesManager.IncreaseMoney(money);
         //TODO-FEATURE: Count destroyed blocks for upgrades/rewards
 
+    }
+
+    private void OnReturnFromOffline(double seconds)
+    {
+        resourcesModel.offlineMoney = 420 * seconds;    //TODO-FEATURE: CalculateOfflineMoney()
+        view.ShowOfflineTimePopup(seconds, resourcesModel.offlineMoney);
+    }
+    
+    private void OnDepthChange(double depth)
+    {
+        view.depthMeter.SetDepth(depth);
+        view.SetBlocksHpDisplay(blocksManager.GetDepthBlocksHealth());
     }
 
     private int fpsRefreshCounter = 0;

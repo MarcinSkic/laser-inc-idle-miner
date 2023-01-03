@@ -6,11 +6,13 @@ using System.Linq;
 
 public class UpgradesManager : MonoBehaviour
 {
+    [Header("Models")]
     [SerializeField]
     private UpgradesModel model;
     [SerializeField]
-    private Data data;
+    private BallsModel ballsModel;
 
+    [Header("Managers")]
     [SerializeField] private BasicBallSpawner basicBallSpawner;
     [SerializeField] private BombBallSpawner bombBallSpawner;
     [SerializeField] private SniperBallSpawner sniperBallSpawner;
@@ -47,7 +49,7 @@ public class UpgradesManager : MonoBehaviour
         {
             case <= UpgradeableObjects.AllBalls:
 
-                foreach (var pair in data.ballsData) {
+                foreach (var pair in ballsModel.ballsData) {
                     if (upgrade.upgradedObjects.HasFlag(pair.Key))
                     {
                         UpgradeBall(upgrade, pair.Value);
@@ -108,7 +110,7 @@ public class UpgradesManager : MonoBehaviour
     {
         if((upgrade.upgradedObjects <= UpgradeableObjects.AllBalls && ((int)upgrade.upgradedObjects % 2 == 0 || upgrade.upgradedObjects == UpgradeableObjects.BasicBall)) && ((int)upgrade.upgradedValues % 2 == 0 || upgrade.upgradedValues == UpgradeableValues.Speed))
         {
-            var value = GetValueByType(upgrade.upgradedValues, data.ballsData[upgrade.upgradedObjects]);
+            var value = GetValueByType(upgrade.upgradedValues, ballsModel.ballsData[upgrade.upgradedObjects]);
             upgrade.onValueUpdate.Invoke(value.value.ToString());
         } 
         else

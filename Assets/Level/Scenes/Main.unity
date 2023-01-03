@@ -1080,7 +1080,7 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 814282266}
-  m_RootOrder: 1
+  m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &231626579
 MonoBehaviour:
@@ -1101,7 +1101,9 @@ MonoBehaviour:
   xArea: 7
   randomOffset: {x: 0.2, y: 0.2}
   spawnOffset: {x: 0, y: -22, z: 0}
-  data: {fileID: 2078200401}
+  model: {fileID: 1947716360}
+  gameModel: {fileID: 1947716359}
+  manager: {fileID: 567613854}
   blockTypeScriptables:
   - {fileID: 11400000, guid: ea8612a399f467441a07d0b393803659, type: 2}
   - {fileID: 11400000, guid: 44a4eac19dac6ec4aa733111bb533b5c, type: 2}
@@ -1126,7 +1128,7 @@ MonoBehaviour:
   active: 0
   inactive: 0
   spawnArea: {x: 7.2, y: 0.5}
-  data: {fileID: 2078200401}
+  ballsModel: {fileID: 1947716361}
 --- !u!114 &231626581
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1144,7 +1146,7 @@ MonoBehaviour:
   active: 0
   inactive: 0
   spawnArea: {x: 7.2, y: 0.5}
-  data: {fileID: 2078200401}
+  ballsModel: {fileID: 1947716361}
 --- !u!114 &231626582
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1162,7 +1164,7 @@ MonoBehaviour:
   active: 0
   inactive: 0
   spawnArea: {x: 7.2, y: 0.5}
-  data: {fileID: 2078200401}
+  ballsModel: {fileID: 1947716361}
 --- !u!1 &231668855
 GameObject:
   m_ObjectHideFlags: 0
@@ -1815,14 +1817,14 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   view: {fileID: 48386113}
-  data: {fileID: 2078200401}
+  model: {fileID: 1947716359}
+  ballsModel: {fileID: 1947716361}
   upgradesModel: {fileID: 1947716357}
   resourcesModel: {fileID: 1947716358}
   blockSpawner: {fileID: 231626579}
   resourcesManager: {fileID: 567613852}
   offlineManager: {fileID: 567613853}
-  _dynamic_blocks: {fileID: 1235393438}
-  movingBorderTexturesParent: {fileID: 74388550}
+  blocksManager: {fileID: 567613854}
 --- !u!4 &383171361
 Transform:
   m_ObjectHideFlags: 0
@@ -3675,6 +3677,7 @@ GameObject:
   - component: {fileID: 567613851}
   - component: {fileID: 567613852}
   - component: {fileID: 567613853}
+  - component: {fileID: 567613854}
   m_Layer: 0
   m_Name: '@Managers'
   m_TagString: Untagged
@@ -3695,7 +3698,7 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 814282266}
-  m_RootOrder: 2
+  m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &567613851
 MonoBehaviour:
@@ -3710,7 +3713,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   model: {fileID: 1947716357}
-  data: {fileID: 2078200401}
+  ballsModel: {fileID: 1947716361}
   basicBallSpawner: {fileID: 231626582}
   bombBallSpawner: {fileID: 231626581}
   sniperBallSpawner: {fileID: 231626580}
@@ -3742,6 +3745,21 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   fileName: lastOnlineTime.dat
   minimumOfflineTimeInSeconds: 10
+--- !u!114 &567613854
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 567613849}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1da4e64438b71a043b17ebc4810efeaa, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  model: {fileID: 1947716360}
+  gameModel: {fileID: 1947716359}
+  blockSpawner: {fileID: 231626579}
 --- !u!1 &587280162
 GameObject:
   m_ObjectHideFlags: 0
@@ -4834,7 +4852,6 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
-  - {fileID: 2078200400}
   - {fileID: 231626578}
   - {fileID: 567613850}
   - {fileID: 1947716356}
@@ -7548,7 +7565,7 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 814282266}
-  m_RootOrder: 4
+  m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &1508174525
 MonoBehaviour:
@@ -7574,7 +7591,7 @@ MonoBehaviour:
   VMin: 0.9
   color: {r: 1, g: 1, b: 1, a: 1}
   rockColor: {r: 0, g: 0, b: 0, a: 0}
-  data: {fileID: 2078200401}
+  gameModel: {fileID: 1947716359}
   copiedMaterials: []
   materials:
   - {fileID: 2100000, guid: 9f23987b9b0297a4792b5241f01a6cee, type: 2}
@@ -7617,7 +7634,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   displayFloatingText: 0
-  showDebugWindow: 0
+  showDebugWindow: 1
   changeTimeScale: 0
   timeScale: 0.1
 --- !u!4 &1513135933
@@ -9151,8 +9168,11 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1947716356}
+  - component: {fileID: 1947716361}
   - component: {fileID: 1947716357}
   - component: {fileID: 1947716358}
+  - component: {fileID: 1947716360}
+  - component: {fileID: 1947716359}
   m_Layer: 0
   m_Name: '@Models'
   m_TagString: Untagged
@@ -9173,7 +9193,7 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 814282266}
-  m_RootOrder: 3
+  m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &1947716357
 MonoBehaviour:
@@ -9216,6 +9236,83 @@ MonoBehaviour:
   money: 183.55
   earnedMoney: 0
   offlineMoney: 0
+--- !u!114 &1947716359
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1947716355}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ec9e629ee39c2304eb4a0fa6a448c61a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  depth: 0
+--- !u!114 &1947716360
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1947716355}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 45b9548a37df75047b78702c348545ef, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  speed: 5
+  _dynamic_blocks: {fileID: 1235393438}
+  movingBorderTexturesParent: {fileID: 74388550}
+--- !u!114 &1947716361
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1947716355}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 869ac6ad55f1d16498f2c465f8b95556, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  ballsDataList:
+  - type: 1
+    nameForUI: 
+    sprite: {fileID: 21300000, guid: 3c0201ab08b7a554082f6d7da400c58b, type: 3}
+    valuesList:
+    - type: 1
+      name: 
+      value: 3
+    - type: 2
+      name: 
+      value: 1
+  - type: 2
+    nameForUI: 
+    sprite: {fileID: 21300000, guid: 0192c9fd2f408024fa0f75adeca8c000, type: 3}
+    valuesList:
+    - type: 1
+      name: 
+      value: 4
+    - type: 2
+      name: 
+      value: 1
+    - type: 4
+      name: SpeedBoost
+      value: 2
+  - type: 4
+    nameForUI: 
+    sprite: {fileID: 21300000, guid: 96c5a551b5e64bd4b93fe972d4acd642, type: 3}
+    valuesList:
+    - type: 1
+      name: 
+      value: 2
+    - type: 2
+      name: 
+      value: 3
+    - type: 4
+      name: ExplosionSize
+      value: 3
 --- !u!1 &1952372087
 GameObject:
   m_ObjectHideFlags: 0
@@ -9977,100 +10074,6 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2051652809}
   m_CullTransparentMesh: 1
---- !u!1 &2078200399
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 2078200400}
-  - component: {fileID: 2078200401}
-  m_Layer: 0
-  m_Name: '@Data'
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!4 &2078200400
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2078200399}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
-  m_Children: []
-  m_Father: {fileID: 814282266}
-  m_RootOrder: 0
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &2078200401
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2078200399}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 869ac6ad55f1d16498f2c465f8b95556, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  ballsDataList:
-  - type: 1
-    nameForUI: 
-    sprite: {fileID: 21300000, guid: 3c0201ab08b7a554082f6d7da400c58b, type: 3}
-    valuesList:
-    - type: 1
-      name: 
-      value: 3
-    - type: 2
-      name: 
-      value: 1
-  - type: 2
-    nameForUI: 
-    sprite: {fileID: 21300000, guid: 0192c9fd2f408024fa0f75adeca8c000, type: 3}
-    valuesList:
-    - type: 1
-      name: 
-      value: 4
-    - type: 2
-      name: 
-      value: 1
-    - type: 4
-      name: SpeedBoost
-      value: 2
-  - type: 4
-    nameForUI: 
-    sprite: {fileID: 21300000, guid: 96c5a551b5e64bd4b93fe972d4acd642, type: 3}
-    valuesList:
-    - type: 1
-      name: 
-      value: 2
-    - type: 2
-      name: 
-      value: 3
-    - type: 4
-      name: ExplosionSize
-      value: 3
-  legacyMoney: 0
-  legacyEarnedMoney: 0
-  basicBallCount: 0
-  bombBallCount: 0
-  sniperBallCount: 0
-  depthPerWave: 0.1
-  depth: 0
-  roundNumber: 0
-  roundTime: 0
-  depthOffset: -18
-  realDepth: 0
-  additionalStartingRound: 0
-  additionalStartingBalls: 0
 --- !u!1 &2078716645
 GameObject:
   m_ObjectHideFlags: 0
