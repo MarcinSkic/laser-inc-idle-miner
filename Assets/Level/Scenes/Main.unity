@@ -1825,6 +1825,7 @@ MonoBehaviour:
   resourcesManager: {fileID: 567613852}
   offlineManager: {fileID: 567613853}
   blocksManager: {fileID: 567613854}
+  savingManager: {fileID: 567613855}
 --- !u!4 &383171361
 Transform:
   m_ObjectHideFlags: 0
@@ -3678,6 +3679,7 @@ GameObject:
   - component: {fileID: 567613852}
   - component: {fileID: 567613853}
   - component: {fileID: 567613854}
+  - component: {fileID: 567613855}
   m_Layer: 0
   m_Name: '@Managers'
   m_TagString: Untagged
@@ -3760,6 +3762,19 @@ MonoBehaviour:
   model: {fileID: 1947716360}
   gameModel: {fileID: 1947716359}
   blockSpawner: {fileID: 231626579}
+--- !u!114 &567613855
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 567613849}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2109dd8fab46d974eb19b5def2df7eb8, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  model: {fileID: 1947716362}
 --- !u!1 &587280162
 GameObject:
   m_ObjectHideFlags: 0
@@ -3988,7 +4003,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &641563873
 RectTransform:
   m_ObjectHideFlags: 0
@@ -7633,6 +7648,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8df5f7b5fed88884bbe63da0e99d0e50, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  loadSaveFile: 1
   displayFloatingText: 0
   showDebugWindow: 1
   changeTimeScale: 0
@@ -9173,6 +9189,7 @@ GameObject:
   - component: {fileID: 1947716358}
   - component: {fileID: 1947716360}
   - component: {fileID: 1947716359}
+  - component: {fileID: 1947716362}
   m_Layer: 0
   m_Name: '@Models'
   m_TagString: Untagged
@@ -9317,6 +9334,19 @@ MonoBehaviour:
     - type: 4
       name: ExplosionSize
       value: 3
+--- !u!114 &1947716362
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1947716355}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: dc054c3500a758d448609fd6a88b6fa0, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  fileName: save.dat
 --- !u!1 &1952372087
 GameObject:
   m_ObjectHideFlags: 0

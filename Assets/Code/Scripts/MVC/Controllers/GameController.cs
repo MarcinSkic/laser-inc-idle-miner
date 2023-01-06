@@ -1,12 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using TMPro;
-using UnityEngine.UI;
-using static System.Math;
-using UnityEngine.Events;
-
-using System;
+using MyBox;
 
 /// <summary>
 /// Methods from this object should not be called by other objects. When such action direction is needed (for example UI or world events) it should connect methods to events HERE.
@@ -24,6 +19,7 @@ public class GameController : BaseController<GameView>
     [SerializeField] private ResourcesManager resourcesManager;
     [SerializeField] private OfflineManager offlineManager;
     [SerializeField] private BlocksManager blocksManager;
+    [AutoProperty(AutoPropertyMode.Scene)] [SerializeField] private SavingManager savingManager;
 
     //KEEP MONOBEHAVIOUR METHODS (Start, Update etc.) ON TOP
     /// <summary>
@@ -38,20 +34,55 @@ public class GameController : BaseController<GameView>
         ConnectToOfflineManagerEvents();
         ConnectToBlocksManagerEvents();
         ConnectToGameModelEvents();
-        ConnectToSettingsModelEvents();      
+        ConnectToSettingsModelEvents();
         ConnectToViewElements();
+
+        if (SettingsModel.Instance.loadSaveFile)
+        {
+            var loadSuccesful = LoadPersistentData();
+
+            if (!loadSuccesful)
+            {
+                LoadDefaults();
+            }
+        } 
+        else
+        {
+            LoadDefaults();
+        }
 
         view.InitBottomButtonsEvent();
         view.SwitchWindowButtons(null, "UpgradeWindow");
         ConnectBallBarsWithEvents();
 
         UpdateSettings();
-        resourcesManager.LoadInitialMoney();
+        
     }
 
     private void Update()
     {
         DisplayFPS();      
+    }
+
+    private void OnApplicationFocus(bool focus)
+    {
+        if (!focus)
+        {
+            SavePersistentData();
+        }
+    }
+
+    private void OnApplicationPause(bool pause)
+    {
+        if (pause)
+        {
+            SavePersistentData();
+        }
+    }
+
+    private void OnApplicationQuit()
+    {
+        
     }
 
     private void ConnectToUpgradesEvents()
@@ -187,25 +218,7 @@ public class GameController : BaseController<GameView>
         view.SetBlocksHpDisplay(blocksManager.GetDepthBlocksHealth());
     }
 
-    private int fpsRefreshCounter = 0;
-
-    void DisplayFPS()
-    {
-        float current;
-        if (fpsRefreshCounter == 0)
-        {
-            fpsRefreshCounter = 100;
-            current = Time.frameCount / Time.time;
-            view.avg_FpsDisplay.text = $"avg FPS: {Mathf.Round(current*10)/10f}";
-            view.fpsDisplay.text = $"FPS: {Mathf.Round(1 / Time.deltaTime)}";
-        } 
-        else
-        {
-            fpsRefreshCounter--;
-        }
-    }
-
-    public void TryBuyUpgrade(Upgrade upgrade)
+    private void TryBuyUpgrade(Upgrade upgrade)
     {
         if (!resourcesManager.TryDecreaseMoney(upgrade.cost))
         {
@@ -213,5 +226,50 @@ public class GameController : BaseController<GameView>
         }
 
         upgrade.DoUpgrade();
+    }
+
+    private void LoadDefaults()
+    {
+        resourcesManager.LoadInspectorMoney();
+    }
+
+    private void SavePersistentData()
+    {
+        PersistentData persistentData = new();
+
+        resourcesManager.SavePersistentData(persistentData);
+
+        savingManager.SavePersistentData(persistentData);
+    }
+
+    private bool LoadPersistentData()
+    {
+        PersistentData persistentData = savingManager.LoadPersistentData();
+
+        if(persistentData == null)
+        {
+            return false;
+        }
+
+        resourcesManager.LoadPersistentData(persistentData);
+
+        return true;
+    }
+
+    private int fpsRefreshCounter = 0;
+    private void DisplayFPS()
+    {
+        float current;
+        if (fpsRefreshCounter == 0)
+        {
+            fpsRefreshCounter = 100;
+            current = Time.frameCount / Time.time;
+            view.avg_FpsDisplay.text = $"avg FPS: {Mathf.Round(current * 10) / 10f}";
+            view.fpsDisplay.text = $"FPS: {Mathf.Round(1 / Time.deltaTime)}";
+        }
+        else
+        {
+            fpsRefreshCounter--;
+        }
     }
 }
