@@ -15,8 +15,9 @@ public static class Keys
 public enum UpgradeableObjects {
     BasicBall = 0b_0000_0000_0001, 
     SniperBall = 0b_0000_0000_0010, 
-    BombBall = 0b_0000_0000_0100, 
-    AllBalls = BasicBall | SniperBall | BombBall,
+    BombBall = 0b_0000_0000_0100,
+    LeechBall = 0b_0000_0000_1000,
+    AllBalls = BasicBall | SniperBall | BombBall | LeechBall,
 
     Miner = 0b_0001_0000_0000
 }
