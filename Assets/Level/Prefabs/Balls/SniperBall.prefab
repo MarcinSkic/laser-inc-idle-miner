@@ -63,6 +63,10 @@ PrefabInstance:
       propertyPath: m_Materials.Array.data[0]
       value: 
       objectReference: {fileID: 2100000, guid: 7bfd25127dc426f42af07ec7c13868e6, type: 2}
+    - target: {fileID: 7017461659481143617, guid: e0cd1037aff08914480e2affbf4e2fe6, type: 3}
+      propertyPath: m_Parameters.generateLightingData
+      value: 1
+      objectReference: {fileID: 0}
     m_RemovedComponents:
     - {fileID: 2441469365506886252, guid: e0cd1037aff08914480e2affbf4e2fe6, type: 3}
     - {fileID: 4739044985203712074, guid: e0cd1037aff08914480e2affbf4e2fe6, type: 3}
@@ -92,4 +96,3 @@ MonoBehaviour:
   rb: {fileID: 5416772939318271907}
   laserColor: {r: 0.06666667, g: 1, b: 0, a: 1}
   laserRotationSpeedDegrees: 360
-  gameController: {fileID: 0}
