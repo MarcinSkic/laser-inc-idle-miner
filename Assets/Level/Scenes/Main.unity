@@ -9349,7 +9349,7 @@ MonoBehaviour:
       value: 1
     - type: 2
       name: 
-      value: 5
+      value: 0.5
     - type: 4
       name: HomingSpeed
       value: 1
