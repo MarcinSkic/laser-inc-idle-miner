@@ -20,6 +20,7 @@ public class SettingsModel : MonoBehaviour
         }
     }
 
+    public bool loadSaveFile = true;
     public bool displayFloatingText;
     public bool showDebugWindow;
     [Space(5)]
