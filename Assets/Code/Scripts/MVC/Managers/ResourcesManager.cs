@@ -22,8 +22,7 @@ public class ResourcesManager : MonoBehaviour
         }
     }
 
-    //TODO-FT-SAVEFILE
-    public void LoadInitialMoney()
+    public void LoadInspectorMoney()
     {
         Money = model.money;
     }
@@ -49,5 +48,15 @@ public class ResourcesManager : MonoBehaviour
             Money -= value;
             return true;
         }
+    }
+
+    public void SavePersistentData(PersistentData data)
+    {
+        data.money = Money;
+    }
+
+    public void LoadPersistentData(PersistentData data)
+    {
+        Money = data.money;
     }
 }
