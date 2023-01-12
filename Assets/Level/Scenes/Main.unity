@@ -1060,6 +1060,7 @@ GameObject:
   - component: {fileID: 231626582}
   - component: {fileID: 231626581}
   - component: {fileID: 231626580}
+  - component: {fileID: 231626583}
   m_Layer: 0
   m_Name: '@Spawners'
   m_TagString: Untagged
@@ -1160,6 +1161,24 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   prefab: {fileID: 4739044985203712074, guid: e0cd1037aff08914480e2affbf4e2fe6, type: 3}
+  instantionsParent: {fileID: 54048869}
+  active: 0
+  inactive: 0
+  spawnArea: {x: 7.2, y: 0.5}
+  ballsModel: {fileID: 1947716361}
+--- !u!114 &231626583
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 231626577}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b7699226411d93c41b94a6e9311118c3, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  prefab: {fileID: 8829928954720027443, guid: ff0ab062fe4bf514895c00a7da2d5899, type: 3}
   instantionsParent: {fileID: 54048869}
   active: 0
   inactive: 0
@@ -3719,6 +3738,7 @@ MonoBehaviour:
   basicBallSpawner: {fileID: 231626582}
   bombBallSpawner: {fileID: 231626581}
   sniperBallSpawner: {fileID: 231626580}
+  leechBallSpawner: {fileID: 231626583}
   blocksParent: {fileID: 1235393438}
 --- !u!114 &567613852
 MonoBehaviour:
@@ -9236,6 +9256,9 @@ MonoBehaviour:
   - {fileID: 11400000, guid: 3706e72bebefa4a48a4e0a5a5ccbf45a, type: 2}
   - {fileID: 11400000, guid: b5fdc013a36388b45895d5becc4fddbe, type: 2}
   - {fileID: 11400000, guid: f0e5e0837f17ef043a33c7f6088f04a8, type: 2}
+  - {fileID: 11400000, guid: dbc6e9b02fc1fb740a3558c69b3e5e68, type: 2}
+  - {fileID: 11400000, guid: df83c4cecf24e04458ddc3786621c7c2, type: 2}
+  - {fileID: 11400000, guid: efa8117b943802c42bce34c5cf03c57b, type: 2}
   upgrades: []
 --- !u!114 &1947716358
 MonoBehaviour:
@@ -9334,6 +9357,19 @@ MonoBehaviour:
     - type: 4
       name: ExplosionSize
       value: 3
+  - type: 8
+    nameForUI: 
+    sprite: {fileID: 21300000, guid: d81c38b8911f89d439a563274f2ce019, type: 3}
+    valuesList:
+    - type: 1
+      name: 
+      value: 1
+    - type: 2
+      name: 
+      value: 0.5
+    - type: 4
+      name: HomingSpeed
+      value: 1
 --- !u!114 &1947716362
 MonoBehaviour:
   m_ObjectHideFlags: 0

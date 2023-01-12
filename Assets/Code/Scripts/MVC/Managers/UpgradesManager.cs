@@ -16,6 +16,7 @@ public class UpgradesManager : MonoBehaviour
     [SerializeField] private BasicBallSpawner basicBallSpawner;
     [SerializeField] private BombBallSpawner bombBallSpawner;
     [SerializeField] private SniperBallSpawner sniperBallSpawner;
+    [SerializeField] private LeechBallSpawner leechBallSpawner;
 
     [SerializeField] private Transform blocksParent;
 
@@ -93,6 +94,18 @@ public class UpgradesManager : MonoBehaviour
                 sniperBallSpawner.Spawn(out var ball);
                 ball.SetVariables(blocksParent);
                 upgrade.onValueUpdate.Invoke(sniperBallSpawner.active.ToString());
+
+                foreach (var speedUpgrade in speedUpgrades)
+                {
+                    speedUpgrade.onValueUpdate += ball.Upgrade;
+                }
+            }
+
+            if (upgrade.upgradedObjects.HasFlag(UpgradeableObjects.LeechBall))
+            {
+                leechBallSpawner.Spawn(out var ball);
+                ball.SetVariables(blocksParent);
+                upgrade.onValueUpdate.Invoke(leechBallSpawner.active.ToString());
 
                 foreach (var speedUpgrade in speedUpgrades)
                 {
