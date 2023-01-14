@@ -14,7 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   blockType:
     name: copper
-    material: {fileID: 2100000, guid: 43a17562d6f770941b40b6965aaab7a7, type: 2}
+    material: {fileID: 2100000, guid: 2469b93a2589d104db0e5ac532479fbd, type: 2}
     hpMultiplier: 2
     rewardMultiplier: 3
     minDepth: 10

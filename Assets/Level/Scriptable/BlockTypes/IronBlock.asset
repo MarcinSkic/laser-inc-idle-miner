@@ -14,7 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   blockType:
     name: iron
-    material: {fileID: 2100000, guid: ee16a907398389f4c8d6ebb732e215c3, type: 2}
+    material: {fileID: 2100000, guid: 10501d9147e052047a75f5b2e16fd1b1, type: 2}
     hpMultiplier: 3
     rewardMultiplier: 5
     minDepth: 30

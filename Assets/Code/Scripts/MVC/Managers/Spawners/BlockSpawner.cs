@@ -99,7 +99,9 @@ public class BlockSpawner : BaseSpawner<BasicBlock>
         }
 
         block.InitBlock(manager.GetDepthBlocksHealth(), blockTypes[typeId].hpMultiplier, blockTypes[typeId].rewardMultiplier);
-        block.gameObject.GetComponent<Renderer>().material = blockTypes[typeId].material;
+        Material[] mats = block.gameObject.GetComponentInChildren<MeshRenderer>().materials;
+        mats[1] = blockTypes[typeId].material;
+        block.gameObject.GetComponentInChildren<MeshRenderer>().materials = mats;
 
 
         base.Get(block);

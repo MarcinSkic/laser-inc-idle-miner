@@ -14,7 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   blockType:
     name: normal
-    material: {fileID: 2100000, guid: f698bcbc3f9bba34d8e07abca69afd21, type: 2}
+    material: {fileID: 2100000, guid: 51aa78f12b90d0547ad5a9d0fc849808, type: 2}
     hpMultiplier: 1
     rewardMultiplier: 1
     minDepth: 0
