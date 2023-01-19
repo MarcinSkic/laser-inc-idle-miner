@@ -1223,6 +1223,7 @@ MonoBehaviour:
   model: {fileID: 1947716360}
   gameModel: {fileID: 1947716359}
   manager: {fileID: 567613854}
+  minExistingY: 0
   blockTypeScriptables:
   - {fileID: 11400000, guid: ea8612a399f467441a07d0b393803659, type: 2}
   - {fileID: 11400000, guid: 44a4eac19dac6ec4aa733111bb533b5c, type: 2}
@@ -1230,6 +1231,8 @@ MonoBehaviour:
   - {fileID: 11400000, guid: 0b075f9b0effd8a448c7aef507cb3ea4, type: 2}
   - {fileID: 11400000, guid: 7be4ea09a7529e54aac428532def278c, type: 2}
   blockTypes: []
+  ifSpawningOnGrid: 1
+  alwaysSpawnMinerals: 1
 --- !u!114 &231626580
 MonoBehaviour:
   m_ObjectHideFlags: 0

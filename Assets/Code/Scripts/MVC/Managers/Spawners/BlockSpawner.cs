@@ -21,10 +21,16 @@ public class BlockSpawner : BaseSpawner<BasicBlock>
     private int column;
     private int columns;
 
+    public float minExistingY = 0;
+
     [InitializationField]
     public List<BlockTypeScriptable> blockTypeScriptables;
     [ReadOnly]
     public List<BlockType> blockTypes;
+
+    [Header("DEBUG")]
+    [SerializeField] private bool ifSpawningOnGrid;
+    [SerializeField] private bool alwaysSpawnMinerals;
     
 
     protected override void Awake()
@@ -52,16 +58,21 @@ public class BlockSpawner : BaseSpawner<BasicBlock>
     public void SpawnBlockRow(out List <BasicBlock> spawnedBlocks)
     {
         //base.Spawn(out BasicBlock block);
-        spawnedBlocks = new List <BasicBlock>();
+        spawnedBlocks = new List<BasicBlock>();
 
-        columns = Random.Range(7, 10);
+        if (ifSpawningOnGrid) {
+            columns = 8;
+        } else {
+            columns = Random.Range(7, 10);
+        }
 
-        for (column = 0; column<columns; column++)
+        for (column = 0; column < columns; column++)
         {
             Spawn(out BasicBlock spawnedBlock);
             spawnedBlocks.Add(spawnedBlock);
-            
+
         }
+
     }
 
     public override void Spawn(out BasicBlock spawnedBlock)
@@ -71,8 +82,15 @@ public class BlockSpawner : BaseSpawner<BasicBlock>
         float xPos;
         // xPos = Random.Range(-spawnArea.x, spawnArea.x);
         xPos = ((column/((columns)-1f))*2f-1f)*xArea;
-        xPos += Random.Range(-randomOffset.x, randomOffset.x);
-        float yPos = Random.Range(-randomOffset.y, randomOffset.y);
+        float yPos = 0;
+        if (!ifSpawningOnGrid)
+        {
+            xPos += Random.Range(-randomOffset.x, randomOffset.x);
+            yPos += Random.Range(-randomOffset.y, randomOffset.y);
+        } else
+        {
+            yPos += minExistingY - 1.236094f - spawnOffset.y;
+        }
 
         block.transform.position = spawnOffset + new Vector3(xPos, yPos, 0);
         spawnedBlock = block;
@@ -84,7 +102,7 @@ public class BlockSpawner : BaseSpawner<BasicBlock>
         for (int i=blockTypes.Count-1; i>=0; i--)
         {
             double chance = 0;
-            if (gameModel.Depth >= blockTypes[i].fullDepth) {
+            if (gameModel.Depth >= blockTypes[i].fullDepth || alwaysSpawnMinerals) {
                 chance = blockTypes[i].maxChance;
             } else if (gameModel.Depth >= blockTypes[i].minDepth)
             {
