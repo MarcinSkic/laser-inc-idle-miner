@@ -14,6 +14,8 @@ public class BlocksManager : MonoBehaviour
 
     private bool isMoving = true;
 
+    public int blockMovementsInARow = 0;
+
     private void Update()
     {
         var blocks = model._dynamic_blocks.GetComponentsInChildren<BasicBlock>(false); //TODO: Very Temp
@@ -26,15 +28,16 @@ public class BlocksManager : MonoBehaviour
         bool condition;
         if (isMoving)
         {
-            condition = CheckForBlocksAboveY(blocks, model.maximum_block_movement_y);
+            condition = !CheckForBlocksAboveY(blocks, model.maximum_block_movement_y);
         }
         else
         {
-            condition = CheckForBlocksAboveY(blocks, model.maximum_block_movement_y - model.block_movement_trigger_difference_y);
+            condition = !CheckForBlocksAboveY(blocks, model.maximum_block_movement_y - model.block_movement_trigger_difference_y);
         }
 
-        if (!condition)
+        if (condition)
         {
+            blockMovementsInARow++;
             foreach (BasicBlock block in blocks)
             {
                 block.transform.position += new Vector3(0, model.speed, 0) * Time.deltaTime;
@@ -57,6 +60,7 @@ public class BlocksManager : MonoBehaviour
         }
         else
         {
+            blockMovementsInARow = 0;
             isMoving = false;
         }
     }

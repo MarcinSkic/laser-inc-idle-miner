@@ -1230,6 +1230,7 @@ MonoBehaviour:
   - {fileID: 11400000, guid: 59867da9890bbc64caab170ad0a14971, type: 2}
   - {fileID: 11400000, guid: 0b075f9b0effd8a448c7aef507cb3ea4, type: 2}
   - {fileID: 11400000, guid: 7be4ea09a7529e54aac428532def278c, type: 2}
+  - {fileID: 11400000, guid: 5d8c5a2bf13464b4bbf998ff4c63f049, type: 2}
   blockTypes: []
   ifSpawningOnGrid: 1
   alwaysSpawnMinerals: 1
@@ -4299,6 +4300,7 @@ MonoBehaviour:
   model: {fileID: 1947716360}
   gameModel: {fileID: 1947716359}
   blockSpawner: {fileID: 231626579}
+  blockMovementsInARow: 0
 --- !u!114 &567613855
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -4868,7 +4870,6 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 681594764}
-  - component: {fileID: 681594765}
   m_Layer: 0
   m_Name: Ring1
   m_TagString: Untagged
@@ -4892,19 +4893,6 @@ Transform:
   m_Father: {fileID: 1252013148}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &681594765
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 681594763}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 025d86a857c3dc148b8050c81289db10, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  DegsPerSecond: 30
 --- !u!1 &693854964
 GameObject:
   m_ObjectHideFlags: 0
@@ -5900,6 +5888,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1045354742}
+  - component: {fileID: 1045354743}
   m_Layer: 0
   m_Name: Miner
   m_TagString: Untagged
@@ -5924,6 +5913,33 @@ Transform:
   m_Father: {fileID: 1064644890}
   m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: 22.5, y: 0, z: -90}
+--- !u!114 &1045354743
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1045354741}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 025d86a857c3dc148b8050c81289db10, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  blocksManager: {fileID: 567613854}
+  MinDegsPerSecond: 10
+  DegsPerSecondPerMovement: 1
+  MaxDegsPerSecond: 60
+  rotationChangeSofteningRatio: 0.95
+  lastRotation: 0
+  rings:
+  - {fileID: 681594763}
+  MinLightIntensity: 50
+  LightIntensityPerMovement: 4
+  MaxLightIntensity: 250
+  lightIntensityChangeSofteningRatio: 0.95
+  lastLightIntensity: 50
+  lights:
+  - {fileID: 302244562}
 --- !u!1 &1046271726
 GameObject:
   m_ObjectHideFlags: 0
