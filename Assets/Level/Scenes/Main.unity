@@ -8443,7 +8443,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   loadSaveFile: 1
   displayFloatingText: 0
-  showDebugWindow: 1
+  showDebugWindow: 0
   changeTimeScale: 0
   timeScale: 0.1
 --- !u!4 &1513135933

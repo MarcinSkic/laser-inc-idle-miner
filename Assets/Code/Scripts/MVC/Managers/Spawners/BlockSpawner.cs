@@ -117,9 +117,22 @@ public class BlockSpawner : BaseSpawner<BasicBlock>
         }
 
         block.InitBlock(manager.GetDepthBlocksHealth(), blockTypes[typeId].hpMultiplier, blockTypes[typeId].rewardMultiplier);
-        Material[] mats = block.gameObject.GetComponentInChildren<MeshRenderer>().materials;
-        mats[1] = blockTypes[typeId].material;
-        block.gameObject.GetComponentInChildren<MeshRenderer>().materials = mats;
+
+        int oreModelIndex = Random.Range(0, 6);
+        // TODO get rid of those GetChild
+        Transform ModelsParent = block.gameObject.transform.GetChild(1).GetChild(0);
+
+        // set ore model
+        for (int i = 0; i < 6; i++)
+        {
+            ModelsParent.GetChild(i).gameObject.SetActive(false);
+        }
+        ModelsParent.GetChild(oreModelIndex).gameObject.SetActive(true);
+        // set ore material
+        ModelsParent.GetChild(oreModelIndex).GetComponentInChildren<MeshRenderer>().material = blockTypes[typeId].material;
+        // set ore rotation
+        int whetherToRotate = Random.Range(0, 2);
+        ModelsParent.parent.rotation = Quaternion.Euler(new Vector3(0, 0, whetherToRotate*180));
 
 
         base.Get(block);
