@@ -16,6 +16,8 @@ public class BlocksManager : MonoBehaviour
 
     public int blockMovementsInARow = 0;
 
+    [SerializeField] private float backgroundYChange;
+
     private void Update()
     {
         var blocks = model._dynamic_blocks.GetComponentsInChildren<BasicBlock>(false); //TODO: Very Temp
@@ -50,7 +52,7 @@ public class BlocksManager : MonoBehaviour
                 bgTextures[i].position += blockMovement;
                 if (bgTextures[i].position.y >= 28f)
                 {
-                    bgTextures[i].position -= new Vector3(0, 16.8f, 0);
+                    bgTextures[i].position -= new Vector3(0, backgroundYChange, 0);
                 }
             }
 

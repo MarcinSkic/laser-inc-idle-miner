@@ -4301,6 +4301,7 @@ MonoBehaviour:
   gameModel: {fileID: 1947716359}
   blockSpawner: {fileID: 231626579}
   blockMovementsInARow: 0
+  backgroundYChange: 14
 --- !u!114 &567613855
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -5927,14 +5928,14 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   blocksManager: {fileID: 567613854}
   MinDegsPerSecond: 10
-  DegsPerSecondPerMovement: 1
+  DegsPerSecondPerMovement: 0.5
   MaxDegsPerSecond: 60
   rotationChangeSofteningRatio: 0.95
   lastRotation: 0
   rings:
   - {fileID: 681594763}
   MinLightIntensity: 50
-  LightIntensityPerMovement: 4
+  LightIntensityPerMovement: 2
   MaxLightIntensity: 250
   lightIntensityChangeSofteningRatio: 0.95
   lastLightIntensity: 50
