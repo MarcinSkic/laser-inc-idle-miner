@@ -43,6 +43,7 @@ public class GameView : BaseView
 
     [Header("Settings Tab")]
     public Toggle is60fps;
+    public Toggle displayFloatingDamage;
 
     [Header("Debug Window")]
     public GameObject debugWindow;

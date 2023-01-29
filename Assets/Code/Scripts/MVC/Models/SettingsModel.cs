@@ -21,12 +21,40 @@ public class SettingsModel : MonoBehaviour
     }
 
     public bool loadSaveFile = true;
-    public bool displayFloatingText;
     public bool showDebugWindow;
     [Space(5)]
     public bool changeTimeScale;
     [ConditionalField(nameof(changeTimeScale))]
     public float timeScale = 1f;
+
+    [Header("Settings edited from game UI")]
+    [ReadOnly][SerializeField] private bool is60fps;
+    public bool Is60fps
+    {
+        get
+        {
+            return is60fps;
+        }
+        set
+        {
+            is60fps = value;
+            onSettingsChange?.Invoke();
+        }
+    }
+
+    [ReadOnly][SerializeField] private bool displayFloatingText;
+    public bool DisplayFloatingText
+    {
+        get
+        {
+            return displayFloatingText;
+        }
+        set
+        {
+            displayFloatingText = value;
+            onSettingsChange?.Invoke();
+        }
+    }
 
     public UnityAction onSettingsChange;
 
