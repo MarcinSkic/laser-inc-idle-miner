@@ -44,7 +44,7 @@ public class BasicBlock : MonoBehaviour, IPoolable<BasicBlock>
             RemoveBlock();
         }
 
-        if (SettingsModel.Instance.displayFloatingText)   
+        if (SettingsModel.Instance.DisplayFloatingText)   
         {
             FloatingTextController.Instance.CreateFloatingText(damage.ToString(), transform);
         }

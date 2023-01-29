@@ -137,6 +137,9 @@ public class GameController : BaseController<GameView>
 
         view.is60fps.onValueChanged.AddListener(value => { SettingsModel.Instance.Is60fps = value; });
         SettingsModel.Instance.Is60fps = view.is60fps.isOn;
+
+        view.displayFloatingDamage.onValueChanged.AddListener(value => { SettingsModel.Instance.DisplayFloatingText = value; });
+        SettingsModel.Instance.DisplayFloatingText = view.displayFloatingDamage.isOn;
     }
 
     private void UpdateSettings()

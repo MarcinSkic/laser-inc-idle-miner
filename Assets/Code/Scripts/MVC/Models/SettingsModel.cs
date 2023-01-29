@@ -38,11 +38,23 @@ public class SettingsModel : MonoBehaviour
         set
         {
             is60fps = value;
-            onSettingsChange.Invoke();
+            onSettingsChange?.Invoke();
         }
     }
 
-    [ReadOnly][SerializeField] public bool displayFloatingText;
+    [ReadOnly][SerializeField] private bool displayFloatingText;
+    public bool DisplayFloatingText
+    {
+        get
+        {
+            return displayFloatingText;
+        }
+        set
+        {
+            displayFloatingText = value;
+            onSettingsChange?.Invoke();
+        }
+    }
 
     public UnityAction onSettingsChange;
 
