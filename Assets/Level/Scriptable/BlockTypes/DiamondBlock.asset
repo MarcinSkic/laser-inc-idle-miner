@@ -14,7 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   blockType:
     name: diamond
-    material: {fileID: 2100000, guid: 726fcaaf930bee6469e02a4a9639857c, type: 2}
+    material: {fileID: 2100000, guid: ad560a930e452f34d8e8e98f9f6e39cb, type: 2}
     hpMultiplier: 10
     rewardMultiplier: 25
     minDepth: 100

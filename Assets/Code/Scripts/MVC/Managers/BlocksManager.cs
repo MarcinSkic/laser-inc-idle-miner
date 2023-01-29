@@ -14,6 +14,10 @@ public class BlocksManager : MonoBehaviour
 
     private bool isMoving = true;
 
+    public int blockMovementsInARow = 0;
+
+    [SerializeField] private float backgroundYChange;
+
     private void Update()
     {
         var blocks = model._dynamic_blocks.GetComponentsInChildren<BasicBlock>(false); //TODO: Very Temp
@@ -26,15 +30,16 @@ public class BlocksManager : MonoBehaviour
         bool condition;
         if (isMoving)
         {
-            condition = CheckForBlocksAboveY(blocks, model.maximum_block_movement_y);
+            condition = !CheckForBlocksAboveY(blocks, model.maximum_block_movement_y);
         }
         else
         {
-            condition = CheckForBlocksAboveY(blocks, model.maximum_block_movement_y - model.block_movement_trigger_difference_y);
+            condition = !CheckForBlocksAboveY(blocks, model.maximum_block_movement_y - model.block_movement_trigger_difference_y);
         }
 
-        if (!condition)
+        if (condition)
         {
+            blockMovementsInARow++;
             foreach (BasicBlock block in blocks)
             {
                 block.transform.position += new Vector3(0, model.speed, 0) * Time.deltaTime;
@@ -43,10 +48,11 @@ public class BlocksManager : MonoBehaviour
             for (int i = 1; i < bgTextures.Length; i++)
             {
                 // Translate by³by z³y bo parent ma scale i rotation
-                bgTextures[i].position += new Vector3(0, model.speed, 0) * Time.deltaTime;
+                Vector3 blockMovement = new Vector3(0, model.speed, 0) * Time.deltaTime;
+                bgTextures[i].position += blockMovement;
                 if (bgTextures[i].position.y >= 28f)
                 {
-                    bgTextures[i].position -= new Vector3(0, 16.8f, 0);
+                    bgTextures[i].position -= new Vector3(0, backgroundYChange, 0);
                 }
             }
 
@@ -56,6 +62,7 @@ public class BlocksManager : MonoBehaviour
         }
         else
         {
+            blockMovementsInARow = 0;
             isMoving = false;
         }
     }
@@ -72,6 +79,18 @@ public class BlocksManager : MonoBehaviour
         return false;
     }
 
+    public float GetMinBlockY(BasicBlock[] blocks)
+    {
+        float minY = -18f;
+        foreach (BasicBlock block in blocks)
+        {
+            if (block.transform.position.y < minY)
+            {
+                minY = block.transform.position.y;
+            }
+        }
+        return minY;
+    }
 
     bool CheckForBlocksBelowY(BasicBlock[] blocks, float y)
     {
@@ -89,7 +108,7 @@ public class BlocksManager : MonoBehaviour
     {
         if (!CheckForBlocksBelowY(blocks, model.block_spawning_trigger_minimum_y))
         {
-
+            blockSpawner.minExistingY = GetMinBlockY(blocks);
             blockSpawner.SpawnBlockRow(out List<BasicBlock> spawnedBlocks);
 
             for (int i = 0; i < spawnedBlocks.Count; i++)
