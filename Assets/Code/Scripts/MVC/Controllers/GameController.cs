@@ -135,8 +135,8 @@ public class GameController : BaseController<GameView>
             view.SetOfflineMoney(resourcesModel.offlineMoney); 
         };
 
-        view.is60fps.onValueChanged.AddListener(Set60FPS);
-        Set60FPS(view.is60fps.isOn);
+        view.is60fps.onValueChanged.AddListener(value => { SettingsModel.Instance.Is60fps = value; });
+        SettingsModel.Instance.Is60fps = view.is60fps.isOn;
     }
 
     private void UpdateSettings()
@@ -151,14 +151,12 @@ public class GameController : BaseController<GameView>
         {
             Time.timeScale = 1f;
         }
-    }
 
-    public void Set60FPS(bool value)
-    {
-        if (value)
+        if (SettingsModel.Instance.Is60fps)
         {
             Application.targetFrameRate = 60;
-        } else
+        }
+        else
         {
             Application.targetFrameRate = 30;
         }
