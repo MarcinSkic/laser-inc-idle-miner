@@ -19,7 +19,22 @@ public class PersistentData
     public double money;
     #endregion
 
+    #region BallsModel
 
+    #endregion
+
+    #region BlocksModel
+
+    #endregion
+
+    #region UpgradesModel
+
+    #endregion
+
+    #region SettingsModel
+    public bool is60fps;
+    public bool displayFloatingText;
+    #endregion
 
     public PersistentData()
     {

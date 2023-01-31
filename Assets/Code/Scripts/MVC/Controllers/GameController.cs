@@ -27,16 +27,26 @@ public class GameController : BaseController<GameView>
     /// </summary>
     void Start()
     {
+        #region UI Creation
         CreateBallBars();
+        #endregion
 
-        ConnectToUpgradesEvents();  //TODO-FT-CURRENT: Move this functionality to upgrade manager?
+        #region UI Initialization
+        view.InitBottomButtonsEvent();
+        #endregion
+
+        #region UI Default Execution
+        view.SwitchWindowButtons(null, "UpgradeWindow");
+        #endregion
+
+        #region Event connections where loading data triggers event
         ConnectToResourceManagerEvents();
-        ConnectToOfflineManagerEvents();
-        ConnectToBlocksManagerEvents();
         ConnectToGameModelEvents();
         ConnectToSettingsModelEvents();
         ConnectToViewElements();
+        #endregion
 
+        #region Loading Saved Data
         if (SettingsModel.Instance.loadSaveFile)
         {
             var loadSuccesful = LoadPersistentData();
@@ -45,18 +55,24 @@ public class GameController : BaseController<GameView>
             {
                 LoadDefaults();
             }
-        } 
+        }
         else
         {
             LoadDefaults();
         }
+        #endregion
 
-        view.InitBottomButtonsEvent();
-        view.SwitchWindowButtons(null, "UpgradeWindow");
+        #region Methods that require loaded data
+        ConnectToUpgradesEvents();  //TODO-FT-CURRENT: Move this functionality to upgrade manager?
         ConnectBallBarsWithEvents();
+        UpdateSettingsViewBySavedData();
+        #endregion
 
+        #region Methods independent from calling order
+        ConnectToOfflineManagerEvents();
+        ConnectToBlocksManagerEvents();
         UpdateSettings();
-        
+        #endregion
     }
 
     private void Update()
@@ -140,6 +156,12 @@ public class GameController : BaseController<GameView>
 
         view.displayFloatingDamage.onValueChanged.AddListener(value => { SettingsModel.Instance.DisplayFloatingText = value; });
         SettingsModel.Instance.DisplayFloatingText = view.displayFloatingDamage.isOn;
+    }
+
+    private void UpdateSettingsViewBySavedData()
+    {
+        view.is60fps.isOn = SettingsModel.Instance.Is60fps;
+        view.displayFloatingDamage.isOn = SettingsModel.Instance.DisplayFloatingText;
     }
 
     private void UpdateSettings()
@@ -232,6 +254,7 @@ public class GameController : BaseController<GameView>
     private void LoadDefaults()
     {
         resourcesManager.LoadInspectorMoney();
+
     }
 
     private void SavePersistentData()
@@ -239,6 +262,7 @@ public class GameController : BaseController<GameView>
         PersistentData persistentData = new();
 
         resourcesManager.SavePersistentData(persistentData);
+        SettingsModel.Instance.SavePersistentData(persistentData);
 
         savingManager.SavePersistentData(persistentData);
     }
@@ -253,6 +277,7 @@ public class GameController : BaseController<GameView>
         }
 
         resourcesManager.LoadPersistentData(persistentData);
+        SettingsModel.Instance.LoadPersistentData(persistentData);
 
         return true;
     }

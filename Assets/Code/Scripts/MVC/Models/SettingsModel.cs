@@ -6,6 +6,7 @@ using MyBox;
 
 public class SettingsModel : MonoBehaviour
 {
+    #region Singleton
     public static SettingsModel Instance;
     private void Awake()
     {
@@ -19,6 +20,7 @@ public class SettingsModel : MonoBehaviour
             DontDestroyOnLoad(gameObject);
         }
     }
+    #endregion
 
     public bool loadSaveFile = true;
     public bool showDebugWindow;
@@ -61,5 +63,17 @@ public class SettingsModel : MonoBehaviour
     private void OnValidate()
     {
         onSettingsChange?.Invoke();
+    }
+
+    public void SavePersistentData(PersistentData data)
+    {
+        data.is60fps = Is60fps;
+        data.displayFloatingText = DisplayFloatingText;
+    }
+
+    public void LoadPersistentData(PersistentData data)
+    {
+        Is60fps = data.is60fps;
+        DisplayFloatingText = data.displayFloatingText;
     }
 }
