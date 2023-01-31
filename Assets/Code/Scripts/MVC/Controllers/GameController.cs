@@ -103,7 +103,7 @@ public class GameController : BaseController<GameView>
 
     private void ConnectToUpgradesEvents()
     {
-        foreach (var upgrade in upgradesModel.upgrades)
+        foreach (var upgrade in upgradesModel.upgrades.Values)
         {
             upgrade.AddOnTryUpgrade(TryBuyUpgrade);
         }
@@ -201,7 +201,7 @@ public class GameController : BaseController<GameView>
         {
             foreach(var buttonUpgrade in ballBar.buttonUpgrades)
             {
-                var upgrade = upgradesModel.GetUpgrade(buttonUpgrade.upgradeName);
+                var upgrade = upgradesModel.upgrades[buttonUpgrade.upgradeName];
                 if(upgrade != null)
                 {
                     buttonUpgrade.Init();

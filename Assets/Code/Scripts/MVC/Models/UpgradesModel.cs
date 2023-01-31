@@ -10,13 +10,8 @@ public class UpgradesModel : MonoBehaviour
     [InitializationField]
     private List<UpgradeScriptable> upgradesScriptable;
 
-    [Header("Debug")]
-    public List<Upgrade> upgrades;
 
-    public Upgrade GetUpgrade(string name)
-    {
-        return upgrades.Find(upgrade => upgrade.name == name);
-    }
+    public Dictionary<string,Upgrade> upgrades; 
 
     private void Awake()
     {
@@ -25,22 +20,13 @@ public class UpgradesModel : MonoBehaviour
 
     private void TransformScriptablesIntoUpgrades()
     {
-        upgrades = new List<Upgrade>();
+        upgrades = new Dictionary<string, Upgrade>();
 
         foreach(var scriptable in upgradesScriptable)
         {
             var upgrade = scriptable.Upgrade;
             upgrade.GenerateName();
-            upgrades.Add(upgrade);
-        }
-    }
-
-    [ContextMenu("Full upgrades prestige")]
-    private void TestFullPrestige()
-    {
-        for(int i = 0; i < upgrades.Count; i++)
-        {
-            upgrades[i] = Functions.GetObjectCopy(upgrades[i].initialUpgrade);
+            upgrades[upgrade.name] = upgrade;
         }
     }
 }

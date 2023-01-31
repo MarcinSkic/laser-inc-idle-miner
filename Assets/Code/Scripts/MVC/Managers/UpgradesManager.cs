@@ -27,8 +27,7 @@ public class UpgradesManager : MonoBehaviour
 
     private void ProcessUpgrades()
     {
-        var upgrades = model.upgrades;
-        foreach(var upgrade in upgrades)
+        foreach(var upgrade in model.upgrades.Values)
         {
             switch (upgrade.type)
             {
@@ -64,7 +63,7 @@ public class UpgradesManager : MonoBehaviour
     {
         if(upgrade.upgradedObjects <= UpgradeableObjects.AllBalls)
         {
-            var speedUpgrades = model.upgrades.Where(upgrade => upgrade.upgradedValues.HasFlag(UpgradeableValues.Speed));
+            var speedUpgrades = model.upgrades.Values.Where(upgrade => upgrade.upgradedValues.HasFlag(UpgradeableValues.Speed));
 
             if (upgrade.upgradedObjects.HasFlag(UpgradeableObjects.BasicBall))
             {
