@@ -16,6 +16,9 @@ public class BasicBlock : MonoBehaviour, IPoolable<BasicBlock>
     protected double maxHp;
     protected double reward;
 
+    private FloatingText floatingRepeatedText = null;
+    private double repeatedTotalValue=0;
+
     void OnMouseOver()
     {
         if (Input.GetMouseButtonDown(0)){
@@ -35,7 +38,22 @@ public class BasicBlock : MonoBehaviour, IPoolable<BasicBlock>
         this.onBlockDestroyed = onBlockDestroyed;
     }
 
-    public void TakeDamage(double damage)
+    public void DisplayDamageTaken(double damage, bool repeating = false)
+    {
+        if (repeating) {
+            if (floatingRepeatedText) {
+                Destroy(floatingRepeatedText.gameObject);
+                repeatedTotalValue += damage;
+            } else {
+                repeatedTotalValue = damage;
+            }
+            floatingRepeatedText = FloatingTextController.Instance.CreateFloatingText(repeatedTotalValue.ToString("F2"), transform);
+        } else {
+            FloatingTextController.Instance.CreateFloatingText(damage.ToString("F2"), transform);
+        }
+    }
+
+    public void TakeDamage(double damage, bool repeating=false)
     {
         hp -= damage;
 
@@ -46,7 +64,7 @@ public class BasicBlock : MonoBehaviour, IPoolable<BasicBlock>
 
         if (SettingsModel.Instance.DisplayFloatingText)   
         {
-            FloatingTextController.Instance.CreateFloatingText(damage.ToString(), transform);
+            DisplayDamageTaken(damage, repeating);
         }
         
     }
