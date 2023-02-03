@@ -16,4 +16,12 @@ public class ShadowBall : BaseBall<BallData>, IPoolable<ShadowBall>, IUpgradeabl
             block.TakePoison(Data.values[UpgradeableValues.Damage]);
         }
     }*/
+
+    public void handleDetectionFromTrigger(Collider collider)
+    {
+        if (collider.gameObject.TryGetComponent<BasicBlock>(out var block))
+        {
+            block.TakeDamage(Data.values[UpgradeableValues.Damage]);
+        }
+    }
 }

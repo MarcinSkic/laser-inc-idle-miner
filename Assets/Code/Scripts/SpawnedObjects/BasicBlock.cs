@@ -29,13 +29,13 @@ public class BasicBlock : MonoBehaviour, IPoolable<BasicBlock>
     private FloatingText floatingRepeatedText = null;
     private double repeatedTotalValue=0;
 
-    void OnMouseOver()
+/*    void OnMouseOver()
     {
-        if (Input.GetMouseButtonDown(0)){
+        //if (Input.GetMouseButtonDown(0)){
             TakeDamage(1);
-        }
+        //}
     }
-
+*/
     public void InitBlock(double baseHp, double hpMultiplier, double rewardMultiplier)
     {
         maxHp = baseHp*hpMultiplier;
