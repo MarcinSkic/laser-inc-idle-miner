@@ -15,6 +15,16 @@ public class BasicBlock : MonoBehaviour, IPoolable<BasicBlock>
     protected double hp;
     protected double maxHp;
     protected double reward;
+    protected double poisonPerSecond = 0;
+
+    public void FixedUpdate()
+    {
+        if (poisonPerSecond>0)
+        {
+            // TODO - can be optimized
+            TakeDamage(poisonPerSecond * Time.deltaTime);
+        }
+    }
 
     private FloatingText floatingRepeatedText = null;
     private double repeatedTotalValue=0;
@@ -67,6 +77,11 @@ public class BasicBlock : MonoBehaviour, IPoolable<BasicBlock>
             DisplayDamageTaken(damage, repeating);
         }
         
+    }
+
+    public void TakePoison(double damagePerSecond)
+    {
+        poisonPerSecond += damagePerSecond;
     }
 
     /// <summary>
