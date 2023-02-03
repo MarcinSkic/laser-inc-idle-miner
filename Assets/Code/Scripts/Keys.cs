@@ -18,7 +18,8 @@ public enum UpgradeableObjects {
     BombBall = 0b_0000_0000_0100,
     LeechBall = 0b_0000_0000_1000,
     PoisonBall = 0b_0000_0001_0000,
-    AllBalls = BasicBall | SniperBall | BombBall | LeechBall | PoisonBall,
+    ShadowBall = 0b_0000_0010_0000,
+    AllBalls = BasicBall | SniperBall | BombBall | LeechBall | PoisonBall | ShadowBall,
 
     Miner = 0b_0001_0000_0000
 }
