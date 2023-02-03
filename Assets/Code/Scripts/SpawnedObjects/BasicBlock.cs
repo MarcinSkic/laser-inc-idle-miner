@@ -41,6 +41,7 @@ public class BasicBlock : MonoBehaviour, IPoolable<BasicBlock>
         maxHp = baseHp*hpMultiplier;
         hp = maxHp;
         reward = maxHp * rewardMultiplier;
+        poisonPerSecond = 0;
     }
 
     public void AssignEvents(UnityAction<double> onBlockDestroyed)
