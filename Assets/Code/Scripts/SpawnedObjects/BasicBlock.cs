@@ -21,6 +21,7 @@ public class BasicBlock : MonoBehaviour, IPoolable<BasicBlock>
     {
         if (poisonPerSecond>0)
         {
+            // TODO - can be optimized
             TakeDamage(poisonPerSecond * Time.deltaTime);
         }
     }
