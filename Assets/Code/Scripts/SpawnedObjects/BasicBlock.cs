@@ -15,6 +15,15 @@ public class BasicBlock : MonoBehaviour, IPoolable<BasicBlock>
     protected double hp;
     protected double maxHp;
     protected double reward;
+    protected double poisonPerSecond = 0;
+
+    public void FixedUpdate()
+    {
+        if (poisonPerSecond>0)
+        {
+            TakeDamage(poisonPerSecond * Time.deltaTime);
+        }
+    }
 
     void OnMouseOver()
     {
@@ -49,6 +58,11 @@ public class BasicBlock : MonoBehaviour, IPoolable<BasicBlock>
             FloatingTextController.Instance.CreateFloatingText(damage.ToString(), transform);
         }
         
+    }
+
+    public void TakePoison(double damagePerSecond)
+    {
+        poisonPerSecond += damagePerSecond;
     }
 
     /// <summary>

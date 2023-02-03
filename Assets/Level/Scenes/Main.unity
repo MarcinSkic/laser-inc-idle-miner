@@ -1180,6 +1180,7 @@ GameObject:
   - component: {fileID: 231626581}
   - component: {fileID: 231626580}
   - component: {fileID: 231626583}
+  - component: {fileID: 231626584}
   m_Layer: 0
   m_Name: '@Spawners'
   m_TagString: Untagged
@@ -1302,6 +1303,24 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   prefab: {fileID: 8829928954720027443, guid: ff0ab062fe4bf514895c00a7da2d5899, type: 3}
+  instantionsParent: {fileID: 54048869}
+  active: 0
+  inactive: 0
+  spawnArea: {x: 7.2, y: 0.5}
+  ballsModel: {fileID: 1947716361}
+--- !u!114 &231626584
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 231626577}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ec2b3bddc19fbba419a4e393453fa19d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  prefab: {fileID: 1261763391811980465, guid: 450430e94c79aed4f8f1cf86dbbd5f41, type: 3}
   instantionsParent: {fileID: 54048869}
   active: 0
   inactive: 0
@@ -4393,6 +4412,7 @@ MonoBehaviour:
   bombBallSpawner: {fileID: 231626581}
   sniperBallSpawner: {fileID: 231626580}
   leechBallSpawner: {fileID: 231626583}
+  poisonBallSpawner: {fileID: 231626584}
   blocksParent: {fileID: 1235393438}
 --- !u!114 &567613852
 MonoBehaviour:
@@ -10453,6 +10473,9 @@ MonoBehaviour:
   - {fileID: 11400000, guid: dbc6e9b02fc1fb740a3558c69b3e5e68, type: 2}
   - {fileID: 11400000, guid: df83c4cecf24e04458ddc3786621c7c2, type: 2}
   - {fileID: 11400000, guid: efa8117b943802c42bce34c5cf03c57b, type: 2}
+  - {fileID: 11400000, guid: b86d3cd949165d7438cfa9c5641371cb, type: 2}
+  - {fileID: 11400000, guid: 4bb34836069f99340a3bbf100c3cbd66, type: 2}
+  - {fileID: 11400000, guid: c774231217784e14e929d56a0c9c71f9, type: 2}
   upgrades: []
 --- !u!114 &1947716358
 MonoBehaviour:
@@ -10563,6 +10586,19 @@ MonoBehaviour:
       value: 0.5
     - type: 4
       name: HomingSpeed
+      value: 1
+  - type: 16
+    nameForUI: 
+    sprite: {fileID: 21300000, guid: 0192c9fd2f408024fa0f75adeca8c000, type: 3}
+    valuesList:
+    - type: 1
+      name: 
+      value: 1
+    - type: 2
+      name: 
+      value: 0.2
+    - type: 4
+      name: PoisonMultiplierOrSth
       value: 1
 --- !u!114 &1947716362
 MonoBehaviour:
