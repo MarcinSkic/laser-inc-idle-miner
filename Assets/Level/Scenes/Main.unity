@@ -1181,6 +1181,7 @@ GameObject:
   - component: {fileID: 231626580}
   - component: {fileID: 231626583}
   - component: {fileID: 231626584}
+  - component: {fileID: 231626585}
   m_Layer: 0
   m_Name: '@Spawners'
   m_TagString: Untagged
@@ -1321,6 +1322,24 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   prefab: {fileID: 1261763391811980465, guid: 450430e94c79aed4f8f1cf86dbbd5f41, type: 3}
+  instantionsParent: {fileID: 54048869}
+  active: 0
+  inactive: 0
+  spawnArea: {x: 7.2, y: 0.5}
+  ballsModel: {fileID: 1947716361}
+--- !u!114 &231626585
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 231626577}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: aaf8287167606ad499acb805ea77f04b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  prefab: {fileID: 8898530462743335456, guid: 288ac1e31cf7b9b4e9a6159e08f7317b, type: 3}
   instantionsParent: {fileID: 54048869}
   active: 0
   inactive: 0
@@ -4413,6 +4432,7 @@ MonoBehaviour:
   sniperBallSpawner: {fileID: 231626580}
   leechBallSpawner: {fileID: 231626583}
   poisonBallSpawner: {fileID: 231626584}
+  shadowBallSpawner: {fileID: 231626585}
   blocksParent: {fileID: 1235393438}
 --- !u!114 &567613852
 MonoBehaviour:
@@ -10476,6 +10496,9 @@ MonoBehaviour:
   - {fileID: 11400000, guid: b86d3cd949165d7438cfa9c5641371cb, type: 2}
   - {fileID: 11400000, guid: 4bb34836069f99340a3bbf100c3cbd66, type: 2}
   - {fileID: 11400000, guid: c774231217784e14e929d56a0c9c71f9, type: 2}
+  - {fileID: 11400000, guid: 3bc399c159830074fb87bb08206835e0, type: 2}
+  - {fileID: 11400000, guid: ec1b95814b977fe42811fd01821eb77c, type: 2}
+  - {fileID: 11400000, guid: 10d20ad43ddf2ae4f8d22cd0ff3ab8e1, type: 2}
   upgrades: []
 --- !u!114 &1947716358
 MonoBehaviour:
@@ -10599,6 +10622,19 @@ MonoBehaviour:
       value: 0.2
     - type: 4
       name: PoisonMultiplierOrSth
+      value: 1
+  - type: 32
+    nameForUI: 
+    sprite: {fileID: 21300000, guid: 3c0201ab08b7a554082f6d7da400c58b, type: 3}
+    valuesList:
+    - type: 1
+      name: 
+      value: 1
+    - type: 2
+      name: 
+      value: 1
+    - type: 4
+      name: '?'
       value: 1
 --- !u!114 &1947716362
 MonoBehaviour:
