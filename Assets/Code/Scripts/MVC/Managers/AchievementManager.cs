@@ -90,30 +90,25 @@ public class AchievementManager : MonoBehaviour
                     return;
                 }
             }
-            // TAK, COMPLETED!!!
             isCompleted = true;
+            achievementManager.onAchievementUnlocked?.Invoke(this);
             Debug.Log($"COMPLETED ACHIEVEMENT: {name} - {description}");
-
             for (int j = 0; j < requirements.Length; j++)
             {
                 DependsOn requirement = requirements[j].dependsOn;
                 if (requirement == DependsOn.Depth)
                 {
                     achievementManager.gameModel.onDepthChange -= checkIfCompleted;
-                    Debug.Log($"odpiento onDepthChange do {name}");
                 }
                 if (requirement == DependsOn.DestroyedBlocksCount)
                 {
                     achievementManager.blocksModel.onDestroyedBlocksCountChange -= checkIfCompleted;
-                    Debug.Log($"odpiento onDestroyedBlocksCountChange do {name}");
                 }
                 if (requirement == DependsOn.Money || requirement == DependsOn.EarnedMoney)
                 {
                     achievementManager.resourcesManager.onMoneyChange -= checkIfCompleted;
-                    Debug.Log($"odpiento onMoneyChange do {name}");
                 }
             }
-            achievementManager.onAchievementUnlocked?.Invoke(this);
         }
     }
 
@@ -131,21 +126,16 @@ public class AchievementManager : MonoBehaviour
                 if (requirement == (DependsOn.Depth))
                 {
                     gameModel.onDepthChange += achievements[i].checkIfCompleted;
-                    Debug.Log($"podpiento onDepthChange do {achievements[i].name}");
                 }
                 if (requirement == (DependsOn.DestroyedBlocksCount))
                 {
                     blocksModel.onDestroyedBlocksCountChange += achievements[i].checkIfCompleted;
-                    Debug.Log($"podpiento onDestroyedBlocksCountChange do {achievements[i].name}");
                 }
                 if (requirement == (DependsOn.Money) || requirement == (DependsOn.EarnedMoney))
                 {
                     resourcesManager.onMoneyChange += achievements[i].checkIfCompleted;
-                    Debug.Log($"podpiento onMoneyChange do {achievements[i].name}");
                 }
             }
         }
-        // blocksModel.onDestroyedBlocksCountChange += updateAchievementsState;
-        // resourcesManager.onMoneyChange += Costam;
     }
 }
