@@ -67,6 +67,12 @@ public class BlocksManager : MonoBehaviour
         }
     }
 
+    public void incrementDestroyedBlocksCount()
+    {
+        model.destroyedBlocksCount = model.destroyedBlocksCount+1;
+        model.onDestroyedBlocksCountChange?.Invoke(model.destroyedBlocksCount);
+    }
+
     bool CheckForBlocksAboveY(BasicBlock[] blocks, float y)
     {
         foreach (BasicBlock block in blocks)

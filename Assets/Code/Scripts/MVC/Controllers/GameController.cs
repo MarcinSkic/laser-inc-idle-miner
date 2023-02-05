@@ -225,6 +225,7 @@ public class GameController : BaseController<GameView>
     private void OnBlockDestroyed(double money)
     {
         resourcesManager.IncreaseMoney(money);
+        blocksManager.incrementDestroyedBlocksCount();
         //TODO-FEATURE: Count destroyed blocks for upgrades/rewards
 
     }

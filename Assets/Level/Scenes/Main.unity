@@ -4391,6 +4391,7 @@ GameObject:
   - component: {fileID: 567613853}
   - component: {fileID: 567613854}
   - component: {fileID: 567613855}
+  - component: {fileID: 567613856}
   m_Layer: 0
   m_Name: '@Managers'
   m_TagString: Untagged
@@ -4491,6 +4492,74 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   model: {fileID: 1947716362}
+--- !u!114 &567613856
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 567613849}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: bc956a7a13729e345a2b9d13d688380c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  gameModel: {fileID: 1947716359}
+  blocksModel: {fileID: 1947716360}
+  resourcesManager: {fileID: 567613852}
+  resourcesModel: {fileID: 1947716358}
+  achievements:
+  - achievementManager: {fileID: 0}
+    name: First steps
+    description: destroy 1 blocks
+    isCompleted: 0
+    requirements:
+    - dependsOn: 1
+      comparison: 1
+      requiredValue: 1
+  - achievementManager: {fileID: 0}
+    name: Mining down
+    description: reach depth of 30 meters
+    isCompleted: 0
+    requirements:
+    - dependsOn: 0
+      comparison: 1
+      requiredValue: 30
+  - achievementManager: {fileID: 0}
+    name: Money accumulation
+    description: Save 500 money
+    isCompleted: 0
+    requirements:
+    - dependsOn: 2
+      comparison: 1
+      requiredValue: 500
+  - achievementManager: {fileID: 0}
+    name: Money maker
+    description: make a total of 1000 money
+    isCompleted: 0
+    requirements:
+    - dependsOn: 3
+      comparison: 1
+      requiredValue: 1000
+  - achievementManager: {fileID: 0}
+    name: Beginner miner
+    description: reach depth of 30 meters and destroy 50 blocks
+    isCompleted: 0
+    requirements:
+    - dependsOn: 0
+      comparison: 1
+      requiredValue: 30
+    - dependsOn: 1
+      comparison: 1
+      requiredValue: 50
+  - achievementManager: {fileID: 0}
+    name: 50 blocks destroyed
+    description: destroy 50 blocks
+    isCompleted: 0
+    requirements:
+    - dependsOn: 1
+      comparison: 1
+      requiredValue: 50
 --- !u!1 &587280162
 GameObject:
   m_ObjectHideFlags: 0
@@ -10690,6 +10759,7 @@ MonoBehaviour:
   block_spawning_trigger_minimum_y: -21
   _dynamic_blocks: {fileID: 1235393438}
   movingBorderTexturesParent: {fileID: 74388550}
+  destroyedBlocks: 0
 --- !u!114 &1947716361
 MonoBehaviour:
   m_ObjectHideFlags: 0
