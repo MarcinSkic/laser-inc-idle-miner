@@ -28,7 +28,11 @@ public class PersistentData
     #endregion
 
     #region UpgradesModel
+    public Upgrade[] upgrades;
+    #endregion
 
+    #region GameModel
+    public double depth;
     #endregion
 
     #region SettingsModel

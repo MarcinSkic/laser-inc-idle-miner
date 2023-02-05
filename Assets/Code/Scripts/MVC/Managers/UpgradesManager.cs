@@ -22,12 +22,12 @@ public class UpgradesManager : MonoBehaviour
 
     [SerializeField] private Transform blocksParent;
 
-    private void Start()
+    private void Awake()
     {
-        ProcessUpgrades();
+        model.TransformScriptablesIntoUpgrades();
     }
 
-    private void ProcessUpgrades()
+    public void ProcessUpgrades()
     {
         foreach(var upgrade in model.upgrades.Values)
         {
@@ -194,6 +194,22 @@ public class UpgradesManager : MonoBehaviour
         else
         {
             upgrade.onValueUpdate.Invoke(string.Format("{0:f2}", value.value));
+        }
+    }
+
+    public void SavePersistentData(PersistentData data)
+    {
+        data.upgrades = model.upgrades.Values.ToArray();
+    }
+
+    public void LoadPersistentData(PersistentData data)
+    {
+        if (data.upgrades != null)
+        {
+            foreach (var upgrade in data.upgrades)
+            {
+                model.upgrades[upgrade.name] = upgrade;
+            }
         }
     }
 }

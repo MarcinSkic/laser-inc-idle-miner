@@ -10,15 +10,9 @@ public class UpgradesModel : MonoBehaviour
     [InitializationField]
     private List<UpgradeScriptable> upgradesScriptable;
 
+    public Dictionary<string,Upgrade> upgrades;
 
-    public Dictionary<string,Upgrade> upgrades; 
-
-    private void Awake()
-    {
-        TransformScriptablesIntoUpgrades();
-    }
-
-    private void TransformScriptablesIntoUpgrades()
+    public void TransformScriptablesIntoUpgrades()
     {
         upgrades = new Dictionary<string, Upgrade>();
 
