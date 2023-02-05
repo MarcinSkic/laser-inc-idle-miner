@@ -15,19 +15,33 @@ public class BasicBlock : MonoBehaviour, IPoolable<BasicBlock>
     protected double hp;
     protected double maxHp;
     protected double reward;
+    protected double poisonPerSecond = 0;
 
-    void OnMouseOver()
+    public void FixedUpdate()
     {
-        if (Input.GetMouseButtonDown(0)){
-            TakeDamage(1);
+        if (poisonPerSecond>0)
+        {
+            // TODO - can be optimized
+            TakeDamage(poisonPerSecond * Time.deltaTime, true);
         }
     }
 
+    private FloatingText floatingRepeatedText = null;
+    private double repeatedTotalValue=0;
+
+/*    void OnMouseOver()
+    {
+        //if (Input.GetMouseButtonDown(0)){
+            TakeDamage(1);
+        //}
+    }
+*/
     public void InitBlock(double baseHp, double hpMultiplier, double rewardMultiplier)
     {
         maxHp = baseHp*hpMultiplier;
         hp = maxHp;
         reward = maxHp * rewardMultiplier;
+        poisonPerSecond = 0;
     }
 
     public void AssignEvents(UnityAction<double> onBlockDestroyed)
@@ -35,7 +49,22 @@ public class BasicBlock : MonoBehaviour, IPoolable<BasicBlock>
         this.onBlockDestroyed = onBlockDestroyed;
     }
 
-    public void TakeDamage(double damage)
+    public void DisplayDamageTaken(double damage, bool repeating = false)
+    {
+        if (repeating) {
+            if (floatingRepeatedText) {
+                Destroy(floatingRepeatedText.gameObject);
+                repeatedTotalValue += damage;
+            } else {
+                repeatedTotalValue = damage;
+            }
+            floatingRepeatedText = FloatingTextController.Instance.CreateFloatingText(repeatedTotalValue.ToString("F2"), transform);
+        } else {
+            FloatingTextController.Instance.CreateFloatingText(damage.ToString("F2"), transform);
+        }
+    }
+
+    public void TakeDamage(double damage, bool repeating=false)
     {
         hp -= damage;
 
@@ -46,9 +75,14 @@ public class BasicBlock : MonoBehaviour, IPoolable<BasicBlock>
 
         if (SettingsModel.Instance.DisplayFloatingText)   
         {
-            FloatingTextController.Instance.CreateFloatingText(damage.ToString(), transform);
+            DisplayDamageTaken(damage, repeating);
         }
         
+    }
+
+    public void TakePoison(double damagePerSecond)
+    {
+        poisonPerSecond += damagePerSecond;
     }
 
     /// <summary>

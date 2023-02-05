@@ -20,7 +20,7 @@ public class LeechBall : BaseBall<BallData>, IPoolable<LeechBall>, IUpgradeable<
         if (leechedBlock && leechedBlock.isActiveAndEnabled)
         {
             // deal {damage} damage/s
-            leechedBlock.TakeDamage(Data.values[UpgradeableValues.Damage]*Time.deltaTime);
+            leechedBlock.TakeDamage(Data.values[UpgradeableValues.Damage]*Time.deltaTime, true);
 
             // move leech together with its block
             Vector3 newLeechedBlockPosition = leechedBlock.transform.position;
