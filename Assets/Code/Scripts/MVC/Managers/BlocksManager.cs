@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using System;
 using UnityEngine.Events;
+using System.Linq;
 
 public class BlocksManager : MonoBehaviour
 {
@@ -126,5 +127,20 @@ public class BlocksManager : MonoBehaviour
     public double GetDepthBlocksHealth()
     {
         return (gameModel.Depth/10) * Math.Pow(model.block_health_exponentiation_base, gameModel.Depth / 10);
+    }
+
+    public void SavePersistentData(PersistentData data)
+    {
+        data.blocksPositions = model._dynamic_blocks.GetComponentsInChildren<BasicBlock>(false).Select(block => new Vector2(block.transform.position.x,block.transform.position.y)).ToArray();
+    }
+
+    public void LoadPersistentData(PersistentData data)
+    {
+        blockSpawner.SpawnBlocksOnPositions(data.blocksPositions, out List<BasicBlock> spawnedBlocks);
+
+        for (int i = 0; i < spawnedBlocks.Count; i++)
+        {
+            spawnedBlocks[i].AssignEvents(onBlockDestroyed);
+        }
     }
 }

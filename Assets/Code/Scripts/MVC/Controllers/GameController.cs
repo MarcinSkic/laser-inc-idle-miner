@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 using MyBox;
+using UnityEngine.Events;
 
 /// <summary>
 /// Methods from this object should not be called by other objects. When such action direction is needed (for example UI or world events) it should connect methods to events HERE.
@@ -15,6 +16,7 @@ public class GameController : BaseController<GameView>
     [SerializeField] private ResourcesModel resourcesModel;
 
     [Header("Managers")]
+    [AutoProperty(AutoPropertyMode.Scene)] [SerializeField] private UpgradesManager upgradesManager;
     [SerializeField] private BlockSpawner blockSpawner;
     [SerializeField] private ResourcesManager resourcesManager;
     [SerializeField] private OfflineManager offlineManager;
@@ -66,6 +68,8 @@ public class GameController : BaseController<GameView>
         ConnectToUpgradesEvents();  //TODO-FT-CURRENT: Move this functionality to upgrade manager?
         ConnectBallBarsWithEvents();
         UpdateSettingsViewBySavedData();
+        upgradesManager.ConnectUpgrades();  //Order important
+        upgradesManager.ExecuteLoadedUpgrades(); //Order important
         #endregion
 
         #region Methods independent from calling order
@@ -73,7 +77,10 @@ public class GameController : BaseController<GameView>
         ConnectToBlocksManagerEvents();
         UpdateSettings();
         #endregion
+
+        onSetupFinished?.Invoke();
     }
+    public UnityAction onSetupFinished;
 
     private void Update()
     {
@@ -103,7 +110,7 @@ public class GameController : BaseController<GameView>
 
     private void ConnectToUpgradesEvents()
     {
-        foreach (var upgrade in upgradesModel.upgrades)
+        foreach (var upgrade in upgradesModel.upgrades.Values)
         {
             upgrade.AddOnTryUpgrade(TryBuyUpgrade);
         }
@@ -112,6 +119,7 @@ public class GameController : BaseController<GameView>
     public void ConnectToResourceManagerEvents()
     {
         resourcesManager.onMoneyChange += view.SetMoneyDisplay;
+        onSetupFinished += () => { resourcesManager.Money = resourcesManager.Money; }; //Welp ¯\_(ツ)_/¯
     }
 
     private void ConnectToOfflineManagerEvents()
@@ -189,7 +197,7 @@ public class GameController : BaseController<GameView>
 
     private void CreateBallBars()
     {
-        foreach(var ballType in ballsModel.ballsDataList)
+        foreach(var ballType in ballsModel.ballsData.Values)
         {
             view.CreateBallBar(ballType);
         }
@@ -201,7 +209,7 @@ public class GameController : BaseController<GameView>
         {
             foreach(var buttonUpgrade in ballBar.buttonUpgrades)
             {
-                var upgrade = upgradesModel.GetUpgrade(buttonUpgrade.upgradeName);
+                var upgrade = upgradesModel.upgrades[buttonUpgrade.upgradeName];
                 if(upgrade != null)
                 {
                     buttonUpgrade.Init();
@@ -264,6 +272,9 @@ public class GameController : BaseController<GameView>
 
         resourcesManager.SavePersistentData(persistentData);
         SettingsModel.Instance.SavePersistentData(persistentData);
+        persistentData.depth = model.Depth;
+        upgradesManager.SavePersistentData(persistentData);
+        blocksManager.SavePersistentData(persistentData);
 
         savingManager.SavePersistentData(persistentData);
     }
@@ -277,8 +288,16 @@ public class GameController : BaseController<GameView>
             return false;
         }
 
+        #region AnyOrder
         resourcesManager.LoadPersistentData(persistentData);
         SettingsModel.Instance.LoadPersistentData(persistentData);
+        model.Depth = persistentData.depth;
+        #endregion
+
+        #region OrderImportant
+        blocksManager.LoadPersistentData(persistentData);
+        upgradesManager.LoadPersistentData(persistentData);
+        #endregion
 
         return true;
     }

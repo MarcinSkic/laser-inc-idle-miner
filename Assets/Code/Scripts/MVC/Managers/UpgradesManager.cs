@@ -22,15 +22,14 @@ public class UpgradesManager : MonoBehaviour
 
     [SerializeField] private Transform blocksParent;
 
-    private void Start()
+    private void Awake()
     {
-        ProcessUpgrades();
+        model.TransformScriptablesIntoUpgrades();
     }
 
-    private void ProcessUpgrades()
+    public void ConnectUpgrades()
     {
-        var upgrades = model.upgrades;
-        foreach(var upgrade in upgrades)
+        foreach(var upgrade in model.upgrades.Values)
         {
             switch (upgrade.type)
             {
@@ -42,6 +41,17 @@ public class UpgradesManager : MonoBehaviour
                     upgrade.AddDoUpgrade(OnSpawnUpgrade);
                     upgrade.onValueUpdate?.Invoke("0");  //UI setup
                     break;
+            }
+        }
+    }
+
+    public void ExecuteLoadedUpgrades()
+    {
+        foreach(var upgrade in model.upgrades.Values)
+        {
+            for(int i = 0; i < upgrade.currentLevel; i++)
+            {
+                upgrade.DoLoadedUpgrade();
             }
         }
     }
@@ -66,7 +76,7 @@ public class UpgradesManager : MonoBehaviour
     {
         if(upgrade.upgradedObjects <= UpgradeableObjects.AllBalls)
         {
-            var speedUpgrades = model.upgrades.Where(upgrade => upgrade.upgradedValues.HasFlag(UpgradeableValues.Speed));
+            var speedUpgrades = model.upgrades.Values.Where(upgrade => upgrade.upgradedValues.HasFlag(UpgradeableValues.Speed));
 
             if (upgrade.upgradedObjects.HasFlag(UpgradeableObjects.BasicBall))
             {
@@ -195,6 +205,30 @@ public class UpgradesManager : MonoBehaviour
         else
         {
             upgrade.onValueUpdate.Invoke(string.Format("{0:f2}", value.value));
+        }
+    }
+
+    public void SavePersistentData(PersistentData data)
+    {
+        data.upgrades = model.upgrades.Values.Select(upgrade => new PersistentUpgrade(upgrade.name, upgrade.currentLevel)).ToArray();
+    }
+
+    public void LoadPersistentData(PersistentData data)
+    {
+        if (data.upgrades != null)
+        {
+            foreach (var persistentUpgrade in data.upgrades)
+            {
+                Debug.Log("Persistent Upgrades:");
+                if (model.upgrades.ContainsKey(persistentUpgrade.name))
+                {
+                    model.upgrades[persistentUpgrade.name].currentLevel = persistentUpgrade.currentLevel;
+                } 
+                else
+                {
+                    Debug.LogWarning($"Can't load data of {persistentUpgrade.name}, there is no such upgrade in dictionary. On game pause/close this data will be overwritten!");
+                }
+            }
         }
     }
 }

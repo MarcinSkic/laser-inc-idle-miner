@@ -41,6 +41,7 @@ public class SavingManager : MonoBehaviour
 
         BinaryFormatter bf = new();
         var jsonedData = JsonUtility.ToJson(data);
+        
         Debug.Log(jsonedData);
 
         bf.Serialize(file, jsonedData);

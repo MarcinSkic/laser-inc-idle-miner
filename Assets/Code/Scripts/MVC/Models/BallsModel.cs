@@ -8,7 +8,7 @@ using MyBox;
 
 public class BallsModel : MonoBehaviour
 {
-    public List<BallData> ballsDataList;
+    public BallData[] ballsDataList;
     public Dictionary<UpgradeableObjects, BallData> ballsData;
 
     void Awake()
@@ -25,5 +25,15 @@ public class BallsModel : MonoBehaviour
             data.Init();
             ballsData.Add(data.type, data);
         }
+    }
+
+    public void SavePersistentData(PersistentData data)
+    {
+
+    }
+
+    public void LoadPersistentData(PersistentData data)
+    {
+
     }
 }

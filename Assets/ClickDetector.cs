@@ -16,7 +16,7 @@ public class ClickDetector : MonoBehaviour
             if (Physics.Raycast(ray, out hit))
             {
                 if (hit.collider.gameObject.TryGetComponent<BasicBlock>(out var block)){
-                    block.TakeDamage(1);
+                    block.TakeDamage(SettingsModel.Instance.clickDamage);
                 }
             }
         }

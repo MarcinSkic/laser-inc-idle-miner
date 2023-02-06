@@ -113,4 +113,28 @@ public class Upgrade
 
         doUpgrade?.Invoke(this);
     }
+
+    public void DoLoadedUpgrade()
+    {
+        cost = cost * costMultiplier + costIncremental;
+        doUpgrade?.Invoke(this);
+    }
+}
+
+[System.Serializable]
+public class PersistentUpgrade
+{
+    public string name;
+    public int currentLevel;
+
+    public PersistentUpgrade(string name, int currentLevel)
+    {
+        this.name = name;
+        this.currentLevel = currentLevel;
+    }
+
+    public override string ToString()
+    {
+        return $"{name}|{currentLevel}";
+    }
 }
