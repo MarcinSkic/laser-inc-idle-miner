@@ -19,16 +19,12 @@ public class PersistentData
     public double money;
     #endregion
 
-    #region BallsModel
-
-    #endregion
-
     #region BlocksModel
 
     #endregion
 
     #region UpgradesModel
-    public Upgrade[] upgrades;
+    public PersistentUpgrade[] upgrades;
     #endregion
 
     #region GameModel

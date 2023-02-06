@@ -27,7 +27,7 @@ public class UpgradesManager : MonoBehaviour
         model.TransformScriptablesIntoUpgrades();
     }
 
-    public void ProcessUpgrades()
+    public void ConnectUpgrades()
     {
         foreach(var upgrade in model.upgrades.Values)
         {
@@ -41,6 +41,17 @@ public class UpgradesManager : MonoBehaviour
                     upgrade.AddDoUpgrade(OnSpawnUpgrade);
                     upgrade.onValueUpdate?.Invoke("0");  //UI setup
                     break;
+            }
+        }
+    }
+
+    public void ExecuteLoadedUpgrades()
+    {
+        foreach(var upgrade in model.upgrades.Values)
+        {
+            for(int i = 0; i < upgrade.currentLevel; i++)
+            {
+                upgrade.DoLoadedUpgrade();
             }
         }
     }
@@ -199,16 +210,24 @@ public class UpgradesManager : MonoBehaviour
 
     public void SavePersistentData(PersistentData data)
     {
-        data.upgrades = model.upgrades.Values.ToArray();
+        data.upgrades = model.upgrades.Values.Select(upgrade => new PersistentUpgrade(upgrade.name, upgrade.currentLevel)).ToArray();
     }
 
     public void LoadPersistentData(PersistentData data)
     {
         if (data.upgrades != null)
         {
-            foreach (var upgrade in data.upgrades)
+            foreach (var persistentUpgrade in data.upgrades)
             {
-                model.upgrades[upgrade.name] = upgrade;
+                Debug.Log("Persistent Upgrades:");
+                if (model.upgrades.ContainsKey(persistentUpgrade.name))
+                {
+                    model.upgrades[persistentUpgrade.name].currentLevel = persistentUpgrade.currentLevel;
+                } 
+                else
+                {
+                    Debug.LogWarning($"Can't load data of {persistentUpgrade.name}, there is no such upgrade in dictionary. On game pause/close this data will be overwritten!");
+                }
             }
         }
     }

@@ -68,7 +68,8 @@ public class GameController : BaseController<GameView>
         ConnectToUpgradesEvents();  //TODO-FT-CURRENT: Move this functionality to upgrade manager?
         ConnectBallBarsWithEvents();
         UpdateSettingsViewBySavedData();
-        upgradesManager.ProcessUpgrades();
+        upgradesManager.ConnectUpgrades();  //Order important
+        upgradesManager.ExecuteLoadedUpgrades(); //Order important
         #endregion
 
         #region Methods independent from calling order
@@ -196,7 +197,7 @@ public class GameController : BaseController<GameView>
 
     private void CreateBallBars()
     {
-        foreach(var ballType in ballsModel.ballsDataList)
+        foreach(var ballType in ballsModel.ballsData.Values)
         {
             view.CreateBallBar(ballType);
         }
@@ -285,10 +286,15 @@ public class GameController : BaseController<GameView>
             return false;
         }
 
+        #region AnyOrder
         resourcesManager.LoadPersistentData(persistentData);
         SettingsModel.Instance.LoadPersistentData(persistentData);
         model.Depth = persistentData.depth;
-        upgradesManager.LoadPersistentData(persistentData);
+        #endregion
+
+        #region OrderImportant
+        upgradesManager.LoadPersistentData(persistentData); //After balls data and balls spawning
+        #endregion
 
         return true;
     }
