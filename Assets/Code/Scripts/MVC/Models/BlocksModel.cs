@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Events;
 using MyBox;
 
 public class BlocksModel : MonoBehaviour
@@ -13,4 +14,18 @@ public class BlocksModel : MonoBehaviour
 
     public Transform _dynamic_blocks;
     public GameObject movingBorderTexturesParent;
+
+    public UnityAction<double> onDestroyedBlocksCountChange;
+
+    [SerializeField]
+    private long destroyedBlocks = 0;
+    public long destroyedBlocksCount
+    {
+        get { return destroyedBlocks; }
+        set
+        {
+            destroyedBlocks = value;
+            onDestroyedBlocksCountChange?.Invoke(destroyedBlocks);
+        }
+    }
 }
