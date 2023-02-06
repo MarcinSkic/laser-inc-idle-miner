@@ -16,6 +16,7 @@ MonoBehaviour:
     achievementManager: {fileID: 0}
     name: First steps
     description: dig 1 block
+    sprite: {fileID: 21300000, guid: b74d6c563778b754496323797aa8064a, type: 3}
     isCompleted: 0
     requirements:
     - dependsOn: 1

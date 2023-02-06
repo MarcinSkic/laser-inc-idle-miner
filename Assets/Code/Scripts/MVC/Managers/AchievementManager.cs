@@ -35,6 +35,7 @@ public class Achievement
     public AchievementManager achievementManager;
     public string name;
     public string description;
+    public Sprite sprite;
     public bool isCompleted = false;
     [SerializeField]
     public AchievementRequirement[] requirements;

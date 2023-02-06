@@ -21,7 +21,7 @@ public class AchievementPopup : MonoBehaviour
     {
         titleText.text = achievement.name;
         descriptionText.text = achievement.description;
-        // image.sprite = achievement
+        image.sprite = achievement.sprite;
     }
 
     private void Start()

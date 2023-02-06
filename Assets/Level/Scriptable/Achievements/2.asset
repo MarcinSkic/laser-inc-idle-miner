@@ -16,6 +16,7 @@ MonoBehaviour:
     achievementManager: {fileID: 0}
     name: Dig deeper
     description: achieve a depth of 30
+    sprite: {fileID: 21300000, guid: 12c30c2917158ff4eb19227256f8d7e1, type: 3}
     isCompleted: 0
     requirements:
     - dependsOn: 0

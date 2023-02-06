@@ -200,14 +200,10 @@ MonoBehaviour:
   destroyTime: 6.5
   disappearStartTime: 5.5
   growEndTime: 0.5
-  currentTime: 0
-  initWidth: 0
-  initHeight: 0
   rt: {fileID: 108108557313281555}
-  vlg: {fileID: 0}
   titleText: {fileID: 2852063580465008674}
   descriptionText: {fileID: 7171565920325124572}
-  image: {fileID: 0}
+  image: {fileID: 3109264399449855450}
 --- !u!1 &4691111608239336951
 GameObject:
   m_ObjectHideFlags: 0
