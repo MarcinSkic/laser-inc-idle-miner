@@ -4508,58 +4508,14 @@ MonoBehaviour:
   blocksModel: {fileID: 1947716360}
   resourcesManager: {fileID: 567613852}
   resourcesModel: {fileID: 1947716358}
-  achievements:
-  - achievementManager: {fileID: 0}
-    name: First steps
-    description: destroy 1 blocks
-    isCompleted: 0
-    requirements:
-    - dependsOn: 1
-      comparison: 1
-      requiredValue: 1
-  - achievementManager: {fileID: 0}
-    name: Mining down
-    description: reach depth of 30 meters
-    isCompleted: 0
-    requirements:
-    - dependsOn: 0
-      comparison: 1
-      requiredValue: 30
-  - achievementManager: {fileID: 0}
-    name: Money accumulation
-    description: Save 500 money
-    isCompleted: 0
-    requirements:
-    - dependsOn: 2
-      comparison: 1
-      requiredValue: 500
-  - achievementManager: {fileID: 0}
-    name: Money maker
-    description: make a total of 1000 money
-    isCompleted: 0
-    requirements:
-    - dependsOn: 3
-      comparison: 1
-      requiredValue: 1000
-  - achievementManager: {fileID: 0}
-    name: Beginner miner
-    description: reach depth of 30 meters and destroy 50 blocks
-    isCompleted: 0
-    requirements:
-    - dependsOn: 0
-      comparison: 1
-      requiredValue: 30
-    - dependsOn: 1
-      comparison: 1
-      requiredValue: 50
-  - achievementManager: {fileID: 0}
-    name: 50 blocks destroyed
-    description: destroy 50 blocks
-    isCompleted: 0
-    requirements:
-    - dependsOn: 1
-      comparison: 1
-      requiredValue: 50
+  achievementsScriptable:
+  - {fileID: 11400000, guid: d6b3306e58730b847ae760e3371d8638, type: 2}
+  - {fileID: 11400000, guid: 8a3dbfb7e341d0a44bd5771e90a5ab42, type: 2}
+  - {fileID: 11400000, guid: 72aed8ed42d436c46b823aee4aade776, type: 2}
+  - {fileID: 11400000, guid: 144741757a3894047b2bfbea6cdd630c, type: 2}
+  - {fileID: 11400000, guid: 8b5d4b4969f680b48a80a28dde637e8b, type: 2}
+  - {fileID: 11400000, guid: 27903c3d6c621e64da14fa8820776338, type: 2}
+  achievements: []
 --- !u!1 &587280162
 GameObject:
   m_ObjectHideFlags: 0
