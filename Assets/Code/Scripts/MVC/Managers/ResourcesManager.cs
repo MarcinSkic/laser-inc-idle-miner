@@ -34,7 +34,6 @@ public class ResourcesManager : MonoBehaviour
             value = 1;
         }
         Money += value;
-        Debug.Log("Increased money");
         model.earnedMoney += value;
     }
 
