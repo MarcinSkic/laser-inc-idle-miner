@@ -273,6 +273,7 @@ public class GameController : BaseController<GameView>
         SettingsModel.Instance.SavePersistentData(persistentData);
         persistentData.depth = model.Depth;
         upgradesManager.SavePersistentData(persistentData);
+        blocksManager.SavePersistentData(persistentData);
 
         savingManager.SavePersistentData(persistentData);
     }
@@ -293,7 +294,8 @@ public class GameController : BaseController<GameView>
         #endregion
 
         #region OrderImportant
-        upgradesManager.LoadPersistentData(persistentData); //After balls data and balls spawning
+        blocksManager.LoadPersistentData(persistentData);
+        upgradesManager.LoadPersistentData(persistentData);
         #endregion
 
         return true;

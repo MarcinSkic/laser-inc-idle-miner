@@ -20,7 +20,7 @@ public class PersistentData
     #endregion
 
     #region BlocksModel
-
+    public Vector2[] blocksPositions;
     #endregion
 
     #region UpgradesModel
