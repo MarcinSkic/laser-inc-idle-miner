@@ -37,7 +37,7 @@ public class PersistentData
     #endregion
 
     #region AchievementsModel
-    public PersistentAchievement[] achievements;
+    public PersistentAchievement[] unlockedAchievements;
     #endregion
 
     public PersistentData()

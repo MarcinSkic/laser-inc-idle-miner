@@ -167,7 +167,7 @@ public class AchievementManager : MonoBehaviour
 
     public void SavePersistentData(PersistentData persistentData)
     {
-        persistentData.achievements = achievements
+        persistentData.unlockedAchievements = achievements
             .Where(achievement => achievement.isCompleted)
             .Select(ach => new PersistentAchievement(ach.name, ach.isCompleted))
             .ToArray();
@@ -175,15 +175,14 @@ public class AchievementManager : MonoBehaviour
 
     public void LoadPersistentData(PersistentData persistentData)
     {
-        if(persistentData.achievements != null)
+        if(persistentData.unlockedAchievements != null)
         {
-            foreach (var unlockedAch in persistentData.achievements)
+            foreach (var unlockedAch in persistentData.unlockedAchievements)
             {
                 for (int i = 0; i < achievements.Count; i++)
                 {
                     if (unlockedAch.name == achievements[i].name)
                     {
-                        Debug.Log("Huh?");
                         achievements[i].isCompleted = true;
                         break;
                     }
