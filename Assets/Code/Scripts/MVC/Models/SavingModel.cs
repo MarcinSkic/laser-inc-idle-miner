@@ -36,6 +36,10 @@ public class PersistentData
     public bool displayFloatingText;
     #endregion
 
+    #region AchievementsModel
+    public PersistentAchievement[] unlockedAchievements;
+    #endregion
+
     public PersistentData()
     {
 

@@ -2,6 +2,7 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.ComponentModel;
+using System.Linq;
 using UnityEngine;
 using UnityEngine.Events;
 
@@ -103,6 +104,19 @@ public class Achievement
     }
 }
 
+[System.Serializable]
+public class PersistentAchievement
+{
+    public string name;
+    public bool isCompleted;
+
+    public PersistentAchievement(string name, bool isCompleted)
+    {
+        this.name = name;
+        this.isCompleted = isCompleted;
+    }
+}
+
 public class AchievementManager : MonoBehaviour
 {
 
@@ -124,27 +138,57 @@ public class AchievementManager : MonoBehaviour
         }
     }
 
-    void Start()
+    public void SetupAchievements()
     {
         for (int i=0; i<achievements.Count; i++)
         {
-            achievements[i].achievementManager = this;
-            for (int j=0; j<achievements[i].requirements.Length; j++)
+            if (!achievements[i].isCompleted)
             {
-                DependsOn requirement = achievements[i].requirements[j].dependsOn;
-                if (requirement == (DependsOn.Depth))
+                achievements[i].achievementManager = this;
+                for (int j = 0; j < achievements[i].requirements.Length; j++)
                 {
-                    gameModel.onDepthChange += achievements[i].checkIfCompleted;
-                }
-                if (requirement == (DependsOn.DestroyedBlocksCount))
-                {
-                    blocksModel.onDestroyedBlocksCountChange += achievements[i].checkIfCompleted;
-                }
-                if (requirement == (DependsOn.Money) || requirement == (DependsOn.EarnedMoney))
-                {
-                    resourcesManager.onMoneyChange += achievements[i].checkIfCompleted;
+                    DependsOn requirement = achievements[i].requirements[j].dependsOn;
+                    if (requirement == (DependsOn.Depth))
+                    {
+                        gameModel.onDepthChange += achievements[i].checkIfCompleted;
+                    }
+                    if (requirement == (DependsOn.DestroyedBlocksCount))
+                    {
+                        blocksModel.onDestroyedBlocksCountChange += achievements[i].checkIfCompleted;
+                    }
+                    if (requirement == (DependsOn.Money) || requirement == (DependsOn.EarnedMoney))
+                    {
+                        resourcesManager.onMoneyChange += achievements[i].checkIfCompleted;
+                    }
                 }
             }
         }
+    }
+
+    public void SavePersistentData(PersistentData persistentData)
+    {
+        persistentData.unlockedAchievements = achievements
+            .Where(achievement => achievement.isCompleted)
+            .Select(ach => new PersistentAchievement(ach.name, ach.isCompleted))
+            .ToArray();
+    }
+
+    public void LoadPersistentData(PersistentData persistentData)
+    {
+        if(persistentData.unlockedAchievements != null)
+        {
+            foreach (var unlockedAch in persistentData.unlockedAchievements)
+            {
+                for (int i = 0; i < achievements.Count; i++)
+                {
+                    if (unlockedAch.name == achievements[i].name)
+                    {
+                        achievements[i].isCompleted = true;
+                        break;
+                    }
+                }
+            }
+        }
+        
     }
 }

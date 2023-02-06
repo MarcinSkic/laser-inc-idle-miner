@@ -21,6 +21,7 @@ public class GameController : BaseController<GameView>
     [SerializeField] private ResourcesManager resourcesManager;
     [SerializeField] private OfflineManager offlineManager;
     [SerializeField] private BlocksManager blocksManager;
+    [AutoProperty(AutoPropertyMode.Scene)] [SerializeField] private AchievementManager achievementManager;
     [AutoProperty(AutoPropertyMode.Scene)] [SerializeField] private SavingManager savingManager;
 
     //KEEP MONOBEHAVIOUR METHODS (Start, Update etc.) ON TOP
@@ -68,10 +69,11 @@ public class GameController : BaseController<GameView>
         ConnectToUpgradesEvents();  //TODO-FT-CURRENT: Move this functionality to upgrade manager?
         ConnectBallBarsWithEvents();
         UpdateSettingsViewBySavedData();
+        achievementManager.SetupAchievements();
         upgradesManager.ConnectUpgrades();  //Order important
         upgradesManager.ExecuteLoadedUpgrades(); //Order important
-        #endregion
 
+        #endregion
         #region Methods independent from calling order
         ConnectToOfflineManagerEvents();
         ConnectToBlocksManagerEvents();
@@ -275,6 +277,7 @@ public class GameController : BaseController<GameView>
         persistentData.depth = model.Depth;
         upgradesManager.SavePersistentData(persistentData);
         blocksManager.SavePersistentData(persistentData);
+        achievementManager.SavePersistentData(persistentData);
 
         savingManager.SavePersistentData(persistentData);
     }
@@ -290,10 +293,11 @@ public class GameController : BaseController<GameView>
 
         #region AnyOrder
         resourcesManager.LoadPersistentData(persistentData);
+        achievementManager.LoadPersistentData(persistentData);
         SettingsModel.Instance.LoadPersistentData(persistentData);
         model.Depth = persistentData.depth;
         #endregion
-
+        
         #region OrderImportant
         blocksManager.LoadPersistentData(persistentData);
         upgradesManager.LoadPersistentData(persistentData);
