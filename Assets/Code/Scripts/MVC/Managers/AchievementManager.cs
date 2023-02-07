@@ -189,8 +189,6 @@ public class AchievementManager : MonoBehaviour
                 }
             }
 
-            Debug.Log(rowCompleted);
-
             if (rowCompleted)
             {
                 Upgrade rowUpgrade = upgradesModel.upgrades[rowReward.Upgrade.GenerateName()];
