@@ -160,7 +160,7 @@ public class UpgradesManager : MonoBehaviour
         if((upgrade.upgradedObjects <= UpgradeableObjects.AllBalls && ((int)upgrade.upgradedObjects % 2 == 0 || upgrade.upgradedObjects == UpgradeableObjects.BasicBall)) && ((int)upgrade.upgradedValues % 2 == 0 || upgrade.upgradedValues == UpgradeableValues.Speed))
         {
             var value = GetValueByType(upgrade.upgradedValues, ballsModel.ballsData[upgrade.upgradedObjects]);
-            upgrade.onValueUpdate.Invoke(value.value.ToString());
+            upgrade.onValueUpdate?.Invoke(value.value.ToString());
         } 
         else
         {
@@ -199,12 +199,12 @@ public class UpgradesManager : MonoBehaviour
         }
         if (upgrade.onUpgradeButtonsShowUpgradeInternalValue)
         {
-            upgrade.onValueUpdate.Invoke(string.Format("{0:f2}", upgrade.upgradeValue));
+            upgrade.onValueUpdate?.Invoke(string.Format("{0:f2}", upgrade.upgradeValue));
             //upgrade.onValueUpdate.Invoke(string.Format("{0:#.0e0}", upgrade.upgradeValue));
         } 
         else
         {
-            upgrade.onValueUpdate.Invoke(string.Format("{0:f2}", value.value));
+            upgrade.onValueUpdate?.Invoke(string.Format("{0:f2}", value.value));
         }
     }
 
