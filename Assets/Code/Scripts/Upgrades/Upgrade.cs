@@ -7,6 +7,8 @@ using UnityEngine.Events;
 public enum UpgradeType { ValuesUpgrade, SpawnUpgrade, CustomFunction}
 public enum ValueUpgradeFormula { Add, Multiply };
 
+public enum UISection { AutoOrNone, UpgradesOther}
+
 [System.Serializable]
 public class Upgrade
 {
@@ -14,6 +16,15 @@ public class Upgrade
 
     [ConditionalField(nameof(type), false, UpgradeType.CustomFunction)]
     public string name;
+    [Tooltip("Fill when upgrades change the same stats")]
+    public string identifier;
+
+    public UISection whereToGenerate;
+    [ConditionalField(nameof(whereToGenerate), true,UISection.AutoOrNone)]
+    public int order;
+    //Sprite?
+    //UI description?
+
     public double cost;
     [Tooltip("Formula: currentCost = currentCost*costMultiplier+costIncremental")]
     public double costIncremental;
@@ -66,8 +77,9 @@ public class Upgrade
             case UpgradeType.CustomFunction:
                 return;
         }
-    }
 
+        name += identifier;
+    }
 
     /// <summary>
     /// This method is to streamline assigning functions to events

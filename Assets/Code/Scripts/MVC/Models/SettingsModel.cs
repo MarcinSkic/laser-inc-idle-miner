@@ -22,7 +22,7 @@ public class SettingsModel : MonoBehaviour
     }
     #endregion
 
-    public bool loadSaveFile = true;
+    public bool loadSaveFile = true;    //TODO: Change to SaveAndLoadFile to block undesired changes to saved file. Also add context menu function to erase existing savefile
     public bool showDebugWindow;
     [Space(5)]
     public bool changeTimeScale;

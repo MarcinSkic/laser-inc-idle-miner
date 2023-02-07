@@ -8952,7 +8952,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8df5f7b5fed88884bbe63da0e99d0e50, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  loadSaveFile: 0
+  loadSaveFile: 1
   showDebugWindow: 0
   changeTimeScale: 0
   timeScale: 0.1
