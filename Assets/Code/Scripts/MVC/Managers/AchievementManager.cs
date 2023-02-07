@@ -130,13 +130,21 @@ public class AchievementManager : MonoBehaviour
     public List<Achievement> achievements;
     public UnityAction<Achievement> onAchievementUnlocked;
 
+    public GameObject achievementGrid;
+    public AchievementSquare achievementSquare;
+    public AchievementTooltip achievementTooltip;
+
     private void Awake()
     {
         achievements = new List<Achievement>();
         for (int i=0; i<achievementsScriptable.Length; i++)
         {
             achievements.Add(achievementsScriptable[i].Achievement);
+            // TODO: move this to a better place
+            AchievementSquare achievementSquareInstance = Instantiate(achievementSquare, achievementGrid.transform);
+            achievementSquareInstance.SetAchievementAndTooltip(achievements[i], achievementTooltip);
         }
+
     }
 
     public void SetupAchievements()
