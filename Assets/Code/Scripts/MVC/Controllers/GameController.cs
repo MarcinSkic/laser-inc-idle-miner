@@ -217,9 +217,8 @@ public class GameController : BaseController<GameView>
         {
             foreach(var buttonUpgrade in ballBar.buttonUpgrades)
             {
-                var upgrade = upgradesModel.upgrades[buttonUpgrade.upgradeName];
-                if(upgrade != null)
-                {
+                if (upgradesModel.upgrades.ContainsKey(buttonUpgrade.upgradeName)){
+                    var upgrade = upgradesModel.upgrades[buttonUpgrade.upgradeName];
                     buttonUpgrade.Init();
                     buttonUpgrade.onClick += upgrade.TryUpgrade;    //Button -> Tries to upgrade an Upgrade
 
@@ -231,7 +230,7 @@ public class GameController : BaseController<GameView>
                 } 
                 else
                 {
-                    Debug.LogWarningFormat("ButtonUpgrade needs: \"{0}\" upgrade, but it couldn't find it in upgrades collection.\n " +
+                    Debug.LogWarningFormat("Ball ButtonUpgrade needs: \"{0}\" upgrade, but it couldn't find it in upgrades collection.\n " +
                         "Maybe UpgradesModel misses scriptable upgrade instance or there is a typo in upgrade name?",buttonUpgrade.upgradeName);
                 }   
             }
