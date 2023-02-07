@@ -26,14 +26,4 @@ public class BallsModel : MonoBehaviour
             ballsData.Add(data.type, data);
         }
     }
-
-    public void SavePersistentData(PersistentData data)
-    {
-
-    }
-
-    public void LoadPersistentData(PersistentData data)
-    {
-
-    }
 }

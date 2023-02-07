@@ -50,5 +50,7 @@ public class SavingManager : MonoBehaviour
 
     public static void EraseSaveFile()
     {
+        string destination = Application.persistentDataPath + "/" + Keys.SAVE_FILE_NAME;
+        if (File.Exists(destination)) File.Delete(destination);
     }
 }

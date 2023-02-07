@@ -136,11 +136,14 @@ public class BlocksManager : MonoBehaviour
 
     public void LoadPersistentData(PersistentData data)
     {
-        blockSpawner.SpawnBlocksOnPositions(data.blocksPositions, out List<BasicBlock> spawnedBlocks);
-
-        for (int i = 0; i < spawnedBlocks.Count; i++)
+        if(data.blocksPositions != null)
         {
-            spawnedBlocks[i].AssignEvents(onBlockDestroyed);
+            blockSpawner.SpawnBlocksOnPositions(data.blocksPositions, out List<BasicBlock> spawnedBlocks);
+
+            for (int i = 0; i < spawnedBlocks.Count; i++)
+            {
+                spawnedBlocks[i].AssignEvents(onBlockDestroyed);
+            }
         }
     }
 }

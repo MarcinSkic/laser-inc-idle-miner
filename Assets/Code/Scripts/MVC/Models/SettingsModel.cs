@@ -74,8 +74,8 @@ public class SettingsModel : MonoBehaviour
 
     public void LoadPersistentData(PersistentData data)
     {
-        Is60fps = data.is60fps;
-        DisplayFloatingText = data.displayFloatingText;
+        Is60fps = data?.is60fps ?? true;
+        DisplayFloatingText = data?.displayFloatingText ?? false;
     }
 
     [ContextMenu("ERASE Save File")]
