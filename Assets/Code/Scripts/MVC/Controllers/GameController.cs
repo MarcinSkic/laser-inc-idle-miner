@@ -23,6 +23,7 @@ public class GameController : BaseController<GameView>
     [SerializeField] private BlocksManager blocksManager;
     [AutoProperty(AutoPropertyMode.Scene)] [SerializeField] private AchievementManager achievementManager;
     [AutoProperty(AutoPropertyMode.Scene)] [SerializeField] private SavingManager savingManager;
+    [AutoProperty(AutoPropertyMode.Scene)] [SerializeField] private AchievementManager achievementManager;
 
     //KEEP MONOBEHAVIOUR METHODS (Start, Update etc.) ON TOP
     /// <summary>
@@ -77,6 +78,7 @@ public class GameController : BaseController<GameView>
         #region Methods independent from calling order
         ConnectToOfflineManagerEvents();
         ConnectToBlocksManagerEvents();
+        ConnectToAchievementsManager();
         UpdateSettings();
         #endregion
 
@@ -166,6 +168,11 @@ public class GameController : BaseController<GameView>
 
         view.displayFloatingDamage.onValueChanged.AddListener(value => { SettingsModel.Instance.DisplayFloatingText = value; });
         SettingsModel.Instance.DisplayFloatingText = view.displayFloatingDamage.isOn;
+    }
+
+    private void ConnectToAchievementsManager()
+    {
+        achievementManager.onAchievementUnlocked += view.CreateAchievementPopup;
     }
 
     private void UpdateSettingsViewBySavedData()

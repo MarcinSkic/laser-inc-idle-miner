@@ -16,6 +16,7 @@ MonoBehaviour:
     achievementManager: {fileID: 0}
     name: Block breaker
     description: destroy 50 blocks
+    sprite: {fileID: 21300000, guid: f6b40a9717c568f418164e3c42821298, type: 3}
     isCompleted: 0
     requirements:
     - dependsOn: 1

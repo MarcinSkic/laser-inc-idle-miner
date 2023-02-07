@@ -16,6 +16,7 @@ MonoBehaviour:
     achievementManager: {fileID: 0}
     name: Money accumulation
     description: save 500 money
+    sprite: {fileID: 21300000, guid: d2e8c228526108e449309995a6eaec28, type: 3}
     isCompleted: 0
     requirements:
     - dependsOn: 2
