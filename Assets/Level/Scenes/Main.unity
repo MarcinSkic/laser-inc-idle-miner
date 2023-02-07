@@ -4527,6 +4527,8 @@ MonoBehaviour:
   achievementReward: {fileID: 11400000, guid: db42842ea9366ae42a168a81239b8154, type: 2}
   rowReward: {fileID: 11400000, guid: 1e34e3c037f9de24e803391bd9542231, type: 2}
   upgradesModel: {fileID: 1947716357}
+  achievementsInRow: 4
+  glp: {fileID: 866237052}
 --- !u!1 &587280162
 GameObject:
   m_ObjectHideFlags: 0

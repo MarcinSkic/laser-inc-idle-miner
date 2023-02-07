@@ -25,7 +25,7 @@ MonoBehaviour:
     onUpgradeButtonsShowUpgradeInternalValue: 0
     upgradeValue: 0
     upgradedObjects: 63
-    upgradedValues: 1
-    changeValue: 1.1
+    upgradedValues: 2
+    changeValue: 1.5
     formula: 1
     currentLevel: 0

@@ -5,6 +5,7 @@ using System.ComponentModel;
 using System.Linq;
 using UnityEngine;
 using UnityEngine.Events;
+using UnityEngine.UI;
 
 public enum DependsOn
 {
@@ -142,9 +143,16 @@ public class AchievementManager : MonoBehaviour
 
     [SerializeField] UpgradesModel upgradesModel;
 
-    // TODO: connect achievementReward upgrade
-    // TODO: connect achievement rowReward upgrade
+    [SerializeField] int achievementsInRow;
+    [SerializeField] GridLayoutGroup glp;
 
+    private void SetSquaresWidth()
+    {
+        int squareWidth = Mathf.RoundToInt(1120 / (achievementsInRow+0.5f));
+        int squareSpacing = (1120 - achievementsInRow * squareWidth) / (achievementsInRow - 1);
+        glp.spacing = new Vector2(squareSpacing, squareSpacing);
+        glp.cellSize = new Vector2(squareWidth, squareWidth);
+    }
 
     private void Awake()
     {
@@ -160,14 +168,34 @@ public class AchievementManager : MonoBehaviour
             // TODO: there must be a better way...
             onAchievementUnlocked += achievementSquareInstance.SetColor;
         }
-
+        SetSquaresWidth();
     }
 
     public void ConnectUpgrades()
     {
-        onAchievementUnlocked += (achievement) => {
+        onAchievementUnlocked += (Achievement achievement) => {
             Upgrade upgrade = upgradesModel.upgrades[achievementReward.Upgrade.GenerateName()];
-            upgrade.DoUpgrade();    
+            upgrade.DoUpgrade();
+
+            int index = achievements.FindIndex(a => a.name == achievement.name);
+            int row = index / achievementsInRow;
+            bool rowCompleted = true;
+
+            for (int i=0; i<achievementsInRow; i++)
+            {
+                if (i + row * achievementsInRow < achievements.Count && !achievements[i + row * achievementsInRow].isCompleted)
+                {
+                    rowCompleted = false;
+                }
+            }
+
+            Debug.Log(rowCompleted);
+
+            if (rowCompleted)
+            {
+                Upgrade rowUpgrade = upgradesModel.upgrades[rowReward.Upgrade.GenerateName()];
+                rowUpgrade.DoUpgrade();
+            }
         } ;
     }
 
