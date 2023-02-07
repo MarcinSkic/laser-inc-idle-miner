@@ -13,7 +13,7 @@ public class SavingManager : MonoBehaviour
 
     public PersistentData LoadPersistentData()
     {
-        string destination = Application.persistentDataPath + "/" + model.fileName;
+        string destination = Application.persistentDataPath + "/" + Keys.SAVE_FILE_NAME;
         FileStream file;
 
         if (File.Exists(destination)) file = File.OpenRead(destination);
@@ -33,7 +33,7 @@ public class SavingManager : MonoBehaviour
     {
         data.lastSaveTime = DateTime.Now;
 
-        string destination = Application.persistentDataPath + "/" + model.fileName;
+        string destination = Application.persistentDataPath + "/" + Keys.SAVE_FILE_NAME;
         FileStream file;
 
         if (File.Exists(destination)) file = File.OpenWrite(destination);
@@ -46,5 +46,11 @@ public class SavingManager : MonoBehaviour
 
         bf.Serialize(file, jsonedData);
         file.Close();
+    }
+
+    public static void EraseSaveFile()
+    {
+        string destination = Application.persistentDataPath + "/" + Keys.SAVE_FILE_NAME;
+        if (File.Exists(destination)) File.Delete(destination);
     }
 }

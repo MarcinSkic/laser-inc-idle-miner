@@ -5,7 +5,6 @@ using UnityEngine;
 
 public class SavingModel : MonoBehaviour
 {
-    public string fileName = "save.dat";
 }
 
 [System.Serializable]
