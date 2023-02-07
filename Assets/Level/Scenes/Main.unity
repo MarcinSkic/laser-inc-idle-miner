@@ -2424,8 +2424,8 @@ MonoBehaviour:
   resourcesManager: {fileID: 567613852}
   offlineManager: {fileID: 567613853}
   blocksManager: {fileID: 567613854}
-  savingManager: {fileID: 567613855}
   achievementManager: {fileID: 567613856}
+  savingManager: {fileID: 567613855}
 --- !u!4 &383171361
 Transform:
   m_ObjectHideFlags: 0
