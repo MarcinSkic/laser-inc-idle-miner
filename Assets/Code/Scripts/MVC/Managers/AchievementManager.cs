@@ -40,6 +40,7 @@ public class Achievement
     public bool isCompleted = false;
     [SerializeField]
     public AchievementRequirement[] requirements;
+
     public void checkIfCompleted(double _)
     {
         for (int i = 0; i < requirements.Length; i++)
@@ -134,15 +135,21 @@ public class AchievementManager : MonoBehaviour
     public AchievementSquare achievementSquare;
     public AchievementTooltip achievementTooltip;
 
+    private List<AchievementSquare> achievementSquares;
+
     private void Awake()
     {
         achievements = new List<Achievement>();
+        achievementSquares = new List<AchievementSquare>();
         for (int i=0; i<achievementsScriptable.Length; i++)
         {
             achievements.Add(achievementsScriptable[i].Achievement);
             // TODO: move this to a better place
             AchievementSquare achievementSquareInstance = Instantiate(achievementSquare, achievementGrid.transform);
             achievementSquareInstance.SetAchievementAndTooltip(achievements[i], achievementTooltip);
+            achievementSquares.Add(achievementSquareInstance);
+            // TODO: there must be a better way...
+            onAchievementUnlocked += achievementSquareInstance.SetColor;
         }
 
     }
