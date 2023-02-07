@@ -22,7 +22,7 @@ public class SettingsModel : MonoBehaviour
     }
     #endregion
 
-    public bool loadSaveFile = true;
+    public bool saveAndLoadFile = true;    //TODO: Change to SaveAndLoadFile to block undesired changes to saved file. Also add context menu function to erase existing savefile
     public bool showDebugWindow;
     [Space(5)]
     public bool changeTimeScale;
@@ -74,7 +74,13 @@ public class SettingsModel : MonoBehaviour
 
     public void LoadPersistentData(PersistentData data)
     {
-        Is60fps = data.is60fps;
-        DisplayFloatingText = data.displayFloatingText;
+        Is60fps = data?.is60fps ?? true;
+        DisplayFloatingText = data?.displayFloatingText ?? false;
+    }
+
+    [ContextMenu("ERASE Save File")]
+    private void EraseSaveFile()
+    {
+        SavingManager.EraseSaveFile();
     }
 }

@@ -57,6 +57,6 @@ public class ResourcesManager : MonoBehaviour
 
     public void LoadPersistentData(PersistentData data)
     {
-        Money = data.money;
+        Money = data?.money ?? 0;
     }
 }

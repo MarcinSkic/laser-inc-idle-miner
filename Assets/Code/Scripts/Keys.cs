@@ -8,7 +8,7 @@ using UnityEngine;
 /// </summary>
 public static class Keys
 {
-
+    public const string SAVE_FILE_NAME = "save.dat";
 }
 
 [Flags]

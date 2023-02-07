@@ -50,7 +50,7 @@ public class GameController : BaseController<GameView>
         #endregion
 
         #region Loading Saved Data
-        if (SettingsModel.Instance.loadSaveFile)
+        if (SettingsModel.Instance.saveAndLoadFile)
         {
             var loadSuccesful = LoadPersistentData();
 
@@ -92,7 +92,7 @@ public class GameController : BaseController<GameView>
 
     private void OnApplicationFocus(bool focus)
     {
-        if (!focus)
+        if (!focus && SettingsModel.Instance.saveAndLoadFile)
         {
             SavePersistentData();
         }
@@ -100,7 +100,7 @@ public class GameController : BaseController<GameView>
 
     private void OnApplicationPause(bool pause)
     {
-        if (pause)
+        if (pause && SettingsModel.Instance.saveAndLoadFile)
         {
             SavePersistentData();
         }
