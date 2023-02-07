@@ -4524,6 +4524,9 @@ MonoBehaviour:
   achievementGrid: {fileID: 866237050}
   achievementSquare: {fileID: 7243954313712763706, guid: c47f897411e00a3448ab38d0873e87d7, type: 3}
   achievementTooltip: {fileID: 511745650299595911}
+  achievementReward: {fileID: 11400000, guid: db42842ea9366ae42a168a81239b8154, type: 2}
+  rowReward: {fileID: 11400000, guid: 1e34e3c037f9de24e803391bd9542231, type: 2}
+  upgradesModel: {fileID: 1947716357}
 --- !u!1 &587280162
 GameObject:
   m_ObjectHideFlags: 0
@@ -11161,6 +11164,8 @@ MonoBehaviour:
   - {fileID: 11400000, guid: 3bc399c159830074fb87bb08206835e0, type: 2}
   - {fileID: 11400000, guid: ec1b95814b977fe42811fd01821eb77c, type: 2}
   - {fileID: 11400000, guid: 10d20ad43ddf2ae4f8d22cd0ff3ab8e1, type: 2}
+  - {fileID: 11400000, guid: db42842ea9366ae42a168a81239b8154, type: 2}
+  - {fileID: 11400000, guid: 1e34e3c037f9de24e803391bd9542231, type: 2}
 --- !u!114 &1947716358
 MonoBehaviour:
   m_ObjectHideFlags: 0

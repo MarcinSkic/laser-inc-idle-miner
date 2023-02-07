@@ -10,12 +10,12 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 5400be14b10cc7e47a7f3024d24c25bb, type: 3}
-  m_Name: achievement reward
+  m_Name: AchievementReward
   m_EditorClassIdentifier: 
   upgrade:
     type: 0
     name: 
-    identifier: achievement reward
+    identifier: AchievementReward
     whereToGenerate: 0
     order: 0
     cost: 0

@@ -137,6 +137,15 @@ public class AchievementManager : MonoBehaviour
 
     private List<AchievementSquare> achievementSquares;
 
+    [SerializeField] UpgradeScriptable achievementReward;
+    [SerializeField] UpgradeScriptable rowReward;
+
+    [SerializeField] UpgradesModel upgradesModel;
+
+    // TODO: connect achievementReward upgrade
+    // TODO: connect achievement rowReward upgrade
+
+
     private void Awake()
     {
         achievements = new List<Achievement>();
@@ -152,6 +161,14 @@ public class AchievementManager : MonoBehaviour
             onAchievementUnlocked += achievementSquareInstance.SetColor;
         }
 
+    }
+
+    public void ConnectUpgrades()
+    {
+        onAchievementUnlocked += (achievement) => {
+            Upgrade upgrade = upgradesModel.upgrades[achievementReward.Upgrade.GenerateName()];
+            upgrade.DoUpgrade();    
+        } ;
     }
 
     public void SetupAchievements()
