@@ -1,0 +1,31 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5400be14b10cc7e47a7f3024d24c25bb, type: 3}
+  m_Name: achievement reward
+  m_EditorClassIdentifier: 
+  upgrade:
+    type: 0
+    name: 
+    identifier: achievement reward
+    whereToGenerate: 0
+    order: 0
+    cost: 0
+    costIncremental: 0
+    costMultiplier: 0
+    maxLevel: -1
+    onUpgradeButtonsShowUpgradeInternalValue: 0
+    upgradeValue: 0
+    upgradedObjects: 63
+    upgradedValues: 2
+    changeValue: 1.1
+    formula: 1
+    currentLevel: 0
