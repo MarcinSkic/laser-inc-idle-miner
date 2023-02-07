@@ -35,6 +35,10 @@ public class GameView : BaseView
     public UIButtonController offlineConfirmButton;
     public UIButtonController offlineGetBonusButton;
 
+    [Header("Achievement popup")]
+    public AchievementPopup achievementPopup;
+    public VerticalLayoutGroup achievementsParent;
+
     [Space(10)]
     [Header("TABS/WINDOWS")]
     [Header("Lasers Tab")]
@@ -155,6 +159,12 @@ public class GameView : BaseView
         offlinePopup.SetActive(true);
         offlineText.text = $"You were offline for <color=#0bf>{seconds}</color>!";
         SetOfflineMoney(earnedMoney);
+    }
+
+    public void CreateAchievementPopup(Achievement achievement)
+    {
+        AchievementPopup ap = Instantiate(achievementPopup, achievementsParent.transform);
+        ap.Init(achievement,achievementsParent);
     }
 
     public void SetOfflineMoney(double earnedMoney)

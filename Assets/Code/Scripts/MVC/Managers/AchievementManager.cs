@@ -112,19 +112,9 @@ public class AchievementManager : MonoBehaviour
     public ResourcesManager resourcesManager;
     public ResourcesModel resourcesModel;
 
-    public Transform popupsParent;
-    public AchievementPopup achievementPopup;
-
     public AchievementScriptable[] achievementsScriptable;
     public List<Achievement> achievements;
     public UnityAction<Achievement> onAchievementUnlocked;
-
-
-    private void CreateAchievementPopup(Achievement achievement)
-    {
-        AchievementPopup ap = Instantiate(achievementPopup, popupsParent);
-        ap.SetAchievement(achievement);
-    }
 
     private void Awake()
     {
@@ -133,8 +123,6 @@ public class AchievementManager : MonoBehaviour
         {
             achievements.Add(achievementsScriptable[i].Achievement);
         }
-
-        onAchievementUnlocked += CreateAchievementPopup;
     }
 
     void Start()

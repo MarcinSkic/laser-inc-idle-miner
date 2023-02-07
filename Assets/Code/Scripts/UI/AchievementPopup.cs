@@ -17,16 +17,13 @@ public class AchievementPopup : MonoBehaviour
     public Image image;
     private float currentProportion;
 
-    public void SetAchievement(Achievement achievement)
+    public void Init(Achievement achievement, VerticalLayoutGroup parent)
     {
         titleText.text = achievement.name;
         descriptionText.text = achievement.description;
         image.sprite = achievement.sprite;
-    }
 
-    private void Start()
-    {
-        vlg = gameObject.GetComponentInParent<VerticalLayoutGroup>();
+        vlg = parent;
         SetProportion(0f);
     }
 

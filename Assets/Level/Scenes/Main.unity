@@ -416,6 +416,8 @@ MonoBehaviour:
   offlineMoney: {fileID: 334914807}
   offlineConfirmButton: {fileID: 1059151223}
   offlineGetBonusButton: {fileID: 797729291}
+  achievementPopup: {fileID: 5574181948036719418, guid: d8770bc25e9864b4ca60b0c645cd0d4f, type: 3}
+  achievementsParent: {fileID: 787881500}
   ballBarPrefab: {fileID: 916111741661999725, guid: 0515818992f6b704aa8d333efc629d72, type: 3}
   ballBarsParent: {fileID: 1293810467}
   is60fps: {fileID: 262945313}
@@ -2422,6 +2424,7 @@ MonoBehaviour:
   offlineManager: {fileID: 567613853}
   blocksManager: {fileID: 567613854}
   savingManager: {fileID: 567613855}
+  achievementManager: {fileID: 567613856}
 --- !u!4 &383171361
 Transform:
   m_ObjectHideFlags: 0
@@ -4508,8 +4511,6 @@ MonoBehaviour:
   blocksModel: {fileID: 1947716360}
   resourcesManager: {fileID: 567613852}
   resourcesModel: {fileID: 1947716358}
-  popupsParent: {fileID: 787881499}
-  achievementPopup: {fileID: 5574181948036719418, guid: d8770bc25e9864b4ca60b0c645cd0d4f, type: 3}
   achievementsScriptable:
   - {fileID: 11400000, guid: d6b3306e58730b847ae760e3371d8638, type: 2}
   - {fileID: 11400000, guid: 8a3dbfb7e341d0a44bd5771e90a5ab42, type: 2}
@@ -5440,7 +5441,7 @@ MonoBehaviour:
   m_ChildControlHeight: 0
   m_ChildScaleWidth: 0
   m_ChildScaleHeight: 1
-  m_ReverseArrangement: 0
+  m_ReverseArrangement: 1
 --- !u!222 &787881501
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -8950,7 +8951,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8df5f7b5fed88884bbe63da0e99d0e50, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  loadSaveFile: 1
+  loadSaveFile: 0
   showDebugWindow: 0
   changeTimeScale: 0
   timeScale: 0.1
