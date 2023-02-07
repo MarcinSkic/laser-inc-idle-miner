@@ -23,6 +23,9 @@ public class BlockSpawner : BaseSpawner<BasicBlock>
 
     public float minExistingY = 0;
 
+    private bool spawnOnPredefinedPosition = false;
+    private Vector2 spawnPosition;
+
     [InitializationField]
     public List<BlockTypeScriptable> blockTypeScriptables;
     [ReadOnly]
@@ -72,7 +75,20 @@ public class BlockSpawner : BaseSpawner<BasicBlock>
             spawnedBlocks.Add(spawnedBlock);
 
         }
+    }
 
+    public void SpawnBlocksOnPositions(Vector2[] positions, out List<BasicBlock> spawnedBlocks)
+    {
+        spawnedBlocks = new List<BasicBlock>();
+
+        spawnOnPredefinedPosition = true;
+        foreach (var pos in positions)
+        {
+            spawnPosition = pos;
+            Spawn(out var block);
+            spawnedBlocks.Add(block);
+        }
+        spawnOnPredefinedPosition = false;
     }
 
     public override void Spawn(out BasicBlock spawnedBlock)
@@ -80,19 +96,33 @@ public class BlockSpawner : BaseSpawner<BasicBlock>
         base.Spawn(out BasicBlock block);
 
         float xPos;
-        // xPos = Random.Range(-spawnArea.x, spawnArea.x);
-        xPos = ((column/((columns)-1f))*2f-1f)*xArea;
-        float yPos = 0;
-        if (!ifSpawningOnGrid)
+        float yPos;
+
+        if (spawnOnPredefinedPosition)
         {
-            xPos += Random.Range(-randomOffset.x, randomOffset.x);
-            yPos += Random.Range(-randomOffset.y, randomOffset.y);
+            xPos = spawnPosition.x;
+            yPos = spawnPosition.y;
+
+            block.transform.position = new Vector3(xPos, yPos, 0);
         } else
         {
-            yPos += minExistingY - 1.236094f - spawnOffset.y;
+            
+            xPos = ((column / ((columns) - 1f)) * 2f - 1f) * xArea;
+            yPos = 0;
+            if (!ifSpawningOnGrid)
+            {
+                xPos += Random.Range(-randomOffset.x, randomOffset.x);
+                yPos += Random.Range(-randomOffset.y, randomOffset.y);
+            }
+            else
+            {
+                yPos += minExistingY - 1.236094f - spawnOffset.y;   //Beautiful magic number <3
+            }
+
+            block.transform.position = spawnOffset + new Vector3(xPos, yPos, 0);
         }
 
-        block.transform.position = spawnOffset + new Vector3(xPos, yPos, 0);
+        
         spawnedBlock = block;
     }
 

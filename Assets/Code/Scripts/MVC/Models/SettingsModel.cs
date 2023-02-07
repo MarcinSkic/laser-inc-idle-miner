@@ -28,6 +28,7 @@ public class SettingsModel : MonoBehaviour
     public bool changeTimeScale;
     [ConditionalField(nameof(changeTimeScale))]
     public float timeScale = 1f;
+    public float clickDamage;
 
     [Header("Settings edited from game UI")]
     [ReadOnly][SerializeField] private bool is60fps;
