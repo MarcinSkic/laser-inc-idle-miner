@@ -7,11 +7,26 @@ using UnityEngine.Pool;
 public class FloatingText : MonoBehaviour, IPoolable<FloatingText>
 {
     public Animator animator;
+
+    private Vector3 objectPosition;
+    public Vector3 ObjectPosition
+    {
+        get
+        {
+            return objectPosition;
+        }
+        set
+        {
+            objectPosition = value;
+            transform.position = Camera.main.WorldToScreenPoint(objectPosition);
+        }
+    }
+
     [SerializeField] private TMP_Text text;
 
     public ObjectPool<FloatingText> Pool { get; set; }
 
-    public void Init(bool repeated=false)
+    public void Init(Vector3 objectPosition, bool repeated = false)
     {
         if (repeated)
         {
@@ -23,6 +38,8 @@ public class FloatingText : MonoBehaviour, IPoolable<FloatingText>
             AnimatorClipInfo clipInfo = animator.GetCurrentAnimatorClipInfo(0)[0];
             StartCoroutine(RelaseOnAnimationFinish(clipInfo.clip.length));
         }
+
+        ObjectPosition = objectPosition;
     }
 
     IEnumerator RelaseOnAnimationFinish(float delay)
@@ -44,6 +61,7 @@ public class FloatingText : MonoBehaviour, IPoolable<FloatingText>
 
     public void Deinit()
     {
-
+        Debug.Log("Deinited");
+        Pool.Release(this);
     }
 }

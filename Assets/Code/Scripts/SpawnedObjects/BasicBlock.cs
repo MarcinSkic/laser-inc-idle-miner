@@ -16,18 +16,17 @@ public class BasicBlock : MonoBehaviour, IPoolable<BasicBlock>
     protected double maxHp;
     protected double reward;
     protected double poisonPerSecond = 0;
+    private FloatingText floatingRepeatedText = null;
+    private double repeatedTotalValue = 0;
 
     public void FixedUpdate()
     {
-        if (poisonPerSecond>0)
+        if (poisonPerSecond > 0)
         {
             // TODO - can be optimized
             TakeDamage(poisonPerSecond * Time.deltaTime, true);
         }
     }
-
-    private FloatingText floatingRepeatedText = null;
-    private double repeatedTotalValue=0;
 
     public void InitBlock(double baseHp, double hpMultiplier, double rewardMultiplier)
     {
@@ -45,13 +44,15 @@ public class BasicBlock : MonoBehaviour, IPoolable<BasicBlock>
     public void DisplayDamageTaken(double damage, bool repeating = false)
     {
         if (repeating) {
-            if (floatingRepeatedText) {
-                Destroy(floatingRepeatedText.gameObject);
-                repeatedTotalValue += damage;
-            } else {
-                repeatedTotalValue = damage;
+            if (floatingRepeatedText == null)
+            {
+                FloatingTextSpawner.Instance.Spawn(out var huh);
+                floatingRepeatedText = huh;
+                floatingRepeatedText.Init(transform.position,true);
             }
-            floatingRepeatedText = FloatingTextController.Instance.CreateFloatingText(repeatedTotalValue.ToString("F2"), transform);
+
+            repeatedTotalValue += damage;
+            floatingRepeatedText.SetText(repeatedTotalValue.ToString("F2"));
         } else {
             FloatingTextSpawner.Instance.SpawnDefault(damage.ToString("F2"), transform);
         }
@@ -61,16 +62,15 @@ public class BasicBlock : MonoBehaviour, IPoolable<BasicBlock>
     {
         hp -= damage;
 
+        if (SettingsModel.Instance.DisplayFloatingText)
+        {
+            DisplayDamageTaken(damage, repeating);
+        }
+
         if (hp <= 0 && gameObject.activeSelf)
         {
             RemoveBlock();
         }
-
-        if (SettingsModel.Instance.DisplayFloatingText)   
-        {
-            DisplayDamageTaken(damage, repeating);
-        }
-        
     }
 
     public void TakePoison(double damagePerSecond)
@@ -81,11 +81,17 @@ public class BasicBlock : MonoBehaviour, IPoolable<BasicBlock>
     /// <summary>
     /// Double is maxHp that is used to money calculations
     /// </summary>
-    private UnityAction<double> onBlockDestroyed;  //TODO-FUTURE: Maybe change it to transfer data packet if it will be used for upgrades
+    public UnityAction<double> onBlockDestroyed;  //TODO-FUTURE: Maybe change it to transfer data packet if it will be used for upgrades
     private void RemoveBlock()
     {
         poisonPerSecond = 0;
+        repeatedTotalValue = 0;
         onBlockDestroyed?.Invoke(reward);
+        if (floatingRepeatedText != null)
+        {
+            floatingRepeatedText.Deinit();
+            floatingRepeatedText = null;
+        }
         Pool.Release(this);
     }
 }

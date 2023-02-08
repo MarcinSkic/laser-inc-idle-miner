@@ -23,18 +23,8 @@ public class FloatingTextSpawner : BaseSpawner<FloatingText>
 
     public void SpawnDefault(string text, Transform location)
     {
-        Spawn(out FloatingText floatingText, location);
+        Spawn(out FloatingText floatingText);
         floatingText.SetText(text);
-        floatingText.Init();
-    }
-
-    public void Spawn(out FloatingText floatingText, Transform location)
-    {
-        base.Spawn(out FloatingText text);
-
-        Vector2 screenPosition = Camera.main.WorldToScreenPoint(location.position);
-        text.transform.position = screenPosition;
-
-        floatingText = text;
+        floatingText.Init(location.position);
     }
 }
