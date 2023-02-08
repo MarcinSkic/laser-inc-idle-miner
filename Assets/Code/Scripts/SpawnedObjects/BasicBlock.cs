@@ -12,6 +12,7 @@ public class BasicBlock : MonoBehaviour, IPoolable<BasicBlock>
 
     public ObjectPool<BasicBlock> Pool { get; set; }
 
+    [SerializeField] protected BlockType type;
     protected double hp;
     protected double maxHp;
     protected double reward;
@@ -28,11 +29,12 @@ public class BasicBlock : MonoBehaviour, IPoolable<BasicBlock>
         }
     }
 
-    public void InitBlock(double baseHp, double hpMultiplier, double rewardMultiplier)
+    public void InitBlock(double baseHp, BlockType blockType)
     {
-        maxHp = baseHp*hpMultiplier;
+        maxHp = baseHp*blockType.hpMultiplier;
         hp = maxHp;
-        reward = maxHp * rewardMultiplier;
+        reward = maxHp * blockType.rewardMultiplier;
+        type = blockType;
         poisonPerSecond = 0;
     }
 
@@ -86,6 +88,29 @@ public class BasicBlock : MonoBehaviour, IPoolable<BasicBlock>
     {
         poisonPerSecond = 0;
         repeatedTotalValue = 0;
+
+        switch (type.name)
+        {
+            case "normal":
+                StatisticsModel.Instance.MinedNormalBlocks = StatisticsModel.Instance.MinedNormalBlocks + 1;
+                break;
+            case "copper":
+                StatisticsModel.Instance.MinedCopperBlocks = StatisticsModel.Instance.MinedCopperBlocks + 1;
+                break;
+            case "iron":
+                StatisticsModel.Instance.MinedIronBlocks = StatisticsModel.Instance.MinedIronBlocks + 1;
+                break;
+            case "gold":
+                StatisticsModel.Instance.MinedGoldBlocks = StatisticsModel.Instance.MinedGoldBlocks + 1;
+                break;
+            case "diamond":
+                StatisticsModel.Instance.MinedDiamondBlocks = StatisticsModel.Instance.MinedDiamondBlocks + 1;
+                break;
+            case "uranium":
+                StatisticsModel.Instance.MinedUraniumBlocks = StatisticsModel.Instance.MinedUraniumBlocks + 1;
+                break;
+        }
+
         onBlockDestroyed?.Invoke(reward);
         if (floatingRepeatedText != null)
         {

@@ -281,6 +281,7 @@ public class GameController : BaseController<GameView>
 
         resourcesManager.SavePersistentData(persistentData);
         SettingsModel.Instance.SavePersistentData(persistentData);
+        StatisticsModel.Instance.SavePersistentData(persistentData);
         persistentData.depth = model.Depth;
         upgradesManager.SavePersistentData(persistentData);
         blocksManager.SavePersistentData(persistentData);
@@ -302,6 +303,7 @@ public class GameController : BaseController<GameView>
         resourcesManager.LoadPersistentData(persistentData);
         achievementManager.LoadPersistentData(persistentData);
         SettingsModel.Instance.LoadPersistentData(persistentData);
+        StatisticsModel.Instance.LoadPersistentData(persistentData);
         model.Depth = persistentData.depth;
         #endregion
         

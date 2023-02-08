@@ -142,7 +142,10 @@ public class BlocksManager : MonoBehaviour
     {
         if(data.blocksPositions != null)
         {
-            blockSpawner.SpawnBlocksOnPositions(data.blocksPositions, out List<BasicBlock> spawnedBlocks);
+            // TODO: wczytaj tu poprawnie te nazwy typów klocków
+            string[] blockTypeNames = new string[data.blocksPositions.Length];
+
+            blockSpawner.SpawnBlocksOnPositions(data.blocksPositions, blockTypeNames, out List<BasicBlock> spawnedBlocks);
 
             for (int i = 0; i < spawnedBlocks.Count; i++)
             {
