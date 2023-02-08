@@ -7,6 +7,7 @@ public class FloatingTextController : MonoBehaviour
     [SerializeField] private FloatingText popupText;
     [SerializeField] private Transform parent;
 
+    #region LEGACY
     public static FloatingTextController Instance;
     private void Awake()
     {
@@ -27,6 +28,8 @@ public class FloatingTextController : MonoBehaviour
         Vector2 screenPosition = Camera.main.WorldToScreenPoint(location.position);
         instance.transform.position = screenPosition;
         instance.SetText(text);
+        instance.Init();
         return instance;
     }
+    #endregion
 }

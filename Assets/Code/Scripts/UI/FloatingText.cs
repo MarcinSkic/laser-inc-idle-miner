@@ -2,21 +2,48 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using TMPro;
+using UnityEngine.Pool;
 
-public class FloatingText : MonoBehaviour
+public class FloatingText : MonoBehaviour, IPoolable<FloatingText>
 {
     public Animator animator;
-    private TMP_Text damageText;
+    [SerializeField] private TMP_Text text;
 
-    private void OnEnable()
+    public ObjectPool<FloatingText> Pool { get; set; }
+
+    public void Init(bool repeated=false)
     {
-        AnimatorClipInfo[] clipInfo = animator.GetCurrentAnimatorClipInfo(0);
-        Destroy(gameObject, clipInfo[0].clip.length);
-        damageText = animator.GetComponent<TMP_Text>();
+        if (repeated)
+        {
+            animator.speed = 0;
+        } 
+        else
+        {
+            animator.speed = 1;
+            AnimatorClipInfo clipInfo = animator.GetCurrentAnimatorClipInfo(0)[0];
+            StartCoroutine(RelaseOnAnimationFinish(clipInfo.clip.length));
+        }
+    }
+
+    IEnumerator RelaseOnAnimationFinish(float delay)
+    {
+        yield return new WaitForSeconds(delay);
+        try
+        {
+            Pool.Release(this);
+        } catch
+        {
+            Destroy(gameObject);
+        }
     }
 
     public void SetText(string text)
     {
-        damageText.text = text;
+        this.text.text = text;
+    }
+
+    public void Deinit()
+    {
+
     }
 }

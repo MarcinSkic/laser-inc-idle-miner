@@ -53,7 +53,7 @@ public class BasicBlock : MonoBehaviour, IPoolable<BasicBlock>
             }
             floatingRepeatedText = FloatingTextController.Instance.CreateFloatingText(repeatedTotalValue.ToString("F2"), transform);
         } else {
-            FloatingTextController.Instance.CreateFloatingText(damage.ToString("F2"), transform);
+            FloatingTextSpawner.Instance.SpawnDefault(damage.ToString("F2"), transform);
         }
     }
 
