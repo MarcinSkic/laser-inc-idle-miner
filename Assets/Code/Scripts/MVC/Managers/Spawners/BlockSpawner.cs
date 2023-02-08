@@ -167,4 +167,10 @@ public class BlockSpawner : BaseSpawner<BasicBlock>
 
         base.Get(block);
     }
+
+    protected override void Release(BasicBlock element)
+    {
+        base.Release(element);
+        element.onBlockDestroyed = null;
+    }
 }

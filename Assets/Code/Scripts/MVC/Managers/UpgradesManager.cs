@@ -116,7 +116,6 @@ public class UpgradesManager : MonoBehaviour
             if (upgrade.upgradedObjects.HasFlag(UpgradeableObjects.LeechBall))
             {
                 leechBallSpawner.Spawn(out var ball);
-                ball.SetVariables(blocksParent);
                 upgrade.onValueUpdate.Invoke(leechBallSpawner.active.ToString());
 
                 foreach (var speedUpgrade in speedUpgrades)
