@@ -218,7 +218,6 @@ public class UpgradesManager : MonoBehaviour
         {
             foreach (var persistentUpgrade in data.upgrades)
             {
-                Debug.Log("Persistent Upgrades:");
                 if (model.upgrades.ContainsKey(persistentUpgrade.name))
                 {
                     model.upgrades[persistentUpgrade.name].currentLevel = persistentUpgrade.currentLevel;

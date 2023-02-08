@@ -61,7 +61,6 @@ public class FloatingText : MonoBehaviour, IPoolable<FloatingText>
 
     public void Deinit()
     {
-        Debug.Log("Deinited");
         Pool.Release(this);
     }
 }
