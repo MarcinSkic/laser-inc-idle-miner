@@ -35,6 +35,15 @@ public class PersistentData
     public bool displayFloatingText;
     #endregion
 
+    #region StatisticsModel
+    public int minedNormalBlocks;
+    public int minedCopperBlocks;
+    public int minedIronBlocks;
+    public int minedGoldBlocks;
+    public int minedDiamondBlocks;
+    public int minedUraniumBlocks;
+    #endregion
+
     #region AchievementsModel
     public PersistentAchievement[] unlockedAchievements;
     #endregion

@@ -25,7 +25,8 @@ public class BlockSpawner : BaseSpawner<BasicBlock>
 
     private bool spawnOnPredefinedPosition = false;
     private Vector2 spawnPosition;
-
+    private string spawnBlockTypeName = "";
+    
     [InitializationField]
     public List<BlockTypeScriptable> blockTypeScriptables;
     [ReadOnly]
@@ -77,14 +78,15 @@ public class BlockSpawner : BaseSpawner<BasicBlock>
         }
     }
 
-    public void SpawnBlocksOnPositions(Vector2[] positions, out List<BasicBlock> spawnedBlocks)
+    public void SpawnBlocksOnPositions(Vector2[] positions, string[] blockTypeNames, out List<BasicBlock> spawnedBlocks)
     {
         spawnedBlocks = new List<BasicBlock>();
 
         spawnOnPredefinedPosition = true;
-        foreach (var pos in positions)
+        for (int i=0; i<positions.Length; i++)
         {
-            spawnPosition = pos;
+            spawnPosition = positions[i];
+            spawnBlockTypeName = blockTypeNames[i] ?? "";
             Spawn(out var block);
             spawnedBlocks.Add(block);
         }
@@ -129,24 +131,43 @@ public class BlockSpawner : BaseSpawner<BasicBlock>
     protected override void Get(BasicBlock block)
     {
         int typeId = 0;
-        for (int i=blockTypes.Count-1; i>=0; i--)
+
+        if (spawnBlockTypeName != "")
         {
-            double chance = 0;
-            if (gameModel.Depth >= blockTypes[i].fullDepth || alwaysSpawnMinerals) {
-                chance = blockTypes[i].maxChance;
-            } else if (gameModel.Depth >= blockTypes[i].minDepth)
+            for (int i=0; i<blockTypes.Count; i++)
             {
-                double part = (gameModel.Depth - blockTypes[i].minDepth) / (blockTypes[i].fullDepth - blockTypes[i].minDepth);
-                chance = part * blockTypes[i].maxChance;
+                if (blockTypes[i].name == spawnBlockTypeName)
+                {
+                    typeId = i;
+                    break;
+                }
             }
-            if (chance > Random.Range(0f, 1f))
+            spawnBlockTypeName = "";
+        } else
+        {
+            #region generate random block type
+            for (int i = blockTypes.Count - 1; i >= 0; i--)
             {
-                typeId = i;
-                break;
+                double chance = 0;
+                if (gameModel.Depth >= blockTypes[i].fullDepth || alwaysSpawnMinerals)
+                {
+                    chance = blockTypes[i].maxChance;
+                }
+                else if (gameModel.Depth >= blockTypes[i].minDepth)
+                {
+                    double part = (gameModel.Depth - blockTypes[i].minDepth) / (blockTypes[i].fullDepth - blockTypes[i].minDepth);
+                    chance = part * blockTypes[i].maxChance;
+                }
+                if (chance > Random.Range(0f, 1f))
+                {
+                    typeId = i;
+                    break;
+                }
             }
+            #endregion
         }
 
-        block.InitBlock(manager.GetDepthBlocksHealth(), blockTypes[typeId].hpMultiplier, blockTypes[typeId].rewardMultiplier);
+        block.InitBlock(manager.GetDepthBlocksHealth(), blockTypes[typeId]);
 
         int oreModelIndex = Random.Range(0, 6);
         // TODO get rid of those GetChild

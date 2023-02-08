@@ -13,6 +13,12 @@ public enum DependsOn
     DestroyedBlocksCount,
     Money,
     EarnedMoney,
+    MinedNormalBlocks,
+    MinedCopperBlocks,
+    MinedIronBlocks,
+    MinedGoldBlocks,
+    MinedDiamondBlocks,
+    MinedUraniumBlocks,
 }
 public enum Comparison
 {
@@ -61,6 +67,24 @@ public class Achievement
                 case DependsOn.Money:
                     comparedValue = achievementManager.resourcesModel.money;
                     break;
+                case DependsOn.MinedNormalBlocks:
+                    comparedValue = StatisticsModel.Instance.MinedNormalBlocks;
+                    break;
+                case DependsOn.MinedCopperBlocks:
+                    comparedValue = StatisticsModel.Instance.MinedCopperBlocks;
+                    break;
+                case DependsOn.MinedIronBlocks:
+                    comparedValue = StatisticsModel.Instance.MinedIronBlocks;
+                    break;
+                case DependsOn.MinedGoldBlocks:
+                    comparedValue = StatisticsModel.Instance.MinedGoldBlocks;
+                    break;
+                case DependsOn.MinedDiamondBlocks:
+                    comparedValue = StatisticsModel.Instance.MinedDiamondBlocks;
+                    break;
+                case DependsOn.MinedUraniumBlocks:
+                    comparedValue = StatisticsModel.Instance.MinedUraniumBlocks;
+                    break;
             }
             double result = comparedValue - requirements[i].requiredValue;
 
@@ -102,6 +126,30 @@ public class Achievement
             if (requirement == DependsOn.Money || requirement == DependsOn.EarnedMoney)
             {
                 achievementManager.resourcesManager.onMoneyChange -= checkIfCompleted;
+            }
+            if (requirement == DependsOn.MinedNormalBlocks)
+            {
+                StatisticsModel.Instance.onMinedNormalBlocksChange -= checkIfCompleted;
+            }
+            if (requirement == DependsOn.MinedCopperBlocks)
+            {
+                StatisticsModel.Instance.onMinedCopperBlocksChange -= checkIfCompleted;
+            }
+            if (requirement == DependsOn.MinedIronBlocks)
+            {
+                StatisticsModel.Instance.onMinedIronBlocksChange -= checkIfCompleted;
+            }
+            if (requirement == DependsOn.MinedGoldBlocks)
+            {
+                StatisticsModel.Instance.onMinedGoldBlocksChange -= checkIfCompleted;
+            }
+            if (requirement == DependsOn.MinedDiamondBlocks)
+            {
+                StatisticsModel.Instance.onMinedDiamondBlocksChange -= checkIfCompleted;
+            }
+            if (requirement == DependsOn.MinedUraniumBlocks)
+            {
+                StatisticsModel.Instance.onMinedUraniumBlocksChange -= checkIfCompleted;
             }
         }
     }
@@ -218,6 +266,30 @@ public class AchievementManager : MonoBehaviour
                     if (requirement == (DependsOn.Money) || requirement == (DependsOn.EarnedMoney))
                     {
                         resourcesManager.onMoneyChange += achievements[i].checkIfCompleted;
+                    }
+                    if (requirement == DependsOn.MinedNormalBlocks)
+                    {
+                        StatisticsModel.Instance.onMinedNormalBlocksChange += achievements[i].checkIfCompleted;
+                    }
+                    if (requirement == DependsOn.MinedCopperBlocks)
+                    {
+                        StatisticsModel.Instance.onMinedCopperBlocksChange += achievements[i].checkIfCompleted;
+                    }
+                    if (requirement == DependsOn.MinedIronBlocks)
+                    {
+                        StatisticsModel.Instance.onMinedIronBlocksChange += achievements[i].checkIfCompleted;
+                    }
+                    if (requirement == DependsOn.MinedGoldBlocks)
+                    {
+                        StatisticsModel.Instance.onMinedGoldBlocksChange += achievements[i].checkIfCompleted;
+                    }
+                    if (requirement == DependsOn.MinedDiamondBlocks)
+                    {
+                        StatisticsModel.Instance.onMinedDiamondBlocksChange += achievements[i].checkIfCompleted;
+                    }
+                    if (requirement == DependsOn.MinedUraniumBlocks)
+                    {
+                        StatisticsModel.Instance.onMinedUraniumBlocksChange += achievements[i].checkIfCompleted;
                     }
                 }
             }
