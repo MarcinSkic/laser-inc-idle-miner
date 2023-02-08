@@ -64,7 +64,7 @@ public class Upgrade
     public UnityAction<string> onValueUpdate;
     public Upgrade initialUpgrade;
 
-    public void GenerateName()
+    public string GenerateName()
     {
         switch (type)
         {
@@ -75,10 +75,11 @@ public class Upgrade
                 name = $"{upgradedObjects}Count";
                 break;
             case UpgradeType.CustomFunction:
-                return;
+                break;
         }
 
         name += identifier;
+        return name;
     }
 
     /// <summary>

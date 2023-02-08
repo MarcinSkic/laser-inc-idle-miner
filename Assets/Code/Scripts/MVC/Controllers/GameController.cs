@@ -71,6 +71,7 @@ public class GameController : BaseController<GameView>
         UpdateSettingsViewBySavedData();
         achievementManager.SetupAchievements();
         upgradesManager.ConnectUpgrades();  //Order important
+        achievementManager.ConnectUpgrades();
         upgradesManager.ExecuteLoadedUpgrades(); //Order important
 
         #endregion
@@ -82,6 +83,7 @@ public class GameController : BaseController<GameView>
         #endregion
 
         onSetupFinished?.Invoke();
+
     }
     public UnityAction onSetupFinished;
 
