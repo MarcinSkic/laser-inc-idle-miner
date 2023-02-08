@@ -8870,7 +8870,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &1508174524
 Transform:
   m_ObjectHideFlags: 0
@@ -10893,7 +10893,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: dc054c3500a758d448609fd6a88b6fa0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  fileName: save.dat
 --- !u!1 &1952372087
 GameObject:
   m_ObjectHideFlags: 0
