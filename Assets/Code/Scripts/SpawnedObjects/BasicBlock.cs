@@ -29,13 +29,6 @@ public class BasicBlock : MonoBehaviour, IPoolable<BasicBlock>
     private FloatingText floatingRepeatedText = null;
     private double repeatedTotalValue=0;
 
-/*    void OnMouseOver()
-    {
-        //if (Input.GetMouseButtonDown(0)){
-            TakeDamage(1);
-        //}
-    }
-*/
     public void InitBlock(double baseHp, double hpMultiplier, double rewardMultiplier)
     {
         maxHp = baseHp*hpMultiplier;
@@ -91,6 +84,7 @@ public class BasicBlock : MonoBehaviour, IPoolable<BasicBlock>
     private UnityAction<double> onBlockDestroyed;  //TODO-FUTURE: Maybe change it to transfer data packet if it will be used for upgrades
     private void RemoveBlock()
     {
+        poisonPerSecond = 0;
         onBlockDestroyed?.Invoke(reward);
         Pool.Release(this);
     }
