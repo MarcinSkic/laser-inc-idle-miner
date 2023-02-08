@@ -146,7 +146,7 @@ public class BlockSpawner : BaseSpawner<BasicBlock>
             }
         }
 
-        block.InitBlock(manager.GetDepthBlocksHealth(), blockTypes[typeId].hpMultiplier, blockTypes[typeId].rewardMultiplier);
+        block.InitBlock(manager.GetDepthBlocksHealth(), blockTypes[typeId].hpMultiplier, blockTypes[typeId].rewardMultiplier, blockTypes[typeId].name);
 
         int oreModelIndex = Random.Range(0, 6);
         // TODO get rid of those GetChild

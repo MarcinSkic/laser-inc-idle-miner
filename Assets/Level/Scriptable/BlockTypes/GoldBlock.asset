@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: GoldBlock
   m_EditorClassIdentifier: 
   blockType:
-    name: diamond
+    name: gold
     material: {fileID: 2100000, guid: 71ff3e075381c8948bb2e7ff667880a1, type: 2}
     hpMultiplier: 5
     rewardMultiplier: 15
