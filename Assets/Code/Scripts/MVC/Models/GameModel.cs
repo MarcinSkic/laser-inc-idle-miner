@@ -6,7 +6,6 @@ using UnityEngine.Events;
 
 public class GameModel : MonoBehaviour
 {
-    [ReadOnly]
     [SerializeField] private double depth;
 
     public UnityAction<double> onDepthChange;
@@ -21,5 +20,10 @@ public class GameModel : MonoBehaviour
             depth = value;
             onDepthChange?.Invoke(depth);
         }
+    }
+
+    private void OnValidate()
+    {
+        Depth = depth;
     }
 }
