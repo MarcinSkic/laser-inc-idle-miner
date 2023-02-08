@@ -12,7 +12,7 @@ public class BasicBlock : MonoBehaviour, IPoolable<BasicBlock>
 
     public ObjectPool<BasicBlock> Pool { get; set; }
 
-    [SerializeField] protected string blockTypeName;
+    [SerializeField] protected BlockType type;
     protected double hp;
     protected double maxHp;
     protected double reward;
@@ -30,12 +30,12 @@ public class BasicBlock : MonoBehaviour, IPoolable<BasicBlock>
     private FloatingText floatingRepeatedText = null;
     private double repeatedTotalValue=0;
 
-    public void InitBlock(double baseHp, double hpMultiplier, double rewardMultiplier, string typeName)
+    public void InitBlock(double baseHp, BlockType blockType)
     {
-        maxHp = baseHp*hpMultiplier;
+        maxHp = baseHp*blockType.hpMultiplier;
         hp = maxHp;
-        reward = maxHp * rewardMultiplier;
-        blockTypeName = typeName;
+        reward = maxHp * blockType.rewardMultiplier;
+        type = blockType;
         poisonPerSecond = 0;
     }
 
@@ -87,7 +87,7 @@ public class BasicBlock : MonoBehaviour, IPoolable<BasicBlock>
     private void RemoveBlock()
     {
         poisonPerSecond = 0;
-        switch (blockTypeName)
+        switch (type.name)
         {
             case "normal":
                 StatisticsModel.Instance.MinedNormalBlocks = StatisticsModel.Instance.MinedNormalBlocks + 1;
