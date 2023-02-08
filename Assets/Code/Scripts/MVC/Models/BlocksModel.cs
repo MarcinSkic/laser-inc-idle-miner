@@ -13,6 +13,7 @@ public class BlocksModel : MonoBehaviour
     public float block_spawning_trigger_minimum_y = -21f;
 
     public Transform _dynamic_blocks;
+    public Transform floatingTexts;
     public GameObject movingBorderTexturesParent;
 
     public UnityAction<double> onDestroyedBlocksCountChange;
