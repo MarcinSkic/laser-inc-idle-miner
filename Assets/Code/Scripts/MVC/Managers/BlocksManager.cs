@@ -45,6 +45,10 @@ public class BlocksManager : MonoBehaviour
             {
                 block.transform.position += new Vector3(0, model.speed, 0) * Time.deltaTime;
             }
+            foreach(FloatingText text in model.floatingTexts.GetComponentsInChildren<FloatingText>(false))
+            {
+                text.ObjectPosition += new Vector3(0, model.speed, 0) * Time.deltaTime;
+            }
             var bgTextures = model.movingBorderTexturesParent.GetComponentsInChildren<Transform>(false);
             for (int i = 1; i < bgTextures.Length; i++)
             {
@@ -120,7 +124,7 @@ public class BlocksManager : MonoBehaviour
 
             for (int i = 0; i < spawnedBlocks.Count; i++)
             {
-                spawnedBlocks[i].AssignEvents(onBlockDestroyed);
+                spawnedBlocks[i].onBlockDestroyed += onBlockDestroyed;
             }
         }
     }
@@ -145,7 +149,7 @@ public class BlocksManager : MonoBehaviour
 
             for (int i = 0; i < spawnedBlocks.Count; i++)
             {
-                spawnedBlocks[i].AssignEvents(onBlockDestroyed);
+                spawnedBlocks[i].onBlockDestroyed += onBlockDestroyed;
             }
         }
     }

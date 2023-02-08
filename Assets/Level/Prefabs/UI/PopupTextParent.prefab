@@ -51,6 +51,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   animator: {fileID: 9108649931831360864}
+  text: {fileID: 5659423329295749901}
 --- !u!1 &4920167934723619677
 GameObject:
   m_ObjectHideFlags: 0

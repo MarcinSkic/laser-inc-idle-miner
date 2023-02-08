@@ -116,7 +116,6 @@ public class UpgradesManager : MonoBehaviour
             if (upgrade.upgradedObjects.HasFlag(UpgradeableObjects.LeechBall))
             {
                 leechBallSpawner.Spawn(out var ball);
-                ball.SetVariables(blocksParent);
                 upgrade.onValueUpdate.Invoke(leechBallSpawner.active.ToString());
 
                 foreach (var speedUpgrade in speedUpgrades)
@@ -219,7 +218,6 @@ public class UpgradesManager : MonoBehaviour
         {
             foreach (var persistentUpgrade in data.upgrades)
             {
-                Debug.Log("Persistent Upgrades:");
                 if (model.upgrades.ContainsKey(persistentUpgrade.name))
                 {
                     model.upgrades[persistentUpgrade.name].currentLevel = persistentUpgrade.currentLevel;

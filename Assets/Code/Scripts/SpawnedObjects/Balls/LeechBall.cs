@@ -9,61 +9,33 @@ public class LeechBall : BaseBall<BallData>, IPoolable<LeechBall>, IUpgradeable<
 
     private BasicBlock leechedBlock;
     private Vector3 lastLeechedBlockPosition;
-    private bool leeching = false;
     private Vector3 velocityToRegain;
 
-    // TODO - unnecessary? or add homing?
-    private Transform blocksParent;
-
-    public void FixedUpdate()
+    public void Update()
     {
         if (leechedBlock && leechedBlock.isActiveAndEnabled)
         {
-            // deal {damage} damage/s
-            leechedBlock.TakeDamage(Data.values[UpgradeableValues.Damage]*Time.deltaTime, true);
-
             // move leech together with its block
             Vector3 newLeechedBlockPosition = leechedBlock.transform.position;
             if (lastLeechedBlockPosition != newLeechedBlockPosition)
             {
-                // TODO - find a better way?
-                // stop leeching if block is already repooled and went to the bottom
-                if ((newLeechedBlockPosition - lastLeechedBlockPosition).magnitude > 1)
-                {
-                    /*Debug.LogWarning(lastLeechedBlockPosition - newLeechedBlockPosition);*/
-                    StopLeeching();
-                }
-                else
-                {
-                    // move
-                    transform.position += newLeechedBlockPosition - lastLeechedBlockPosition;
-                }
+                transform.position += newLeechedBlockPosition - lastLeechedBlockPosition;
             }
             lastLeechedBlockPosition = newLeechedBlockPosition;
-        } 
-        // if block has been destroyed
-        else if (leeching)
-        {
-            StopLeeching();
+
+            leechedBlock.TakeDamage(Data.values[UpgradeableValues.Damage] * Time.deltaTime, true);
         }
     }
 
-    private void StopLeeching()
+    private void StopLeeching(double _)
     {
         // reset leeching variables
-        leeching = false;
         leechedBlock = null;
 
         // restore normal movement
         rb.isKinematic = false;
         rb.velocity = velocityToRegain;
         SetVelocity();
-    }
-
-    // TODO - unnecessary? or add homing?
-    public void SetVariables(Transform blocksParent)
-    {
-        this.blocksParent = blocksParent;
     }
 
     protected override void OnCollisionEnter(Collision collision)
@@ -73,7 +45,7 @@ public class LeechBall : BaseBall<BallData>, IPoolable<LeechBall>, IUpgradeable<
         {
             // start leeching
             leechedBlock = block;
-            leeching = true;
+            leechedBlock.onBlockDestroyed += StopLeeching;
 
             // turn off normal movement, switch to following the block
             lastLeechedBlockPosition = leechedBlock.transform.position;

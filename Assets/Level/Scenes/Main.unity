@@ -3552,6 +3552,54 @@ MonoBehaviour:
   m_ChildScaleWidth: 0
   m_ChildScaleHeight: 0
   m_ReverseArrangement: 0
+--- !u!1 &501923589
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 501923591}
+  - component: {fileID: 501923590}
+  m_Layer: 0
+  m_Name: '@FloatingTextSpawner'
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &501923590
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 501923589}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 77fb35b75559f65448fa2a7bb0398e82, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  prefab: {fileID: 6450399307910019861, guid: 1af91d9923965f648ac0c42ae1bda18f, type: 3}
+  instantionsParent: {fileID: 1460261072}
+  active: 0
+  inactive: 0
+--- !u!4 &501923591
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 501923589}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0.55814105, y: 6.496844, z: 1.7241077}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 7
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &506492054
 GameObject:
   m_ObjectHideFlags: 0
@@ -5353,52 +5401,6 @@ RectTransform:
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0.5, y: 1}
---- !u!1 &746244740
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 746244742}
-  - component: {fileID: 746244741}
-  m_Layer: 0
-  m_Name: '@FloatingTextController'
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!114 &746244741
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 746244740}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: cb4d90976785aa249b941e09736675a5, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  popupText: {fileID: 6450399307910019861, guid: 1af91d9923965f648ac0c42ae1bda18f, type: 3}
-  parent: {fileID: 1460261072}
---- !u!4 &746244742
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 746244740}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 294.71265, y: 462.24384, z: -1.7098647}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
-  m_Children: []
-  m_Father: {fileID: 0}
-  m_RootOrder: 7
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &787881498
 GameObject:
   m_ObjectHideFlags: 0
@@ -9250,7 +9252,7 @@ MonoBehaviour:
   showDebugWindow: 0
   changeTimeScale: 0
   timeScale: 0.1
-  clickDamage: 1
+  clickDamage: 100
   is60fps: 0
   displayFloatingText: 0
 --- !u!4 &1513135933
@@ -11192,7 +11194,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   manager: {fileID: 567613852}
-  money: 183.55
+  money: 234523525
   earnedMoney: 0
   offlineMoney: 0
 --- !u!114 &1947716359
@@ -11207,7 +11209,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ec9e629ee39c2304eb4a0fa6a448c61a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  depth: 0
+  depth: 1
 --- !u!114 &1947716360
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -11226,6 +11228,7 @@ MonoBehaviour:
   block_health_exponentiation_base: 1.03
   block_spawning_trigger_minimum_y: -21
   _dynamic_blocks: {fileID: 1235393438}
+  floatingTexts: {fileID: 1460261072}
   movingBorderTexturesParent: {fileID: 74388550}
   destroyedBlocks: 0
 --- !u!114 &1947716361

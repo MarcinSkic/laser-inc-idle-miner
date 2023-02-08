@@ -111,7 +111,7 @@ public class Achievement
         }
         isCompleted = true;
         achievementManager.onAchievementUnlocked?.Invoke(this);
-        Debug.Log($"COMPLETED ACHIEVEMENT: {name} - {description}");
+
         for (int j = 0; j < requirements.Length; j++)
         {
             DependsOn requirement = requirements[j].dependsOn;
