@@ -24,6 +24,9 @@ public class GameController : BaseController<GameView>
     [AutoProperty(AutoPropertyMode.Scene)] [SerializeField] private AchievementManager achievementManager;
     [AutoProperty(AutoPropertyMode.Scene)] [SerializeField] private SavingManager savingManager;
 
+    [SerializeField] RewardBat rewardBat;
+    [SerializeField] Transform batParent;
+
     //KEEP MONOBEHAVIOUR METHODS (Start, Update etc.) ON TOP
     /// <summary>
     /// This Start should be considered root Start of game, all inits where order of operations is important should originate from here
@@ -87,9 +90,23 @@ public class GameController : BaseController<GameView>
     }
     public UnityAction onSetupFinished;
 
+
     private void Update()
     {
-        DisplayFPS();      
+        DisplayFPS();
+    }
+
+
+    private void FixedUpdate()
+    {
+        SpawnBatOrNot();
+    }
+    private void SpawnBatOrNot()
+    {
+        if (Random.Range(1, 1000) > 993)
+        {
+            RewardBat newBat = Instantiate(rewardBat, batParent);
+        }
     }
 
     private void OnApplicationFocus(bool focus)

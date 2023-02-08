@@ -2427,6 +2427,8 @@ MonoBehaviour:
   blocksManager: {fileID: 567613854}
   achievementManager: {fileID: 567613856}
   savingManager: {fileID: 567613855}
+  rewardBat: {fileID: 7232551561847147341, guid: 213b8b2afa656744a8e5f09b36b46cf9, type: 3}
+  batParent: {fileID: 240033866}
 --- !u!4 &383171361
 Transform:
   m_ObjectHideFlags: 0
@@ -5274,7 +5276,7 @@ Camera:
   m_Depth: -1
   m_CullingMask:
     serializedVersion: 2
-    m_Bits: 2147483647
+    m_Bits: 759
   m_RenderingPath: -1
   m_TargetTexture: {fileID: 0}
   m_TargetDisplay: 0
@@ -7013,7 +7015,7 @@ GameObject:
   - component: {fileID: 1134417209}
   - component: {fileID: 1134417208}
   m_Layer: 0
-  m_Name: ShadowBallCamera
+  m_Name: PriorityCamera
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -7114,7 +7116,7 @@ Camera:
   m_Depth: -1
   m_CullingMask:
     serializedVersion: 2
-    m_Bits: 256
+    m_Bits: 768
   m_RenderingPath: -1
   m_TargetTexture: {fileID: 0}
   m_TargetDisplay: 0
