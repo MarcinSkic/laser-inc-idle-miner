@@ -49,6 +49,10 @@ public class BlocksManager : MonoBehaviour
             {
                 text.ObjectPosition += new Vector3(0, model.speed, 0) * Time.deltaTime;
             }
+            /*foreach(BaseBall<BallData> ball in model._dynamic_balls.GetComponentsInChildren<BaseBall<BallData>>(false))
+            {
+                ball._rb.velocity += new Vector3(0, model.speed, 0) * Time.deltaTime;
+            }*/
             var bgTextures = model.movingBorderTexturesParent.GetComponentsInChildren<Transform>(false);
             for (int i = 1; i < bgTextures.Length; i++)
             {

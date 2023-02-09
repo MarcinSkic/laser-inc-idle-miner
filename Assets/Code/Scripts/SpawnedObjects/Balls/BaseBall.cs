@@ -11,8 +11,11 @@ public class BaseBall<T> : MonoBehaviour, IPoolable<BaseBall<T>>, IUpgradeable<T
     [SerializeField] protected float laserRotationSpeedDegrees;
     public T Data { get; set; }
     public ObjectPool<BaseBall<T>> Pool { get ; set; }
+    public Rigidbody _rb => rb;
 
     private float laserRotationDirection;
+    private float ballCorectionThreshold = 0.01f;
+    private float forceAppliedToBallStuckInOneDimension = 2f;
 
     public virtual void InitBall()
     {
@@ -92,13 +95,60 @@ public class BaseBall<T> : MonoBehaviour, IPoolable<BaseBall<T>>, IUpgradeable<T
         }
     }
 
-    protected void SetVelocity(){
-        if(rb.velocity.magnitude <= 0.000001f)
+    IEnumerator ProtectVelocity(bool recursive=false)
+    {
+        bool attemptedCorrection = false;
+        bool correctionApplied = false;
+
+        if (rb.velocity.magnitude <= (float)Data.values[UpgradeableValues.Speed]*0.01f)
         {
             rb.velocity = Vector3.Normalize(new Vector3(Random.Range(-1f, 1f), Random.Range(-1f, 1f), 0)) * (float)Data.values[UpgradeableValues.Speed];
-            //Debug.Log("Ball has been unstuck");
+            NormalizeVelocity();
+            Debug.Log("Ball has been unstuck",this);
+            correctionApplied = true;
         }
+        else if(Mathf.Abs(rb.velocity.x) <= ballCorectionThreshold || Mathf.Abs(rb.velocity.y) <= ballCorectionThreshold)
+        {
+            if (Mathf.Abs(rb.velocity.x) <= ballCorectionThreshold && recursive)
+            {
+                rb.velocity += new Vector3(transform.position.x < 0 ? forceAppliedToBallStuckInOneDimension : -forceAppliedToBallStuckInOneDimension, 0, 0);
+                NormalizeVelocity();
+                Debug.Log("Ball has been pushed horizontally", this);
+                correctionApplied = true;
+            }
+            else if (Mathf.Abs(rb.velocity.y) <= ballCorectionThreshold && recursive)
+            {
+                rb.velocity += new Vector3(0, -forceAppliedToBallStuckInOneDimension, 0);
+                NormalizeVelocity();
+                Debug.Log("Ball has been pushed vertically", this);
+                correctionApplied = true;
+            }
+
+            attemptedCorrection = true;
+        }
+
+        attemptedCorrection |= correctionApplied;
+
+        if (attemptedCorrection)
+        {
+            if (correctionApplied)
+            {
+                SettingsModel.Instance.ballsAppliedCorrections++;
+            }
+            SettingsModel.Instance.ballsAttemptedCorrections++;
+            yield return new WaitForSeconds(0.5f);
+            StartCoroutine(ProtectVelocity(true));
+        }
+    }
+
+    protected void NormalizeVelocity()
+    {
         rb.velocity = rb.velocity.normalized * (float)Data.values[UpgradeableValues.Speed];
+    }
+
+    protected void SetVelocity(){
+        NormalizeVelocity();
+        StartCoroutine(ProtectVelocity());
     }
 
     private void UpdateLaserRotation()
