@@ -23,21 +23,25 @@ public class Upgrade
     public UISection whereToGenerate;
     [ConditionalField(nameof(whereToGenerate), true,UISection.AutoOrNone)]
     public int order;
+    [ConditionalField(nameof(whereToGenerate), true, UISection.AutoOrNone)]
     public string title;
+    [ConditionalField(nameof(whereToGenerate), true, UISection.AutoOrNone)]
     public string description;
     //Sprite?
     #endregion
 
-    #region Cost
-    public double cost;
-    [Tooltip("Formula: currentCost = currentCost*costMultiplier+costIncremental")]
-    public double costIncremental;
-    [Tooltip("Formula: currentCost = currentCost*costMultiplier+costIncremental")]
-    public double costMultiplier;
-    #endregion
-
     [Tooltip("Set to -1 for infinite levels")]
     public int maxLevel = -1;
+
+    #region Cost
+    public double cost;
+    [ConditionalField(nameof(maxLevel), true, 1)]
+    [Tooltip("Formula: currentCost = currentCost*costMultiplier+costIncremental")]
+    public double costIncremental;
+    [ConditionalField(nameof(maxLevel), true, 1)]
+    [Tooltip("Formula: currentCost = currentCost*costMultiplier+costIncremental")]
+    public double costMultiplier = 1;
+    #endregion
 
     public bool onUpgradeButtonsShowUpgradeInternalValue = false;
 

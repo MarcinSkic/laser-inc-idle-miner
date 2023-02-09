@@ -479,7 +479,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 0, y: 0}
-  m_AnchoredPosition: {x: 20, y: 0}
+  m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 0, y: 50}
   m_Pivot: {x: 0, y: 1}
 --- !u!222 &3222880870784519087
@@ -604,7 +604,9 @@ GameObject:
   - component: {fileID: 3222880871226057059}
   - component: {fileID: 3222880871226057057}
   - component: {fileID: 3222880871226057056}
+  - component: {fileID: 4185182536238812376}
   - component: {fileID: 1183516883901433956}
+  - component: {fileID: 21511107344435338}
   m_Layer: 5
   m_Name: UpgradeBar
   m_TagString: Untagged
@@ -673,6 +675,50 @@ MonoBehaviour:
   m_FillOrigin: 0
   m_UseSpriteMesh: 0
   m_PixelsPerUnitMultiplier: 1
+--- !u!114 &4185182536238812376
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3222880871226057058}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4e29b1a8efbd4b44bb3f3716e73f07ff, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Navigation:
+    m_Mode: 3
+    m_WrapAround: 0
+    m_SelectOnUp: {fileID: 0}
+    m_SelectOnDown: {fileID: 0}
+    m_SelectOnLeft: {fileID: 0}
+    m_SelectOnRight: {fileID: 0}
+  m_Transition: 1
+  m_Colors:
+    m_NormalColor: {r: 1, g: 1, b: 1, a: 1}
+    m_HighlightedColor: {r: 0.9607843, g: 0.9607843, b: 0.9607843, a: 1}
+    m_PressedColor: {r: 0.78431374, g: 0.78431374, b: 0.78431374, a: 1}
+    m_SelectedColor: {r: 0.9607843, g: 0.9607843, b: 0.9607843, a: 1}
+    m_DisabledColor: {r: 0.78431374, g: 0.78431374, b: 0.78431374, a: 0.5019608}
+    m_ColorMultiplier: 1
+    m_FadeDuration: 0.1
+  m_SpriteState:
+    m_HighlightedSprite: {fileID: 0}
+    m_PressedSprite: {fileID: 0}
+    m_SelectedSprite: {fileID: 0}
+    m_DisabledSprite: {fileID: 0}
+  m_AnimationTriggers:
+    m_NormalTrigger: Normal
+    m_HighlightedTrigger: Highlighted
+    m_PressedTrigger: Pressed
+    m_SelectedTrigger: Selected
+    m_DisabledTrigger: Disabled
+  m_Interactable: 1
+  m_TargetGraphic: {fileID: 3222880871226057056}
+  m_OnClick:
+    m_PersistentCalls:
+      m_Calls: []
 --- !u!114 &1183516883901433956
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -685,6 +731,26 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 009ea3c4047185643baa4254d28b4f1f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  upgradeIcon: {fileID: 0}
+  levelText: {fileID: 3222880870784519086}
+  descriptionText: {fileID: 327003141869707963}
+  upgradeButton: {fileID: 21511107344435338}
+--- !u!114 &21511107344435338
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3222880871226057058}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c00ed48db324c334d8e88e1221ba8778, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  button: {fileID: 4185182536238812376}
+  text: {fileID: 3142140491833344886}
+  upgradeName: 
+  costText: {fileID: 2939425581341317713}
 --- !u!1 &3222880871953216645
 GameObject:
   m_ObjectHideFlags: 0

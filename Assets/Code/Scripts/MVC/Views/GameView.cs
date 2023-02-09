@@ -45,6 +45,10 @@ public class GameView : BaseView
     public UIBallBar ballBarPrefab;
     public Transform ballBarsParent;
 
+    [Header("Upgrades Tab")]
+    public UIUpgradeBar upgradeBarPrefab;
+    public Transform upgradeBarsParent;
+
     [Header("Settings Tab")]
     public Toggle is60fps;
     public Toggle displayFloatingDamage;
@@ -152,6 +156,18 @@ public class GameView : BaseView
         ballBar.ballIcon.sprite = ballType.sprite;
 
         ballBars.Add(ballBar);
+    }
+
+    public UIUpgradeBar CreateUpgradeBar(Upgrade upgrade)
+    {
+        var upgradeBar = Instantiate(upgradeBarPrefab, upgradeBarsParent);
+        upgradeBar.SetDescription(upgrade.description);
+        upgradeBar.SetLevel(upgrade);
+        upgradeBar.UpgradeButton.SetText(upgrade.title);
+        upgradeBar.UpgradeButton.upgradeName = upgrade.name;
+
+
+        return upgradeBar;
     }
 
     public void ShowOfflineTimePopup(double seconds,double earnedMoney)
