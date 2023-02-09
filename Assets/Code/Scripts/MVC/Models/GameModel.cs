@@ -6,6 +6,7 @@ using UnityEngine.Events;
 
 public class GameModel : MonoBehaviour
 {
+    #region Depth
     [SerializeField] private double depth;
 
     public UnityAction<double> onDepthChange;
@@ -21,6 +22,11 @@ public class GameModel : MonoBehaviour
             onDepthChange?.Invoke(depth);
         }
     }
+    #endregion
+
+    public float heightOfBottomBar;
+    public Transform bottomBorder;
+    
 
     private void OnValidate()
     {

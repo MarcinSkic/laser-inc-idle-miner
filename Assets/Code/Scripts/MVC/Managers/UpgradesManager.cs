@@ -34,11 +34,11 @@ public class UpgradesManager : MonoBehaviour
             switch (upgrade.type)
             {
                 case UpgradeType.ValuesUpgrade:
-                    upgrade.AddDoUpgrade(OnValuesUpgrade);
+                    upgrade.doUpgrade += OnValuesUpgrade;
                     SetFirstUpgradeButtonValue(upgrade);    //UI setup
                     break;
                 case UpgradeType.SpawnUpgrade:
-                    upgrade.AddDoUpgrade(OnSpawnUpgrade);
+                    upgrade.doUpgrade += OnSpawnUpgrade;
                     upgrade.onValueUpdate?.Invoke("0");  //UI setup
                     break;
             }
@@ -81,7 +81,7 @@ public class UpgradesManager : MonoBehaviour
             if (upgrade.upgradedObjects.HasFlag(UpgradeableObjects.BasicBall))
             {
                 basicBallSpawner.Spawn(out var ball);
-                upgrade.onValueUpdate.Invoke(basicBallSpawner.active.ToString()); //TODO-FT-CURRENT: Pull from Data?;
+                upgrade.onValueUpdate?.Invoke(basicBallSpawner.active.ToString()); //TODO-FT-CURRENT: Pull from Data?;
 
                 foreach (var speedUpgrade in speedUpgrades)
                 {
@@ -93,7 +93,7 @@ public class UpgradesManager : MonoBehaviour
             {
                 bombBallSpawner.Spawn(out var ball);
                 ball.SetVariables(blocksParent);
-                upgrade.onValueUpdate.Invoke(bombBallSpawner.active.ToString());
+                upgrade.onValueUpdate?.Invoke(bombBallSpawner.active.ToString());
 
                 foreach (var speedUpgrade in speedUpgrades)
                 {
@@ -105,7 +105,7 @@ public class UpgradesManager : MonoBehaviour
             {
                 sniperBallSpawner.Spawn(out var ball);
                 ball.SetVariables(blocksParent);
-                upgrade.onValueUpdate.Invoke(sniperBallSpawner.active.ToString());
+                upgrade.onValueUpdate?.Invoke(sniperBallSpawner.active.ToString());
 
                 foreach (var speedUpgrade in speedUpgrades)
                 {
@@ -116,7 +116,7 @@ public class UpgradesManager : MonoBehaviour
             if (upgrade.upgradedObjects.HasFlag(UpgradeableObjects.LeechBall))
             {
                 leechBallSpawner.Spawn(out var ball);
-                upgrade.onValueUpdate.Invoke(leechBallSpawner.active.ToString());
+                upgrade.onValueUpdate?.Invoke(leechBallSpawner.active.ToString());
 
                 foreach (var speedUpgrade in speedUpgrades)
                 {
@@ -128,7 +128,7 @@ public class UpgradesManager : MonoBehaviour
             {
                 poisonBallSpawner.Spawn(out var ball);
                 // ball.SetVariables(blocksParent);
-                upgrade.onValueUpdate.Invoke(poisonBallSpawner.active.ToString());
+                upgrade.onValueUpdate?.Invoke(poisonBallSpawner.active.ToString());
 
                 foreach (var speedUpgrade in speedUpgrades)
                 {
@@ -140,7 +140,7 @@ public class UpgradesManager : MonoBehaviour
             {
                 shadowBallSpawner.Spawn(out var ball);
                 // ball.SetVariables(blocksParent);
-                upgrade.onValueUpdate.Invoke(shadowBallSpawner.active.ToString());
+                upgrade.onValueUpdate?.Invoke(shadowBallSpawner.active.ToString());
 
                 foreach (var speedUpgrade in speedUpgrades)
                 {

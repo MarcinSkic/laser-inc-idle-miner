@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using MyBox;
 using UnityEngine.Events;
+using System.Linq;
 
 /// <summary>
 /// Methods from this object should not be called by other objects. When such action direction is needed (for example UI or world events) it should connect methods to events HERE.
@@ -76,13 +77,15 @@ public class GameController : BaseController<GameView>
         upgradesManager.ConnectUpgrades();  //Order important
         achievementManager.ConnectUpgrades();
         upgradesManager.ExecuteLoadedUpgrades(); //Order important
-
+        CreateUpgradesUI();
         #endregion
+
         #region Methods independent from calling order
         ConnectToOfflineManagerEvents();
         ConnectToBlocksManagerEvents();
         ConnectToAchievementsManager();
         UpdateSettings();
+        MoveBorderToMatchScreenSize();
         #endregion
 
         onSetupFinished?.Invoke();
@@ -134,7 +137,7 @@ public class GameController : BaseController<GameView>
     {
         foreach (var upgrade in upgradesModel.upgrades.Values)
         {
-            upgrade.AddOnTryUpgrade(TryBuyUpgrade);
+            upgrade.doTryUpgrade += TryBuyUpgrade;
         }
     }
 
@@ -222,6 +225,12 @@ public class GameController : BaseController<GameView>
         }
     }
 
+
+    private void MoveBorderToMatchScreenSize()
+    {
+        model.bottomBorder.position = Camera.main.ScreenToWorldPoint(new Vector3(0f,model.heightOfBottomBar,-Camera.main.transform.position.z));
+    }
+
     private void CreateBallBars()
     {
         foreach(var ballType in ballsModel.ballsData.Values)
@@ -244,8 +253,8 @@ public class GameController : BaseController<GameView>
                     buttonUpgrade.SetUpgradeCost(upgrade);   //Set initial values
                     resourcesManager.onMoneyChange += buttonUpgrade.ChangeStateBasedOnMoney;
 
-                    upgrade.AddDoUpgrade(buttonUpgrade.SetUpgradeCost);  //Upgrade -> Updates Button values
-                    upgrade.onValueUpdate += buttonUpgrade.SetUpgradeValue;  //TODO-FUTURE-BUG: There should be check if the button uses upgrade internal value or universal value, if universal then it should connect to not yet existing system of sending event on value change
+                    upgrade.doUpgrade += buttonUpgrade.SetUpgradeCost; //Upgrade -> Updates Button values
+                    upgrade.onValueUpdate += buttonUpgrade.SetText;  //TODO-FUTURE-BUG: There should be check if the button uses upgrade internal value or universal value, if universal then it should connect to not yet existing system of sending event on value change
                 } 
                 else
                 {
@@ -254,6 +263,27 @@ public class GameController : BaseController<GameView>
                 }   
             }
         }
+    }
+
+    private void CreateUpgradesUI()
+    {
+        foreach (var upgrade in upgradesModel.upgrades.Values.Where(upgrade => upgrade.whereToGenerate == UISection.UpgradesOther).OrderBy(upgrade => upgrade.order))
+        {
+            var upgradeBar = view.CreateUpgradeBar(upgrade);
+            ConnectUpgradeBar(upgradeBar, upgrade);
+        }
+    }
+
+    private void ConnectUpgradeBar(UIUpgradeBar upgradeBar, Upgrade upgrade)
+    {
+        upgradeBar.UpgradeButton.Init();
+        upgradeBar.UpgradeButton.onClick += upgrade.TryUpgrade;
+
+        upgradeBar.UpgradeButton.SetUpgradeCost(upgrade);
+        resourcesManager.onMoneyChange += upgradeBar.UpgradeButton.ChangeStateBasedOnMoney;
+
+        upgrade.doUpgrade += upgradeBar.UpgradeButton.SetUpgradeCost;
+        upgrade.doUpgrade += upgradeBar.SetLevel;
     }
 
     private void OnBlockDestroyed(double money)
