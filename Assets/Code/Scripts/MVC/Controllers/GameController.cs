@@ -75,11 +75,13 @@ public class GameController : BaseController<GameView>
         upgradesManager.ExecuteLoadedUpgrades(); //Order important
 
         #endregion
+
         #region Methods independent from calling order
         ConnectToOfflineManagerEvents();
         ConnectToBlocksManagerEvents();
         ConnectToAchievementsManager();
         UpdateSettings();
+        MoveBorderToMatchScreenSize();
         #endregion
 
         onSetupFinished?.Invoke();
@@ -203,6 +205,12 @@ public class GameController : BaseController<GameView>
         {
             Application.targetFrameRate = 30;
         }
+    }
+
+
+    private void MoveBorderToMatchScreenSize()
+    {
+        model.bottomBorder.position = Camera.main.ScreenToWorldPoint(new Vector3(0f,model.heightOfBottomBar,-Camera.main.transform.position.z));
     }
 
     private void CreateBallBars()

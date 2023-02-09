@@ -19,8 +19,6 @@ public class BaseBall<T> : MonoBehaviour, IPoolable<BaseBall<T>>, IUpgradeable<T
     private float velocityAppliedToBallStuckInOneDimension = 2f;
     private float velocityCorrectionDelay = 0.01f;
 
-    private float leftEdge = -1287.52f;
-
     public virtual void InitBall()
     {
         SetLaserColor();
