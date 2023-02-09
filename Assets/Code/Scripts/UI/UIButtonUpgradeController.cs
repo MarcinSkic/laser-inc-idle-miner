@@ -6,7 +6,7 @@ using UnityEngine;
 public class UIButtonUpgradeController : UIButtonController
 {
     [Header("BUTTON UPGRADE")]
-    public string upgradeName;  //TODO-FT-DICTIONARIES: Should be enum
+    public string upgradeName;
     [SerializeField]
     private TMP_Text costText;  //TODO-FT-RESOURCES
 
@@ -40,10 +40,5 @@ public class UIButtonUpgradeController : UIButtonController
         {
             Activate();
         }
-    }
-
-    public void SetUpgradeValue(string value)
-    {
-        ChangeText(value);
     }
 }

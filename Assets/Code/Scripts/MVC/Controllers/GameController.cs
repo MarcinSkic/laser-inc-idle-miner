@@ -117,7 +117,7 @@ public class GameController : BaseController<GameView>
     {
         foreach (var upgrade in upgradesModel.upgrades.Values)
         {
-            upgrade.AddOnTryUpgrade(TryBuyUpgrade);
+            upgrade.doTryUpgrade += TryBuyUpgrade;
         }
     }
 
@@ -227,8 +227,8 @@ public class GameController : BaseController<GameView>
                     buttonUpgrade.SetUpgradeCost(upgrade);   //Set initial values
                     resourcesManager.onMoneyChange += buttonUpgrade.ChangeStateBasedOnMoney;
 
-                    upgrade.AddDoUpgrade(buttonUpgrade.SetUpgradeCost);  //Upgrade -> Updates Button values
-                    upgrade.onValueUpdate += buttonUpgrade.SetUpgradeValue;  //TODO-FUTURE-BUG: There should be check if the button uses upgrade internal value or universal value, if universal then it should connect to not yet existing system of sending event on value change
+                    upgrade.doUpgrade += buttonUpgrade.SetUpgradeCost; //Upgrade -> Updates Button values
+                    upgrade.onValueUpdate += buttonUpgrade.ChangeText;  //TODO-FUTURE-BUG: There should be check if the button uses upgrade internal value or universal value, if universal then it should connect to not yet existing system of sending event on value change
                 } 
                 else
                 {

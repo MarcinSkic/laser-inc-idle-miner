@@ -16,20 +16,25 @@ public class Upgrade
 
     [ConditionalField(nameof(type), false, UpgradeType.CustomFunction)]
     public string name;
-    [Tooltip("Fill when upgrades change the same stats")]
+    [Tooltip("Required when upgrades change the same stats")]
     public string identifier;
 
+    #region UI
     public UISection whereToGenerate;
     [ConditionalField(nameof(whereToGenerate), true,UISection.AutoOrNone)]
     public int order;
+    public string title;
+    public string description;
     //Sprite?
-    //UI description?
+    #endregion
 
+    #region Cost
     public double cost;
     [Tooltip("Formula: currentCost = currentCost*costMultiplier+costIncremental")]
     public double costIncremental;
     [Tooltip("Formula: currentCost = currentCost*costMultiplier+costIncremental")]
     public double costMultiplier;
+    #endregion
 
     [Tooltip("Set to -1 for infinite levels")]
     public int maxLevel = -1;
@@ -80,26 +85,6 @@ public class Upgrade
 
         name += identifier;
         return name;
-    }
-
-    /// <summary>
-    /// This method is to streamline assigning functions to events
-    /// </summary>
-    /// <param name="actions"></param>
-    public void AddDoUpgrade(params UnityAction<Upgrade>[] actions)
-    {
-        foreach (var action in actions)
-        {
-            doUpgrade += action;
-        }
-    }
-
-    public void AddOnTryUpgrade(params UnityAction<Upgrade>[] actions)
-    {
-        foreach (var action in actions)
-        {
-            doTryUpgrade += action;
-        }
     }
 
     /// <summary>

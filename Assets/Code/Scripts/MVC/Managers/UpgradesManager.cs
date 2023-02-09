@@ -34,11 +34,11 @@ public class UpgradesManager : MonoBehaviour
             switch (upgrade.type)
             {
                 case UpgradeType.ValuesUpgrade:
-                    upgrade.AddDoUpgrade(OnValuesUpgrade);
+                    upgrade.doUpgrade += OnValuesUpgrade;
                     SetFirstUpgradeButtonValue(upgrade);    //UI setup
                     break;
                 case UpgradeType.SpawnUpgrade:
-                    upgrade.AddDoUpgrade(OnSpawnUpgrade);
+                    upgrade.doUpgrade += OnSpawnUpgrade;
                     upgrade.onValueUpdate?.Invoke("0");  //UI setup
                     break;
             }
