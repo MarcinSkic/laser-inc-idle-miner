@@ -2,6 +2,21 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+public enum BatRewardType
+{
+    money,
+    premium,
+    powerup
+}
+
+[System.Serializable]
+public class BatOption
+{
+    public Sprite batSprite;
+    public BatRewardType rewardType;
+    public bool needsAd;
+}
+
 public class RewardBat : MonoBehaviour
 {
     [SerializeField] float xDeviation;
@@ -10,12 +25,16 @@ public class RewardBat : MonoBehaviour
     [SerializeField] float horizontalSpeed;
     int direction;
     [SerializeField] SpriteRenderer batSprite;
+    [SerializeField] BatOption[] batOptions;
+    private BatOption batOption;
 
     void Start()
     {
         transform.position = new Vector3(Random.Range(-xDeviation, xDeviation), -yBorders, Random.Range(3f, 5f));
         direction = Random.Range(0, 2) * 2 - 1; // either 1 or -1
         handleDirectionChange();
+        batOption = batOptions[Random.Range(0, batOptions.Length)];
+        batSprite.sprite = batOption.batSprite;
     }
 
     void FixedUpdate()
@@ -39,7 +58,11 @@ public class RewardBat : MonoBehaviour
 
     public void getClicked()
     {
-        Debug.Log("You got a gem! or sth.");
+        if (batOption.needsAd)
+        {
+            Debug.Log($"watch an ad to get {batOption.rewardType}");
+        }
+        Debug.Log($"you get {batOption.rewardType}");
         Destroy(gameObject);
     }
 }

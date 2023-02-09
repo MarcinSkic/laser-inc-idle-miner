@@ -27,7 +27,7 @@ Transform:
   m_GameObject: {fileID: 534717299721461492}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalScale: {x: 2, y: 2, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 534717300250465204}
@@ -47,12 +47,29 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   xDeviation: 6.5
-  yBorders: 20
+  yBorders: 30
   verticalSpeed: 4
   horizontalSpeed: 8
-  zSpriteRotationDeviation: 30
-  zSpriteRotationSpeed: 666
   batSprite: {fileID: 534717300250465203}
+  batOptions:
+  - batSprite: {fileID: 21300000, guid: ba29b0299c4684d4eabcd609caf55805, type: 3}
+    rewardType: 0
+    needsAd: 0
+  - batSprite: {fileID: 21300000, guid: d429333b9c3fad14d87ddad3c6eb9d80, type: 3}
+    rewardType: 0
+    needsAd: 1
+  - batSprite: {fileID: 21300000, guid: 8a88c23dc0c74d446b404d49a910095f, type: 3}
+    rewardType: 1
+    needsAd: 0
+  - batSprite: {fileID: 21300000, guid: 4e4cfadba63173c4aa20941bc4ea71f2, type: 3}
+    rewardType: 1
+    needsAd: 1
+  - batSprite: {fileID: 21300000, guid: 8127d414e94ecf24eb0adcea5863c826, type: 3}
+    rewardType: 2
+    needsAd: 0
+  - batSprite: {fileID: 21300000, guid: c31054e9bf0937d4994d520dcb91d528, type: 3}
+    rewardType: 2
+    needsAd: 1
 --- !u!65 &8697932057656942237
 BoxCollider:
   m_ObjectHideFlags: 0
