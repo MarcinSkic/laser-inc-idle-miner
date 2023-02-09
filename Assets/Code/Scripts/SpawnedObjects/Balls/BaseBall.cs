@@ -49,7 +49,7 @@ public class BaseBall<T> : MonoBehaviour, IPoolable<BaseBall<T>>, IUpgradeable<T
     void Update()
     {
         RotateLaser();
-        Debug.Log(rb.velocity);
+        Debug.Log(rb.velocity); //TODO Clear this
     }
 
     protected virtual void OnCollisionEnter(Collision collision)

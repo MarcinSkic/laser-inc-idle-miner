@@ -39,7 +39,7 @@ public class UIButtonController : MonoBehaviour
         onClick?.Invoke();
     }
 
-    public void ChangeText(string value)
+    public void SetText(string value)
     {
         text.text = value;
     }
