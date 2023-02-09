@@ -31,6 +31,7 @@ public class SettingsModel : MonoBehaviour
     public float clickDamage;
 
     [Header("Settings edited from game UI")]
+    #region Is60fps
     [ReadOnly][SerializeField] private bool is60fps;
     public bool Is60fps
     {
@@ -44,7 +45,9 @@ public class SettingsModel : MonoBehaviour
             onSettingsChange?.Invoke();
         }
     }
+    #endregion
 
+    #region DisplayFloatingText
     [ReadOnly][SerializeField] private bool displayFloatingText;
     public bool DisplayFloatingText
     {
@@ -58,6 +61,11 @@ public class SettingsModel : MonoBehaviour
             onSettingsChange?.Invoke();
         }
     }
+    #endregion
+
+    [Header("Debug informations")]
+    [ReadOnly] public int ballsAttemptedCorrections = 0;
+    [ReadOnly] public int ballsAppliedCorrections = 0;
 
     public UnityAction onSettingsChange;
 

@@ -11,8 +11,15 @@ public class BaseBall<T> : MonoBehaviour, IPoolable<BaseBall<T>>, IUpgradeable<T
     [SerializeField] protected float laserRotationSpeedDegrees;
     public T Data { get; set; }
     public ObjectPool<BaseBall<T>> Pool { get ; set; }
+    public Rigidbody _rb => rb;
 
     private float laserRotationDirection;
+    private float ballOneDimensionCorectionThreshold = 0.1f;
+    private float ballSpeedPercentageCorrectionThreshold = 0.1f;
+    private float velocityAppliedToBallStuckInOneDimension = 2f;
+    private float velocityCorrectionDelay = 0.01f;
+
+    private float leftEdge = -1287.52f;
 
     public virtual void InitBall()
     {
@@ -44,6 +51,7 @@ public class BaseBall<T> : MonoBehaviour, IPoolable<BaseBall<T>>, IUpgradeable<T
     void Update()
     {
         RotateLaser();
+        Debug.Log(rb.velocity);
     }
 
     protected virtual void OnCollisionEnter(Collision collision)
@@ -92,13 +100,68 @@ public class BaseBall<T> : MonoBehaviour, IPoolable<BaseBall<T>>, IUpgradeable<T
         }
     }
 
-    protected void SetVelocity(){
-        if(rb.velocity.magnitude <= 0.000001f)
+    IEnumerator ProtectVelocity(bool recursive=false)
+    {
+        bool attemptedCorrection = false;
+        bool correctionApplied = false;
+
+        if (recursive)
+        {
+            yield return new WaitForSeconds(velocityCorrectionDelay);
+        } else
+        {
+            yield return new WaitForSeconds(velocityCorrectionDelay * 5);
+        }
+        
+        if (rb.velocity.magnitude <= (float)Data.values[UpgradeableValues.Speed]* ballSpeedPercentageCorrectionThreshold)
         {
             rb.velocity = Vector3.Normalize(new Vector3(Random.Range(-1f, 1f), Random.Range(-1f, 1f), 0)) * (float)Data.values[UpgradeableValues.Speed];
-            //Debug.Log("Ball has been unstuck");
+            NormalizeVelocity();
+            Debug.Log("Ball has been unstuck",this);
+            correctionApplied = true;
         }
+        else if(Mathf.Abs(rb.velocity.x) <= ballOneDimensionCorectionThreshold || Mathf.Abs(rb.velocity.y) <= ballOneDimensionCorectionThreshold)
+        {
+            if (Mathf.Abs(rb.velocity.x) <= ballOneDimensionCorectionThreshold && recursive)
+            {
+                rb.velocity += new Vector3(transform.position.x < 0 ? velocityAppliedToBallStuckInOneDimension : -velocityAppliedToBallStuckInOneDimension, 0, 0);
+                NormalizeVelocity();
+                Debug.Log("Ball has been pushed horizontally", this);
+                correctionApplied = true;
+            }
+            else if (Mathf.Abs(rb.velocity.y) <= ballOneDimensionCorectionThreshold && recursive)
+            {
+                rb.velocity += new Vector3(0, -velocityAppliedToBallStuckInOneDimension, 0);
+                NormalizeVelocity();
+                Debug.Log("Ball has been pushed vertically", this);
+                correctionApplied = true;
+            }
+
+            attemptedCorrection = true;
+        }
+
+        attemptedCorrection |= correctionApplied;
+
+        if (attemptedCorrection)
+        {
+            if (correctionApplied)
+            {
+                SettingsModel.Instance.ballsAppliedCorrections++;
+            }
+            SettingsModel.Instance.ballsAttemptedCorrections++;
+            yield return new WaitForSeconds(velocityCorrectionDelay);
+            StartCoroutine(ProtectVelocity(true));
+        }
+    }
+
+    protected void NormalizeVelocity()
+    {
         rb.velocity = rb.velocity.normalized * (float)Data.values[UpgradeableValues.Speed];
+    }
+
+    protected void SetVelocity(){
+        NormalizeVelocity();
+        StartCoroutine(ProtectVelocity());
     }
 
     private void UpdateLaserRotation()
