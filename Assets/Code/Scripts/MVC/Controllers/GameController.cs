@@ -53,9 +53,9 @@ public class GameController : BaseController<GameView>
         #region Loading Saved Data
         if (SettingsModel.Instance.saveAndLoadFile)
         {
-            var loadSuccesful = LoadPersistentData();
+            savingManager.loadedProperly = LoadPersistentData();
 
-            if (!loadSuccesful)
+            if (!savingManager.loadedProperly)
             {
                 LoadDefaults();
             }

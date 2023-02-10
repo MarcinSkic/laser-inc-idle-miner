@@ -49,7 +49,6 @@ public class BaseBall<T> : MonoBehaviour, IPoolable<BaseBall<T>>, IUpgradeable<T
     void Update()
     {
         RotateLaser();
-        Debug.Log(rb.velocity); //TODO Clear this
     }
 
     protected virtual void OnCollisionEnter(Collision collision)
@@ -115,7 +114,6 @@ public class BaseBall<T> : MonoBehaviour, IPoolable<BaseBall<T>>, IUpgradeable<T
         {
             rb.velocity = Vector3.Normalize(new Vector3(Random.Range(-1f, 1f), Random.Range(-1f, 1f), 0)) * (float)Data.values[UpgradeableValues.Speed];
             NormalizeVelocity();
-            Debug.Log("Ball has been unstuck",this);
             correctionApplied = true;
         }
         else if(Mathf.Abs(rb.velocity.x) <= ballOneDimensionCorectionThreshold || Mathf.Abs(rb.velocity.y) <= ballOneDimensionCorectionThreshold)
@@ -124,14 +122,12 @@ public class BaseBall<T> : MonoBehaviour, IPoolable<BaseBall<T>>, IUpgradeable<T
             {
                 rb.velocity += new Vector3(transform.position.x < 0 ? velocityAppliedToBallStuckInOneDimension : -velocityAppliedToBallStuckInOneDimension, 0, 0);
                 NormalizeVelocity();
-                Debug.Log("Ball has been pushed horizontally", this);
                 correctionApplied = true;
             }
             else if (Mathf.Abs(rb.velocity.y) <= ballOneDimensionCorectionThreshold && recursive)
             {
                 rb.velocity += new Vector3(0, -velocityAppliedToBallStuckInOneDimension, 0);
                 NormalizeVelocity();
-                Debug.Log("Ball has been pushed vertically", this);
                 correctionApplied = true;
             }
 
