@@ -16,6 +16,8 @@ public class PersistentData
 
     #region ResourceModel
     public double money;
+    public double earnedMoney;
+    public double offlineEarnedMoney;
     #endregion
 
     #region BlocksModel

@@ -8,11 +8,17 @@ public class ResourcesModel : MonoBehaviour
     [AutoProperty(AutoPropertyMode.Scene)]
     [SerializeField] ResourcesManager manager;
 
+    [Tooltip("Current money")]
     public double money = 0;
     [ReadOnly]
+    [Tooltip("Total of money earned")]
     public double earnedMoney = 0;
     [ReadOnly]
+    [Tooltip("Calculated reward for last offline time")]
     public double offlineMoney = 0;
+    [ReadOnly]
+    [Tooltip("Total of money earned for offline rewards")]
+    public double offlineEarnedMoney = 0;
 
 
     #region AFK gain test

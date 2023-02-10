@@ -14,9 +14,6 @@ public class ResourcesManager : MonoBehaviour
 
     void updateLastEarnedMoneyStates()
     {
-        // for debug
-        // IncreaseMoney(1);
-
         model.lastEarnedMoneyStates.Add(model.earnedMoney);
         if (model.lastEarnedMoneyStates.Count > 16)
         {
@@ -92,6 +89,13 @@ public class ResourcesManager : MonoBehaviour
         model.earnedMoney += value;
     }
 
+    public void IncreaseMoneyForOffline(double value)
+    {
+        Money += value;
+        model.earnedMoney += value;
+        model.offlineEarnedMoney += value;
+    }
+
     public bool TryDecreaseMoney(double value)
     {
         if(Money - value < 0)
@@ -108,10 +112,14 @@ public class ResourcesManager : MonoBehaviour
     public void SavePersistentData(PersistentData data)
     {
         data.money = Money;
+        data.earnedMoney = model.earnedMoney;
+        data.offlineEarnedMoney = model.offlineEarnedMoney;
     }
 
     public void LoadPersistentData(PersistentData data)
     {
         Money = data?.money ?? 0;
+        model.earnedMoney = data?.earnedMoney ?? 0;
+        model.offlineEarnedMoney = data?.offlineEarnedMoney ?? 0;
     }
 }

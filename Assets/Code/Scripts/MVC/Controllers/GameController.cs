@@ -172,7 +172,7 @@ public class GameController : BaseController<GameView>
         view.InitButtons();
 
         view.offlineConfirmButton.onClick += delegate {
-            resourcesManager.IncreaseMoney(resourcesModel.offlineMoney);
+            resourcesManager.IncreaseMoneyForOffline(resourcesModel.offlineMoney);
             view.offlineGetBonusButton.Activate();
             view.offlinePopup.SetActive(false); 
         };
