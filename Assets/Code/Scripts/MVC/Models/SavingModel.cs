@@ -18,6 +18,8 @@ public class PersistentData
     public double money;
     public double earnedMoney;
     public double offlineEarnedMoney;
+    public double afkGainPerSec;
+    public List<double> lastOnlineEarnedMoneyStates;
     #endregion
 
     #region BlocksModel

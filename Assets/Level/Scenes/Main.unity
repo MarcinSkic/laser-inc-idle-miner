@@ -11452,13 +11452,13 @@ MonoBehaviour:
   earnedMoney: 0
   offlineMoney: 0
   offlineEarnedMoney: 0
+  afkGainPerSec: 0
   secondsForOfflineRewardCalculation: 15
   maxToAfkProportion: 50
   lastOnlineEarnedMoneyStates: []
   earnedOverSecs: 0
   maxEarnedOverSecs: 0
   maxPerSecOverSecs: 0
-  afkGainPerSec: 0
   currentPerSecOverSecs: 0
   afkToCurrentProportion: 0
 --- !u!114 &1947716359

@@ -93,6 +93,8 @@ public class ResourcesManager : MonoBehaviour
         data.money = Money;
         data.earnedMoney = model.earnedMoney;
         data.offlineEarnedMoney = model.offlineEarnedMoney;
+        data.afkGainPerSec = model.afkGainPerSec;
+        data.lastOnlineEarnedMoneyStates = model.lastOnlineEarnedMoneyStates;
     }
 
     public void LoadPersistentData(PersistentData data)
@@ -100,5 +102,7 @@ public class ResourcesManager : MonoBehaviour
         Money = data?.money ?? 0;
         model.earnedMoney = data?.earnedMoney ?? 0;
         model.offlineEarnedMoney = data?.offlineEarnedMoney ?? 0;
+        model.afkGainPerSec = data?.afkGainPerSec ?? 0;
+        model.lastOnlineEarnedMoneyStates = data?.lastOnlineEarnedMoneyStates ?? new List<double>();
     }
 }
