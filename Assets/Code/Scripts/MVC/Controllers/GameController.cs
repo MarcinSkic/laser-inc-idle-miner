@@ -67,7 +67,7 @@ public class GameController : BaseController<GameView>
         #endregion
 
         #region Methods that require loaded data
-        ConnectToUpgradesEvents();  //TODO-FT-CURRENT: Move this functionality to upgrade manager?
+        ConnectToUpgradesEvents();
         ConnectBallBarsWithEvents();
         UpdateSettingsViewBySavedData();
         achievementManager.SetupAchievements();
@@ -273,7 +273,7 @@ public class GameController : BaseController<GameView>
     {
         resourcesManager.IncreaseMoney(money);
         blocksManager.incrementDestroyedBlocksCount();
-        //TODO-FEATURE: Count destroyed blocks for upgrades/rewards
+        //TODO-UGLY: It should be here but is in BasicBlock: count destroyed blocks for upgrades/rewards
 
     }
 
@@ -326,6 +326,7 @@ public class GameController : BaseController<GameView>
 
         if(persistentData == null)
         {
+            savingManager.loadedProperly = true;
             return false;
         }
 
@@ -342,6 +343,7 @@ public class GameController : BaseController<GameView>
         upgradesManager.LoadPersistentData(persistentData);
         #endregion
 
+        savingManager.loadedProperly = true;
         return true;
     }
 

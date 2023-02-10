@@ -4,8 +4,9 @@ using UnityEngine;
 
 public class ShadowBallCollisionDetector : MonoBehaviour
 {
+    [SerializeField] private ShadowBall ball;
     public void OnTriggerEnter(Collider collider)
     {
-        gameObject.GetComponentInParent<ShadowBall>().handleDetectionFromTrigger(collider);
+        ball.HandleDetectionFromTrigger(collider);
     }
 }

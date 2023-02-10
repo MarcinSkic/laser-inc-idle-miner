@@ -10,6 +10,7 @@ public class SavingManager : MonoBehaviour
 {
     [AutoProperty(AutoPropertyMode.Scene)]
     [SerializeField] private SavingModel model;
+    public bool loadedProperly = false;
 
     public PersistentData LoadPersistentData()
     {
@@ -31,6 +32,12 @@ public class SavingManager : MonoBehaviour
 
     public void SavePersistentData(PersistentData data)
     {
+        if (!loadedProperly)
+        {
+            Debug.Log("Saving aborted, Loading was not succesful");
+            return;
+        }
+
         data.lastSaveTime = DateTime.Now;
 
         string destination = Application.persistentDataPath + "/" + Keys.SAVE_FILE_NAME;

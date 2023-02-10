@@ -170,8 +170,7 @@ public class BlockSpawner : BaseSpawner<BasicBlock>
         block.InitBlock(manager.GetDepthBlocksHealth(), blockTypes[typeId]);
 
         int oreModelIndex = Random.Range(0, 6);
-        // TODO get rid of those GetChild
-        Transform ModelsParent = block.gameObject.transform.GetChild(1).GetChild(0);
+        Transform ModelsParent = block.gameObject.transform.GetChild(1).GetChild(0);         // TODO-UGLY: get rid of those GetChild
 
         // set ore model
         for (int i = 0; i < 6; i++)
