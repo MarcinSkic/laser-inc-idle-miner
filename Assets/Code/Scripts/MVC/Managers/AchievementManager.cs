@@ -19,6 +19,12 @@ public enum DependsOn
     MinedGoldBlocks,
     MinedDiamondBlocks,
     MinedUraniumBlocks,
+    PrestigeCurrency,
+    EarnedPrestigeCurrency,
+    PremiumCurrency,
+    EarnedPremiumCurrency,
+    powerUpTimeLeft,
+    earnedPowerUpTime,
 }
 public enum Comparison
 {
@@ -85,6 +91,24 @@ public class Achievement
                 case DependsOn.MinedUraniumBlocks:
                     comparedValue = StatisticsModel.Instance.MinedUraniumBlocks;
                     break;
+                case DependsOn.PrestigeCurrency:
+                    comparedValue = achievementManager.resourcesModel.prestigeCurrency;
+                    break;
+                case DependsOn.EarnedPrestigeCurrency:
+                    comparedValue = achievementManager.resourcesModel.earnedPrestigeCurrency;
+                    break;
+                case DependsOn.PremiumCurrency:
+                    comparedValue = achievementManager.resourcesModel.premiumCurrency;
+                    break;
+                case DependsOn.EarnedPremiumCurrency:
+                    comparedValue = achievementManager.resourcesModel.earnedPremiumCurrency;
+                    break;
+                case DependsOn.powerUpTimeLeft:
+                    comparedValue = achievementManager.resourcesModel.powerUpTimeLeft;
+                    break;
+                case DependsOn.earnedPowerUpTime:
+                    comparedValue = achievementManager.resourcesModel.earnedPowerUpTime;
+                    break;
             }
             double result = comparedValue - requirements[i].requiredValue;
 
@@ -150,6 +174,18 @@ public class Achievement
             if (requirement == DependsOn.MinedUraniumBlocks)
             {
                 StatisticsModel.Instance.onMinedUraniumBlocksChange -= checkIfCompleted;
+            }
+            if (requirement == DependsOn.PrestigeCurrency || requirement == DependsOn.EarnedPrestigeCurrency)
+            {
+                achievementManager.resourcesManager.onPrestigeCurrencyChange -= checkIfCompleted;
+            }
+            if (requirement == DependsOn.PremiumCurrency || requirement == DependsOn.EarnedPremiumCurrency)
+            {
+                achievementManager.resourcesManager.onPremiumCurrencyChange -= checkIfCompleted;
+            }
+            if (requirement == DependsOn.powerUpTimeLeft || requirement == DependsOn.earnedPowerUpTime)
+            {
+                achievementManager.resourcesManager.onPowerUpTimeAdded -= checkIfCompleted;
             }
         }
     }
@@ -290,6 +326,18 @@ public class AchievementManager : MonoBehaviour
                     if (requirement == DependsOn.MinedUraniumBlocks)
                     {
                         StatisticsModel.Instance.onMinedUraniumBlocksChange += achievements[i].checkIfCompleted;
+                    }
+                    if (requirement == DependsOn.PrestigeCurrency || requirement == DependsOn.EarnedPrestigeCurrency)
+                    {
+                        resourcesManager.onPrestigeCurrencyChange += achievements[i].checkIfCompleted;
+                    }
+                    if (requirement == DependsOn.PremiumCurrency || requirement == DependsOn.EarnedPremiumCurrency)
+                    {
+                        resourcesManager.onPremiumCurrencyChange += achievements[i].checkIfCompleted;
+                    }
+                    if (requirement == DependsOn.powerUpTimeLeft || requirement == DependsOn.earnedPowerUpTime)
+                    {
+                        resourcesManager.onPowerUpTimeAdded += achievements[i].checkIfCompleted;
                     }
                 }
             }

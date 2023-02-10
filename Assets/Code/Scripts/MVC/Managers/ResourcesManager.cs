@@ -8,6 +8,7 @@ public class ResourcesManager : MonoBehaviour
     [SerializeField]
     private ResourcesModel model;
 
+    public UnityAction<double> onPowerUpTimeAdded;
     public UnityAction<double> onPremiumCurrencyChange;
     public UnityAction<double> onPrestigeCurrencyChange;
     public UnityAction<double> onMoneyChange;
@@ -31,8 +32,9 @@ public class ResourcesManager : MonoBehaviour
 
     public void IncreasePowerUpTimeLeft(double value)
     {
-        PowerUpTimeLeft += value;
         model.earnedPowerUpTime += value;
+        PowerUpTimeLeft += value;
+        onPowerUpTimeAdded?.Invoke(PowerUpTimeLeft);
     }
 
     public void DecreasePowerUpTimeLeft(double value)
@@ -64,8 +66,8 @@ public class ResourcesManager : MonoBehaviour
         {
             value = 1;
         }
-        PremiumCurrency += value;
         model.earnedPremiumCurrency += value;
+        PremiumCurrency += value;
     }
     #endregion
 
@@ -89,8 +91,8 @@ public class ResourcesManager : MonoBehaviour
         {
             value = 1;
         }
-        PrestigeCurrency += value;
         model.earnedPrestigeCurrency += value;
+        PrestigeCurrency += value;
     }
     #endregion
 
@@ -153,8 +155,8 @@ public class ResourcesManager : MonoBehaviour
         {
             value = 1;
         }
-        Money += value;
         model.earnedMoney += value;
+        Money += value;
     }
 
     // add X money as offline/reward money

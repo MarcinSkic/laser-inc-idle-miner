@@ -4584,6 +4584,12 @@ MonoBehaviour:
   - {fileID: 11400000, guid: 887a083a86054934e817a2a414b95615, type: 2}
   - {fileID: 11400000, guid: 586763e781d8262448ebd0fddf0c2e0d, type: 2}
   - {fileID: 11400000, guid: b977b4ccb055cdf4c8019fde3b5c6a8f, type: 2}
+  - {fileID: 11400000, guid: 2f1a9e66d586ae2429274e115ff1c13a, type: 2}
+  - {fileID: 11400000, guid: 6f2c2374559b1a248bcd3403815ae38e, type: 2}
+  - {fileID: 11400000, guid: ce679308f10faa84bbd79d46ac3f8057, type: 2}
+  - {fileID: 11400000, guid: e9d1a9260dc4bc04d801dfae0cc39f30, type: 2}
+  - {fileID: 11400000, guid: 5554a3979607de141ae87d1ea7fba2e0, type: 2}
+  - {fileID: 11400000, guid: e8ecf8fe7bd13304599b2e73c8848af9, type: 2}
   achievements: []
   achievementGrid: {fileID: 866237050}
   achievementSquare: {fileID: 7243954313712763706, guid: c47f897411e00a3448ab38d0873e87d7, type: 3}
@@ -4591,7 +4597,7 @@ MonoBehaviour:
   achievementReward: {fileID: 11400000, guid: db42842ea9366ae42a168a81239b8154, type: 2}
   rowReward: {fileID: 11400000, guid: 1e34e3c037f9de24e803391bd9542231, type: 2}
   upgradesModel: {fileID: 1947716357}
-  achievementsInRow: 4
+  achievementsInRow: 5
   glp: {fileID: 866237052}
 --- !u!1 &587280162
 GameObject:
