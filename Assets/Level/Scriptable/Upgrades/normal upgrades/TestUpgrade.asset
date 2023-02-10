@@ -17,13 +17,13 @@ MonoBehaviour:
     name: 
     identifier: Test
     whereToGenerate: 1
-    order: 0
+    order: 1000
     title: Tescik
     description: Testowy fajny upgrade
+    maxLevel: -1
     cost: 5
     costIncremental: 0
     costMultiplier: 2
-    maxLevel: -1
     onUpgradeButtonsShowUpgradeInternalValue: 0
     upgradeValue: 0
     upgradedObjects: 63

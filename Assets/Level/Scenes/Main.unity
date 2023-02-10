@@ -1230,6 +1230,7 @@ MonoBehaviour:
   model: {fileID: 1947716360}
   gameModel: {fileID: 1947716359}
   manager: {fileID: 567613854}
+  resourceManager: {fileID: 567613852}
   minExistingY: 0
   blockTypeScriptables:
   - {fileID: 11400000, guid: ea8612a399f467441a07d0b393803659, type: 2}
@@ -11435,6 +11436,7 @@ MonoBehaviour:
   - {fileID: 11400000, guid: 68a7816a55a58924cacf413fa25075a2, type: 2}
   - {fileID: 11400000, guid: 83769e669b6d9ca488e7edd55d873461, type: 2}
   - {fileID: 11400000, guid: 00c8227c191119a4db76d349076039f3, type: 2}
+  - {fileID: 11400000, guid: 9b3495f7bcdbfd646a1d21b4eaac3708, type: 2}
 --- !u!114 &1947716358
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -11448,6 +11450,12 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   manager: {fileID: 567613852}
+  powerUpTimeLeft: 0
+  earnedPowerUpTime: 0
+  premiumCurrency: 0
+  earnedPremiumCurrency: 0
+  prestigeCurrency: 0
+  earnedPrestigeCurrency: 0
   money: 0
   earnedMoney: 0
   offlineMoney: 0
