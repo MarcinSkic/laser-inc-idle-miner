@@ -11452,28 +11452,15 @@ MonoBehaviour:
   earnedMoney: 0
   offlineMoney: 0
   offlineEarnedMoney: 0
-  lastEarnedMoneyStates: []
-  earnedOver5: 0
-  earnedOver10: 0
-  earnedOver15: 0
-  maxEarnedOver5: 0
-  maxEarnedOver10: 0
-  maxEarnedOver15: 0
-  maxPerSecOver15: 0
-  maxPerSecOver10: 0
-  maxPerSecOver5: 0
-  afkGainPerSec15: 0
-  afkGainPerSec10: 0
-  afkGainPerSec5: 0
-  maxToAfkProportion15: 20
-  maxToAfkProportion10: 20
-  maxToAfkProportion5: 20
-  currentPerSecOver15: 0
-  currentPerSecOver10: 0
-  currentPerSecOver5: 0
-  afkToCurrentProportion15: 0
-  afkToCurrentProportion10: 0
-  afkToCurrentProportion5: 0
+  secondsForOfflineRewardCalculation: 15
+  maxToAfkProportion: 50
+  lastOnlineEarnedMoneyStates: []
+  earnedOverSecs: 0
+  maxEarnedOverSecs: 0
+  maxPerSecOverSecs: 0
+  afkGainPerSec: 0
+  currentPerSecOverSecs: 0
+  afkToCurrentProportion: 0
 --- !u!114 &1947716359
 MonoBehaviour:
   m_ObjectHideFlags: 0

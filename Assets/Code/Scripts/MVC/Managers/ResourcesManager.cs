@@ -14,19 +14,22 @@ public class ResourcesManager : MonoBehaviour
 
     void updateLastEarnedMoneyStates()
     {
-        model.lastEarnedMoneyStates.Add(model.earnedMoney);
-        if (model.lastEarnedMoneyStates.Count > 16)
+        int secs = model.secondsForOfflineRewardCalculation;
+
+        // save states
+        model.lastOnlineEarnedMoneyStates.Add(model.earnedMoney - model.offlineEarnedMoney);
+        if (model.lastOnlineEarnedMoneyStates.Count > secs+1)
         {
-            model.lastEarnedMoneyStates.RemoveAt(0);
+            model.lastOnlineEarnedMoneyStates.RemoveAt(0);
         }
-        model.earnedOver15 = model.earnedMoney - model.lastEarnedMoneyStates[0];
-        model.currentPerSecOver15 = model.earnedOver15 / 15f;
-        model.afkToCurrentProportion15 = model.afkGainPerSec15 / model.currentPerSecOver15;
-        if (model.earnedOver15 > model.maxEarnedOver15)
+        model.earnedOverSecs = model.earnedMoney - model.lastOnlineEarnedMoneyStates[0];
+        model.currentPerSecOverSecs = model.earnedOverSecs / secs;
+        model.afkToCurrentProportion = model.afkGainPerSec / model.currentPerSecOverSecs;
+        if (model.earnedOverSecs > model.maxEarnedOverSecs)
         {
-            model.maxEarnedOver15 = model.earnedOver15;
-            model.maxPerSecOver15 = model.maxEarnedOver15 / 5f;
-            model.afkGainPerSec15 = model.maxPerSecOver15 / model.maxToAfkProportion15;
+            model.maxEarnedOverSecs = model.earnedOverSecs;
+            model.maxPerSecOverSecs = model.maxEarnedOverSecs / 5f;
+            model.afkGainPerSec = model.maxPerSecOverSecs / model.maxToAfkProportion;
         }
     }
 
