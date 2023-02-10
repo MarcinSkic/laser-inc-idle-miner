@@ -55,21 +55,27 @@ MonoBehaviour:
   - batSprite: {fileID: 21300000, guid: ba29b0299c4684d4eabcd609caf55805, type: 3}
     rewardType: 0
     needsAd: 0
+    rewardAmount: 58020000b004000008070000
   - batSprite: {fileID: 21300000, guid: d429333b9c3fad14d87ddad3c6eb9d80, type: 3}
     rewardType: 0
     needsAd: 1
+    rewardAmount: 100e0000201c0000302a0000
   - batSprite: {fileID: 21300000, guid: 8a88c23dc0c74d446b404d49a910095f, type: 3}
     rewardType: 1
     needsAd: 0
+    rewardAmount: 010000000200000003000000
   - batSprite: {fileID: 21300000, guid: 4e4cfadba63173c4aa20941bc4ea71f2, type: 3}
     rewardType: 1
     needsAd: 1
+    rewardAmount: 0a0000001400000019000000
   - batSprite: {fileID: 21300000, guid: 8127d414e94ecf24eb0adcea5863c826, type: 3}
     rewardType: 2
     needsAd: 0
+    rewardAmount: 2c0100005802000084030000
   - batSprite: {fileID: 21300000, guid: c31054e9bf0937d4994d520dcb91d528, type: 3}
     rewardType: 2
     needsAd: 1
+    rewardAmount: 08070000100e0000201c0000
 --- !u!65 &8697932057656942237
 BoxCollider:
   m_ObjectHideFlags: 0

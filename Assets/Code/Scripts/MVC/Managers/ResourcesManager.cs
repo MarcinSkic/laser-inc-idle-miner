@@ -17,12 +17,13 @@ public class ResourcesManager : MonoBehaviour
         int secs = model.secondsForOfflineRewardCalculation;
 
         // save states
-        model.lastOnlineEarnedMoneyStates.Add(model.earnedMoney - model.offlineEarnedMoney);
+        double currentOnlineEarnedMoney = model.earnedMoney - model.offlineEarnedMoney;
+        model.lastOnlineEarnedMoneyStates.Add(currentOnlineEarnedMoney);
         if (model.lastOnlineEarnedMoneyStates.Count > secs+1)
         {
             model.lastOnlineEarnedMoneyStates.RemoveAt(0);
         }
-        model.earnedOverSecs = model.earnedMoney - model.lastOnlineEarnedMoneyStates[0];
+        model.earnedOverSecs = currentOnlineEarnedMoney - model.lastOnlineEarnedMoneyStates[0];
         model.currentPerSecOverSecs = model.earnedOverSecs / secs;
         model.afkToCurrentProportion = model.afkGainPerSec / model.currentPerSecOverSecs;
         if (model.earnedOverSecs > model.maxEarnedOverSecs)
@@ -68,11 +69,23 @@ public class ResourcesManager : MonoBehaviour
         model.earnedMoney += value;
     }
 
-    public void IncreaseMoneyForOffline(double value)
+    // add X money as offline/reward money
+    public void IncreaseMoneyForOfflineByValue(double value)
     {
-        Money += value;
-        model.earnedMoney += value;
+        IncreaseMoney(value);
         model.offlineEarnedMoney += value;
+    }
+
+    // get amount of money due for X offline seconds
+    public double CalculateOfflineMoney(double seconds)
+    {
+        return seconds * model.afkGainPerSec;
+    }
+
+    // add money equal to offline reward for X seconds
+    public void IncreaseMoneyForOfflineByTime(double seconds)
+    {
+        IncreaseMoneyForOfflineByValue(CalculateOfflineMoney(seconds));
     }
 
     public bool TryDecreaseMoney(double value)

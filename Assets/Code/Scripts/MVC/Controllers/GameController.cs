@@ -109,6 +109,7 @@ public class GameController : BaseController<GameView>
         if (Random.Range(1, 1000) > 993)
         {
             RewardBat newBat = Instantiate(rewardBat, batParent);
+            newBat.resourcesManager = resourcesManager;
         }
     }
 
@@ -172,7 +173,7 @@ public class GameController : BaseController<GameView>
         view.InitButtons();
 
         view.offlineConfirmButton.onClick += delegate {
-            resourcesManager.IncreaseMoneyForOffline(resourcesModel.offlineMoney);
+            resourcesManager.IncreaseMoneyForOfflineByValue(resourcesModel.offlineMoney);
             view.offlineGetBonusButton.Activate();
             view.offlinePopup.SetActive(false); 
         };
@@ -296,7 +297,7 @@ public class GameController : BaseController<GameView>
 
     private void OnReturnFromOffline(double seconds)
     {
-        resourcesModel.offlineMoney = 420 * seconds;    //TODO-FEATURE: CalculateOfflineMoney()
+        resourcesModel.offlineMoney = resourcesManager.CalculateOfflineMoney(seconds);
         view.ShowOfflineTimePopup(seconds, resourcesModel.offlineMoney);
     }
     

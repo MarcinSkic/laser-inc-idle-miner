@@ -15,6 +15,8 @@ public class BatOption
     public Sprite batSprite;
     public BatRewardType rewardType;
     public bool needsAd;
+    [Tooltip("seconds of boost/afkReward, amount of premium currency")]
+    public int[] rewardAmount;
 }
 
 public class RewardBat : MonoBehaviour
@@ -27,6 +29,7 @@ public class RewardBat : MonoBehaviour
     [SerializeField] SpriteRenderer batSprite;
     [SerializeField] BatOption[] batOptions;
     private BatOption batOption;
+    public ResourcesManager resourcesManager;
 
     void Start()
     {
@@ -58,11 +61,31 @@ public class RewardBat : MonoBehaviour
 
     public void getClicked()
     {
+        string debugString = "";
         if (batOption.needsAd)
         {
-            Debug.Log($"watch an ad to get {batOption.rewardType}");
+            debugString += "watch an ad to get ";
+        } else
+        {
+            debugString += "you get ";
         }
-        Debug.Log($"you get {batOption.rewardType}");
+        int value = batOption.rewardAmount[Random.Range(0, batOption.rewardAmount.Length)];
+        debugString += $"{value}";
+        // TODO: connect to ads
+        switch (batOption.rewardType)
+        {
+            case BatRewardType.money:
+                debugString += " seconds worth of offlineReward";
+                resourcesManager.IncreaseMoneyForOfflineByTime(value);
+                break;
+            case BatRewardType.powerup:
+                debugString += " seconds of double laser power";
+                break;
+            case BatRewardType.premium:
+                debugString += " premium curency";
+                break;
+        }
+        Debug.Log(debugString);
         Destroy(gameObject);
     }
 }
