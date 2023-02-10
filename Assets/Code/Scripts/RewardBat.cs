@@ -80,9 +80,11 @@ public class RewardBat : MonoBehaviour
                 break;
             case BatRewardType.powerup:
                 debugString += " seconds of double laser power";
+                resourcesManager.IncreasePowerUpTimeLeft(value);
                 break;
             case BatRewardType.premium:
                 debugString += " premium curency";
+                resourcesManager.IncreasePremiumCurrency(value);
                 break;
         }
         Debug.Log(debugString);

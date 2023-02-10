@@ -8,6 +8,30 @@ public class ResourcesModel : MonoBehaviour
     [AutoProperty(AutoPropertyMode.Scene)]
     [SerializeField] ResourcesManager manager;
 
+    [Header("POWER-UP")]
+    [ReadOnly]
+    [Tooltip("Current power-up time")]
+    public double powerUpTimeLeft = 0;
+    [ReadOnly]
+    [Tooltip("Total of power-up time earned")]
+    public double earnedPowerUpTime = 0;
+
+    [Header("PREMIUM CURRENCY")]
+    [ReadOnly]
+    [Tooltip("Current premium currency")]
+    public double premiumCurrency = 0;
+    [ReadOnly]
+    [Tooltip("Total of premium currency earned")]
+    public double earnedPremiumCurrency = 0;
+
+    [Header("PRESTIGE CURRENCY")]
+    [ReadOnly]
+    [Tooltip("Current prestige currency")]
+    public double prestigeCurrency = 0;
+    [ReadOnly]
+    [Tooltip("Total of prestige currency earned")]
+    public double earnedPrestigeCurrency = 0;
+
     [Header("CURRENT MONEY DATA")]
     [Tooltip("Current money")]
     public double money = 0;
