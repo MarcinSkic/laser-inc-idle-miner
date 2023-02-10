@@ -10,7 +10,7 @@ public class SavingManager : MonoBehaviour
 {
     [AutoProperty(AutoPropertyMode.Scene)]
     [SerializeField] private SavingModel model;
-    [SerializeField] public bool loadedProperly = false;
+    public bool loadedProperly = false;
 
     public PersistentData LoadPersistentData()
     {
