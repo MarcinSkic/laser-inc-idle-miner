@@ -36,11 +36,7 @@ public class BasicBlock : MonoBehaviour, IPoolable<BasicBlock>
         reward = maxHp * blockType.rewardMultiplier;
         type = blockType;
         poisonPerSecond = 0;
-    }
-
-    public void AssignEvents(UnityAction<double> onBlockDestroyed)
-    {
-        this.onBlockDestroyed = onBlockDestroyed;
+        Debug.Log($"Init: {hp}hp {maxHp}maxHp {baseHp}baseHp {reward}reward {type}blockType");
     }
 
     public void DisplayDamageTaken(double damage, bool repeating = false)
