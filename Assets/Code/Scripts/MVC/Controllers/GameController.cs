@@ -67,7 +67,7 @@ public class GameController : BaseController<GameView>
         #endregion
 
         #region Methods that require loaded data
-        ConnectToUpgradesEvents();  //TODO-FT-CURRENT: Move this functionality to upgrade manager?
+        ConnectToUpgradesEvents();
         ConnectBallBarsWithEvents();
         UpdateSettingsViewBySavedData();
         achievementManager.SetupAchievements();
@@ -273,7 +273,7 @@ public class GameController : BaseController<GameView>
     {
         resourcesManager.IncreaseMoney(money);
         blocksManager.incrementDestroyedBlocksCount();
-        //TODO-FEATURE: Count destroyed blocks for upgrades/rewards
+        //TODO-UGLY: It should be here but is in BasicBlock: count destroyed blocks for upgrades/rewards
 
     }
 
