@@ -75,7 +75,6 @@ public class GameController : BaseController<GameView>
         UpdateSettingsViewBySavedData();
         achievementManager.SetupAchievements();
         upgradesManager.ConnectUpgrades();  //Order important
-        achievementManager.ConnectUpgrades();
         upgradesManager.ExecuteLoadedUpgrades(); //Order important
         CreateUpgradesUI();
         #endregion

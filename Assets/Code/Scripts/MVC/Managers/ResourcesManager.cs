@@ -8,10 +8,14 @@ public class ResourcesManager : MonoBehaviour
     [SerializeField]
     private ResourcesModel model;
 
-    public UnityAction<double> onPowerUpTimeAdded;
+    public UnityAction<double> onPowerUpTimeChanged;
+    public UnityAction<double> onPowerUpTimeEarned;
     public UnityAction<double> onPremiumCurrencyChange;
+    public UnityAction<double> onPremiumCurrencyEarned;
     public UnityAction<double> onPrestigeCurrencyChange;
+    public UnityAction<double> onPrestigeCurrencyEarned;
     public UnityAction<double> onMoneyChange;
+    public UnityAction<double> onMoneyEarned;
 
     private void Update()
     {
@@ -26,15 +30,31 @@ public class ResourcesManager : MonoBehaviour
         }
         set
         {
+            if(model.powerUpTimeLeft < value)
+            {
+                onPowerUpTimeChanged?.Invoke(value);
+            }
             model.powerUpTimeLeft = value;
+        }
+    }
+
+    public double EarnedPowerUpTime
+    {
+        get
+        {
+            return model.earnedPowerUpTime;
+        }
+        set
+        {
+            model.earnedPowerUpTime = value;
+            onPowerUpTimeEarned?.Invoke(value);
         }
     }
 
     public void IncreasePowerUpTimeLeft(double value)
     {
-        model.earnedPowerUpTime += value;
+        EarnedPowerUpTime += value;
         PowerUpTimeLeft += value;
-        onPowerUpTimeAdded?.Invoke(PowerUpTimeLeft);
     }
 
     public void DecreasePowerUpTimeLeft(double value)
@@ -60,13 +80,26 @@ public class ResourcesManager : MonoBehaviour
         }
     }
 
+    public double EarnedPremiumCurrency
+    {
+        get
+        {
+            return model.earnedPremiumCurrency;
+        }
+        set
+        {
+            model.earnedPremiumCurrency = value;
+            onPremiumCurrencyEarned?.Invoke(value);
+        }
+    }
+
     public void IncreasePremiumCurrency(double value)
     {
         if (value < 1)
         {
             value = 1;
         }
-        model.earnedPremiumCurrency += value;
+        EarnedPremiumCurrency += value;
         PremiumCurrency += value;
     }
     #endregion
@@ -85,13 +118,26 @@ public class ResourcesManager : MonoBehaviour
         }
     }
 
+    public double EarnedPrestigeCurrency
+    {
+        get
+        {
+            return model.earnedPrestigeCurrency;
+        }
+        set
+        {
+            model.earnedPrestigeCurrency = value;
+            onPrestigeCurrencyEarned?.Invoke(value);
+        }
+    }
+
     public void IncreasePrestigeCurrency(double value)
     {
         if (value < 1)
         {
             value = 1;
         }
-        model.earnedPrestigeCurrency += value;
+        EarnedPrestigeCurrency += value;
         PrestigeCurrency += value;
     }
     #endregion
@@ -141,10 +187,22 @@ public class ResourcesManager : MonoBehaviour
         }
     }
 
+    public double EarnedMoney
+    {
+        get
+        {
+            return model.earnedMoney;
+        }
+        set
+        {
+            model.earnedMoney = value;
+            onMoneyEarned?.Invoke(value);
+        }
+    }
+
     public void LoadInspectorMoney()
     {
         Money = model.money;
-        // should this be here???
         PremiumCurrency = model.premiumCurrency;
         PrestigeCurrency = model.prestigeCurrency;
     }
@@ -155,7 +213,7 @@ public class ResourcesManager : MonoBehaviour
         {
             value = 1;
         }
-        model.earnedMoney += value;
+        EarnedMoney += value;
         Money += value;
     }
 
@@ -212,17 +270,17 @@ public class ResourcesManager : MonoBehaviour
 public void LoadPersistentData(PersistentData data)
     {
         Money = data?.money ?? 0;
-        model.earnedMoney = data?.earnedMoney ?? 0;
+        EarnedMoney = data?.earnedMoney ?? 0;
         model.offlineEarnedMoney = data?.offlineEarnedMoney ?? 0;
         model.afkGainPerSec = data?.afkGainPerSec ?? 0;
         model.lastOnlineEarnedMoneyStates = data?.lastOnlineEarnedMoneyStates ?? new List<double>();
 
-        model.premiumCurrency = data?.premiumCurrency ?? 0;
-        model.earnedPremiumCurrency = data?.earnedPremiumCurrency ?? 0;
-        model.prestigeCurrency = data?.prestigeCurrency ?? 0;
-        model.earnedPrestigeCurrency = data?.earnedPrestigeCurrency ?? 0;
+        PremiumCurrency = data?.premiumCurrency ?? 0;
+        EarnedPremiumCurrency = data?.earnedPremiumCurrency ?? 0;
+        PrestigeCurrency = data?.prestigeCurrency ?? 0;
+        EarnedPrestigeCurrency = data?.earnedPrestigeCurrency ?? 0;
 
-        model.powerUpTimeLeft = data?.powerUpTime ?? 0;
-        model.earnedPowerUpTime = data?.earnedPowerUpTime ?? 0;
+        PowerUpTimeLeft = data?.powerUpTime ?? 0;
+        EarnedPowerUpTime = data?.earnedPowerUpTime ?? 0;
     }
 }
