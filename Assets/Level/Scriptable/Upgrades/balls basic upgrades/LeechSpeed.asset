@@ -15,10 +15,15 @@ MonoBehaviour:
   upgrade:
     type: 0
     name: SniperSpeed
-    cost: 25
-    costIncremental: 10
-    costMultiplier: 1.1
+    identifier: 
+    whereToGenerate: 0
+    order: 0
+    title: 
+    description: 
     maxLevel: -1
+    cost: 600000
+    costIncremental: 0
+    costMultiplier: 2
     onUpgradeButtonsShowUpgradeInternalValue: 0
     upgradeValue: 0
     upgradedObjects: 8

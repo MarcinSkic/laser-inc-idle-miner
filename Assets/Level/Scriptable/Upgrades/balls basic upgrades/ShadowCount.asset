@@ -15,10 +15,15 @@ MonoBehaviour:
   upgrade:
     type: 1
     name: SniperCount
-    cost: 500
-    costIncremental: 0
-    costMultiplier: 3
+    identifier: 
+    whereToGenerate: 0
+    order: 0
+    title: 
+    description: 
     maxLevel: -1
+    cost: 100000000
+    costIncremental: 0
+    costMultiplier: 5
     onUpgradeButtonsShowUpgradeInternalValue: 0
     upgradeValue: 0
     upgradedObjects: 32

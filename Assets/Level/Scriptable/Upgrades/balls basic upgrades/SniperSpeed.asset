@@ -13,18 +13,21 @@ MonoBehaviour:
   m_Name: SniperSpeed
   m_EditorClassIdentifier: 
   upgrade:
-    name: SniperSpeed
     type: 0
-    cost: 20
-    costIncremental: 10
-    costMultiplier: 1.1
+    name: SniperSpeed
+    identifier: 
+    whereToGenerate: 0
+    order: 0
+    title: 
+    description: 
     maxLevel: -1
+    cost: 300
+    costIncremental: 0
+    costMultiplier: 2
     onUpgradeButtonsShowUpgradeInternalValue: 0
     upgradeValue: 0
     upgradedObjects: 2
     upgradedValues: 1
-    upgradedValuesNames:
-    - Speed
     changeValue: 1
     formula: 0
     currentLevel: 0

@@ -15,10 +15,15 @@ MonoBehaviour:
   upgrade:
     type: 0
     name: SniperDamage
-    cost: 15
-    costIncremental: 5
-    costMultiplier: 1.1
+    identifier: 
+    whereToGenerate: 0
+    order: 0
+    title: 
+    description: 
     maxLevel: -1
+    cost: 300000
+    costIncremental: 5
+    costMultiplier: 1.4
     onUpgradeButtonsShowUpgradeInternalValue: 0
     upgradeValue: 0
     upgradedObjects: 8
