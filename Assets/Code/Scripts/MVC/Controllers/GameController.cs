@@ -25,6 +25,9 @@ public class GameController : BaseController<GameView>
     [AutoProperty(AutoPropertyMode.Scene)] [SerializeField] private AchievementManager achievementManager;
     [AutoProperty(AutoPropertyMode.Scene)] [SerializeField] private SavingManager savingManager;
 
+    [SerializeField] RewardBat rewardBat;
+    [SerializeField] Transform batParent;
+
     //KEEP MONOBEHAVIOUR METHODS (Start, Update etc.) ON TOP
     /// <summary>
     /// This Start should be considered root Start of game, all inits where order of operations is important should originate from here
@@ -67,12 +70,12 @@ public class GameController : BaseController<GameView>
         #endregion
 
         #region Methods that require loaded data
+        CreateAchievementsWindow();
         ConnectToUpgradesEvents();
         ConnectBallBarsWithEvents();
         UpdateSettingsViewBySavedData();
         achievementManager.SetupAchievements();
         upgradesManager.ConnectUpgrades();  //Order important
-        achievementManager.ConnectUpgrades();
         upgradesManager.ExecuteLoadedUpgrades(); //Order important
         CreateUpgradesUI();
         #endregion
@@ -90,9 +93,24 @@ public class GameController : BaseController<GameView>
     }
     public UnityAction onSetupFinished;
 
+
     private void Update()
     {
-        DisplayFPS();      
+        DisplayFPS();
+    }
+
+
+    private void FixedUpdate()
+    {
+        SpawnBatOrNot();
+    }
+    private void SpawnBatOrNot()
+    {
+        if (Random.Range(1, 1000) > 993)
+        {
+            RewardBat newBat = Instantiate(rewardBat, batParent);
+            newBat.resourcesManager = resourcesManager;
+        }
     }
 
     private void OnApplicationFocus(bool focus)
@@ -155,7 +173,7 @@ public class GameController : BaseController<GameView>
         view.InitButtons();
 
         view.offlineConfirmButton.onClick += delegate {
-            resourcesManager.IncreaseMoney(resourcesModel.offlineMoney);
+            resourcesManager.IncreaseMoneyForOfflineByValue(resourcesModel.offlineMoney);
             view.offlineGetBonusButton.Activate();
             view.offlinePopup.SetActive(false); 
         };
@@ -222,6 +240,15 @@ public class GameController : BaseController<GameView>
         }
     }
 
+    private void CreateAchievementsWindow()
+    {
+        view.InitAchievementsWindow();
+        foreach(var achievement in achievementManager.achievements)
+        {
+            view.CreateAchievement(achievement);
+        }
+    }
+
     private void ConnectBallBarsWithEvents()
     {
         foreach(var ballBar in view.ballBars)
@@ -279,7 +306,7 @@ public class GameController : BaseController<GameView>
 
     private void OnReturnFromOffline(double seconds)
     {
-        resourcesModel.offlineMoney = 420 * seconds;    //TODO-FEATURE: CalculateOfflineMoney()
+        resourcesModel.offlineMoney = resourcesManager.CalculateOfflineMoney(seconds);
         view.ShowOfflineTimePopup(seconds, resourcesModel.offlineMoney);
     }
     

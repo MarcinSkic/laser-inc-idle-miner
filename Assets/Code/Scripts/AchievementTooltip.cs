@@ -9,17 +9,12 @@ public class AchievementTooltip : MonoBehaviour
     [SerializeField] TMP_Text descriptionText;
     [SerializeField] Canvas parentCanvas;
     [SerializeField] Vector2 offset;
-    float timeLeft = 0f;
 
-    private void FixedUpdate()
+    IEnumerator Display(float seconds)
     {
-        if (timeLeft < 0)
-        {
-            gameObject.SetActive(false);
-        } else
-        {
-            timeLeft -= Time.deltaTime;
-        }
+        yield return new WaitForSeconds(seconds);
+
+        gameObject.SetActive(false);
     }
 
     public void DisplayAchievement(Achievement achievement)
@@ -27,14 +22,8 @@ public class AchievementTooltip : MonoBehaviour
         nameText.text = achievement.name;
         descriptionText.text = achievement.description;
 
-/*        Vector2 newPos;
-
-        RectTransformUtility.ScreenPointToLocalPointInRectangle(parentCanvas.transform as RectTransform,
-        Input.mousePosition, parentCanvas.worldCamera, out newPos);
-
-        GetComponent<RectTransform>().anchoredPosition = newPos+offset;*/
-
         gameObject.SetActive(true);
-        timeLeft = 5f;
+        StopAllCoroutines();
+        StartCoroutine(Display(5f));
     }
 }

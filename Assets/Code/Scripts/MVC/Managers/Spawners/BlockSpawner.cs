@@ -18,6 +18,8 @@ public class BlockSpawner : BaseSpawner<BasicBlock>
     [SerializeField] private GameModel gameModel;
     [SerializeField] private BlocksManager manager;
 
+    public ResourcesManager resourceManager;
+
     private int column;
     private int columns;
 
@@ -35,7 +37,13 @@ public class BlockSpawner : BaseSpawner<BasicBlock>
     [Header("DEBUG")]
     [SerializeField] private bool ifSpawningOnGrid;
     [SerializeField] private bool alwaysSpawnMinerals;
-    
+
+    protected override BasicBlock Create()
+    {
+        BasicBlock block = base.Create();
+        block.blockSpawner = this;
+        return block;
+    }
 
     protected override void Awake()
     {

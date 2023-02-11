@@ -424,6 +424,10 @@ MonoBehaviour:
   upgradeBarsParent: {fileID: 934328678}
   is60fps: {fileID: 262945313}
   displayFloatingDamage: {fileID: 2125497570}
+  achievementPrefab: {fileID: 7243954313712763706, guid: c47f897411e00a3448ab38d0873e87d7, type: 3}
+  achievementTooltip: {fileID: 511745650299595911}
+  achievementsInRow: 5
+  achievementsGlp: {fileID: 866237052}
   debugWindow: {fileID: 1312679215}
   fpsDisplay: {fileID: 1411531043}
   avg_FpsDisplay: {fileID: 2108675812}
@@ -1230,6 +1234,7 @@ MonoBehaviour:
   model: {fileID: 1947716360}
   gameModel: {fileID: 1947716359}
   manager: {fileID: 567613854}
+  resourceManager: {fileID: 567613852}
   minExistingY: 0
   blockTypeScriptables:
   - {fileID: 11400000, guid: ea8612a399f467441a07d0b393803659, type: 2}
@@ -2429,6 +2434,8 @@ MonoBehaviour:
   blocksManager: {fileID: 567613854}
   achievementManager: {fileID: 567613856}
   savingManager: {fileID: 567613855}
+  rewardBat: {fileID: 7232551561847147341, guid: 213b8b2afa656744a8e5f09b36b46cf9, type: 3}
+  batParent: {fileID: 240033866}
 --- !u!4 &383171361
 Transform:
   m_ObjectHideFlags: 0
@@ -4581,6 +4588,12 @@ MonoBehaviour:
   - {fileID: 11400000, guid: 887a083a86054934e817a2a414b95615, type: 2}
   - {fileID: 11400000, guid: 586763e781d8262448ebd0fddf0c2e0d, type: 2}
   - {fileID: 11400000, guid: b977b4ccb055cdf4c8019fde3b5c6a8f, type: 2}
+  - {fileID: 11400000, guid: 2f1a9e66d586ae2429274e115ff1c13a, type: 2}
+  - {fileID: 11400000, guid: 6f2c2374559b1a248bcd3403815ae38e, type: 2}
+  - {fileID: 11400000, guid: ce679308f10faa84bbd79d46ac3f8057, type: 2}
+  - {fileID: 11400000, guid: e9d1a9260dc4bc04d801dfae0cc39f30, type: 2}
+  - {fileID: 11400000, guid: 5554a3979607de141ae87d1ea7fba2e0, type: 2}
+  - {fileID: 11400000, guid: e8ecf8fe7bd13304599b2e73c8848af9, type: 2}
   achievements: []
   achievementGrid: {fileID: 866237050}
   achievementSquare: {fileID: 7243954313712763706, guid: c47f897411e00a3448ab38d0873e87d7, type: 3}
@@ -4588,7 +4601,7 @@ MonoBehaviour:
   achievementReward: {fileID: 11400000, guid: db42842ea9366ae42a168a81239b8154, type: 2}
   rowReward: {fileID: 11400000, guid: 1e34e3c037f9de24e803391bd9542231, type: 2}
   upgradesModel: {fileID: 1947716357}
-  achievementsInRow: 4
+  achievementsInRow: 5
   glp: {fileID: 866237052}
 --- !u!1 &587280162
 GameObject:
@@ -5276,7 +5289,7 @@ Camera:
   m_Depth: -1
   m_CullingMask:
     serializedVersion: 2
-    m_Bits: 2147483647
+    m_Bits: 759
   m_RenderingPath: -1
   m_TargetTexture: {fileID: 0}
   m_TargetDisplay: 0
@@ -6116,8 +6129,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: 0, y: -956.16034}
-  m_SizeDelta: {x: 0, y: 0}
+  m_AnchoredPosition: {x: 0, y: -1046.7179}
+  m_SizeDelta: {x: 0, y: 50}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &934328680
 MonoBehaviour:
@@ -7102,7 +7115,7 @@ GameObject:
   - component: {fileID: 1134417209}
   - component: {fileID: 1134417208}
   m_Layer: 0
-  m_Name: ShadowBallCamera
+  m_Name: PriorityCamera
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -7203,7 +7216,7 @@ Camera:
   m_Depth: -1
   m_CullingMask:
     serializedVersion: 2
-    m_Bits: 256
+    m_Bits: 768
   m_RenderingPath: -1
   m_TargetTexture: {fileID: 0}
   m_TargetDisplay: 0
@@ -8856,7 +8869,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!224 &1406645951
 RectTransform:
   m_ObjectHideFlags: 0
@@ -9377,7 +9390,7 @@ MonoBehaviour:
   showDebugWindow: 0
   changeTimeScale: 0
   timeScale: 0.1
-  clickDamage: 100
+  clickDamage: 1000000
   is60fps: 0
   displayFloatingText: 0
   ballsAttemptedCorrections: 0
@@ -11433,6 +11446,7 @@ MonoBehaviour:
   - {fileID: 11400000, guid: 68a7816a55a58924cacf413fa25075a2, type: 2}
   - {fileID: 11400000, guid: 83769e669b6d9ca488e7edd55d873461, type: 2}
   - {fileID: 11400000, guid: 00c8227c191119a4db76d349076039f3, type: 2}
+  - {fileID: 11400000, guid: 9b3495f7bcdbfd646a1d21b4eaac3708, type: 2}
 --- !u!114 &1947716358
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -11446,9 +11460,25 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   manager: {fileID: 567613852}
-  money: 234523525
+  powerUpTimeLeft: 0
+  earnedPowerUpTime: 0
+  premiumCurrency: 0
+  earnedPremiumCurrency: 0
+  prestigeCurrency: 0
+  earnedPrestigeCurrency: 0
+  money: 0
   earnedMoney: 0
   offlineMoney: 0
+  offlineEarnedMoney: 0
+  afkGainPerSec: 0
+  secondsForOfflineRewardCalculation: 15
+  maxToAfkProportion: 50
+  lastOnlineEarnedMoneyStates: []
+  earnedOverSecs: 0
+  maxEarnedOverSecs: 0
+  maxPerSecOverSecs: 0
+  currentPerSecOverSecs: 0
+  afkToCurrentProportion: 0
 --- !u!114 &1947716359
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -11461,7 +11491,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ec9e629ee39c2304eb4a0fa6a448c61a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  depth: 1
+  depth: 0
   heightOfBottomBar: 150
   bottomBorder: {fileID: 1719632677}
 --- !u!114 &1947716360
@@ -12023,7 +12053,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &1992481516
 RectTransform:
   m_ObjectHideFlags: 0
@@ -13177,7 +13207,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6125542366609652760, guid: 41ab5e8dd8f04f747b4f2ccd4364077e, type: 3}
       propertyPath: m_IsActive
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 7558216855682321436, guid: 41ab5e8dd8f04f747b4f2ccd4364077e, type: 3}
       propertyPath: m_Enabled

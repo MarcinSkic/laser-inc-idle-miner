@@ -16,6 +16,18 @@ public class PersistentData
 
     #region ResourceModel
     public double money;
+    public double earnedMoney;
+    public double offlineEarnedMoney;
+    public double afkGainPerSec;
+    public List<double> lastOnlineEarnedMoneyStates;
+
+    public double premiumCurrency;
+    public double earnedPremiumCurrency;
+    public double prestigeCurrency;
+    public double earnedPrestigeCurrency;
+
+    public double powerUpTime;
+    public double earnedPowerUpTime;
     #endregion
 
     #region BlocksModel

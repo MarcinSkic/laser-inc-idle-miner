@@ -10,15 +10,15 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 34d9a164a224495449c801551316aa61, type: 3}
-  m_Name: millionaire
+  m_Name: powerUp
   m_EditorClassIdentifier: 
   achievement:
-    name: Millionaire
-    description: accumulate $1000000
-    sprite: {fileID: 21300000, guid: ea7160dfa17c9b7469feaf347218a62d, type: 3}
+    achievementManager: {fileID: 0}
+    name: Powered up
+    description: have at least 1 hours of power up
+    sprite: {fileID: 21300000, guid: a998c85207f5924449c35feca0d49bc6, type: 3}
     isCompleted: 0
-    leftRequirements: 0
     requirements:
-    - dependsOn: 2
+    - dependsOn: 14
       comparison: 1
-      requiredValue: 1000000
+      requiredValue: 3600

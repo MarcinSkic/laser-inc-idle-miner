@@ -10,24 +10,24 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 5400be14b10cc7e47a7f3024d24c25bb, type: 3}
-  m_Name: TestUpgradeTheThird
+  m_Name: Upgrade1
   m_EditorClassIdentifier: 
   upgrade:
-    type: 1
+    type: 0
     name: 
-    identifier: Test3
+    identifier: Better lens
     whereToGenerate: 1
-    order: 1002
-    title: MANY BALLS
-    description: A ten jest jednorazowy :P
+    order: 0
+    title: Better lens
+    description: damage of all lasers +50%
     maxLevel: 1
-    cost: 10000
+    cost: 100
     costIncremental: 0
     costMultiplier: 1
     onUpgradeButtonsShowUpgradeInternalValue: 0
     upgradeValue: 0
     upgradedObjects: 63
-    upgradedValues: 0
-    changeValue: 0
-    formula: 0
+    upgradedValues: 2
+    changeValue: 1.5
+    formula: 1
     currentLevel: 0

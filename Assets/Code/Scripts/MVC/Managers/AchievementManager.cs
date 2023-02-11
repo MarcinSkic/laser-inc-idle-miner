@@ -19,6 +19,12 @@ public enum DependsOn
     MinedGoldBlocks,
     MinedDiamondBlocks,
     MinedUraniumBlocks,
+    PrestigeCurrency,
+    EarnedPrestigeCurrency,
+    PremiumCurrency,
+    EarnedPremiumCurrency,
+    PowerUpTimeLeft,
+    EarnedPowerUpTime,
 }
 public enum Comparison
 {
@@ -30,126 +36,83 @@ public enum Comparison
 }
 
 [System.Serializable]
-public class AchievementRequirement
+public class Requirement
 {
     public DependsOn dependsOn;
     public Comparison comparison;
     public double requiredValue;
+    private bool isFulfilled = false;
+    private bool IsFulfilled
+    {
+        set
+        {
+            if(value != isFulfilled)
+            {
+                isFulfilled = value;
+                onStateChanged?.Invoke(isFulfilled);
+            }
+        }
+    }
+    public UnityAction<bool> onStateChanged;
+
+    public void CheckIfFulfilled(double value)
+    {
+        double result = value - requiredValue;
+
+        if (result <= 0 && comparison == Comparison.GT)
+        {
+            IsFulfilled = false;
+            return;
+        }
+        if (result < 0 && comparison == Comparison.GTEQ)
+        {
+            IsFulfilled = false;
+            return;
+        }
+        if (result != 0 && comparison == Comparison.EQ)
+        {
+            IsFulfilled = false;
+            return;
+        }
+        if (result > 0 && comparison == Comparison.LTEQ)
+        {
+            IsFulfilled = false;
+            return;
+        }
+        if (result >= 0 && comparison == Comparison.LT)
+        {
+            IsFulfilled = false;
+            return;
+        }
+
+        IsFulfilled = true;
+    }
 }
 
 [System.Serializable]
 public class Achievement
 {
-    public AchievementManager achievementManager;
     public string name;
     public string description;
     public Sprite sprite;
     public bool isCompleted = false;
+    public int leftRequirements = 0;
     [SerializeField]
-    public AchievementRequirement[] requirements;
+    public Requirement[] requirements;
 
-    public void checkIfCompleted(double _)
+    public UnityAction<Achievement> onAchievementUnlocked;
+
+    //TODO-MAYBE-BUG: Order of events firing may impact some weird achievements where you need to have exactly this and this value etc.
+    public void CheckIfAchieved(bool newStateOfRequirement)
     {
-        for (int i = 0; i < requirements.Length; i++)
+        if (!isCompleted)
         {
-            double comparedValue = 0;
-            switch (requirements[i].dependsOn)
-            {
-                case DependsOn.Depth:
-                    comparedValue = achievementManager.gameModel.Depth;
-                    break;
-                case DependsOn.DestroyedBlocksCount:
-                    comparedValue = achievementManager.blocksModel.destroyedBlocksCount;
-                    break;
-                case DependsOn.EarnedMoney:
-                    comparedValue = achievementManager.resourcesModel.earnedMoney;
-                    break;
-                case DependsOn.Money:
-                    comparedValue = achievementManager.resourcesModel.money;
-                    break;
-                case DependsOn.MinedNormalBlocks:
-                    comparedValue = StatisticsModel.Instance.MinedNormalBlocks;
-                    break;
-                case DependsOn.MinedCopperBlocks:
-                    comparedValue = StatisticsModel.Instance.MinedCopperBlocks;
-                    break;
-                case DependsOn.MinedIronBlocks:
-                    comparedValue = StatisticsModel.Instance.MinedIronBlocks;
-                    break;
-                case DependsOn.MinedGoldBlocks:
-                    comparedValue = StatisticsModel.Instance.MinedGoldBlocks;
-                    break;
-                case DependsOn.MinedDiamondBlocks:
-                    comparedValue = StatisticsModel.Instance.MinedDiamondBlocks;
-                    break;
-                case DependsOn.MinedUraniumBlocks:
-                    comparedValue = StatisticsModel.Instance.MinedUraniumBlocks;
-                    break;
-            }
-            double result = comparedValue - requirements[i].requiredValue;
+            leftRequirements += newStateOfRequirement ? -1 : 1;
 
-            if (result <= 0 && requirements[i].comparison == Comparison.GT)
+            if (leftRequirements <= 0)
             {
-                return;
-            }
-            if (result < 0 && requirements[i].comparison == Comparison.GTEQ)
-            {
-                return;
-            }
-            if (result != 0 && requirements[i].comparison == Comparison.EQ)
-            {
-                return;
-            }
-            if (result > 0 && requirements[i].comparison == Comparison.LTEQ)
-            {
-                return;
-            }
-            if (result >= 0 && requirements[i].comparison == Comparison.LT)
-            {
-                return;
-            }
-        }
-        isCompleted = true;
-        achievementManager.onAchievementUnlocked?.Invoke(this);
-
-        for (int j = 0; j < requirements.Length; j++)
-        {
-            DependsOn requirement = requirements[j].dependsOn;
-            if (requirement == DependsOn.Depth)
-            {
-                achievementManager.gameModel.onDepthChange -= checkIfCompleted;
-            }
-            if (requirement == DependsOn.DestroyedBlocksCount)
-            {
-                achievementManager.blocksModel.onDestroyedBlocksCountChange -= checkIfCompleted;
-            }
-            if (requirement == DependsOn.Money || requirement == DependsOn.EarnedMoney)
-            {
-                achievementManager.resourcesManager.onMoneyChange -= checkIfCompleted;
-            }
-            if (requirement == DependsOn.MinedNormalBlocks)
-            {
-                StatisticsModel.Instance.onMinedNormalBlocksChange -= checkIfCompleted;
-            }
-            if (requirement == DependsOn.MinedCopperBlocks)
-            {
-                StatisticsModel.Instance.onMinedCopperBlocksChange -= checkIfCompleted;
-            }
-            if (requirement == DependsOn.MinedIronBlocks)
-            {
-                StatisticsModel.Instance.onMinedIronBlocksChange -= checkIfCompleted;
-            }
-            if (requirement == DependsOn.MinedGoldBlocks)
-            {
-                StatisticsModel.Instance.onMinedGoldBlocksChange -= checkIfCompleted;
-            }
-            if (requirement == DependsOn.MinedDiamondBlocks)
-            {
-                StatisticsModel.Instance.onMinedDiamondBlocksChange -= checkIfCompleted;
-            }
-            if (requirement == DependsOn.MinedUraniumBlocks)
-            {
-                StatisticsModel.Instance.onMinedUraniumBlocksChange -= checkIfCompleted;
+                isCompleted = true;
+                onAchievementUnlocked?.Invoke(this);
             }
         }
     }
@@ -188,111 +151,183 @@ public class AchievementManager : MonoBehaviour
 
     [SerializeField] UpgradeScriptable achievementReward;
     [SerializeField] UpgradeScriptable rowReward;
-
     [SerializeField] UpgradesModel upgradesModel;
 
     [SerializeField] int achievementsInRow;
     [SerializeField] GridLayoutGroup glp;
 
-    private void SetSquaresWidth()
-    {
-        int squareWidth = Mathf.RoundToInt(1120 / (achievementsInRow+0.5f));
-        int squareSpacing = (1120 - achievementsInRow * squareWidth) / (achievementsInRow - 1);
-        glp.spacing = new Vector2(squareSpacing, squareSpacing);
-        glp.cellSize = new Vector2(squareWidth, squareWidth);
-    }
-
     private void Awake()
     {
         achievements = new List<Achievement>();
-        achievementSquares = new List<AchievementSquare>();
+        
         for (int i=0; i<achievementsScriptable.Length; i++)
         {
             achievements.Add(achievementsScriptable[i].Achievement);
-            // TODO: move this to a better place
-            AchievementSquare achievementSquareInstance = Instantiate(achievementSquare, achievementGrid.transform);
-            achievementSquareInstance.SetAchievementAndTooltip(achievements[i], achievementTooltip);
-            achievementSquares.Add(achievementSquareInstance);
-            // TODO: there must be a better way...
-            onAchievementUnlocked += achievementSquareInstance.SetColor;
-        }
-        SetSquaresWidth();
-    }
-
-    public void ConnectUpgrades()
-    {
-        onAchievementUnlocked += (Achievement achievement) => {
-            Upgrade upgrade = upgradesModel.upgrades[achievementReward.Upgrade.GenerateName()];
-            upgrade.DoUpgrade();
-
-            int index = achievements.FindIndex(a => a.name == achievement.name);
-            int row = index / achievementsInRow;
-            bool rowCompleted = true;
-
-            for (int i=0; i<achievementsInRow; i++)
-            {
-                if (i + row * achievementsInRow < achievements.Count && !achievements[i + row * achievementsInRow].isCompleted)
-                {
-                    rowCompleted = false;
-                }
-            }
-
-            if (rowCompleted)
-            {
-                Upgrade rowUpgrade = upgradesModel.upgrades[rowReward.Upgrade.GenerateName()];
-                rowUpgrade.DoUpgrade();
-            }
-        } ;
+        } 
     }
 
     public void SetupAchievements()
     {
-        for (int i=0; i<achievements.Count; i++)
+        foreach(Achievement achievement in achievements)
         {
-            if (!achievements[i].isCompleted)
+            if (!achievement.isCompleted)
             {
-                achievements[i].achievementManager = this;
-                for (int j = 0; j < achievements[i].requirements.Length; j++)
+
+                foreach (Requirement requirement in achievement.requirements)
                 {
-                    DependsOn requirement = achievements[i].requirements[j].dependsOn;
-                    if (requirement == (DependsOn.Depth))
+
+                    switch (requirement.dependsOn)
                     {
-                        gameModel.onDepthChange += achievements[i].checkIfCompleted;
+                        case DependsOn.Depth:
+                            gameModel.onDepthChange += requirement.CheckIfFulfilled;
+                            break;
+                        case DependsOn.DestroyedBlocksCount:
+                            blocksModel.onDestroyedBlocksCountChange += requirement.CheckIfFulfilled;
+                            break;
+                        case DependsOn.Money:
+                            resourcesManager.onMoneyChange += requirement.CheckIfFulfilled;
+                            break;
+                        case DependsOn.EarnedMoney:
+                            resourcesManager.onMoneyEarned += requirement.CheckIfFulfilled;
+                            break;
+                        case DependsOn.MinedNormalBlocks:
+                            StatisticsModel.Instance.onMinedNormalBlocksChange += requirement.CheckIfFulfilled;
+                            break;
+                        case DependsOn.MinedCopperBlocks:
+                            StatisticsModel.Instance.onMinedCopperBlocksChange += requirement.CheckIfFulfilled;
+                            break;
+                        case DependsOn.MinedIronBlocks:
+                            StatisticsModel.Instance.onMinedIronBlocksChange += requirement.CheckIfFulfilled;
+                            break;
+                        case DependsOn.MinedGoldBlocks:
+                            StatisticsModel.Instance.onMinedGoldBlocksChange += requirement.CheckIfFulfilled;
+                            break;
+                        case DependsOn.MinedDiamondBlocks:
+                            StatisticsModel.Instance.onMinedDiamondBlocksChange += requirement.CheckIfFulfilled;
+                            break;
+                        case DependsOn.MinedUraniumBlocks:
+                            StatisticsModel.Instance.onMinedUraniumBlocksChange += requirement.CheckIfFulfilled;
+                            break;
+                        case DependsOn.PrestigeCurrency:
+                            resourcesManager.onPrestigeCurrencyChange += requirement.CheckIfFulfilled;
+                            break;
+                        case DependsOn.EarnedPrestigeCurrency:
+                            resourcesManager.onPrestigeCurrencyEarned += requirement.CheckIfFulfilled;
+                            break;
+                        case DependsOn.PremiumCurrency:
+                            resourcesManager.onPremiumCurrencyChange += requirement.CheckIfFulfilled;
+                            break;
+                        case DependsOn.EarnedPremiumCurrency:
+                            resourcesManager.onPremiumCurrencyEarned += requirement.CheckIfFulfilled;
+                            break;
+                        case DependsOn.PowerUpTimeLeft:
+                            resourcesManager.onPowerUpTimeChanged += requirement.CheckIfFulfilled;
+                            break;
+                        case DependsOn.EarnedPowerUpTime:
+                            resourcesManager.onPowerUpTimeEarned += requirement.CheckIfFulfilled;
+                            break;    
                     }
-                    if (requirement == (DependsOn.DestroyedBlocksCount))
-                    {
-                        blocksModel.onDestroyedBlocksCountChange += achievements[i].checkIfCompleted;
-                    }
-                    if (requirement == (DependsOn.Money) || requirement == (DependsOn.EarnedMoney))
-                    {
-                        resourcesManager.onMoneyChange += achievements[i].checkIfCompleted;
-                    }
-                    if (requirement == DependsOn.MinedNormalBlocks)
-                    {
-                        StatisticsModel.Instance.onMinedNormalBlocksChange += achievements[i].checkIfCompleted;
-                    }
-                    if (requirement == DependsOn.MinedCopperBlocks)
-                    {
-                        StatisticsModel.Instance.onMinedCopperBlocksChange += achievements[i].checkIfCompleted;
-                    }
-                    if (requirement == DependsOn.MinedIronBlocks)
-                    {
-                        StatisticsModel.Instance.onMinedIronBlocksChange += achievements[i].checkIfCompleted;
-                    }
-                    if (requirement == DependsOn.MinedGoldBlocks)
-                    {
-                        StatisticsModel.Instance.onMinedGoldBlocksChange += achievements[i].checkIfCompleted;
-                    }
-                    if (requirement == DependsOn.MinedDiamondBlocks)
-                    {
-                        StatisticsModel.Instance.onMinedDiamondBlocksChange += achievements[i].checkIfCompleted;
-                    }
-                    if (requirement == DependsOn.MinedUraniumBlocks)
-                    {
-                        StatisticsModel.Instance.onMinedUraniumBlocksChange += achievements[i].checkIfCompleted;
-                    }
+                    requirement.onStateChanged += achievement.CheckIfAchieved;
+
+                    achievement.leftRequirements++;
                 }
+
+                achievement.onAchievementUnlocked += OnAchievementUnlock;
+            }         
+        }
+    }
+
+    public void DisconnectAchievement(Achievement achievement)
+    {
+        foreach (Requirement requirement in achievement.requirements)
+        {
+            switch (requirement.dependsOn)
+            {
+                case DependsOn.Depth:
+                    gameModel.onDepthChange -= requirement.CheckIfFulfilled;
+                    break;
+                case DependsOn.DestroyedBlocksCount:
+                    blocksModel.onDestroyedBlocksCountChange -= requirement.CheckIfFulfilled;
+                    break;
+                case DependsOn.Money:
+                    resourcesManager.onMoneyChange -= requirement.CheckIfFulfilled;
+                    break;
+                case DependsOn.EarnedMoney:
+                    resourcesManager.onMoneyEarned -= requirement.CheckIfFulfilled;
+                    break;
+                case DependsOn.MinedNormalBlocks:
+                    StatisticsModel.Instance.onMinedNormalBlocksChange -= requirement.CheckIfFulfilled;
+                    break;
+                case DependsOn.MinedCopperBlocks:
+                    StatisticsModel.Instance.onMinedCopperBlocksChange -= requirement.CheckIfFulfilled;
+                    break;
+                case DependsOn.MinedIronBlocks:
+                    StatisticsModel.Instance.onMinedIronBlocksChange -= requirement.CheckIfFulfilled;
+                    break;
+                case DependsOn.MinedGoldBlocks:
+                    StatisticsModel.Instance.onMinedGoldBlocksChange -= requirement.CheckIfFulfilled;
+                    break;
+                case DependsOn.MinedDiamondBlocks:
+                    StatisticsModel.Instance.onMinedDiamondBlocksChange -= requirement.CheckIfFulfilled;
+                    break;
+                case DependsOn.MinedUraniumBlocks:
+                    StatisticsModel.Instance.onMinedUraniumBlocksChange -= requirement.CheckIfFulfilled;
+                    break;
+                case DependsOn.PrestigeCurrency:
+                    resourcesManager.onPrestigeCurrencyChange -= requirement.CheckIfFulfilled;
+                    break;
+                case DependsOn.EarnedPrestigeCurrency:
+                    resourcesManager.onPrestigeCurrencyEarned -= requirement.CheckIfFulfilled;
+                    break;
+                case DependsOn.PremiumCurrency:
+                    resourcesManager.onPremiumCurrencyChange -= requirement.CheckIfFulfilled;
+                    break;
+                case DependsOn.EarnedPremiumCurrency:
+                    resourcesManager.onPremiumCurrencyEarned -= requirement.CheckIfFulfilled;
+                    break;
+                case DependsOn.PowerUpTimeLeft:
+                    resourcesManager.onPowerUpTimeChanged -= requirement.CheckIfFulfilled;
+                    break;
+                case DependsOn.EarnedPowerUpTime:
+                    resourcesManager.onPowerUpTimeEarned -= requirement.CheckIfFulfilled;
+                    break;
             }
+            requirement.onStateChanged -= achievement.CheckIfAchieved;  //If we are lazy, this alone is enough to disconnect achievement, requirements will fire without anyone listening to    
+        }
+
+        achievement.onAchievementUnlocked -= OnAchievementUnlock;
+    }
+
+    public void OnAchievementUnlock(Achievement achievement)
+    {
+        DoAchievementsUpgrades(achievement);
+
+        onAchievementUnlocked?.Invoke(achievement);
+
+        DisconnectAchievement(achievement);
+    }
+
+    public void DoAchievementsUpgrades(Achievement achievement)
+    {
+        Upgrade upgrade = upgradesModel.upgrades[achievementReward.Upgrade.GenerateName()];
+        upgrade.DoUpgrade();
+
+        int index = achievements.FindIndex(a => a.name == achievement.name);
+        int row = index / achievementsInRow;
+        bool rowCompleted = true;
+
+        for (int i = 0; i < achievementsInRow; i++)
+        {
+            if (i + row * achievementsInRow < achievements.Count && !achievements[i + row * achievementsInRow].isCompleted)
+            {
+                rowCompleted = false;
+            }
+        }
+
+        if (rowCompleted)
+        {
+            Upgrade rowUpgrade = upgradesModel.upgrades[rowReward.Upgrade.GenerateName()];
+            rowUpgrade.DoUpgrade();
         }
     }
 

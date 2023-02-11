@@ -17,7 +17,7 @@ MonoBehaviour:
     name: 
     identifier: Test2
     whereToGenerate: 1
-    order: 1
+    order: 1001
     title: TescikDrugi
     description: Order mu narzuca kolejnosc
     maxLevel: 5

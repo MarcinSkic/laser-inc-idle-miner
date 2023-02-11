@@ -19,6 +19,8 @@ public class BasicBlock : MonoBehaviour, IPoolable<BasicBlock>
     protected double poisonPerSecond = 0;
     private FloatingText floatingRepeatedText = null;
     private double repeatedTotalValue = 0;
+    public BlockSpawner blockSpawner;
+
 
     public void Update()
     {
@@ -55,8 +57,15 @@ public class BasicBlock : MonoBehaviour, IPoolable<BasicBlock>
         }
     }
 
+    private bool CheckIfPowerUpActive()
+    {
+        return blockSpawner.resourceManager.PowerUpTimeLeft > 0;
+    }
+
     public void TakeDamage(double damage, bool repeating=false)
     {
+        damage *= (1 + (CheckIfPowerUpActive() ? 1 : 0));
+        
         hp -= damage;
 
         if (SettingsModel.Instance.DisplayFloatingText)
