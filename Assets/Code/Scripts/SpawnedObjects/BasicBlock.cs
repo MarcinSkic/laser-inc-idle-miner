@@ -19,14 +19,14 @@ public class BasicBlock : MonoBehaviour, IPoolable<BasicBlock>
     protected double poisonPerSecond = 0;
     private FloatingText floatingRepeatedText = null;
     private double repeatedTotalValue = 0;
-
     public BlockSpawner blockSpawner;
 
-    public void FixedUpdate()
+
+    public void Update()
     {
         if (poisonPerSecond > 0)
         {
-            // TODO - can be optimized
+            // TODO-FT-GAMECLOCK - can be optimized
             TakeDamage(poisonPerSecond * Time.deltaTime, true);
         }
     }
@@ -38,11 +38,6 @@ public class BasicBlock : MonoBehaviour, IPoolable<BasicBlock>
         reward = maxHp * blockType.rewardMultiplier;
         type = blockType;
         poisonPerSecond = 0;
-    }
-
-    public void AssignEvents(UnityAction<double> onBlockDestroyed)
-    {
-        this.onBlockDestroyed = onBlockDestroyed;
     }
 
     public void DisplayDamageTaken(double damage, bool repeating = false)
@@ -98,7 +93,7 @@ public class BasicBlock : MonoBehaviour, IPoolable<BasicBlock>
         poisonPerSecond = 0;
         repeatedTotalValue = 0;
 
-        switch (type.name)
+        switch (type.name)  //TODO-UGLY: It should be connected to onBlockDestroyed, and this action should pass BlockData or smth like that
         {
             case "normal":
                 StatisticsModel.Instance.MinedNormalBlocks = StatisticsModel.Instance.MinedNormalBlocks + 1;

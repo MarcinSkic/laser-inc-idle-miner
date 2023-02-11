@@ -128,7 +128,7 @@ public class BlocksManager : MonoBehaviour
 
             for (int i = 0; i < spawnedBlocks.Count; i++)
             {
-                spawnedBlocks[i].onBlockDestroyed += onBlockDestroyed;
+                spawnedBlocks[i].onBlockDestroyed += (reward) => { onBlockDestroyed.Invoke(reward); };
             }
         }
     }
@@ -153,7 +153,7 @@ public class BlocksManager : MonoBehaviour
 
             for (int i = 0; i < spawnedBlocks.Count; i++)
             {
-                spawnedBlocks[i].onBlockDestroyed += onBlockDestroyed;
+                spawnedBlocks[i].onBlockDestroyed += (reward) => { onBlockDestroyed?.Invoke(reward); };
             }
         }
     }

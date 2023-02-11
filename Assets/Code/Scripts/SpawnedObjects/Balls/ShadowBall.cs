@@ -7,17 +7,7 @@ public class ShadowBall : BaseBall<BallData>, IPoolable<ShadowBall>, IUpgradeabl
 {
     public new ObjectPool<ShadowBall> Pool { get; set; }
 
-/*    protected override void TryDealDamage(Collision collision)
-    {
-        if (collision.gameObject.TryGetComponent<BasicBlock>(out var block))
-        {
-            block.TakeDamage(Data.values[UpgradeableValues.Damage]);
-            // TODO - what should be the proportion of poison damage vs bounce damage?
-            block.TakePoison(Data.values[UpgradeableValues.Damage]);
-        }
-    }*/
-
-    public void handleDetectionFromTrigger(Collider collider)
+    public void HandleDetectionFromTrigger(Collider collider)
     {
         if (collider.gameObject.TryGetComponent<BasicBlock>(out var block))
         {

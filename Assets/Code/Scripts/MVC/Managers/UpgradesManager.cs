@@ -81,7 +81,7 @@ public class UpgradesManager : MonoBehaviour
             if (upgrade.upgradedObjects.HasFlag(UpgradeableObjects.BasicBall))
             {
                 basicBallSpawner.Spawn(out var ball);
-                upgrade.onValueUpdate?.Invoke(basicBallSpawner.active.ToString()); //TODO-FT-CURRENT: Pull from Data?;
+                upgrade.onValueUpdate?.Invoke(basicBallSpawner.active.ToString()); //TODO-UGLY: Should be from BallsModel like: public int basicBallCount => basicBallSpawner.active 
 
                 foreach (var speedUpgrade in speedUpgrades)
                 {
@@ -127,7 +127,6 @@ public class UpgradesManager : MonoBehaviour
             if (upgrade.upgradedObjects.HasFlag(UpgradeableObjects.PoisonBall))
             {
                 poisonBallSpawner.Spawn(out var ball);
-                // ball.SetVariables(blocksParent);
                 upgrade.onValueUpdate?.Invoke(poisonBallSpawner.active.ToString());
 
                 foreach (var speedUpgrade in speedUpgrades)
@@ -139,7 +138,6 @@ public class UpgradesManager : MonoBehaviour
             if (upgrade.upgradedObjects.HasFlag(UpgradeableObjects.ShadowBall))
             {
                 shadowBallSpawner.Spawn(out var ball);
-                // ball.SetVariables(blocksParent);
                 upgrade.onValueUpdate?.Invoke(shadowBallSpawner.active.ToString());
 
                 foreach (var speedUpgrade in speedUpgrades)

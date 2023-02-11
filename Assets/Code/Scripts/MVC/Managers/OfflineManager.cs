@@ -18,7 +18,7 @@ public class OfflineManager : MonoBehaviour
     private DateTime lastActivitySaveTime = DateTime.MinValue;
     private DateTime oldTime;
 
-    // TODO ZABEZPIECZENIA
+    //TODO-FEATURE: Protection against forwarding date
 
     private void Update()
     {
