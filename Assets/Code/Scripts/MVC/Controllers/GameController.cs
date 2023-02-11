@@ -27,6 +27,7 @@ public class GameController : BaseController<GameView>
 
     [SerializeField] RewardBat rewardBat;
     [SerializeField] Transform batParent;
+    [SerializeField] int batsPer10000FixedUpdates;
 
     //KEEP MONOBEHAVIOUR METHODS (Start, Update etc.) ON TOP
     /// <summary>
@@ -106,7 +107,7 @@ public class GameController : BaseController<GameView>
     }
     private void SpawnBatOrNot()
     {
-        if (Random.Range(1, 1000) > 993)
+        if (Random.Range(0, 10000) < batsPer10000FixedUpdates)
         {
             RewardBat newBat = Instantiate(rewardBat, batParent);
             newBat.resourcesManager = resourcesManager;

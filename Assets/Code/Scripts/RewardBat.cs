@@ -33,7 +33,7 @@ public class RewardBat : MonoBehaviour
 
     void Start()
     {
-        transform.position = new Vector3(Random.Range(-xDeviation, xDeviation), -yBorders, Random.Range(3f, 5f));
+        transform.position = new Vector3(Random.Range(-xDeviation, xDeviation), -yBorders, Random.Range(-3f, -5f));
         direction = Random.Range(0, 2) * 2 - 1; // either 1 or -1
         handleDirectionChange();
         batOption = batOptions[Random.Range(0, batOptions.Length)];
