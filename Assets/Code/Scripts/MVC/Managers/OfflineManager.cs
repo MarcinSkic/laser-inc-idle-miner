@@ -22,14 +22,17 @@ public class OfflineManager : MonoBehaviour
 
     private void Update()
     {
-        if (DateTime.Now > lastOfflineCountCheck.AddSeconds(0.5))
+        if (SettingsModel.Instance.doOfflineEarning)
         {
-            CountOfflineTime();
-        }
-        if (DateTime.Now > lastActivitySaveTime.AddSeconds(1))
-        {
-            CountOfflineTime();
-            SaveActivityTime();
+            if (DateTime.Now > lastOfflineCountCheck.AddSeconds(0.5))
+            {
+                CountOfflineTime();
+            }
+            if (DateTime.Now > lastActivitySaveTime.AddSeconds(1))
+            {
+                CountOfflineTime();
+                SaveActivityTime();
+            }
         }
     }
 

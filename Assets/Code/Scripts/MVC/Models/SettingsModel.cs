@@ -23,6 +23,7 @@ public class SettingsModel : MonoBehaviour
     #endregion
 
     public bool saveAndLoadFile = true;    //TODO: Change to SaveAndLoadFile to block undesired changes to saved file. Also add context menu function to erase existing savefile
+    public bool doOfflineEarning = true;
     public bool showDebugWindow;
     [Space(5)]
     public bool changeTimeScale;
