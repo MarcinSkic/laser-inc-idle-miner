@@ -9386,11 +9386,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8df5f7b5fed88884bbe63da0e99d0e50, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  saveAndLoadFile: 1
+  saveAndLoadFile: 0
   showDebugWindow: 0
   changeTimeScale: 0
   timeScale: 0.1
-  clickDamage: 1e+22
+  clickDamage: 1000000
   is60fps: 0
   displayFloatingText: 0
   ballsAttemptedCorrections: 0
@@ -11491,7 +11491,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ec9e629ee39c2304eb4a0fa6a448c61a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  depth: 5000
+  depth: 0
   heightOfBottomBar: 150
   bottomBorder: {fileID: 1719632677}
 --- !u!114 &1947716360
@@ -13207,7 +13207,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6125542366609652760, guid: 41ab5e8dd8f04f747b4f2ccd4364077e, type: 3}
       propertyPath: m_IsActive
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 7558216855682321436, guid: 41ab5e8dd8f04f747b4f2ccd4364077e, type: 3}
       propertyPath: m_Enabled
