@@ -70,6 +70,7 @@ public class GameController : BaseController<GameView>
         #endregion
 
         #region Methods that require loaded data
+        CreateAchievementsWindow();
         ConnectToUpgradesEvents();  //TODO-FT-CURRENT: Move this functionality to upgrade manager?
         ConnectBallBarsWithEvents();
         UpdateSettingsViewBySavedData();
@@ -236,6 +237,15 @@ public class GameController : BaseController<GameView>
         foreach(var ballType in ballsModel.ballsData.Values)
         {
             view.CreateBallBar(ballType);
+        }
+    }
+
+    private void CreateAchievementsWindow()
+    {
+        view.InitAchievementsWindow();
+        foreach(var achievement in achievementManager.achievements)
+        {
+            view.CreateAchievement(achievement);
         }
     }
 

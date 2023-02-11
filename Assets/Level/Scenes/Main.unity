@@ -424,6 +424,10 @@ MonoBehaviour:
   upgradeBarsParent: {fileID: 934328678}
   is60fps: {fileID: 262945313}
   displayFloatingDamage: {fileID: 2125497570}
+  achievementPrefab: {fileID: 7243954313712763706, guid: c47f897411e00a3448ab38d0873e87d7, type: 3}
+  achievementTooltip: {fileID: 511745650299595911}
+  achievementsInRow: 5
+  achievementsGlp: {fileID: 866237052}
   debugWindow: {fileID: 1312679215}
   fpsDisplay: {fileID: 1411531043}
   avg_FpsDisplay: {fileID: 2108675812}
@@ -8865,7 +8869,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!224 &1406645951
 RectTransform:
   m_ObjectHideFlags: 0
@@ -9386,7 +9390,7 @@ MonoBehaviour:
   showDebugWindow: 0
   changeTimeScale: 0
   timeScale: 0.1
-  clickDamage: 100
+  clickDamage: 1e+22
   is60fps: 0
   displayFloatingText: 0
   ballsAttemptedCorrections: 0
@@ -11487,7 +11491,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ec9e629ee39c2304eb4a0fa6a448c61a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  depth: 1
+  depth: 5000
   heightOfBottomBar: 150
   bottomBorder: {fileID: 1719632677}
 --- !u!114 &1947716360

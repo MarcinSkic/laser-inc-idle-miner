@@ -1,27 +1,25 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Events;
 using UnityEngine.UI;
 
 public class AchievementSquare : MonoBehaviour
 {
     [SerializeField] Achievement achievement;
-    [SerializeField] AchievementTooltip achievementTooltip;
+    [SerializeField] Button button;
     [SerializeField] Image image;
     [SerializeField] Color lockedColor;
 
-    public void SetAchievementAndTooltip(Achievement achievement, AchievementTooltip achievementTooltip)
+    public void Init(Achievement achievement)
     {
         this.achievement = achievement;
-        this.achievementTooltip = achievementTooltip;
         image.sprite = achievement.sprite;
+        SetColor(achievement);
+        button.onClick.AddListener(() => { onAchievementClicked?.Invoke(achievement); });
     }
 
-    public void ActivateTooltip()
-    {
-        achievementTooltip.DisplayAchievement(achievement);
-    }
-
+    public UnityAction<Achievement> onAchievementClicked;
     public void SetColor(Achievement _)
     {
         if (!achievement.isCompleted)

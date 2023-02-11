@@ -151,59 +151,19 @@ public class AchievementManager : MonoBehaviour
 
     [SerializeField] UpgradeScriptable achievementReward;
     [SerializeField] UpgradeScriptable rowReward;
-
     [SerializeField] UpgradesModel upgradesModel;
 
     [SerializeField] int achievementsInRow;
     [SerializeField] GridLayoutGroup glp;
 
-    private void SetSquaresWidth()
-    {
-        int squareWidth = Mathf.RoundToInt(1120 / (achievementsInRow+0.5f));
-        int squareSpacing = (1120 - achievementsInRow * squareWidth) / (achievementsInRow - 1);
-        glp.spacing = new Vector2(squareSpacing, squareSpacing);
-        glp.cellSize = new Vector2(squareWidth, squareWidth);
-    }
-
     private void Awake()
     {
         achievements = new List<Achievement>();
-        achievementSquares = new List<AchievementSquare>();
+        
         for (int i=0; i<achievementsScriptable.Length; i++)
         {
             achievements.Add(achievementsScriptable[i].Achievement);
-            // TODO: move this to a better place
-            AchievementSquare achievementSquareInstance = Instantiate(achievementSquare, achievementGrid.transform);
-            achievementSquareInstance.SetAchievementAndTooltip(achievements[i], achievementTooltip);
-            achievementSquares.Add(achievementSquareInstance);
-            // TODO: there must be a better way...
-            onAchievementUnlocked += achievementSquareInstance.SetColor;
-        }
-        SetSquaresWidth();
-    }
-
-    public void DoAchievementsUpgrades(Achievement achievement)
-    {
-        Upgrade upgrade = upgradesModel.upgrades[achievementReward.Upgrade.GenerateName()];
-        upgrade.DoUpgrade();
-
-        int index = achievements.FindIndex(a => a.name == achievement.name);
-        int row = index / achievementsInRow;
-        bool rowCompleted = true;
-
-        for (int i = 0; i < achievementsInRow; i++)
-        {
-            if (i + row * achievementsInRow < achievements.Count && !achievements[i + row * achievementsInRow].isCompleted)
-            {
-                rowCompleted = false;
-            }
-        }
-
-        if (rowCompleted)
-        {
-            Upgrade rowUpgrade = upgradesModel.upgrades[rowReward.Upgrade.GenerateName()];
-            rowUpgrade.DoUpgrade();
-        }
+        } 
     }
 
     public void SetupAchievements()
@@ -345,6 +305,30 @@ public class AchievementManager : MonoBehaviour
         onAchievementUnlocked?.Invoke(achievement);
 
         DisconnectAchievement(achievement);
+    }
+
+    public void DoAchievementsUpgrades(Achievement achievement)
+    {
+        Upgrade upgrade = upgradesModel.upgrades[achievementReward.Upgrade.GenerateName()];
+        upgrade.DoUpgrade();
+
+        int index = achievements.FindIndex(a => a.name == achievement.name);
+        int row = index / achievementsInRow;
+        bool rowCompleted = true;
+
+        for (int i = 0; i < achievementsInRow; i++)
+        {
+            if (i + row * achievementsInRow < achievements.Count && !achievements[i + row * achievementsInRow].isCompleted)
+            {
+                rowCompleted = false;
+            }
+        }
+
+        if (rowCompleted)
+        {
+            Upgrade rowUpgrade = upgradesModel.upgrades[rowReward.Upgrade.GenerateName()];
+            rowUpgrade.DoUpgrade();
+        }
     }
 
     public void SavePersistentData(PersistentData persistentData)

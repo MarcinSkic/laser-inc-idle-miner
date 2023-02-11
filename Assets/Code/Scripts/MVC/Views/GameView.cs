@@ -53,6 +53,14 @@ public class GameView : BaseView
     public Toggle is60fps;
     public Toggle displayFloatingDamage;
 
+    [Header("AchievementsTab")]
+    public AchievementSquare achievementPrefab;
+    public AchievementTooltip achievementTooltip;
+
+    private List<AchievementSquare> achievementSquares;
+    [SerializeField] int achievementsInRow;
+    [SerializeField] GridLayoutGroup achievementsGlp;
+
     [Header("Debug Window")]
     public GameObject debugWindow;
     public TMP_Text fpsDisplay;
@@ -175,6 +183,34 @@ public class GameView : BaseView
         offlinePopup.SetActive(true);
         offlineText.text = $"You were offline for <color=#0bf>{seconds}</color>!";
         SetOfflineMoney(earnedMoney);
+    }
+
+    public void InitAchievementsWindow()
+    {
+        achievementSquares = new List<AchievementSquare>();
+        SetAchievementSquaresWidth();
+    }
+
+    public void CreateAchievement(Achievement achievement)
+    {
+        AchievementSquare achievementSquareInstance = Instantiate(achievementPrefab, achievementsGlp.transform);
+
+        achievementSquareInstance.Init(achievement);
+        achievementSquareInstance.onAchievementClicked += achievementTooltip.DisplayAchievement;
+
+        achievementSquares.Add(achievementSquareInstance);
+
+        achievement.onAchievementUnlocked += achievementSquareInstance.SetColor;
+
+        
+    }
+
+    private void SetAchievementSquaresWidth()
+    {
+        int squareWidth = Mathf.RoundToInt(1120 / (achievementsInRow + 0.5f));
+        int squareSpacing = (1120 - achievementsInRow * squareWidth) / (achievementsInRow - 1);
+        achievementsGlp.spacing = new Vector2(squareSpacing, squareSpacing);
+        achievementsGlp.cellSize = new Vector2(squareWidth, squareWidth);
     }
 
     public void CreateAchievementPopup(Achievement achievement)

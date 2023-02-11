@@ -22,6 +22,7 @@ public class ResourcesManager : MonoBehaviour
         DecreasePowerUpTimeLeft(Time.deltaTime);
     }
 
+    #region PowerUpTime
     public double PowerUpTimeLeft
     {
         get
@@ -65,6 +66,7 @@ public class ResourcesManager : MonoBehaviour
             PowerUpTimeLeft = 0;
         }
     }
+    #endregion
 
     #region PremiumCurrency
     public double PremiumCurrency
@@ -174,6 +176,7 @@ public class ResourcesManager : MonoBehaviour
 
     #endregion
 
+    #region Money
     public double Money
     {
         get
@@ -200,13 +203,6 @@ public class ResourcesManager : MonoBehaviour
         }
     }
 
-    public void LoadInspectorMoney()
-    {
-        Money = model.money;
-        PremiumCurrency = model.premiumCurrency;
-        PrestigeCurrency = model.prestigeCurrency;
-    }
-
     public void IncreaseMoney(double value)
     {
         if (value < 1)
@@ -216,6 +212,14 @@ public class ResourcesManager : MonoBehaviour
         Money += value;
         EarnedMoney += value;
     }
+    #endregion
+
+    public void LoadInspectorMoney()
+    {
+        Money = model.money;
+        PremiumCurrency = model.premiumCurrency;
+        PrestigeCurrency = model.prestigeCurrency;
+    } 
 
     // add X money as offline/reward money
     public void IncreaseMoneyForOfflineByValue(double value)
@@ -265,9 +269,9 @@ public class ResourcesManager : MonoBehaviour
 
         data.powerUpTime = model.powerUpTimeLeft;
         data.earnedPowerUpTime = model.earnedPowerUpTime;
-}
+    }
 
-public void LoadPersistentData(PersistentData data)
+    public void LoadPersistentData(PersistentData data)
     {
         Money = data?.money ?? 0;
         EarnedMoney = data?.earnedMoney ?? 0;

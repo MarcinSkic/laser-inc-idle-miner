@@ -93,13 +93,13 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   achievement:
-    achievementManager: {fileID: 0}
     name: 
     description: 
     sprite: {fileID: 0}
     isCompleted: 0
+    leftRequirements: 0
     requirements: []
-  achievementTooltip: {fileID: 0}
+  button: {fileID: -4322887065346071738}
   image: {fileID: 7810898365835723791}
   lockedColor: {r: 0.8207547, g: 0, b: 0, a: 1}
 --- !u!50 &5101611855634531833
@@ -192,16 +192,4 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 7810898365835723791}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls:
-      - m_Target: {fileID: 7243954313712763706}
-        m_TargetAssemblyTypeName: AchievementSquare, Assembly-CSharp
-        m_MethodName: ActivateTooltip
-        m_Mode: 1
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
+      m_Calls: []
