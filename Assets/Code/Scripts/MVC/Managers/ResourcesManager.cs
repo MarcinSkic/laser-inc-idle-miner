@@ -213,8 +213,8 @@ public class ResourcesManager : MonoBehaviour
         {
             value = 1;
         }
-        EarnedMoney += value;
         Money += value;
+        EarnedMoney += value;
     }
 
     // add X money as offline/reward money
