@@ -13,18 +13,21 @@ MonoBehaviour:
   m_Name: BombCount
   m_EditorClassIdentifier: 
   upgrade:
-    name: BombCount
     type: 1
-    cost: 500
-    costIncremental: 0
-    costMultiplier: 4
+    name: BombCount
+    identifier: 
+    whereToGenerate: 0
+    order: 0
+    title: 
+    description: 
     maxLevel: -1
+    cost: 5000
+    costIncremental: 0
+    costMultiplier: 5
     onUpgradeButtonsShowUpgradeInternalValue: 0
     upgradeValue: 0
     upgradedObjects: 4
-    specifiedObjects:
-    - Bomb
-    upgradedValuesNames: []
+    upgradedValues: 0
     changeValue: 0
     formula: 0
     currentLevel: 0

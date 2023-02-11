@@ -13,18 +13,21 @@ MonoBehaviour:
   m_Name: SniperDamage
   m_EditorClassIdentifier: 
   upgrade:
-    name: SniperDamage
     type: 0
-    cost: 11.97
-    costIncremental: 5
-    costMultiplier: 1.1
+    name: SniperDamage
+    identifier: 
+    whereToGenerate: 0
+    order: 0
+    title: 
+    description: 
     maxLevel: -1
+    cost: 500
+    costIncremental: 5
+    costMultiplier: 1.4
     onUpgradeButtonsShowUpgradeInternalValue: 0
     upgradeValue: 0
     upgradedObjects: 2
     upgradedValues: 2
-    upgradedValuesNames:
-    - Damage
     changeValue: 1.5
     formula: 1
     currentLevel: 0

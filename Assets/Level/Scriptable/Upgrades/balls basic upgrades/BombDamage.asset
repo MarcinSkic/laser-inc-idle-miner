@@ -13,18 +13,21 @@ MonoBehaviour:
   m_Name: BombDamage
   m_EditorClassIdentifier: 
   upgrade:
-    name: BombDamage
     type: 0
-    cost: 10
-    costIncremental: 5
-    costMultiplier: 1.1
+    name: BombDamage
+    identifier: 
+    whereToGenerate: 0
+    order: 0
+    title: 
+    description: 
     maxLevel: -1
+    cost: 10000
+    costIncremental: 5
+    costMultiplier: 1.4
     onUpgradeButtonsShowUpgradeInternalValue: 0
     upgradeValue: 0
     upgradedObjects: 4
     upgradedValues: 2
-    upgradedValuesNames:
-    - Damage
     changeValue: 1.5
     formula: 1
     currentLevel: 0

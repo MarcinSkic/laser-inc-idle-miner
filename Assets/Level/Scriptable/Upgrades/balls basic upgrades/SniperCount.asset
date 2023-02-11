@@ -13,18 +13,21 @@ MonoBehaviour:
   m_Name: SniperCount
   m_EditorClassIdentifier: 
   upgrade:
-    name: SniperCount
     type: 1
-    cost: 100
-    costIncremental: 0
-    costMultiplier: 3
+    name: SniperCount
+    identifier: 
+    whereToGenerate: 0
+    order: 0
+    title: 
+    description: 
     maxLevel: -1
+    cost: 350
+    costIncremental: 0
+    costMultiplier: 5
     onUpgradeButtonsShowUpgradeInternalValue: 0
     upgradeValue: 0
     upgradedObjects: 2
-    specifiedObjects:
-    - Sniper
-    upgradedValuesNames: []
+    upgradedValues: 0
     changeValue: 0
     formula: 0
     currentLevel: 0
