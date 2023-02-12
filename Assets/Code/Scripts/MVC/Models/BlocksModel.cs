@@ -6,7 +6,9 @@ using MyBox;
 
 public class BlocksModel : MonoBehaviour
 {
-    public float speed = 5f;
+    public float baseSpeed = 5f;
+    public float maximumBonusSpeed;
+    public float movementsToFullBonus;
     public float maximum_block_movement_y = 5f;
     public float block_movement_trigger_difference_y = 0.5f;
     public double block_health_exponentiation_base = 1.03;

@@ -3510,6 +3510,7 @@ MonoBehaviour:
   instantionsParent: {fileID: 1460261072}
   active: 0
   inactive: 0
+  floatingTexts: []
 --- !u!4 &501923591
 Transform:
   m_ObjectHideFlags: 0
@@ -11358,7 +11359,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 45b9548a37df75047b78702c348545ef, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  speed: 5
+  baseSpeed: 0
+  maximumBonusSpeed: 10
+  movementsToFullBonus: 1000
   maximum_block_movement_y: 5
   block_movement_trigger_difference_y: 0.5
   block_health_exponentiation_base: 1.03

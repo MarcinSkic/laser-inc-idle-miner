@@ -40,7 +40,8 @@ public class BlocksManager : MonoBehaviour
     public UnityAction<Vector3> onDepthIncrease;
     private void IncreaseDepth()
     {
-        var movement = new Vector3(0, model.speed * ((blockMovementsInARow / 1000) + 1), 0) * Time.deltaTime;
+        //        var movement = new Vector3(0, Math.Min(model.baseSpeed * ((blockMovementsInARow / model.movementsPerSpeedMultiplier) + 1f), model.depthIncreaseSpeedLimit), 0) * Time.deltaTime;
+        var movement = new Vector3(0, (model.baseSpeed + model.maximumBonusSpeed * Mathf.Min(Mathf.Sqrt(blockMovementsInARow / model.movementsToFullBonus), 1f))*Time.deltaTime, 0);
         gameModel.Depth += movement.y;
 
         MoveBlocks(movement);
