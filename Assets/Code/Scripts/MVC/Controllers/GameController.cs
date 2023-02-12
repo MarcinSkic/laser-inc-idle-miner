@@ -300,7 +300,7 @@ public class GameController : BaseController<GameView>
     private void OnBlockDestroyed(double money)
     {
         resourcesManager.IncreaseMoney(money);
-        blocksManager.incrementDestroyedBlocksCount();
+        blocksManager.IncrementDestroyedBlocksCount();
         //TODO-UGLY: It should be here but is in BasicBlock: count destroyed blocks for upgrades/rewards
 
     }
@@ -325,6 +325,8 @@ public class GameController : BaseController<GameView>
         }
 
         upgrade.DoUpgrade();
+
+        resourcesManager.Money = resourcesManager.Money; //Welp (again) ¯\_(ツ)_/¯
     }
 
     private void LoadDefaults()
