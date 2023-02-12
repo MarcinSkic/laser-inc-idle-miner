@@ -200,5 +200,6 @@ public class BlockSpawner : BaseSpawner<BasicBlock>
     {
         base.Release(element);
         element.onBlockDestroyed = null;
+        model.blocks.Remove(element);
     }
 }

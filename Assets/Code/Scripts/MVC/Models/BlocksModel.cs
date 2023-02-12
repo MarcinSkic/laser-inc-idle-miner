@@ -16,18 +16,20 @@ public class BlocksModel : MonoBehaviour
     public Transform floatingTexts;
     public Transform _dynamic_balls;
     public GameObject movingBorderTexturesParent;
+    public Transform[] movingBackgrounds;
 
-    public UnityAction<double> onDestroyedBlocksCountChange;
+    public UnityAction<double> onDestroyedBlocksChange;
 
+    public List<BasicBlock> blocks;
     [SerializeField]
     private long destroyedBlocks = 0;
-    public long destroyedBlocksCount
+    public long DestroyedBlocks
     {
         get { return destroyedBlocks; }
         set
         {
             destroyedBlocks = value;
-            onDestroyedBlocksCountChange?.Invoke(destroyedBlocks);
+            onDestroyedBlocksChange?.Invoke(destroyedBlocks);
         }
     }
 }

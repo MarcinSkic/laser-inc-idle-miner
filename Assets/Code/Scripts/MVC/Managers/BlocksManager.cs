@@ -13,78 +13,78 @@ public class BlocksManager : MonoBehaviour
 
     public UnityAction<double> onBlockDestroyed;
 
-    private bool isMoving = true;
-
     public int blockMovementsInARow = 0;
 
     [SerializeField] private float backgroundYChange;
 
     private void Update()
     {
-        var blocks = model._dynamic_blocks.GetComponentsInChildren<BasicBlock>(false); //TODO: Very Temp
-        MoveBlocks(blocks); // TODO: not optimal
-        CheckIfWaveFinished(blocks); // TODO: not optimal
-    }
-
-    private void MoveBlocks(BasicBlock[] blocks)
-    {
-        bool condition;
-        if (isMoving)
+        //This condition is needed if we ever comeback to blocks having random y in the same wave
+        //if((isMoving && !IsAnyBlockAboveY(model.maximum_block_movement_y)) || (!isMoving && !IsAnyBlockAboveY(model.maximum_block_movement_y - model.block_movement_trigger_difference_y)))
+        if(!IsAnyBlockAboveY(model.maximum_block_movement_y))
         {
-            condition = !CheckForBlocksAboveY(blocks, model.maximum_block_movement_y);
-        }
-        else
-        {
-            condition = !CheckForBlocksAboveY(blocks, model.maximum_block_movement_y - model.block_movement_trigger_difference_y);
-        }
-
-        if (condition)
-        {
+            IncreaseDepth();   
             blockMovementsInARow++;
-            foreach (BasicBlock block in blocks)
-            {
-                block.transform.position += new Vector3(0, model.speed, 0) * Time.deltaTime;
-            }
-            foreach(FloatingText text in model.floatingTexts.GetComponentsInChildren<FloatingText>(false))
-            {
-                text.ObjectPosition += new Vector3(0, model.speed, 0) * Time.deltaTime;
-            }
-            /*foreach(BaseBall<BallData> ball in model._dynamic_balls.GetComponentsInChildren<BaseBall<BallData>>(false))
-            {
-                ball._rb.velocity += new Vector3(0, model.speed, 0) * Time.deltaTime;
-            }*/
-            var bgTextures = model.movingBorderTexturesParent.GetComponentsInChildren<Transform>(false);
-            for (int i = 1; i < bgTextures.Length; i++)
-            {
-                // Translate by³by z³y bo parent ma scale i rotation
-                Vector3 blockMovement = new Vector3(0, model.speed, 0) * Time.deltaTime;
-                bgTextures[i].position += blockMovement;
-                if (bgTextures[i].position.y >= 28f)
-                {
-                    bgTextures[i].position -= new Vector3(0, backgroundYChange, 0);
-                }
-            }
 
-            gameModel.Depth += model.speed * Time.deltaTime;
-
-            isMoving = true;
-        }
+            if (!IsAnyBlockBelowY(model.block_spawning_trigger_minimum_y))
+            {
+                SpawnBlocksRow();
+            }
+        } 
         else
         {
             blockMovementsInARow = 0;
-            isMoving = false;
         }
     }
 
-    public void incrementDestroyedBlocksCount()
+    public UnityAction<Vector3> onDepthIncrease;
+    private void IncreaseDepth()
     {
-        model.destroyedBlocksCount = model.destroyedBlocksCount+1;
-        model.onDestroyedBlocksCountChange?.Invoke(model.destroyedBlocksCount);
+        var movement = new Vector3(0, model.speed * ((blockMovementsInARow / 1000) + 1), 0) * Time.deltaTime;
+        gameModel.Depth += movement.y;
+
+        MoveBlocks(movement);
+        MoveFloatingTexts(movement);
+        MoveBackground(movement);
+        onDepthIncrease?.Invoke(movement);   
     }
 
-    bool CheckForBlocksAboveY(BasicBlock[] blocks, float y)
+    private void MoveBlocks(Vector3 delta)
     {
-        foreach (BasicBlock block in blocks)
+        foreach (BasicBlock block in model.blocks)
+        {
+            block.transform.position += delta;
+        }
+    }
+
+    private void MoveFloatingTexts(Vector3 delta)
+    {
+        foreach (FloatingText text in FloatingTextSpawner.Instance.floatingTexts)
+        {
+            text.ObjectPosition += delta;
+        }
+    }
+
+    private void MoveBackground(Vector3 delta)
+    {
+        for (int i = 0; i < model.movingBackgrounds.Length; i++)
+        {
+            model.movingBackgrounds[i].position += delta;
+            if (model.movingBackgrounds[i].position.y >= 28f)
+            {
+                model.movingBackgrounds[i].position -= new Vector3(0, backgroundYChange, 0);
+            }
+        }
+    }
+
+    public void IncrementDestroyedBlocksCount()
+    {
+        model.DestroyedBlocks++;
+    }
+
+    bool IsAnyBlockAboveY(float y)
+    {
+        foreach (BasicBlock block in model.blocks)
         {
             if (block.transform.position.y > y)
             {
@@ -94,10 +94,10 @@ public class BlocksManager : MonoBehaviour
         return false;
     }
 
-    public float GetMinBlockY(BasicBlock[] blocks)
+    public float GetMinBlockY()
     {
         float minY = -18f;
-        foreach (BasicBlock block in blocks)
+        foreach (BasicBlock block in model.blocks)
         {
             if (block.transform.position.y < minY)
             {
@@ -107,9 +107,9 @@ public class BlocksManager : MonoBehaviour
         return minY;
     }
 
-    bool CheckForBlocksBelowY(BasicBlock[] blocks, float y)
+    bool IsAnyBlockBelowY(float y)
     {
-        foreach (BasicBlock block in blocks)
+        foreach (BasicBlock block in model.blocks)
         {
             if (block.transform.position.y < y)
             {
@@ -119,17 +119,14 @@ public class BlocksManager : MonoBehaviour
         return false;
     }
 
-    private void CheckIfWaveFinished(BasicBlock[] blocks)
+    private void SpawnBlocksRow()
     {
-        if (!CheckForBlocksBelowY(blocks, model.block_spawning_trigger_minimum_y))
-        {
-            blockSpawner.minExistingY = GetMinBlockY(blocks);
-            blockSpawner.SpawnBlockRow(out List<BasicBlock> spawnedBlocks);
+        blockSpawner.minExistingY = GetMinBlockY();
+        blockSpawner.SpawnBlockRow(out List<BasicBlock> spawnedBlocks);
 
-            for (int i = 0; i < spawnedBlocks.Count; i++)
-            {
-                spawnedBlocks[i].onBlockDestroyed += (reward) => { onBlockDestroyed.Invoke(reward); };
-            }
+        for (int i = 0; i < spawnedBlocks.Count; i++)
+        {
+            SetupSpawnedBlock(spawnedBlocks[i]);
         }
     }
     public double GetDepthBlocksHealth()
@@ -153,8 +150,19 @@ public class BlocksManager : MonoBehaviour
 
             for (int i = 0; i < spawnedBlocks.Count; i++)
             {
-                spawnedBlocks[i].onBlockDestroyed += (reward) => { onBlockDestroyed?.Invoke(reward); };
+                SetupSpawnedBlock(spawnedBlocks[i]);
             }
         }
+    }
+
+    private void SetupSpawnedBlock(BasicBlock block) 
+    {
+        model.blocks.Add(block);
+        block.onBlockDestroyed += OnBlockDestroyed;
+    }
+
+    private void OnBlockDestroyed(double value)
+    {
+        onBlockDestroyed.Invoke(value);
     }
 }

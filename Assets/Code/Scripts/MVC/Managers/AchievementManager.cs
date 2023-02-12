@@ -182,7 +182,7 @@ public class AchievementManager : MonoBehaviour
                             gameModel.onDepthChange += requirement.CheckIfFulfilled;
                             break;
                         case DependsOn.DestroyedBlocksCount:
-                            blocksModel.onDestroyedBlocksCountChange += requirement.CheckIfFulfilled;
+                            blocksModel.onDestroyedBlocksChange += requirement.CheckIfFulfilled;
                             break;
                         case DependsOn.Money:
                             resourcesManager.onMoneyChange += requirement.CheckIfFulfilled;
@@ -247,7 +247,7 @@ public class AchievementManager : MonoBehaviour
                     gameModel.onDepthChange -= requirement.CheckIfFulfilled;
                     break;
                 case DependsOn.DestroyedBlocksCount:
-                    blocksModel.onDestroyedBlocksCountChange -= requirement.CheckIfFulfilled;
+                    blocksModel.onDestroyedBlocksChange -= requirement.CheckIfFulfilled;
                     break;
                 case DependsOn.Money:
                     resourcesManager.onMoneyChange -= requirement.CheckIfFulfilled;
