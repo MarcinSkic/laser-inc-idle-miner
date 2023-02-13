@@ -214,6 +214,56 @@ public class ResourcesManager : MonoBehaviour
     }
     #endregion
 
+    public double GetCurrency(Currency currency)
+    {
+        return currency switch
+        {
+            Currency.Money => Money,
+            Currency.Prestige => PrestigeCurrency,
+            Currency.Premium => PremiumCurrency,
+            _ => -1,
+        };
+    }
+
+    public bool TryDecreaseCurrency(double value, Currency currency)
+    {
+        switch (currency)
+        {
+            case Currency.Money:
+                if (Money - value < 0)
+                {
+                    return false;
+                }
+                else
+                {
+                    Money -= value;
+                    return true;
+                }
+            case Currency.Prestige:
+                if (PrestigeCurrency - value < 0)
+                {
+                    return false;
+                }
+                else
+                {
+                    PrestigeCurrency -= value;
+                    return true;
+                }
+            case Currency.Premium:
+                if (PremiumCurrency - value < 0)
+                {
+                    return false;
+                }
+                else
+                {
+                    PremiumCurrency -= value;
+                    return true;
+                }
+            default:
+                return false;
+        }
+        
+    }
     public void LoadInspectorMoney()
     {
         Money = model.money;
@@ -238,19 +288,6 @@ public class ResourcesManager : MonoBehaviour
     public void IncreaseMoneyForOfflineByTime(double seconds)
     {
         IncreaseMoneyForOfflineByValue(CalculateOfflineMoney(seconds));
-    }
-
-    public bool TryDecreaseMoney(double value)
-    {
-        if(Money - value < 0)
-        {
-            return false;
-        } 
-        else
-        {
-            Money -= value;
-            return true;
-        }
     }
 
     public void SavePersistentData(PersistentData data)
