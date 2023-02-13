@@ -4,6 +4,7 @@ using UnityEngine;
 using MyBox;
 using UnityEngine.Events;
 using System.Linq;
+using UnityEngine.SceneManagement;
 
 /// <summary>
 /// Methods from this object should not be called by other objects. When such action direction is needed (for example UI or world events) it should connect methods to events HERE.
@@ -358,11 +359,12 @@ public class GameController : BaseController<GameView>
         PersistentData persistentData = new();
 
         resourcesManager.SavePersistentData(persistentData);
-        SettingsModel.Instance.SavePersistentData(persistentData);
         StatisticsModel.Instance.SavePersistentData(persistentData);
         persistentData.depth = model.Depth;
         upgradesManager.SavePersistentData(persistentData);
         blocksManager.SavePersistentData(persistentData);
+
+        SettingsModel.Instance.SavePersistentData(persistentData);
         achievementManager.SavePersistentData(persistentData);
 
         savingManager.SavePersistentData(persistentData);
@@ -393,6 +395,26 @@ public class GameController : BaseController<GameView>
 
         savingManager.loadedProperly = true;
         return true;
+    }
+
+    private void ClearBeforePrestige()
+    {
+        FloatingTextSpawner.Instance.ClearBeforePrestige();
+    }
+
+    [ContextMenu("Prestige")]
+    private void ExecutePrestige()
+    {
+        PersistentData persistentData = new();
+
+        SettingsModel.Instance.SavePersistentData(persistentData);
+        achievementManager.SavePersistentData(persistentData);
+        persistentData.prestigeCurrency += resourcesManager.PrestigeCurrency + resourcesManager.PrestigeCurrencyForNextPrestige;
+
+        savingManager.SavePersistentData(persistentData);
+
+        ClearBeforePrestige();
+        SceneManager.LoadScene(SceneManager.GetActiveScene().name);
     }
 
     private int fpsRefreshCounter = 0;

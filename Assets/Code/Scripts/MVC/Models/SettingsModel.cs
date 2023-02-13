@@ -17,7 +17,6 @@ public class SettingsModel : MonoBehaviour
         else
         {
             Instance = this;
-            DontDestroyOnLoad(gameObject);
         }
     }
     #endregion

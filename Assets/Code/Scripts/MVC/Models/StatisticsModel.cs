@@ -17,7 +17,6 @@ public class StatisticsModel : MonoBehaviour
         else
         {
             Instance = this;
-            DontDestroyOnLoad(gameObject);
         }
     }
     #endregion

@@ -12466,6 +12466,8 @@ MonoBehaviour:
   earnedPremiumCurrency: 0
   prestigeCurrency: 0
   earnedPrestigeCurrency: 0
+  prestigeCurrencyForNextPrestige: 1000
+  startMoney: 1
   money: 0
   earnedMoney: 0
   offlineMoney: 0

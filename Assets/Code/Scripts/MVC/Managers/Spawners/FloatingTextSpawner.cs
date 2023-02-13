@@ -17,10 +17,13 @@ public class FloatingTextSpawner : BaseSpawner<FloatingText>
         else
         {
             Instance = this;
-            DontDestroyOnLoad(gameObject);
         }
     }
     #endregion
+    public void ClearBeforePrestige()
+    {
+        floatingTexts.Clear();
+    }
 
     public void SpawnDefault(string text, Transform location)
     {
