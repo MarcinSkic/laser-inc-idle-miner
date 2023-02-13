@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using MyBox;
 
+public enum Currency { Money, Prestige, Premium }
 public class ResourcesModel : MonoBehaviour
 {
     [AutoProperty(AutoPropertyMode.Scene)]
@@ -17,7 +18,6 @@ public class ResourcesModel : MonoBehaviour
     public double earnedPowerUpTime = 0;
 
     [Header("PREMIUM CURRENCY")]
-    [ReadOnly]
     [Tooltip("Current premium currency")]
     public double premiumCurrency = 0;
     [ReadOnly]
@@ -25,7 +25,6 @@ public class ResourcesModel : MonoBehaviour
     public double earnedPremiumCurrency = 0;
 
     [Header("PRESTIGE CURRENCY")]
-    [ReadOnly]
     [Tooltip("Current prestige currency")]
     public double prestigeCurrency = 0;
     [ReadOnly]
@@ -71,5 +70,6 @@ public class ResourcesModel : MonoBehaviour
     private void OnValidate()
     {
         manager.onMoneyChange?.Invoke(money);
+        manager.onPrestigeCurrencyChange?.Invoke(prestigeCurrency);
     }
 }

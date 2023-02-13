@@ -7,6 +7,7 @@ using UnityEngine.UI;
 public class UIUpgradeBar : MonoBehaviour
 {
     [SerializeField] private Image upgradeIcon;
+    [SerializeField] private Image currencyIcon;
     [SerializeField] private TMP_Text levelText;
     [SerializeField] private TMP_Text descriptionText;
     [SerializeField] private UIButtonUpgradeController upgradeButton;
@@ -15,6 +16,11 @@ public class UIUpgradeBar : MonoBehaviour
     public void SetDescription(string description)
     {
         descriptionText.text = description;
+    }
+
+    public void SetCurrencySprite(Sprite sprite)
+    {
+        currencyIcon.sprite = sprite;
     }
 
     public void SetLevel(Upgrade upgrade)

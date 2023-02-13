@@ -732,6 +732,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   upgradeIcon: {fileID: 0}
+  currencyIcon: {fileID: 7510674941839221620}
   levelText: {fileID: 3222880870784519086}
   descriptionText: {fileID: 327003141869707963}
   upgradeButton: {fileID: 21511107344435338}

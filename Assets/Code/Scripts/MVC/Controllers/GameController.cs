@@ -146,7 +146,12 @@ public class GameController : BaseController<GameView>
     public void ConnectToResourceManagerEvents()
     {
         resourcesManager.onMoneyChange += view.SetMoneyDisplay;
-        onSetupFinished += () => { resourcesManager.Money = resourcesManager.Money; }; //Welp ¯\_(ツ)_/¯
+        resourcesManager.onPrestigeCurrencyChange += view.SetPrestigeCurrencyDisplay;
+
+        onSetupFinished += () => { 
+            resourcesManager.Money = resourcesManager.Money;
+            resourcesManager.PrestigeCurrency = resourcesManager.PrestigeCurrency;
+        }; //Welp ¯\_(ツ)_/¯
     }
 
     private void ConnectToOfflineManagerEvents()
@@ -278,7 +283,7 @@ public class GameController : BaseController<GameView>
 
     private void CreateUpgradesUI()
     {
-        foreach (var upgrade in upgradesModel.upgrades.Values.Where(upgrade => upgrade.whereToGenerate == UISection.UpgradesOther).OrderBy(upgrade => upgrade.order))
+        foreach (var upgrade in upgradesModel.upgrades.Values.Where(upgrade => upgrade.whereToGenerate != UISection.AutoOrNone).OrderBy(upgrade => upgrade.order))
         {
             var upgradeBar = view.CreateUpgradeBar(upgrade);
             ConnectUpgradeBar(upgradeBar, upgrade);
@@ -291,7 +296,18 @@ public class GameController : BaseController<GameView>
         upgradeBar.UpgradeButton.onClick += upgrade.TryUpgrade;
 
         upgradeBar.UpgradeButton.SetUpgradeCost(upgrade);
-        resourcesManager.onMoneyChange += upgradeBar.UpgradeButton.ChangeStateBasedOnMoney;
+        switch (upgrade.currency)
+        {
+            case Currency.Money:
+                resourcesManager.onMoneyChange += upgradeBar.UpgradeButton.ChangeStateBasedOnMoney;
+                break;
+            case Currency.Prestige:
+                resourcesManager.onPrestigeCurrencyChange += upgradeBar.UpgradeButton.ChangeStateBasedOnMoney;
+                break;
+            case Currency.Premium:
+                resourcesManager.onPremiumCurrencyChange += upgradeBar.UpgradeButton.ChangeStateBasedOnMoney;
+                break;
+        }
 
         upgrade.doUpgrade += upgradeBar.UpgradeButton.SetUpgradeCost;
         upgrade.doUpgrade += upgradeBar.SetLevel;
@@ -319,7 +335,7 @@ public class GameController : BaseController<GameView>
 
     private void TryBuyUpgrade(Upgrade upgrade)
     {
-        if (!resourcesManager.TryDecreaseMoney(upgrade.cost))
+        if (!resourcesManager.TryDecreaseCurrency(upgrade.cost,upgrade.currency))
         {
             return;
         }
@@ -327,6 +343,8 @@ public class GameController : BaseController<GameView>
         upgrade.DoUpgrade();
 
         resourcesManager.Money = resourcesManager.Money; //Welp (again) ¯\_(ツ)_/¯
+        resourcesManager.PrestigeCurrency = resourcesManager.PrestigeCurrency;
+        resourcesManager.PremiumCurrency = resourcesManager.PremiumCurrency;
     }
 
     private void LoadDefaults()

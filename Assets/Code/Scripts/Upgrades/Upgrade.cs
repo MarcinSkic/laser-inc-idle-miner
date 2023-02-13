@@ -6,8 +6,7 @@ using UnityEngine.Events;
 
 public enum UpgradeType { ValuesUpgrade, SpawnUpgrade, CustomFunction}
 public enum ValueUpgradeFormula { Add, Multiply };
-
-public enum UISection { AutoOrNone, UpgradesOther}
+public enum UISection { AutoOrNone, Normal, Choice, Prestige}
 
 [System.Serializable]
 public class Upgrade
@@ -34,6 +33,7 @@ public class Upgrade
     public int maxLevel = -1;
 
     #region Cost
+    public Currency currency;
     public double cost;
     [ConditionalField(nameof(maxLevel), true, 1)]
     [Tooltip("Formula: currentCost = currentCost*costMultiplier+costIncremental")]
@@ -71,6 +71,7 @@ public class Upgrade
     public UnityAction<Upgrade> doTryUpgrade;
     public UnityAction<Upgrade> doUpgrade;
     public UnityAction<string> onValueUpdate;
+    public UnityAction<Upgrade> onMaxedUpgrade;
     public Upgrade initialUpgrade;
 
     public string GenerateName()
@@ -112,6 +113,11 @@ public class Upgrade
     {
         cost = cost * costMultiplier + costIncremental;
         currentLevel++;
+
+        if(currentLevel == maxLevel)
+        {
+            onMaxedUpgrade?.Invoke(this);
+        }
 
         doUpgrade?.Invoke(this);
     }

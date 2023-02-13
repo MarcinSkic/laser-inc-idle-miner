@@ -11,6 +11,9 @@ public class GameView : BaseView
 {
     [Header("UNIVERSAL")]
     public Color upgradeButton_MaxedUpgrades;
+    public Sprite moneyIcon;
+    public Sprite prestigeCurrencyIcon;
+    public Sprite premiumCurrencyIcon;
 
     [Space(10)]
     [Header("IN GAME")]
@@ -48,6 +51,13 @@ public class GameView : BaseView
     [Header("Upgrades Tab")]
     public UIUpgradeBar upgradeBarPrefab;
     public Transform upgradeBarsParent;
+
+    [Header("Choice Upgrades Tab")]
+    public Transform choiceUpgradeBarsParent;
+
+    [Header("Prestige Upgrades Tab")]
+    public TMP_Text prestigeCurrencyDisplay;
+    public Transform prestigeUpgradeBarsParent;
 
     [Header("Settings Tab")]
     public Toggle is60fps;
@@ -168,7 +178,33 @@ public class GameView : BaseView
 
     public UIUpgradeBar CreateUpgradeBar(Upgrade upgrade)
     {
-        var upgradeBar = Instantiate(upgradeBarPrefab, upgradeBarsParent);
+        UIUpgradeBar upgradeBar = null;
+        switch (upgrade.whereToGenerate)
+        {
+            case UISection.Normal:
+                upgradeBar = Instantiate(upgradeBarPrefab, upgradeBarsParent);
+                break;
+            case UISection.Prestige:
+                upgradeBar = Instantiate(upgradeBarPrefab, prestigeUpgradeBarsParent);
+                break;
+            case UISection.Choice:
+                upgradeBar = Instantiate(upgradeBarPrefab, choiceUpgradeBarsParent);
+                break;
+        }
+
+        switch (upgrade.currency)
+        {
+            case Currency.Money:
+                upgradeBar.SetCurrencySprite(moneyIcon);
+                break;
+            case Currency.Prestige:
+                upgradeBar.SetCurrencySprite(prestigeCurrencyIcon);
+                break;
+            case Currency.Premium:
+                upgradeBar.SetCurrencySprite(premiumCurrencyIcon);
+                break;
+        }
+        
         upgradeBar.SetDescription(upgrade.description);
         upgradeBar.SetLevel(upgrade);
         upgradeBar.UpgradeButton.SetText(upgrade.title);
@@ -227,6 +263,11 @@ public class GameView : BaseView
     public void SetMoneyDisplay(double value)
     {
         moneyDisplay.text = string.Format("Money: {0:F0}",value);
+    }
+
+    public void SetPrestigeCurrencyDisplay(double value)
+    {
+        prestigeCurrencyDisplay.text = string.Format("{0:F0} kul-ejd", value);
     }
 
     public void SetBlocksHpDisplay(double value)
