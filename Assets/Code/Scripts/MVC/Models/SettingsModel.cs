@@ -22,8 +22,12 @@ public class SettingsModel : MonoBehaviour
     }
     #endregion
 
+    [Header("TRUE before build/commit")]
     public bool saveAndLoadFile = true;    //TODO: Change to SaveAndLoadFile to block undesired changes to saved file. Also add context menu function to erase existing savefile
     public bool doOfflineEarning = true;
+    public bool spawnBlocks = true;
+
+    [Header("FALSE before build/commit")]
     public bool showDebugWindow;
     [Space(5)]
     public bool changeTimeScale;
@@ -91,5 +95,15 @@ public class SettingsModel : MonoBehaviour
     private void EraseSaveFile()
     {
         SavingManager.EraseSaveFile();
+    }
+
+    [ContextMenu("Restore Normal Settings")]
+    private void RestoreNormalSettings()
+    {
+        saveAndLoadFile = true;    //TODO: Change to SaveAndLoadFile to block undesired changes to saved file. Also add context menu function to erase existing savefile
+        doOfflineEarning = true;
+        spawnBlocks = true;
+        showDebugWindow = false;
+        changeTimeScale = false;
     }
 }

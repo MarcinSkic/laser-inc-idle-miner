@@ -146,9 +146,9 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 3573452}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalScale: {x: 1.0000002, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 662815920}
@@ -646,7 +646,7 @@ GameObject:
   - component: {fileID: 91030340}
   - component: {fileID: 91030339}
   m_Layer: 0
-  m_Name: TestLight
+  m_Name: SpotlightTop
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1732,7 +1732,7 @@ GameObject:
   - component: {fileID: 302244562}
   - component: {fileID: 302244561}
   m_Layer: 0
-  m_Name: TestLight (1)
+  m_Name: MinerLight
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -6456,21 +6456,70 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 025d86a857c3dc148b8050c81289db10, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  blocksManager: {fileID: 567613854}
-  MinDegsPerSecond: 10
-  DegsPerSecondPerMovement: 0.5
-  MaxDegsPerSecond: 60
-  rotationChangeSofteningRatio: 0.95
-  lastRotation: 0
+  blocksModel: {fileID: 1947716360}
   rings:
   - {fileID: 681594763}
-  MinLightIntensity: 50
-  LightIntensityPerMovement: 2
-  MaxLightIntensity: 250
-  lightIntensityChangeSofteningRatio: 0.95
-  lastLightIntensity: 50
   lights:
   - {fileID: 302244562}
+  rotationCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 10
+      inSlope: 16.41461
+      outSlope: 16.41461
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.056179773
+    - serializedVersion: 3
+      time: 10
+      value: 150.33018
+      inSlope: 11.636085
+      outSlope: 11.636085
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.05168543
+      outWeight: 0
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  intensityCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 50
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    - serializedVersion: 3
+      time: 7.7685766
+      value: 149.75229
+      inSlope: 41.52554
+      outSlope: 41.52554
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    - serializedVersion: 3
+      time: 10
+      value: 250
+      inSlope: 44.925457
+      outSlope: 0
+      tangentMode: 69
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  targetSpeed: 0
+  deccelerationPerSecond: 2
 --- !u!1 &1046271726
 GameObject:
   m_ObjectHideFlags: 0
@@ -9221,9 +9270,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8df5f7b5fed88884bbe63da0e99d0e50, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  saveAndLoadFile: 0
-  doOfflineEarning: 0
-  showDebugWindow: 1
+  saveAndLoadFile: 1
+  doOfflineEarning: 1
+  spawnBlocks: 1
+  showDebugWindow: 0
   changeTimeScale: 0
   timeScale: 0.1
   clickDamage: 1
@@ -11083,7 +11133,7 @@ GameObject:
   - component: {fileID: 1921078943}
   - component: {fileID: 1921078942}
   m_Layer: 0
-  m_Name: TestLight (2)
+  m_Name: SpotLightFront
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -11360,8 +11410,42 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   baseSpeed: 0
+  accelerationCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 0
+      inSlope: 6.1572328
+      outSlope: 6.1572328
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0
+      outWeight: 0.081105836
+    - serializedVersion: 3
+      time: 0.20780171
+      value: 0.69466615
+      inSlope: 1.3146657
+      outSlope: 1.3146657
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.0553948
+    - serializedVersion: 3
+      time: 1
+      value: 1
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0
+      outWeight: 0
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  currentSpeed: 0
   maximumBonusSpeed: 10
-  movementsToFullBonus: 1000
+  movementsPerIncrement: 500
   maximum_block_movement_y: 5
   block_movement_trigger_difference_y: 0.5
   block_health_exponentiation_base: 1.03

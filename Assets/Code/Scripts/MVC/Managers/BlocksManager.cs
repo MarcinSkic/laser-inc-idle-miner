@@ -26,7 +26,7 @@ public class BlocksManager : MonoBehaviour
             IncreaseDepth();   
             blockMovementsInARow++;
 
-            if (!IsAnyBlockBelowY(model.block_spawning_trigger_minimum_y))
+            if (!IsAnyBlockBelowY(model.block_spawning_trigger_minimum_y) && SettingsModel.Instance.spawnBlocks)
             {
                 SpawnBlocksRow();
             }
@@ -34,14 +34,15 @@ public class BlocksManager : MonoBehaviour
         else
         {
             blockMovementsInARow = 0;
+            model.currentSpeed = 0;
         }
     }
 
     public UnityAction<Vector3> onDepthIncrease;
     private void IncreaseDepth()
     {
-        //        var movement = new Vector3(0, Math.Min(model.baseSpeed * ((blockMovementsInARow / model.movementsPerSpeedMultiplier) + 1f), model.depthIncreaseSpeedLimit), 0) * Time.deltaTime;
-        var movement = new Vector3(0, (model.baseSpeed + model.maximumBonusSpeed * Mathf.Min(Mathf.Sqrt(blockMovementsInARow / model.movementsToFullBonus), 1f))*Time.deltaTime, 0);
+        model.currentSpeed = model.baseSpeed + model.maximumBonusSpeed * model.accelerationCurve.Evaluate(blockMovementsInARow / (model.movementsPerIncrement * Mathf.Sqrt(model.maximumBonusSpeed)));
+        var movement = new Vector3(0, model.currentSpeed * Time.deltaTime, 0);
         gameModel.Depth += movement.y;
 
         MoveBlocks(movement);
