@@ -14,6 +14,7 @@ public class ResourcesManager : MonoBehaviour
     public UnityAction<double> onPremiumCurrencyEarned;
     public UnityAction<double> onPrestigeCurrencyChange;
     public UnityAction<double> onPrestigeCurrencyEarned;
+    public UnityAction<double> onPrestigeCurrencyForNextPrestigeChange;
     public UnityAction<double> onMoneyChange;
     public UnityAction<double> onMoneyEarned;
 
@@ -133,13 +134,26 @@ public class ResourcesManager : MonoBehaviour
         }
     }
 
+    public double PrestigeCurrencyForNextPrestige
+    {
+        get
+        {
+            return model.prestigeCurrencyForNextPrestige;
+        }
+        set
+        {
+            model.prestigeCurrencyForNextPrestige = value;
+            onPrestigeCurrencyForNextPrestigeChange?.Invoke(value);
+        }
+    }
+
     public void IncreasePrestigeCurrency(double value)
     {
         if (value < 1)
         {
             value = 1;
         }
-        EarnedPrestigeCurrency += value;
+        EarnedPrestigeCurrency += value;    //TODO-@FILIP: Should it save beetwen prestiges? I guess Yes, but then i want ACCURATE and COMPREHENSIVE list of prestige persistent variables
         PrestigeCurrency += value;
     }
     #endregion
@@ -266,7 +280,7 @@ public class ResourcesManager : MonoBehaviour
     }
     public void LoadInspectorMoney()
     {
-        Money = model.money;
+        Money = model.money + model.startMoney;
         PremiumCurrency = model.premiumCurrency;
         PrestigeCurrency = model.prestigeCurrency;
     } 
@@ -310,7 +324,7 @@ public class ResourcesManager : MonoBehaviour
 
     public void LoadPersistentData(PersistentData data)
     {
-        Money = data?.money ?? 0;
+        Money = data?.money ?? model.startMoney;
         EarnedMoney = data?.earnedMoney ?? 0;
         model.offlineEarnedMoney = data?.offlineEarnedMoney ?? 0;
         model.afkGainPerSec = data?.afkGainPerSec ?? 0;
