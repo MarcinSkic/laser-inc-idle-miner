@@ -13,26 +13,26 @@ public static class NumberFormatter
     private static string FormatToEngineering(double num)
     {
         // z wymuszeniem konkretnie 3 cyfr, nie mniej
-        if (num > 1 && num < 1e3)
+        if (num >= 1 && num < 1e3)
         {
             return string.Format("{0:f0}",num);
         }
 
         int exponent = 0;
-        while (num > 1e3)
+        while (Math.Abs(num) > 1e3)
         {
             num = num / 1000.0;
             exponent += 3;
         }
-        while (num < 1)
+        while (num != 0 && Math.Abs(num) < 1)
         {
             num = num * 1000.0;
             exponent -= 3;
         }
-        string rounded = RoundToSignificantDigits(num, 3).ToString();
+        String rounded = RoundToSignificantDigits(num, 3).ToString();
         if (rounded.Length == 1) { rounded = rounded + ".00"; }
         if (rounded.Length == 3 && rounded.Contains(".")) { rounded = rounded + "0"; }
-        return string.Format("{0}e{1}", rounded, exponent);
+        return String.Format("{0}e{1}", rounded, exponent);
     }
 
     private static string naukowa1(double num)
