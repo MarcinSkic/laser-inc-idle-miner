@@ -51,9 +51,9 @@ public class BasicBlock : MonoBehaviour, IPoolable<BasicBlock>
             }
 
             repeatedTotalValue += damage;
-            floatingRepeatedText.SetText(repeatedTotalValue.ToString("F2"));
+            floatingRepeatedText.SetText(NumberFormatter.Format(repeatedTotalValue));
         } else {
-            FloatingTextSpawner.Instance.SpawnDefault(damage.ToString("F2"), transform);
+            FloatingTextSpawner.Instance.SpawnDefault(NumberFormatter.Format(damage), transform);
         }
     }
 
