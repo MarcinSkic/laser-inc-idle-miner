@@ -21,7 +21,7 @@ public class DoPrestigeTab : MonoBehaviour
         else
         {
             resetButton.interactable = false;
-            rewardText.text = "<color=\"orange\">You need to reach a depth of 500 to be able to prestige.</color>";
+            rewardText.text = "<color=\"orange\">You need to reach a depth of 500m to be able to prestige.</color>";
         }
     }
 

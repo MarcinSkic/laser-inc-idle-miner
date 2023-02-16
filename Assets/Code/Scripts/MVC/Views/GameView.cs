@@ -56,7 +56,7 @@ public class GameView : BaseView
     public Transform choiceUpgradeBarsParent;
 
     [Header("Prestige Upgrades Tab")]
-    public TMP_Text prestigeCurrencyDisplay;
+    public TMP_Text[] prestigeCurrencyDisplays;
     public Transform prestigeUpgradeBarsParent;
 
     [Header("Settings Tab")]
@@ -262,12 +262,15 @@ public class GameView : BaseView
 
     public void SetMoneyDisplay(double value)
     {
-        moneyDisplay.text = string.Format("Money: {0:F0}",value);
+        moneyDisplay.text = $"Money: {NumberFormatter.Format(value)}";
     }
 
     public void SetPrestigeCurrencyDisplay(double value)
     {
-        prestigeCurrencyDisplay.text = string.Format("{0:F0} kul-ejd", value);
+        foreach(var display in prestigeCurrencyDisplays)
+        {
+            display.text = NumberFormatter.Format(value);
+        }
     }
 
     public void SetBlocksHpDisplay(double value)
