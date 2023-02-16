@@ -2,11 +2,14 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Events;
+using System;
 
 public class ResourcesManager : MonoBehaviour
 {
     [SerializeField]
     private ResourcesModel model;
+
+    [SerializeField] GameModel gameModel;
 
     public UnityAction<double> onPowerUpTimeChanged;
     public UnityAction<double> onPowerUpTimeEarned;
@@ -138,7 +141,12 @@ public class ResourcesManager : MonoBehaviour
     {
         get
         {
-            return model.prestigeCurrencyForNextPrestige;
+            //return model.prestigeCurrencyForNextPrestige;
+            if (gameModel.Depth >= 500f)
+            {
+                return Math.Pow(2f, (gameModel.Depth/500f));
+            }
+            return 0f;
         }
         set
         {
