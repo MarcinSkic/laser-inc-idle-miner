@@ -74,12 +74,12 @@ public class GameController : BaseController<GameView>
         #region Methods that require loaded data
         CreateAchievementsWindow();
         ConnectToUpgradesEvents();
-        ConnectBallBarsWithEvents();
         UpdateSettingsViewBySavedData();
         achievementManager.SetupAchievements();
-        upgradesManager.ConnectUpgrades();  //Order important
-        upgradesManager.ExecuteLoadedUpgrades(); //Order important
-        CreateUpgradesUI();
+        SetupBallBars();    //Order important #1
+        upgradesManager.ConnectUpgradesAndLoadValues();  //Order important #2
+        upgradesManager.ExecuteLoadedUpgrades(); //Order important #3
+        CreateUpgradesUI(); //Order important #4
         #endregion
 
         #region Methods independent from calling order
@@ -256,7 +256,7 @@ public class GameController : BaseController<GameView>
         }
     }
 
-    private void ConnectBallBarsWithEvents()
+    private void SetupBallBars()
     {
         foreach(var ballBar in view.ballBars)
         {

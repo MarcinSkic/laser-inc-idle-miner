@@ -18,6 +18,14 @@ public class Upgrade
     [Tooltip("Required when upgrades change the same stats")]
     public string identifier;
 
+    #region Requirements
+    [HideInInspector]
+    public bool isUnlocked = true;
+    [HideInInspector]
+    public int leftRequirements = 0;
+    public Requirement[] requirements;
+    #endregion
+
     #region UI
     public UISection whereToGenerate;
     [ConditionalField(nameof(whereToGenerate), true,UISection.AutoOrNone)]
@@ -72,6 +80,7 @@ public class Upgrade
     public UnityAction<Upgrade> doUpgrade;
     public UnityAction<string> onValueUpdate;
     public UnityAction<Upgrade> onMaxedUpgrade;
+    public UnityAction<Upgrade> onUnlock;
     public Upgrade initialUpgrade;
 
     public string GenerateName()
@@ -90,6 +99,20 @@ public class Upgrade
 
         name += identifier;
         return name;
+    }
+
+    public void CheckIfUnlocked(bool newStateOfRequirement)
+    {
+        if (!isUnlocked)
+        {
+            leftRequirements += newStateOfRequirement ? -1 : 1;
+
+            if (leftRequirements <= 0)
+            {
+                isUnlocked = true;
+                onUnlock?.Invoke(this);
+            }
+        }
     }
 
     /// <summary>
@@ -134,6 +157,7 @@ public class PersistentUpgrade
 {
     public string name;
     public int currentLevel;
+    //TODO-CURRENT: isUnlocked
 
     public PersistentUpgrade(string name, int currentLevel)
     {

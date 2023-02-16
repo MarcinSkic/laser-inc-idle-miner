@@ -27,7 +27,7 @@ public class UpgradesManager : MonoBehaviour
         model.TransformScriptablesIntoUpgrades();
     }
 
-    public void ConnectUpgrades()
+    public void ConnectUpgradesAndLoadValues()
     {
         foreach(var upgrade in model.upgrades.Values)
         {
@@ -42,6 +42,12 @@ public class UpgradesManager : MonoBehaviour
                     upgrade.onValueUpdate?.Invoke("0");  //UI setup
                     break;
             }
+
+            foreach (var requirement in upgrade.requirements)
+            {
+                upgrade.isUnlocked = false;
+            }
+
         }
     }
 
