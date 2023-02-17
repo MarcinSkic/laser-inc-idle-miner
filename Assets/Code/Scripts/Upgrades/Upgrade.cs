@@ -20,7 +20,7 @@ public class Upgrade
 
     #region Requirements
     [HideInInspector]
-    public bool isUnlocked = true;
+    public bool isUnlocked = false;
     [HideInInspector]
     public int leftRequirements = 0;
     public Requirement[] requirements;
@@ -123,6 +123,12 @@ public class Upgrade
     {
         if (currentLevel == maxLevel)
         {
+            return;
+        }
+
+        if (!isUnlocked)
+        {
+            Debug.LogWarning($"\"{title}\" upgrade is locked, but UI allowed to TryUpgrade!");
             return;
         }
 

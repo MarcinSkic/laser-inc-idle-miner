@@ -43,9 +43,20 @@ public class UpgradesManager : MonoBehaviour
                     break;
             }
 
-            foreach (var requirement in upgrade.requirements)
+            if (!upgrade.isUnlocked)
             {
-                upgrade.isUnlocked = false;
+                upgrade.isUnlocked = true;
+
+                foreach (var requirement in upgrade.requirements)
+                {
+                    upgrade.isUnlocked = false;
+                    RequirementsManager.Instance.ConnectRequirementToValueEvent(requirement);
+                    requirement.onStateChanged += upgrade.CheckIfUnlocked;
+
+                    upgrade.leftRequirements++;
+                }
+
+                upgrade.onUnlock += OnUpgradeUnlocked;
             }
 
         }
@@ -209,6 +220,19 @@ public class UpgradesManager : MonoBehaviour
         {
             upgrade.onValueUpdate?.Invoke(NumberFormatter.Format(value.value));
         }
+    }
+
+    private void OnUpgradeUnlocked(Upgrade upgrade)
+    {
+        Debug.Log($"Unlocked \"{upgrade.title}\"");
+
+        foreach(var requirement in upgrade.requirements)
+        {
+            RequirementsManager.Instance.DisconnectRequirementFromValueEvent(requirement);
+            requirement.onStateChanged -= upgrade.CheckIfUnlocked;
+        }
+
+        upgrade.onUnlock = null;
     }
 
     public void SavePersistentData(PersistentData data)
