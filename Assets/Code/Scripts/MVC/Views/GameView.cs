@@ -167,11 +167,12 @@ public class GameView : BaseView
         }
     }
 
-    public void CreateBallBar(BallData ballType)
+    public void CreateBallBar(BallData ballData)
     {
         var ballBar = Instantiate(ballBarPrefab, ballBarsParent);
-        ballBar.SetUpgradesName(ballType.type);
-        ballBar.ballIcon.sprite = ballType.sprite;
+        ballBar.SetUpgradesName(ballData.type);
+        ballBar.ballIcon.sprite = ballData.sprite;
+        ballBar.ballType = ballData.type;
 
         ballBars.Add(ballBar);
     }
@@ -210,6 +211,15 @@ public class GameView : BaseView
         upgradeBar.UpgradeButton.SetText(upgrade.title);
         upgradeBar.UpgradeButton.upgradeName = upgrade.name;
 
+        upgrade.onMaxedUpgrade += upgradeBar.OnMaxed;
+        if (upgrade.isUnlocked)
+        {
+            upgradeBar.Unlock(upgrade);
+        } else
+        {
+            upgradeBar.Lock();
+            upgrade.onUnlock += upgradeBar.Unlock;
+        }
 
         return upgradeBar;
     }

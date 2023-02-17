@@ -16,6 +16,12 @@ MonoBehaviour:
     type: 0
     name: 
     identifier: TestPrestige
+    isUnlocked: 0
+    leftRequirements: 0
+    requirements:
+    - dependsOn: 0
+      comparison: 1
+      requiredValue: 100
     whereToGenerate: 3
     order: 0
     title: Upgrade za prestige

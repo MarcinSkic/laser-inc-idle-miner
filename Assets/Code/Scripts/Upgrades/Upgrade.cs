@@ -18,6 +18,14 @@ public class Upgrade
     [Tooltip("Required when upgrades change the same stats")]
     public string identifier;
 
+    #region Requirements
+    [HideInInspector]
+    public bool isUnlocked = false;
+    [HideInInspector]
+    public int leftRequirements = 0;
+    public Requirement[] requirements;
+    #endregion
+
     #region UI
     public UISection whereToGenerate;
     [ConditionalField(nameof(whereToGenerate), true,UISection.AutoOrNone)]
@@ -72,6 +80,7 @@ public class Upgrade
     public UnityAction<Upgrade> doUpgrade;
     public UnityAction<string> onValueUpdate;
     public UnityAction<Upgrade> onMaxedUpgrade;
+    public UnityAction<Upgrade> onUnlock;
     public Upgrade initialUpgrade;
 
     public string GenerateName()
@@ -92,6 +101,20 @@ public class Upgrade
         return name;
     }
 
+    public void CheckIfUnlocked(bool newStateOfRequirement)
+    {
+        if (!isUnlocked)
+        {
+            leftRequirements += newStateOfRequirement ? -1 : 1;
+
+            if (leftRequirements <= 0)
+            {
+                isUnlocked = true;
+                onUnlock?.Invoke(this);
+            }
+        }
+    }
+
     /// <summary>
     /// This should be called by UI and event onTryUpgrade should be connected to further validations
     /// </summary>
@@ -99,6 +122,11 @@ public class Upgrade
     public void TryUpgrade()
     {
         if (currentLevel == maxLevel)
+        {
+            return;
+        }
+
+        if (!isUnlocked)
         {
             return;
         }
@@ -134,11 +162,13 @@ public class PersistentUpgrade
 {
     public string name;
     public int currentLevel;
+    public bool isUnlocked;
 
-    public PersistentUpgrade(string name, int currentLevel)
+    public PersistentUpgrade(string name, int currentLevel, bool isUnlocked)
     {
         this.name = name;
         this.currentLevel = currentLevel;
+        this.isUnlocked = isUnlocked;
     }
 
     public override string ToString()

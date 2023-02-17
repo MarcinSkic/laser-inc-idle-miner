@@ -74,12 +74,13 @@ public class GameController : BaseController<GameView>
         #region Methods that require loaded data
         CreateAchievementsWindow();
         ConnectToUpgradesEvents();
-        ConnectBallBarsWithEvents();
         UpdateSettingsViewBySavedData();
         achievementManager.SetupAchievements();
-        upgradesManager.ConnectUpgrades();  //Order important
-        upgradesManager.ExecuteLoadedUpgrades(); //Order important
-        CreateUpgradesUI();
+        upgradesManager.SetupUpgrades();  //Order important #beforeUI
+        SetupBallBars();    //Order important #UI
+        CreateUpgradesUI(); //Order important #UI
+        upgradesManager.SetInitialUpgradesValues(); //Order important #beforeExecuteLoaded
+        upgradesManager.ExecuteLoadedUpgrades(); //Order important #last
         #endregion
 
         #region Methods independent from calling order
@@ -256,7 +257,7 @@ public class GameController : BaseController<GameView>
         }
     }
 
-    private void ConnectBallBarsWithEvents()
+    private void SetupBallBars()
     {
         foreach(var ballBar in view.ballBars)
         {
@@ -272,6 +273,18 @@ public class GameController : BaseController<GameView>
 
                     upgrade.doUpgrade += buttonUpgrade.SetUpgradeCost; //Upgrade -> Updates Button values
                     upgrade.onValueUpdate += buttonUpgrade.SetText;  //TODO-FUTURE-BUG: There should be check if the button uses upgrade internal value or universal value, if universal then it should connect to not yet existing system of sending event on value change
+
+                    if (upgrade.type == UpgradeType.SpawnUpgrade)
+                    {
+                        if (!upgrade.isUnlocked)
+                        {
+                            ballBar.Lock();
+                            upgrade.onUnlock += ballBar.Unlock; //Must be connected always because default state is Locked
+                        } else
+                        {
+                            ballBar.Unlock(upgrade);
+                        }               
+                    }
                 } 
                 else
                 {

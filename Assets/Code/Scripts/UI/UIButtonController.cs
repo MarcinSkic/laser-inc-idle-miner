@@ -11,11 +11,13 @@ public class UIButtonController : MonoBehaviour
     [SerializeField] protected Button button;
     [Tooltip("Optional")]
     [SerializeField] protected TMP_Text text;
+    [SerializeField] protected bool hardDeactivate;
 
     public virtual void Init()
     {
         button.onClick.AddListener(OnClicked);
         Activate();
+        hardDeactivate = false;
     }
 
     public void SetColor(Color color)
@@ -25,12 +27,20 @@ public class UIButtonController : MonoBehaviour
 
     public void Activate()
     {
-        button.interactable = true;
+        if (!hardDeactivate)
+        {
+            button.interactable = true;
+        }
     }
 
     public void Deactivate()
     {
         button.interactable = false;
+    }
+
+    public void SetHardDeactivate(bool state)
+    {
+        hardDeactivate = state;
     }
 
     public UnityAction onClick;

@@ -27,7 +27,7 @@ public class UpgradesManager : MonoBehaviour
         model.TransformScriptablesIntoUpgrades();
     }
 
-    public void ConnectUpgrades()
+    public void SetupUpgrades()
     {
         foreach(var upgrade in model.upgrades.Values)
         {
@@ -39,6 +39,42 @@ public class UpgradesManager : MonoBehaviour
                     break;
                 case UpgradeType.SpawnUpgrade:
                     upgrade.doUpgrade += OnSpawnUpgrade;
+                    upgrade.onValueUpdate?.Invoke("0");  //UI setup
+                    break;
+            }
+
+            if (!upgrade.isUnlocked)    //Maybe set true by LoadPersistentData or scriptable in future 
+            {
+                upgrade.isUnlocked = true;  //If no requirements then unlocked...
+
+                if (!SettingsModel.Instance.removeUpgradesRequirements)
+                {
+                    foreach (var requirement in upgrade.requirements)
+                    {
+                        upgrade.isUnlocked = false; //...but if there are requirements then locked
+                        RequirementsManager.Instance.ConnectRequirementToValueEvent(requirement);
+                        requirement.onStateChanged += upgrade.CheckIfUnlocked;
+
+                        upgrade.leftRequirements++;
+                    }
+                }           
+
+                upgrade.onUnlock += OnUpgradeUnlocked;
+            }
+
+        }
+    }
+
+    public void SetInitialUpgradesValues()
+    {
+        foreach (var upgrade in model.upgrades.Values)
+        {
+            switch (upgrade.type)
+            {
+                case UpgradeType.ValuesUpgrade:
+                    SetFirstUpgradeButtonValue(upgrade);    //UI setup
+                    break;
+                case UpgradeType.SpawnUpgrade:
                     upgrade.onValueUpdate?.Invoke("0");  //UI setup
                     break;
             }
@@ -205,9 +241,22 @@ public class UpgradesManager : MonoBehaviour
         }
     }
 
+    private void OnUpgradeUnlocked(Upgrade upgrade)
+    {
+        Debug.Log($"Unlocked \"{upgrade.title}\"");
+
+        foreach(var requirement in upgrade.requirements)
+        {
+            RequirementsManager.Instance.DisconnectRequirementFromValueEvent(requirement);
+            requirement.onStateChanged -= upgrade.CheckIfUnlocked;
+        }
+
+        upgrade.onUnlock = null;
+    }
+
     public void SavePersistentData(PersistentData data)
     {
-        data.upgrades = model.upgrades.Values.Select(upgrade => new PersistentUpgrade(upgrade.name, upgrade.currentLevel)).ToArray();
+        data.upgrades = model.upgrades.Values.Select(upgrade => new PersistentUpgrade(upgrade.name, upgrade.currentLevel, upgrade.isUnlocked)).ToArray();
     }
 
     public void LoadPersistentData(PersistentData data)
@@ -219,6 +268,7 @@ public class UpgradesManager : MonoBehaviour
                 if (model.upgrades.ContainsKey(persistentUpgrade.name))
                 {
                     model.upgrades[persistentUpgrade.name].currentLevel = persistentUpgrade.currentLevel;
+                    model.upgrades[persistentUpgrade.name].isUnlocked = persistentUpgrade.isUnlocked;
                 } 
                 else
                 {
