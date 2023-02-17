@@ -47,21 +47,19 @@ public class UpgradesManager : MonoBehaviour
             {
                 upgrade.isUnlocked = true;  //If no requirements then unlocked...
 
-                foreach (var requirement in upgrade.requirements)
+                if (!SettingsModel.Instance.removeUpgradesRequirements)
                 {
-                    upgrade.isUnlocked = false; //...but if there are requirements then locked
-                    RequirementsManager.Instance.ConnectRequirementToValueEvent(requirement);
-                    requirement.onStateChanged += upgrade.CheckIfUnlocked;
+                    foreach (var requirement in upgrade.requirements)
+                    {
+                        upgrade.isUnlocked = false; //...but if there are requirements then locked
+                        RequirementsManager.Instance.ConnectRequirementToValueEvent(requirement);
+                        requirement.onStateChanged += upgrade.CheckIfUnlocked;
 
-                    upgrade.leftRequirements++;
-                }
+                        upgrade.leftRequirements++;
+                    }
+                }           
 
                 upgrade.onUnlock += OnUpgradeUnlocked;
-
-                if (upgrade.isUnlocked) //If unlocked then refresh locked UI (for example BallBars)
-                {
-                    //upgrade.onUnlock?.Invoke(upgrade);
-                }
             }
 
         }

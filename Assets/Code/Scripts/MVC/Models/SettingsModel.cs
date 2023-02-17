@@ -27,6 +27,7 @@ public class SettingsModel : MonoBehaviour
     public bool spawnBlocks = true;
 
     [Header("FALSE before build/commit")]
+    public bool removeUpgradesRequirements;
     public bool showDebugWindow;
     [Space(5)]
     public bool changeTimeScale;

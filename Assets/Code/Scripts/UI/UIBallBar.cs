@@ -12,13 +12,11 @@ public class UIBallBar : MonoBehaviour
 
     public void Lock()
     {
-        Debug.Log("Huh");
         lockedUpgradeHider.SetActive(true);
     }
 
     public void Unlock(Upgrade _)
     {
-        Debug.Log("UnHuh");
         lockedUpgradeHider.SetActive(false);
     }
 

@@ -211,6 +211,7 @@ public class GameView : BaseView
         upgradeBar.UpgradeButton.SetText(upgrade.title);
         upgradeBar.UpgradeButton.upgradeName = upgrade.name;
 
+        upgrade.onMaxedUpgrade += upgradeBar.OnMaxed;
         if (upgrade.isUnlocked)
         {
             upgradeBar.Unlock(upgrade);

@@ -24,6 +24,15 @@ public class UIUpgradeBar : MonoBehaviour
         lockedUpgradeHider.SetActive(false);
     }
 
+    public void OnMaxed(Upgrade _)
+    {
+        upgradeButton.SetHardDeactivate(true);
+        upgradeButton.Deactivate();
+
+        //TODO-@FILIP: It should disappear?
+        //gameObject.SetActive(false);
+    }
+
     public void SetDescription(string description)
     {
         descriptionText.text = description;
