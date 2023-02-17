@@ -6,12 +6,23 @@ using UnityEngine.UI;
 
 public class UIUpgradeBar : MonoBehaviour
 {
+    [SerializeField] private GameObject lockedUpgradeHider;
     [SerializeField] private Image upgradeIcon;
     [SerializeField] private Image currencyIcon;
     [SerializeField] private TMP_Text levelText;
     [SerializeField] private TMP_Text descriptionText;
     [SerializeField] private UIButtonUpgradeController upgradeButton;
     public UIButtonUpgradeController UpgradeButton => upgradeButton;
+
+    public void Lock()
+    {
+        lockedUpgradeHider.SetActive(true);
+    }
+
+    public void Unlock(Upgrade _)
+    {
+        lockedUpgradeHider.SetActive(false);
+    }
 
     public void SetDescription(string description)
     {

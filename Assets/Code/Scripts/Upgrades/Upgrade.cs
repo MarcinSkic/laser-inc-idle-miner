@@ -128,7 +128,6 @@ public class Upgrade
 
         if (!isUnlocked)
         {
-            Debug.LogWarning($"\"{title}\" upgrade is locked, but UI allowed to TryUpgrade!");
             return;
         }
 

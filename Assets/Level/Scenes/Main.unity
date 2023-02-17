@@ -13219,7 +13219,7 @@ MonoBehaviour:
   earnedPowerUpTime: 0
   premiumCurrency: 0
   earnedPremiumCurrency: 0
-  prestigeCurrency: 0
+  prestigeCurrency: 100
   earnedPrestigeCurrency: 0
   prestigeCurrencyForNextPrestige: 1000
   startMoney: 1

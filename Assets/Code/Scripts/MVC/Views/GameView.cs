@@ -210,6 +210,14 @@ public class GameView : BaseView
         upgradeBar.UpgradeButton.SetText(upgrade.title);
         upgradeBar.UpgradeButton.upgradeName = upgrade.name;
 
+        if (upgrade.isUnlocked)
+        {
+            upgradeBar.Unlock(upgrade);
+        } else
+        {
+            upgradeBar.Lock();
+            upgrade.onUnlock += upgradeBar.Unlock;
+        }
 
         return upgradeBar;
     }
