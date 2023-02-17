@@ -13,7 +13,7 @@ public static class NumberFormatter
     private static string FormatToEngineering(double num)
     {
         // z wymuszeniem konkretnie 3 cyfr, nie mniej
-        if (num >= 1 && num < 1e3)
+        if (num == 0 || (Math.Abs(num) >= 1 && Math.Abs(num) <= 1e3))
         {
             return string.Format("{0:f0}",num);
         }
