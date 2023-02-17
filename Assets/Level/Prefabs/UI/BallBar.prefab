@@ -1662,6 +1662,7 @@ MonoBehaviour:
   - {fileID: 3959891242100361369}
   - {fileID: 5828274119111790028}
   - {fileID: 3171041813695493666}
+  ballType: 0
 --- !u!1 &8921787403056690223
 GameObject:
   m_ObjectHideFlags: 0
@@ -1772,8 +1773,8 @@ RectTransform:
   m_Father: {fileID: 8836610884315549173}
   m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0.8, y: 0}
-  m_AnchorMax: {x: 0.8, y: 1}
+  m_AnchorMin: {x: 0.65, y: 0}
+  m_AnchorMax: {x: 0.65, y: 1}
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 0, y: -100}
   m_Pivot: {x: 0.5, y: 0.5}

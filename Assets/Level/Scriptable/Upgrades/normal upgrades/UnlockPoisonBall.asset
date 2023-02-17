@@ -10,31 +10,27 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 5400be14b10cc7e47a7f3024d24c25bb, type: 3}
-  m_Name: PoisonCount
+  m_Name: UnlockPoisonBall
   m_EditorClassIdentifier: 
   upgrade:
-    type: 1
-    name: SniperCount
+    type: 2
+    name: UnlockPoisonBall
     identifier: 
-    isUnlocked: 1
+    isUnlocked: 0
     leftRequirements: 0
-    requirements:
-    - dependsOn: 16
-      comparison: 2
-      requiredValue: 1
-      upgradeScriptable: {fileID: 11400000, guid: 6bf44ee033c3f534598b981ea7fe19f3, type: 2}
-    whereToGenerate: 0
+    requirements: []
+    whereToGenerate: 1
     order: 0
-    title: 
-    description: 
-    maxLevel: -1
+    title: Nanobots
+    description: Unlock Poison Ball
+    maxLevel: 1
     currency: 0
-    cost: 5000000
+    cost: 10000
     costIncremental: 0
-    costMultiplier: 5
+    costMultiplier: 1
     onUpgradeButtonsShowUpgradeInternalValue: 0
     upgradeValue: 0
-    upgradedObjects: 16
+    upgradedObjects: 0
     upgradedValues: 0
     changeValue: 0
     formula: 0

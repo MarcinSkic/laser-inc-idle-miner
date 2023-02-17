@@ -10465,7 +10465,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8df5f7b5fed88884bbe63da0e99d0e50, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  saveAndLoadFile: 1
+  saveAndLoadFile: 0
   doOfflineEarning: 1
   spawnBlocks: 1
   showDebugWindow: 0
@@ -13202,6 +13202,7 @@ MonoBehaviour:
   - {fileID: 11400000, guid: 00c8227c191119a4db76d349076039f3, type: 2}
   - {fileID: 11400000, guid: 9b3495f7bcdbfd646a1d21b4eaac3708, type: 2}
   - {fileID: 11400000, guid: e8e83b5fecb2d9f449acff5c8eeaf0b6, type: 2}
+  - {fileID: 11400000, guid: 6bf44ee033c3f534598b981ea7fe19f3, type: 2}
 --- !u!114 &1947716358
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -13223,7 +13224,7 @@ MonoBehaviour:
   earnedPrestigeCurrency: 0
   prestigeCurrencyForNextPrestige: 1000
   startMoney: 67.63
-  money: 214.52
+  money: 2358723857
   earnedMoney: 0
   offlineMoney: 0
   offlineEarnedMoney: 0
@@ -14175,6 +14176,7 @@ MonoBehaviour:
   gameModel: {fileID: 1947716359}
   blocksModel: {fileID: 1947716360}
   resourcesManager: {fileID: 567613852}
+  upgradesModel: {fileID: 1947716357}
 --- !u!4 &2009229919
 Transform:
   m_ObjectHideFlags: 0

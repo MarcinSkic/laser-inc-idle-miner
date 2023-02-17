@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Events;
+using MyBox;
 
 public class RequirementsManager : MonoBehaviour
 {
@@ -23,6 +24,7 @@ public class RequirementsManager : MonoBehaviour
     [SerializeField] private GameModel gameModel;
     [SerializeField] private BlocksModel blocksModel;
     [SerializeField] private ResourcesManager resourcesManager;
+    [SerializeField] private UpgradesModel upgradesModel;
 
     public void ConnectRequirementToValueEvent(Requirement requirement)
     {
@@ -75,6 +77,9 @@ public class RequirementsManager : MonoBehaviour
                 break;
             case DependsOn.EarnedPowerUpTime:
                 resourcesManager.onPowerUpTimeEarned += requirement.CheckIfFulfilled;
+                break;
+            case DependsOn.UpgradeLevel:
+                upgradesModel.upgrades[requirement.upgradeScriptable.Upgrade.GenerateName()].doUpgrade += requirement.CheckUpgradeLevel;
                 break;
         }
     }
@@ -131,6 +136,9 @@ public class RequirementsManager : MonoBehaviour
             case DependsOn.EarnedPowerUpTime:
                 resourcesManager.onPowerUpTimeEarned -= requirement.CheckIfFulfilled;
                 break;
+            case DependsOn.UpgradeLevel:
+                upgradesModel.upgrades[requirement.upgradeScriptable.Upgrade.GenerateName()].doUpgrade -= requirement.CheckUpgradeLevel;
+                break;
         }
     }
 }
@@ -153,6 +161,7 @@ public enum DependsOn
     EarnedPremiumCurrency,
     PowerUpTimeLeft,
     EarnedPowerUpTime,
+    UpgradeLevel
 }
 public enum Comparison
 {
@@ -169,6 +178,9 @@ public class Requirement
     public DependsOn dependsOn;
     public Comparison comparison;
     public double requiredValue;
+    [ConditionalField(nameof(dependsOn), false, DependsOn.UpgradeLevel)]
+    public UpgradeScriptable upgradeScriptable;
+
     private bool isFulfilled = false;
     private bool IsFulfilled
     {
@@ -214,5 +226,10 @@ public class Requirement
         }
 
         IsFulfilled = true;
+    }
+
+    public void CheckUpgradeLevel(Upgrade upgrade)
+    {
+        CheckIfFulfilled(upgrade.currentLevel);
     }
 }
