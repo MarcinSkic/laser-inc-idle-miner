@@ -21,7 +21,7 @@ public class UIButtonUpgradeController : UIButtonController
     public void SetUpgradeCost(Upgrade upgrade)
     {
         cost = upgrade.cost;
-        costText.text = string.Format("{0:f0}$", upgrade.cost);
+        costText.text = NumberFormatter.Format(upgrade.cost);
 
         if (upgrade.currentLevel == upgrade.maxLevel)
         {

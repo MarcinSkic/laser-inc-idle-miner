@@ -202,12 +202,12 @@ public class UpgradesManager : MonoBehaviour
         }
         if (upgrade.onUpgradeButtonsShowUpgradeInternalValue)
         {
-            upgrade.onValueUpdate?.Invoke(string.Format("{0:f2}", upgrade.upgradeValue));
+            upgrade.onValueUpdate?.Invoke(NumberFormatter.Format(upgrade.upgradeValue));
             //upgrade.onValueUpdate.Invoke(string.Format("{0:#.0e0}", upgrade.upgradeValue));
         } 
         else
         {
-            upgrade.onValueUpdate?.Invoke(string.Format("{0:f2}", value.value));
+            upgrade.onValueUpdate?.Invoke(NumberFormatter.Format(value.value));
         }
     }
 

@@ -403,7 +403,7 @@ public class GameController : BaseController<GameView>
     }
 
     [ContextMenu("Prestige")]
-    private void ExecutePrestige()
+    public void ExecutePrestige()
     {
         PersistentData persistentData = new();
 
