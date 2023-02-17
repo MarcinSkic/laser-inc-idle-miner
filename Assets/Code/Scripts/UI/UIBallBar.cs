@@ -5,8 +5,22 @@ using UnityEngine.UI;
 
 public class UIBallBar : MonoBehaviour
 {
+    [SerializeField] private GameObject lockedUpgradeHider;
     public Image ballIcon;
     public List<UIButtonUpgradeController> buttonUpgrades;
+    public UpgradeableObjects ballType;
+
+    public void Lock()
+    {
+        Debug.Log("Huh");
+        lockedUpgradeHider.SetActive(true);
+    }
+
+    public void Unlock(Upgrade _)
+    {
+        Debug.Log("UnHuh");
+        lockedUpgradeHider.SetActive(false);
+    }
 
     public void SetUpgradesName(UpgradeableObjects type)
     {

@@ -27,7 +27,7 @@ public class UpgradesManager : MonoBehaviour
         model.TransformScriptablesIntoUpgrades();
     }
 
-    public void ConnectUpgradesAndLoadValues()
+    public void SetupUpgrades()
     {
         foreach(var upgrade in model.upgrades.Values)
         {
@@ -43,13 +43,13 @@ public class UpgradesManager : MonoBehaviour
                     break;
             }
 
-            if (!upgrade.isUnlocked)
+            if (!upgrade.isUnlocked)    //Maybe set true by LoadPersistentData or scriptable in future 
             {
-                upgrade.isUnlocked = true;
+                upgrade.isUnlocked = true;  //If no requirements then unlocked...
 
                 foreach (var requirement in upgrade.requirements)
                 {
-                    upgrade.isUnlocked = false;
+                    upgrade.isUnlocked = false; //...but if there are requirements then locked
                     RequirementsManager.Instance.ConnectRequirementToValueEvent(requirement);
                     requirement.onStateChanged += upgrade.CheckIfUnlocked;
 
@@ -57,8 +57,29 @@ public class UpgradesManager : MonoBehaviour
                 }
 
                 upgrade.onUnlock += OnUpgradeUnlocked;
+
+                if (upgrade.isUnlocked) //If unlocked then refresh locked UI (for example BallBars)
+                {
+                    //upgrade.onUnlock?.Invoke(upgrade);
+                }
             }
 
+        }
+    }
+
+    public void SetInitialUpgradesValues()
+    {
+        foreach (var upgrade in model.upgrades.Values)
+        {
+            switch (upgrade.type)
+            {
+                case UpgradeType.ValuesUpgrade:
+                    SetFirstUpgradeButtonValue(upgrade);    //UI setup
+                    break;
+                case UpgradeType.SpawnUpgrade:
+                    upgrade.onValueUpdate?.Invoke("0");  //UI setup
+                    break;
+            }
         }
     }
 
@@ -237,7 +258,7 @@ public class UpgradesManager : MonoBehaviour
 
     public void SavePersistentData(PersistentData data)
     {
-        data.upgrades = model.upgrades.Values.Select(upgrade => new PersistentUpgrade(upgrade.name, upgrade.currentLevel)).ToArray();
+        data.upgrades = model.upgrades.Values.Select(upgrade => new PersistentUpgrade(upgrade.name, upgrade.currentLevel, upgrade.isUnlocked)).ToArray();
     }
 
     public void LoadPersistentData(PersistentData data)
@@ -249,6 +270,7 @@ public class UpgradesManager : MonoBehaviour
                 if (model.upgrades.ContainsKey(persistentUpgrade.name))
                 {
                     model.upgrades[persistentUpgrade.name].currentLevel = persistentUpgrade.currentLevel;
+                    model.upgrades[persistentUpgrade.name].isUnlocked = persistentUpgrade.isUnlocked;
                 } 
                 else
                 {

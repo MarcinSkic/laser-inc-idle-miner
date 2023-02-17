@@ -20,6 +20,7 @@ public class UpgradesModel : MonoBehaviour
         {
             var upgrade = scriptable.Upgrade;
             upgrade.GenerateName();
+            upgrade.isUnlocked = false;
             upgrades[upgrade.name] = upgrade;
         }
     }

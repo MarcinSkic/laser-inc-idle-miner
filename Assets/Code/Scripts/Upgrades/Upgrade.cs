@@ -162,12 +162,13 @@ public class PersistentUpgrade
 {
     public string name;
     public int currentLevel;
-    //TODO-CURRENT: isUnlocked
+    public bool isUnlocked;
 
-    public PersistentUpgrade(string name, int currentLevel)
+    public PersistentUpgrade(string name, int currentLevel, bool isUnlocked)
     {
         this.name = name;
         this.currentLevel = currentLevel;
+        this.isUnlocked = isUnlocked;
     }
 
     public override string ToString()

@@ -16,11 +16,18 @@ MonoBehaviour:
     type: 1
     name: SniperCount
     identifier: 
+    isUnlocked: 1
+    leftRequirements: 0
+    requirements:
+    - dependsOn: 4
+      comparison: 0
+      requiredValue: 10
     whereToGenerate: 0
     order: 0
     title: 
     description: 
     maxLevel: -1
+    currency: 0
     cost: 5000000
     costIncremental: 0
     costMultiplier: 5

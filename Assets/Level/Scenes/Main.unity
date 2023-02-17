@@ -10465,7 +10465,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8df5f7b5fed88884bbe63da0e99d0e50, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  saveAndLoadFile: 0
+  saveAndLoadFile: 1
   doOfflineEarning: 1
   spawnBlocks: 1
   showDebugWindow: 0
@@ -13222,8 +13222,8 @@ MonoBehaviour:
   prestigeCurrency: 100
   earnedPrestigeCurrency: 0
   prestigeCurrencyForNextPrestige: 1000
-  startMoney: 1
-  money: 0
+  startMoney: 67.63
+  money: 214.52
   earnedMoney: 0
   offlineMoney: 0
   offlineEarnedMoney: 0
