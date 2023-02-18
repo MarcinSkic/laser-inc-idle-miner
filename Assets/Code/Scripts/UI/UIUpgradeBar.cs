@@ -12,6 +12,8 @@ public class UIUpgradeBar : MonoBehaviour
     [SerializeField] private TMP_Text levelText;
     [SerializeField] private TMP_Text descriptionText;
     [SerializeField] private UIButtonUpgradeController upgradeButton;
+    [SerializeField] private TMP_Text toUnlockText;
+
     public UIButtonUpgradeController UpgradeButton => upgradeButton;
 
     public void Lock()
@@ -53,5 +55,10 @@ public class UIUpgradeBar : MonoBehaviour
         {
             levelText.text = string.Format(upgrade.maxLevel == -1 ? "Lv {0}" : "Lv {0}/{1}", upgrade.currentLevel,upgrade.maxLevel);
         }
+    }
+
+    public void SetToUnlockDescription(string description)
+    {
+        toUnlockText.text = description;
     }
 }

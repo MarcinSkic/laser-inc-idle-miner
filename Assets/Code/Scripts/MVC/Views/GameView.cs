@@ -205,7 +205,8 @@ public class GameView : BaseView
                 upgradeBar.SetCurrencySprite(premiumCurrencyIcon);
                 break;
         }
-        
+
+        upgradeBar.SetToUnlockDescription(upgrade.toUnlockDescription);
         upgradeBar.SetDescription(upgrade.description);
         upgradeBar.SetLevel(upgrade);
         upgradeBar.UpgradeButton.SetText(upgrade.title);
