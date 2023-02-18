@@ -243,7 +243,7 @@ public class UpgradesManager : MonoBehaviour
 
     private void OnUpgradeUnlocked(Upgrade upgrade)
     {
-        Debug.Log($"Unlocked \"{upgrade.title}\"");
+        Debug.Log($"Unlocked: Title \"{upgrade.title}\" | Name \"{upgrade.name}\"");
 
         foreach(var requirement in upgrade.requirements)
         {

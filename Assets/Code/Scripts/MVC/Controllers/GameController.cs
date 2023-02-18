@@ -310,22 +310,43 @@ public class GameController : BaseController<GameView>
         upgradeBar.UpgradeButton.onClick += upgrade.TryUpgrade;
 
         upgradeBar.UpgradeButton.SetUpgradeCost(upgrade);
-        switch (upgrade.currency)
+
+        if (upgrade.currentLevel == upgrade.maxLevel)
         {
-            case Currency.Money:
-                resourcesManager.onMoneyChange += upgradeBar.UpgradeButton.ChangeStateBasedOnMoney;
-                break;
-            case Currency.Prestige:
-                resourcesManager.onPrestigeCurrencyChange += upgradeBar.UpgradeButton.ChangeStateBasedOnMoney;
-                break;
-            case Currency.Premium:
-                resourcesManager.onPremiumCurrencyChange += upgradeBar.UpgradeButton.ChangeStateBasedOnMoney;
-                break;
+            upgradeBar.OnMaxed(upgrade);
+        }
+        else
+        {
+            switch (upgrade.currency)
+            {
+                case Currency.Money:
+                    resourcesManager.onMoneyChange += upgradeBar.UpgradeButton.ChangeStateBasedOnMoney;
+                    break;
+                case Currency.Prestige:
+                    resourcesManager.onPrestigeCurrencyChange += upgradeBar.UpgradeButton.ChangeStateBasedOnMoney;
+                    break;
+                case Currency.Premium:
+                    resourcesManager.onPremiumCurrencyChange += upgradeBar.UpgradeButton.ChangeStateBasedOnMoney;
+                    break;
+            }
+
+            upgrade.doUpgrade += upgradeBar.SetLevel;
+            upgrade.doUpgrade += upgradeBar.UpgradeButton.SetUpgradeCost;
+            upgrade.onMaxedUpgrade += upgradeBar.OnMaxed;
         }
 
-        upgrade.doUpgrade += upgradeBar.UpgradeButton.SetUpgradeCost;
-        upgrade.doUpgrade += upgradeBar.SetLevel;
+        if (upgrade.isUnlocked)
+        {
+            upgradeBar.Unlock(upgrade);
+        }
+        else
+        {
+            upgradeBar.Lock();
+            upgrade.onUnlock += upgradeBar.Unlock;
+        }
     }
+
+
 
     private void OnBlockDestroyed(double money)
     {
