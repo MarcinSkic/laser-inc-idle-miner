@@ -18,5 +18,5 @@ MonoBehaviour:
     hpMultiplier: 5
     rewardMultiplier: 15
     minDepth: 100
-    fullDepth: 250
+    fullDepth: 350
     maxChance: 0.03
