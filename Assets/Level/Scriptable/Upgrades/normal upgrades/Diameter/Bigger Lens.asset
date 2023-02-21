@@ -10,28 +10,29 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 5400be14b10cc7e47a7f3024d24c25bb, type: 3}
-  m_Name: UnlockPoisonBall
+  m_Name: Bigger Lens
   m_EditorClassIdentifier: 
   upgrade:
-    type: 2
-    name: UnlockPoisonBall
-    identifier: 
+    type: 0
+    name: 
+    identifier: largerLens
     isUnlocked: 0
     leftRequirements: 0
     requirements: []
     whereToGenerate: 1
     order: 0
-    title: Nanobots
-    description: Unlock Poison Ball
-    maxLevel: 1
+    title: Larger lens
+    description: +20% damage
+    toUnlockDescription: 
+    maxLevel: -1
     currency: 0
-    cost: 10000
+    cost: 100
     costIncremental: 0
-    costMultiplier: 1
+    costMultiplier: 1.5
     onUpgradeButtonsShowUpgradeInternalValue: 0
     upgradeValue: 0
-    upgradedObjects: 0
-    upgradedValues: 0
-    changeValue: 0
-    formula: 0
+    upgradedObjects: 63
+    upgradedValues: 2
+    changeValue: 1.2
+    formula: 1
     currentLevel: 0

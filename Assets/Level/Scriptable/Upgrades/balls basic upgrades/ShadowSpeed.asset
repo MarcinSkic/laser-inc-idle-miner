@@ -16,14 +16,19 @@ MonoBehaviour:
     type: 0
     name: SniperSpeed
     identifier: 
+    isUnlocked: 0
+    leftRequirements: 0
+    requirements: []
     whereToGenerate: 0
     order: 0
     title: 
     description: 
+    toUnlockDescription: 
     maxLevel: -1
+    currency: 0
     cost: 250000000
     costIncremental: 0
-    costMultiplier: 2
+    costMultiplier: 3.16227766016838
     onUpgradeButtonsShowUpgradeInternalValue: 0
     upgradeValue: 0
     upgradedObjects: 32

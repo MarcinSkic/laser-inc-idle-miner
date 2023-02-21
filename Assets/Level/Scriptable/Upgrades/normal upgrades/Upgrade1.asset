@@ -16,12 +16,17 @@ MonoBehaviour:
     type: 0
     name: 
     identifier: Better lens
+    isUnlocked: 0
+    leftRequirements: 0
+    requirements: []
     whereToGenerate: 1
     order: 0
-    title: Better lens
-    description: damage of all lasers +50%
+    title: Lens QA
+    description: +50% damage
+    toUnlockDescription: 
     maxLevel: 1
-    cost: 100
+    currency: 0
+    cost: 300
     costIncremental: 0
     costMultiplier: 1
     onUpgradeButtonsShowUpgradeInternalValue: 0

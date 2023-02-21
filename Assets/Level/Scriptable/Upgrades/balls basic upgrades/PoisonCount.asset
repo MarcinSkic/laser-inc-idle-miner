@@ -19,16 +19,15 @@ MonoBehaviour:
     isUnlocked: 1
     leftRequirements: 0
     requirements:
-    - dependsOn: 16
-      comparison: 2
-      requiredValue: 1
+    - dependsOn: 0
+      comparison: 1
+      requiredValue: 2500
       upgradeScriptable: {fileID: 11400000, guid: 6bf44ee033c3f534598b981ea7fe19f3, type: 2}
     whereToGenerate: 0
     order: 0
     title: 
     description: 
-    toUnlockDescription: test test test test test test test test test test test test
-      test test
+    toUnlockDescription: reach a depth of 2500
     maxLevel: -1
     currency: 0
     cost: 5000000

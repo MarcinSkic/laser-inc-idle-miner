@@ -16,11 +16,20 @@ MonoBehaviour:
     type: 1
     name: BombCount
     identifier: 
+    isUnlocked: 0
+    leftRequirements: 0
+    requirements:
+    - dependsOn: 0
+      comparison: 1
+      requiredValue: 300
+      upgradeScriptable: {fileID: 0}
     whereToGenerate: 0
     order: 0
     title: 
     description: 
+    toUnlockDescription: reach a depth of 300
     maxLevel: -1
+    currency: 0
     cost: 5000
     costIncremental: 0
     costMultiplier: 5

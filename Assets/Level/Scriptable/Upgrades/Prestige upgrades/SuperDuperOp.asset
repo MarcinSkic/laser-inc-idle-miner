@@ -15,26 +15,24 @@ MonoBehaviour:
   upgrade:
     type: 0
     name: 
-    identifier: TestPrestige
+    identifier: enhanced lens
     isUnlocked: 0
     leftRequirements: 0
-    requirements:
-    - dependsOn: 0
-      comparison: 1
-      requiredValue: 100
+    requirements: []
     whereToGenerate: 3
     order: 0
-    title: Upgrade za prestige
-    description: Testowy upgrade za prestige
-    maxLevel: 1
+    title: enhanced lens
+    description: damage * 2.5
+    toUnlockDescription: 
+    maxLevel: -1
     currency: 1
-    cost: 50
+    cost: 10
     costIncremental: 0
-    costMultiplier: 1
+    costMultiplier: 10
     onUpgradeButtonsShowUpgradeInternalValue: 0
     upgradeValue: 0
     upgradedObjects: 63
     upgradedValues: 2
-    changeValue: 10
+    changeValue: 3
     formula: 1
     currentLevel: 0
