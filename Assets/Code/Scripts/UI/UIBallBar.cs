@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using TMPro;
 
 public class UIBallBar : MonoBehaviour
 {
@@ -9,6 +10,7 @@ public class UIBallBar : MonoBehaviour
     public Image ballIcon;
     public List<UIButtonUpgradeController> buttonUpgrades;
     public UpgradeableObjects ballType;
+    public TMP_Text toUnlockText;
 
     public void Lock()
     {

@@ -20,6 +20,7 @@ public class BasicBlock : MonoBehaviour, IPoolable<BasicBlock>
     private FloatingText floatingRepeatedText = null;
     private double repeatedTotalValue = 0;
     public BlockSpawner blockSpawner;
+    public double numberOfLeeches;
 
 
     public void Update()
@@ -65,6 +66,7 @@ public class BasicBlock : MonoBehaviour, IPoolable<BasicBlock>
     public void TakeDamage(double damage, bool repeating=false)
     {
         damage *= (1 + (CheckIfPowerUpActive() ? 1 : 0));
+        damage *= (1.0 + numberOfLeeches);
         
         hp -= damage;
 
@@ -90,6 +92,8 @@ public class BasicBlock : MonoBehaviour, IPoolable<BasicBlock>
     public UnityAction<double> onBlockDestroyed;  //TODO-FUTURE: Maybe change it to transfer data packet if it will be used for upgrades
     private void RemoveBlock()
     {
+        // reset values
+        numberOfLeeches = 0;
         poisonPerSecond = 0;
         repeatedTotalValue = 0;
 

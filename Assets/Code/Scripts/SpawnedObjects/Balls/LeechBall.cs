@@ -45,6 +45,7 @@ public class LeechBall : BaseBall<BallData>, IPoolable<LeechBall>, IUpgradeable<
         {
             // start leeching
             leechedBlock = block;
+            leechedBlock.numberOfLeeches += 1;
             leechedBlock.onBlockDestroyed += StopLeeching;
 
             // turn off normal movement, switch to following the block
