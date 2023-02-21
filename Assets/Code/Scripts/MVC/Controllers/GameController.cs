@@ -280,6 +280,7 @@ public class GameController : BaseController<GameView>
                         {
                             ballBar.Lock();
                             upgrade.onUnlock += ballBar.Unlock; //Must be connected always because default state is Locked
+                            ballBar.toUnlockText.text = upgrade.toUnlockDescription;
                         } else
                         {
                             ballBar.Unlock(upgrade);

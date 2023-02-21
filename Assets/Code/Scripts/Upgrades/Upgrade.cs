@@ -34,6 +34,7 @@ public class Upgrade
     public string title;
     [ConditionalField(nameof(whereToGenerate), true, UISection.AutoOrNone)]
     public string description;
+    public string toUnlockDescription;
     //Sprite?
     #endregion
 

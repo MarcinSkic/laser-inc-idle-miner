@@ -10,34 +10,33 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 5400be14b10cc7e47a7f3024d24c25bb, type: 3}
-  m_Name: PoisonCount
+  m_Name: TestBlocked
   m_EditorClassIdentifier: 
   upgrade:
-    type: 1
-    name: SniperCount
-    identifier: 
-    isUnlocked: 1
+    type: 0
+    name: 
+    identifier: testblocked
+    isUnlocked: 0
     leftRequirements: 0
     requirements:
-    - dependsOn: 16
-      comparison: 2
-      requiredValue: 1
-      upgradeScriptable: {fileID: 11400000, guid: 6bf44ee033c3f534598b981ea7fe19f3, type: 2}
-    whereToGenerate: 0
-    order: 0
-    title: 
-    description: 
-    toUnlockDescription: test test test test test test test test test test test test
-      test test
+    - dependsOn: 0
+      comparison: 1
+      requiredValue: 66.6
+      upgradeScriptable: {fileID: 0}
+    whereToGenerate: 1
+    order: 666
+    title: 66.6m
+    description: +6.66% damage
+    toUnlockDescription: reach a depth o 66.6m
     maxLevel: -1
     currency: 0
-    cost: 5000000
+    cost: 10
     costIncremental: 0
-    costMultiplier: 5
+    costMultiplier: 31.6227766016838
     onUpgradeButtonsShowUpgradeInternalValue: 0
     upgradeValue: 0
-    upgradedObjects: 16
-    upgradedValues: 0
-    changeValue: 0
-    formula: 0
+    upgradedObjects: 63
+    upgradedValues: 2
+    changeValue: 1.066
+    formula: 1
     currentLevel: 0
