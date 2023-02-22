@@ -186,18 +186,20 @@ public class GameView : BaseView
         foreach(var button in windowButtons)
         {
             button.Init();
-            button.Select();
             button.onClick += SwitchWindow;
         }
+
+        SelectBottomWindowButtons();
     }
 
     private void SwitchWindow(UIButtonController button, string name)
     {
         if (activeWindow != null && name == activeWindow.name)
         {
+            button.Deselect();
             activeWindow.Dectivate();
             activeWindow = null;
-            SelectAllWindowButtons();
+            SelectBottomWindowButtons();
             return;
         }
 
@@ -228,11 +230,14 @@ public class GameView : BaseView
         }
     }
 
-    private void SelectAllWindowButtons()
+    private void SelectBottomWindowButtons()
     {
         foreach (var b in windowButtons)
         {
-            b.Select();
+            if (!b.name.Contains("Setting"))
+            {
+                b.Select();
+            }        
         }
     }
 
@@ -350,7 +355,7 @@ public class GameView : BaseView
 
     public void SetMoneyDisplay(double value)
     {
-        moneyDisplay.text = $"Money: {NumberFormatter.Format(value)}";
+        moneyDisplay.text = NumberFormatter.Format(value);
     }
 
     public void SetPrestigeCurrencyDisplay(double value)

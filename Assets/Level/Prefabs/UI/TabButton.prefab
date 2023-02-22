@@ -100,7 +100,7 @@ MonoBehaviour:
     m_SelectOnDown: {fileID: 0}
     m_SelectOnLeft: {fileID: 0}
     m_SelectOnRight: {fileID: 0}
-  m_Transition: 1
+  m_Transition: 0
   m_Colors:
     m_NormalColor: {r: 1, g: 1, b: 1, a: 1}
     m_HighlightedColor: {r: 0.9607843, g: 0.9607843, b: 0.9607843, a: 1}
@@ -147,6 +147,8 @@ MonoBehaviour:
   selectedObject: {fileID: 5086465057861146900}
   defaultFont: {r: 0.14509805, g: 0.14509805, b: 0.14509805, a: 1}
   selectedFont: {r: 0.5529412, g: 0.5568628, b: 0.5568628, a: 1}
+  defaultColor: {r: 0, g: 0, b: 0, a: 0}
+  selectedColor: {r: 0, g: 0, b: 0, a: 0}
   parameter: Tab
 --- !u!1 &1392567111665064467
 GameObject:

@@ -8,7 +8,7 @@ using MyBox;
 using System;
 
 [Flags]
-public enum TransitionType { SpriteSwap = 0b1, ObjectSwap = 0b10, FontColorSwap=0b100}
+public enum TransitionType { SpriteSwap = 0b1, ObjectSwap = 0b10, FontColorSwap=0b100, ImageColorSwap=0b1000}
 
 public class UIButtonController : MonoBehaviour
 {
@@ -33,6 +33,11 @@ public class UIButtonController : MonoBehaviour
     [SerializeField] protected Color defaultFont;
     [ConditionalField(nameof(transitionType), false, TransitionType.FontColorSwap)]
     [SerializeField] protected Color selectedFont;
+
+    [ConditionalField(nameof(transitionType), false, TransitionType.ImageColorSwap)]
+    [SerializeField] protected Color defaultColor;
+    [ConditionalField(nameof(transitionType), false, TransitionType.ImageColorSwap)]
+    [SerializeField] protected Color selectedColor;
 
     public virtual void Init()
     {
@@ -82,6 +87,11 @@ public class UIButtonController : MonoBehaviour
             text.color = selectedFont;
         }
 
+        if (transitionType.HasFlag(TransitionType.ImageColorSwap))
+        {
+            button.image.color = selectedColor;
+        }
+
         Debug.Log($"Selected {gameObject.name}",this);
     }
 
@@ -101,6 +111,11 @@ public class UIButtonController : MonoBehaviour
         if (transitionType.HasFlag(TransitionType.FontColorSwap))
         {
             text.color = defaultFont;
+        }
+
+        if (transitionType.HasFlag(TransitionType.ImageColorSwap))
+        {
+            button.image.color = defaultColor;
         }
 
         Debug.Log($"Deselected {gameObject.name}", this);
