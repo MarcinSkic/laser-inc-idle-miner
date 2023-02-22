@@ -16,12 +16,17 @@ MonoBehaviour:
     type: 1
     name: BasicBallCount
     identifier: 
+    isUnlocked: 0
+    leftRequirements: 0
+    requirements: []
     whereToGenerate: 0
     order: 0
     title: 
     description: 
+    toUnlockDescription: 
     maxLevel: -1
-    cost: 10
+    currency: 0
+    cost: 3
     costIncremental: 0
     costMultiplier: 5
     onUpgradeButtonsShowUpgradeInternalValue: 0

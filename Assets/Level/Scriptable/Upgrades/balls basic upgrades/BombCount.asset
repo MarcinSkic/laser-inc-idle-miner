@@ -21,13 +21,13 @@ MonoBehaviour:
     requirements:
     - dependsOn: 0
       comparison: 1
-      requiredValue: 300
+      requiredValue: 200
       upgradeScriptable: {fileID: 0}
     whereToGenerate: 0
     order: 0
     title: 
     description: 
-    toUnlockDescription: reach a depth of 300
+    toUnlockDescription: reach a depth of 200
     maxLevel: -1
     currency: 0
     cost: 5000
