@@ -27,8 +27,9 @@ public enum UpgradeableObjects {
 [Flags]
 public enum UpgradeableValues
 {
-    Speed = 0b0001,
-    Damage = 0b0010,
-    Special = 0b0100,
-    ClickDamage = 0b1000,
+    Speed = 0b00001,
+    Damage = 0b00010,
+    Special = 0b00100,
+    ClickDamage = 0b01000,
+    MoneyGainMultiplier = 0b10000,
 }

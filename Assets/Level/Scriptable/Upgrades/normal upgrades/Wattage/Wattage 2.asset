@@ -28,7 +28,7 @@ MonoBehaviour:
       requiredValue: 1
       upgradeScriptable: {fileID: 11400000, guid: 7acc5955f9ef07c4a992c1add297788d, type: 2}
     whereToGenerate: 1
-    order: 2
+    order: 75
     title: 2MW generator
     description: double power means double damage!
     toUnlockDescription: 1MW generator & depth of 750

@@ -27,7 +27,7 @@ MonoBehaviour:
     maxLevel: -1
     currency: 0
     cost: 1
-    costIncremental: 0
+    costIncremental: -3
     costMultiplier: 5
     onUpgradeButtonsShowUpgradeInternalValue: 0
     upgradeValue: 0
