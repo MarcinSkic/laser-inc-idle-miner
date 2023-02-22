@@ -45,6 +45,7 @@ public class UIWindow : MonoBehaviour
         }
 
         newTab.SetActive(true);
+        button.Select();
     }
 
     private void DisableAllTabs()
@@ -52,6 +53,11 @@ public class UIWindow : MonoBehaviour
         foreach (var tab in tabs)
         {
             tab.SetActive(false);
+        }
+
+        foreach(var button in tabButtons)
+        {
+            button.Deselect();
         }
     }
 }

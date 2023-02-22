@@ -186,6 +186,7 @@ public class GameView : BaseView
         foreach(var button in windowButtons)
         {
             button.Init();
+            button.Select();
             button.onClick += SwitchWindow;
         }
     }
@@ -196,6 +197,7 @@ public class GameView : BaseView
         {
             activeWindow.Dectivate();
             activeWindow = null;
+            SelectAllWindowButtons();
             return;
         }
 
@@ -208,17 +210,37 @@ public class GameView : BaseView
 
         if(activeWindow == null)
         {
+            DeselectAllWindowButtons();
             activeWindow = newWindow;
             activeWindow.Activate();
+            button.Select();
             return;
         }
 
         if(activeWindow != null && name != activeWindow.name)
         {
+            DeselectAllWindowButtons();
             activeWindow.Dectivate();
             activeWindow = newWindow;
             activeWindow.Activate();
+            button.Select();
             return;
+        }
+    }
+
+    private void SelectAllWindowButtons()
+    {
+        foreach (var b in windowButtons)
+        {
+            b.Select();
+        }
+    }
+
+    private void DeselectAllWindowButtons()
+    {
+        foreach (var b in windowButtons)
+        {
+            b.Deselect();
         }
     }
 
