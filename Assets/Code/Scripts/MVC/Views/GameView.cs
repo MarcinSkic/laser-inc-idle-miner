@@ -22,8 +22,11 @@ public class GameView : BaseView
 
     [Header("Tabs Switching")]
     [SerializeField] private List<GameObject> tabButtonsContainers;
-    [SerializeField] private List<UIButtonWithStringController> windowButtons;
-    [SerializeField] private List<GameObject> windows;
+    [SerializeField] private List<UIButtonWithStringController> legacyWindowButtons;
+    [SerializeField] private List<GameObject> legacyWindows;
+
+    [SerializeField] private UIWindow[] windows;
+    [SerializeField] private UIButtonWithStringController[] windowButtons;
 
     public Color bottomButton_Default;
     public Color bottomButton_Activated;
@@ -81,8 +84,9 @@ public class GameView : BaseView
     [ReadOnly]
     public List<UIBallBar> ballBars;
 
-    UnityAction<Color> onTabClosing;
-    public void InitBottomButtonsEvent()
+    #region LEGACY WINDOWS-TABS SYSTEM
+    private UnityAction<Color> onTabClosing;
+    public void InitBottomButtonsEventLegacy()
     {
         foreach(var tabButtonsContainer in tabButtonsContainers)
         {
@@ -94,7 +98,7 @@ public class GameView : BaseView
             }
         }
 
-        foreach (var windowButton in windowButtons)
+        foreach (var windowButton in legacyWindowButtons)
         {
             windowButton.Init();
             windowButton.onClick += SwitchWindowButtons;
@@ -167,6 +171,67 @@ public class GameView : BaseView
         }
     }
 
+    #endregion
+    #region NEW WINDOWS-TABS SYSTEM
+    public UIWindow activeWindow = null;
+
+    public void InitWindows()
+    {
+        foreach(var window in windows)
+        {
+            window.Setup();
+
+        }
+
+        foreach(var button in windowButtons)
+        {
+            button.Init();
+            button.onClick += SwitchWindow;
+        }
+    }
+
+    private void SwitchWindow(UIButtonController button, string name)
+    {
+        if (activeWindow != null && name == activeWindow.name)
+        {
+            activeWindow.Dectivate();
+            activeWindow = null;
+            return;
+        }
+
+        var newWindow = windows.First(w => w.name == name);
+        if(newWindow == null)
+        {
+            Debug.LogWarning($"There is no window called {name} to be activated, typo in button string parameter?", button);
+            return;
+        }
+
+        if(activeWindow == null)
+        {
+            activeWindow = newWindow;
+            activeWindow.Activate();
+            return;
+        }
+
+        if(activeWindow != null && name != activeWindow.name)
+        {
+            activeWindow.Dectivate();
+            activeWindow = newWindow;
+            activeWindow.Activate();
+            return;
+        }
+    }
+
+    public void DisableAllWindows()
+    {
+        foreach(var window in windows)
+        {
+            window.Dectivate();
+        }
+    }
+
+
+    #endregion
     public void CreateBallBar(BallData ballData)
     {
         var ballBar = Instantiate(ballBarPrefab, ballBarsParent);
