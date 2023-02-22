@@ -33,6 +33,6 @@ MonoBehaviour:
     upgradeValue: 0
     upgradedObjects: 4
     upgradedValues: 1
-    changeValue: 0.4
+    changeValue: 0.5
     formula: 0
     currentLevel: 0

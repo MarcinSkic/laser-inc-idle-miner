@@ -28,7 +28,7 @@ MonoBehaviour:
     currency: 0
     cost: 10
     costIncremental: 5
-    costMultiplier: 2.3
+    costMultiplier: 2.23606797749979
     onUpgradeButtonsShowUpgradeInternalValue: 0
     upgradeValue: 0
     upgradedObjects: 1

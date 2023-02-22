@@ -10516,7 +10516,7 @@ MonoBehaviour:
   showDebugWindow: 0
   changeTimeScale: 0
   timeScale: 0.1
-  clickDamage: 1
+  clickDamage: 10
   is60fps: 0
   displayFloatingText: 0
   ballsAttemptedCorrections: 0
@@ -13500,7 +13500,7 @@ MonoBehaviour:
     valuesList:
     - type: 1
       name: 
-      value: 2
+      value: 3
     - type: 2
       name: 
       value: 3
@@ -13513,7 +13513,7 @@ MonoBehaviour:
     valuesList:
     - type: 1
       name: 
-      value: 1
+      value: 3
     - type: 2
       name: 
       value: 0.5
@@ -13526,7 +13526,7 @@ MonoBehaviour:
     valuesList:
     - type: 1
       name: 
-      value: 1
+      value: 3
     - type: 2
       name: 
       value: 0.2
