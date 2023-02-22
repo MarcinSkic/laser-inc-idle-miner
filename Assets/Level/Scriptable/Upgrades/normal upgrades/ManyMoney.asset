@@ -22,17 +22,17 @@ MonoBehaviour:
     whereToGenerate: 1
     order: 0
     title: Extraction efficiency
-    description: x5 money gain
+    description: x1.2 money gain
     toUnlockDescription: 
     maxLevel: -1
     currency: 0
-    cost: 10
+    cost: 100
     costIncremental: 0
     costMultiplier: 100
     onUpgradeButtonsShowUpgradeInternalValue: 0
     upgradeValue: 0
     upgradedObjects: 256
     upgradedValues: 16
-    changeValue: 5
+    changeValue: 1.2
     formula: 1
     currentLevel: 0

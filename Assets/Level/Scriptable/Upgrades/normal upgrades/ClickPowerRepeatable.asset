@@ -22,7 +22,7 @@ MonoBehaviour:
     whereToGenerate: 1
     order: -1
     title: Click power
-    description: x3 click damage
+    description: x5 click damage
     toUnlockDescription: 
     maxLevel: -1
     currency: 0
@@ -33,6 +33,6 @@ MonoBehaviour:
     upgradeValue: 0
     upgradedObjects: 256
     upgradedValues: 8
-    changeValue: 3
+    changeValue: 5
     formula: 1
     currentLevel: 0

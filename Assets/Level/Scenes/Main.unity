@@ -13349,6 +13349,7 @@ MonoBehaviour:
   - {fileID: 11400000, guid: 080cc780074314e4aab6968b3bf12905, type: 2}
   - {fileID: 11400000, guid: 9ebb945fbb929484e9dcd49da19e38b6, type: 2}
   - {fileID: 11400000, guid: f7b680159857d894ba0550fc79dc99e6, type: 2}
+  - {fileID: 11400000, guid: b3a599856d43d184097c2dc78f47756a, type: 2}
 --- !u!114 &1947716358
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -13510,7 +13511,7 @@ MonoBehaviour:
       value: 3
     - type: 4
       name: ExplosionSize
-      value: 3
+      value: 2
   - type: 8
     nameForUI: 
     sprite: {fileID: 21300000, guid: d81c38b8911f89d439a563274f2ce019, type: 3}
