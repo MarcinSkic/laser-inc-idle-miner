@@ -10516,7 +10516,7 @@ MonoBehaviour:
   showDebugWindow: 0
   changeTimeScale: 0
   timeScale: 0.1
-  clickDamage: 10
+  clickDamage: 1
   is60fps: 0
   displayFloatingText: 0
   ballsAttemptedCorrections: 0
@@ -13346,6 +13346,7 @@ MonoBehaviour:
   - {fileID: 11400000, guid: f8345415d47c6d147880ca8eda697fee, type: 2}
   - {fileID: 11400000, guid: 2640fda8b9e9d1d4e9f2028d9851295f, type: 2}
   - {fileID: 11400000, guid: 080cc780074314e4aab6968b3bf12905, type: 2}
+  - {fileID: 11400000, guid: 9ebb945fbb929484e9dcd49da19e38b6, type: 2}
 --- !u!114 &1947716358
 MonoBehaviour:
   m_ObjectHideFlags: 0

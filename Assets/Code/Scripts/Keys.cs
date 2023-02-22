@@ -29,5 +29,6 @@ public enum UpgradeableValues
 {
     Speed = 0b0001,
     Damage = 0b0010,
-    Special = 0b0100
+    Special = 0b0100,
+    ClickDamage = 0b1000,
 }

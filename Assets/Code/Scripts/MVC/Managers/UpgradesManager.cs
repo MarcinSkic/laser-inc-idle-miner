@@ -106,6 +106,11 @@ public class UpgradesManager : MonoBehaviour
                 }
                 break;
         }
+
+        if (upgrade.upgradedValues.HasFlag(UpgradeableValues.ClickDamage))
+        {
+            SettingsModel.Instance.clickDamage *= upgrade.changeValue;
+        }
     }
 
     private void OnSpawnUpgrade(Upgrade upgrade)
