@@ -10,29 +10,29 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 5400be14b10cc7e47a7f3024d24c25bb, type: 3}
-  m_Name: SuperDuperOp
+  m_Name: ManyMoney
   m_EditorClassIdentifier: 
   upgrade:
     type: 0
     name: 
-    identifier: enhanced lens
+    identifier: ManyMoney
     isUnlocked: 0
     leftRequirements: 0
     requirements: []
-    whereToGenerate: 3
+    whereToGenerate: 1
     order: 0
-    title: enhanced lens
-    description: damage * 2.5
+    title: Extraction efficiency
+    description: x1.2 money gain
     toUnlockDescription: 
     maxLevel: -1
-    currency: 1
-    cost: 10
+    currency: 0
+    cost: 100
     costIncremental: 0
-    costMultiplier: 10
+    costMultiplier: 100
     onUpgradeButtonsShowUpgradeInternalValue: 0
     upgradeValue: 0
-    upgradedObjects: 63
-    upgradedValues: 2
-    changeValue: 3
+    upgradedObjects: 256
+    upgradedValues: 16
+    changeValue: 1.2
     formula: 1
     currentLevel: 0

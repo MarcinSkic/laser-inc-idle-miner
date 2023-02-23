@@ -10,29 +10,37 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 5400be14b10cc7e47a7f3024d24c25bb, type: 3}
-  m_Name: SuperDuperOp
+  m_Name: Wattage 4
   m_EditorClassIdentifier: 
   upgrade:
     type: 0
     name: 
-    identifier: enhanced lens
+    identifier: wattage4
     isUnlocked: 0
     leftRequirements: 0
-    requirements: []
-    whereToGenerate: 3
-    order: 0
-    title: enhanced lens
-    description: damage * 2.5
-    toUnlockDescription: 
-    maxLevel: -1
-    currency: 1
-    cost: 10
+    requirements:
+    - dependsOn: 0
+      comparison: 1
+      requiredValue: 5000
+      upgradeScriptable: {fileID: 0}
+    - dependsOn: 16
+      comparison: 1
+      requiredValue: 1
+      upgradeScriptable: {fileID: 11400000, guid: d245c9dfdd3716244a348b8ab078cb61, type: 2}
+    whereToGenerate: 1
+    order: 500
+    title: 8MW generator
+    description: double power means double damage!
+    toUnlockDescription: 4MW generator & depth of 5000
+    maxLevel: 1
+    currency: 0
+    cost: 1000000
     costIncremental: 0
-    costMultiplier: 10
+    costMultiplier: 1
     onUpgradeButtonsShowUpgradeInternalValue: 0
     upgradeValue: 0
     upgradedObjects: 63
     upgradedValues: 2
-    changeValue: 3
+    changeValue: 2
     formula: 1
     currentLevel: 0

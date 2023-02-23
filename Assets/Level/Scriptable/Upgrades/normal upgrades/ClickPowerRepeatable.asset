@@ -10,29 +10,29 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 5400be14b10cc7e47a7f3024d24c25bb, type: 3}
-  m_Name: SuperDuperOp
+  m_Name: ClickPowerRepeatable
   m_EditorClassIdentifier: 
   upgrade:
     type: 0
     name: 
-    identifier: enhanced lens
+    identifier: ClickPowerRepeatable
     isUnlocked: 0
     leftRequirements: 0
     requirements: []
-    whereToGenerate: 3
-    order: 0
-    title: enhanced lens
-    description: damage * 2.5
+    whereToGenerate: 1
+    order: -1
+    title: Click power
+    description: x5 click damage
     toUnlockDescription: 
     maxLevel: -1
-    currency: 1
-    cost: 10
+    currency: 0
+    cost: 50
     costIncremental: 0
-    costMultiplier: 10
+    costMultiplier: 100
     onUpgradeButtonsShowUpgradeInternalValue: 0
     upgradeValue: 0
-    upgradedObjects: 63
-    upgradedValues: 2
-    changeValue: 3
+    upgradedObjects: 256
+    upgradedValues: 8
+    changeValue: 5
     formula: 1
     currentLevel: 0

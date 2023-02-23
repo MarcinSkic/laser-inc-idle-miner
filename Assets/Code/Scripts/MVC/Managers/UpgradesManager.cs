@@ -22,6 +22,8 @@ public class UpgradesManager : MonoBehaviour
 
     [SerializeField] private Transform blocksParent;
 
+    [SerializeField] private ResourcesModel resourcesModel;
+
     private void Awake()
     {
         model.TransformScriptablesIntoUpgrades();
@@ -105,6 +107,15 @@ public class UpgradesManager : MonoBehaviour
                     }
                 }
                 break;
+        }
+
+        if (upgrade.upgradedValues.HasFlag(UpgradeableValues.ClickDamage))
+        {
+            SettingsModel.Instance.clickDamage *= upgrade.changeValue;
+        }
+        if (upgrade.upgradedValues.HasFlag(UpgradeableValues.MoneyGainMultiplier))
+        {
+            resourcesModel.moneyGainMultiplier *= upgrade.changeValue;
         }
     }
 

@@ -225,12 +225,18 @@ public class ResourcesManager : MonoBehaviour
         }
     }
 
-    public void IncreaseMoney(double value)
+    public void IncreaseMoney(double value, bool forBreakingBlocks = false)
     {
         if (value < 1)
         {
             value = 1;
         }
+
+        if (forBreakingBlocks)
+        {
+            value *= model.moneyGainMultiplier;
+        }
+
         Money += value;
         EarnedMoney += value;
     }

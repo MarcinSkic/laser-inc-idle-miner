@@ -48,6 +48,8 @@ public class ResourcesModel : MonoBehaviour
     [ReadOnly]
     [Tooltip("Current reward for offline time")]
     public double afkGainPerSec;
+    [Tooltip("Only affects reward for breaking blocks")]
+    public double moneyGainMultiplier;
 
     [Header("OFFLINE REWARD PARAMETERS")]
     [Tooltip("Amount of seconds to calculate offline rewards")]

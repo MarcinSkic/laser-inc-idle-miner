@@ -16,14 +16,19 @@ MonoBehaviour:
     type: 0
     name: BombDamage
     identifier: 
+    isUnlocked: 0
+    leftRequirements: 0
+    requirements: []
     whereToGenerate: 0
     order: 0
     title: 
     description: 
+    toUnlockDescription: 
     maxLevel: -1
+    currency: 0
     cost: 10000
     costIncremental: 5
-    costMultiplier: 1.4
+    costMultiplier: 2.23606797749979
     onUpgradeButtonsShowUpgradeInternalValue: 0
     upgradeValue: 0
     upgradedObjects: 4
