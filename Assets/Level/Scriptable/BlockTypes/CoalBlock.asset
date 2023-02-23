@@ -10,13 +10,13 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: cb6241cc6da16104f8ace39a9092abab, type: 3}
-  m_Name: IronBlock
+  m_Name: CoalBlock
   m_EditorClassIdentifier: 
   blockType:
-    name: iron
-    material: {fileID: 2100000, guid: 10501d9147e052047a75f5b2e16fd1b1, type: 2}
-    hpMultiplier: 3
-    rewardMultiplier: 5
-    minDepth: 30
-    fullDepth: 150
-    maxChance: 0.1
+    name: coal
+    material: {fileID: 2100000, guid: 841d417a4f68eb448b82b862a0b6676f, type: 2}
+    hpMultiplier: 1.5
+    rewardMultiplier: 2
+    minDepth: 1
+    fullDepth: 5
+    maxChance: 0.15

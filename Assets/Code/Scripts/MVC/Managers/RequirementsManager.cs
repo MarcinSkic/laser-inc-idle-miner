@@ -45,6 +45,9 @@ public class RequirementsManager : MonoBehaviour
             case DependsOn.MinedNormalBlocks:
                 StatisticsModel.Instance.onMinedNormalBlocksChange += requirement.CheckIfFulfilled;
                 break;
+            case DependsOn.MinedCoalBlocks:
+                StatisticsModel.Instance.onMinedCoalBlocksChange += requirement.CheckIfFulfilled;
+                break;
             case DependsOn.MinedCopperBlocks:
                 StatisticsModel.Instance.onMinedCopperBlocksChange += requirement.CheckIfFulfilled;
                 break;
@@ -53,6 +56,12 @@ public class RequirementsManager : MonoBehaviour
                 break;
             case DependsOn.MinedGoldBlocks:
                 StatisticsModel.Instance.onMinedGoldBlocksChange += requirement.CheckIfFulfilled;
+                break;
+            case DependsOn.MinedSapphireBlocks:
+                StatisticsModel.Instance.onMinedSapphireBlocksChange += requirement.CheckIfFulfilled;
+                break;
+            case DependsOn.MinedRubyBlocks:
+                StatisticsModel.Instance.onMinedRubyBlocksChange += requirement.CheckIfFulfilled;
                 break;
             case DependsOn.MinedDiamondBlocks:
                 StatisticsModel.Instance.onMinedDiamondBlocksChange += requirement.CheckIfFulfilled;
@@ -103,6 +112,9 @@ public class RequirementsManager : MonoBehaviour
             case DependsOn.MinedNormalBlocks:
                 StatisticsModel.Instance.onMinedNormalBlocksChange -= requirement.CheckIfFulfilled;
                 break;
+            case DependsOn.MinedCoalBlocks:
+                StatisticsModel.Instance.onMinedCoalBlocksChange -= requirement.CheckIfFulfilled;
+                break;
             case DependsOn.MinedCopperBlocks:
                 StatisticsModel.Instance.onMinedCopperBlocksChange -= requirement.CheckIfFulfilled;
                 break;
@@ -111,6 +123,12 @@ public class RequirementsManager : MonoBehaviour
                 break;
             case DependsOn.MinedGoldBlocks:
                 StatisticsModel.Instance.onMinedGoldBlocksChange -= requirement.CheckIfFulfilled;
+                break;
+            case DependsOn.MinedSapphireBlocks:
+                StatisticsModel.Instance.onMinedSapphireBlocksChange -= requirement.CheckIfFulfilled;
+                break;
+            case DependsOn.MinedRubyBlocks:
+                StatisticsModel.Instance.onMinedRubyBlocksChange -= requirement.CheckIfFulfilled;
                 break;
             case DependsOn.MinedDiamondBlocks:
                 StatisticsModel.Instance.onMinedDiamondBlocksChange -= requirement.CheckIfFulfilled;
@@ -161,7 +179,10 @@ public enum DependsOn
     EarnedPremiumCurrency,
     PowerUpTimeLeft,
     EarnedPowerUpTime,
-    UpgradeLevel
+    UpgradeLevel,
+    MinedCoalBlocks,
+    MinedRubyBlocks,
+    MinedSapphireBlocks,
 }
 public enum Comparison
 {

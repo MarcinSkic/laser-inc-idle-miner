@@ -102,6 +102,9 @@ public class BasicBlock : MonoBehaviour, IPoolable<BasicBlock>
             case "normal":
                 StatisticsModel.Instance.MinedNormalBlocks = StatisticsModel.Instance.MinedNormalBlocks + 1;
                 break;
+            case "coal":
+                StatisticsModel.Instance.MinedCoalBlocks = StatisticsModel.Instance.MinedCoalBlocks + 1;
+                break;
             case "copper":
                 StatisticsModel.Instance.MinedCopperBlocks = StatisticsModel.Instance.MinedCopperBlocks + 1;
                 break;
@@ -110,6 +113,12 @@ public class BasicBlock : MonoBehaviour, IPoolable<BasicBlock>
                 break;
             case "gold":
                 StatisticsModel.Instance.MinedGoldBlocks = StatisticsModel.Instance.MinedGoldBlocks + 1;
+                break;
+            case "sapphire":
+                StatisticsModel.Instance.MinedSapphireBlocks = StatisticsModel.Instance.MinedSapphireBlocks + 1;
+                break;
+            case "ruby":
+                StatisticsModel.Instance.MinedRubyBlocks = StatisticsModel.Instance.MinedRubyBlocks + 1;
                 break;
             case "diamond":
                 StatisticsModel.Instance.MinedDiamondBlocks = StatisticsModel.Instance.MinedDiamondBlocks + 1;
