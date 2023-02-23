@@ -66,6 +66,7 @@ public class GameView : BaseView
     public Toggle is60fps;
     public Toggle displayFloatingDamage;
     public UIButtonController cheatMoney;
+    public UIButtonController cheatDepth;
     public UIButtonController forcePrestige;
     public UIButtonController eraseSaveFile;
 
@@ -113,6 +114,7 @@ public class GameView : BaseView
         offlineConfirmButton.Init();
         offlineGetBonusButton.Init();
         cheatMoney.Init();
+        cheatDepth.Init();
         forcePrestige.Init();
         eraseSaveFile.Init();
     }

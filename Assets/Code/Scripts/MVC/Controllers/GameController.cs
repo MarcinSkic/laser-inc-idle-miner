@@ -196,7 +196,10 @@ public class GameController : BaseController<GameView>
         };
 
         view.cheatMoney.onClick += resourcesManager.CheatMoney;
-        view.cheatMoney.SetText($"Cheat {NumberFormatter.Format(resourcesModel.cheatMoney)}");
+        view.cheatMoney.SetText($"Cheat {NumberFormatter.Format(resourcesModel.cheatMoney)} money");
+
+        view.cheatDepth.onClick += delegate { model.Depth += model.cheatDepth; };
+        view.cheatDepth.SetText($"Dive {NumberFormatter.Format(model.cheatDepth)}m");
 
         view.forcePrestige.onClick += ExecutePrestige;
 
