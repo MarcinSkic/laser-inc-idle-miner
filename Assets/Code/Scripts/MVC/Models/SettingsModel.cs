@@ -22,7 +22,7 @@ public class SettingsModel : MonoBehaviour
     #endregion
 
     [Header("TRUE before build/commit")]
-    public bool saveAndLoadFile = true;    //TODO: Change to SaveAndLoadFile to block undesired changes to saved file. Also add context menu function to erase existing savefile
+    public bool saveAndLoadFile = true;
     public bool doOfflineEarning = true;
     public bool spawnBlocks = true;
 
@@ -100,7 +100,7 @@ public class SettingsModel : MonoBehaviour
     [ContextMenu("Restore Normal Settings")]
     private void RestoreNormalSettings()
     {
-        saveAndLoadFile = true;    //TODO: Change to SaveAndLoadFile to block undesired changes to saved file. Also add context menu function to erase existing savefile
+        saveAndLoadFile = true;
         doOfflineEarning = true;
         spawnBlocks = true;
         showDebugWindow = false;

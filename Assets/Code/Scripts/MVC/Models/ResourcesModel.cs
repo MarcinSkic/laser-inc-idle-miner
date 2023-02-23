@@ -36,6 +36,7 @@ public class ResourcesModel : MonoBehaviour
     public double startMoney = 1;
     [Tooltip("Current money")]
     public double money = 0;
+    public double cheatMoney = 1e99;
     [ReadOnly]
     [Tooltip("Total of money earned")]
     public double earnedMoney = 0;

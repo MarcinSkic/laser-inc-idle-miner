@@ -8,6 +8,7 @@ public class GameModel : MonoBehaviour
 {
     #region Depth
     [SerializeField] private double depth;
+    public double cheatDepth = 100;
 
     public UnityAction<double> onDepthChange;
     public double Depth
