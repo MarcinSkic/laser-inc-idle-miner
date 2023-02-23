@@ -22,8 +22,11 @@ public class GameView : BaseView
 
     [Header("Tabs Switching")]
     [SerializeField] private List<GameObject> tabButtonsContainers;
-    [SerializeField] private List<UIButtonWithStringController> windowButtons;
-    [SerializeField] private List<GameObject> windows;
+    [SerializeField] private List<UIButtonWithStringController> legacyWindowButtons;
+    [SerializeField] private List<GameObject> legacyWindows;
+
+    [SerializeField] private UIWindow[] windows;
+    [SerializeField] private UIButtonWithStringController[] windowButtons;
 
     public Color bottomButton_Default;
     public Color bottomButton_Activated;
@@ -81,8 +84,9 @@ public class GameView : BaseView
     [ReadOnly]
     public List<UIBallBar> ballBars;
 
-    UnityAction<Color> onTabClosing;
-    public void InitBottomButtonsEvent()
+    #region LEGACY WINDOWS-TABS SYSTEM
+    private UnityAction<Color> onTabClosing;
+    public void InitBottomButtonsEventLegacy()
     {
         foreach(var tabButtonsContainer in tabButtonsContainers)
         {
@@ -94,7 +98,7 @@ public class GameView : BaseView
             }
         }
 
-        foreach (var windowButton in windowButtons)
+        foreach (var windowButton in legacyWindowButtons)
         {
             windowButton.Init();
             windowButton.onClick += SwitchWindowButtons;
@@ -167,6 +171,94 @@ public class GameView : BaseView
         }
     }
 
+    #endregion
+    #region NEW WINDOWS-TABS SYSTEM
+    public UIWindow activeWindow = null;
+
+    public void InitWindows()
+    {
+        foreach(var window in windows)
+        {
+            window.Setup();
+
+        }
+
+        foreach(var button in windowButtons)
+        {
+            button.Init();
+            button.onClick += SwitchWindow;
+        }
+
+        SelectBottomWindowButtons();
+    }
+
+    private void SwitchWindow(UIButtonController button, string name)
+    {
+        if (activeWindow != null && name == activeWindow.name)
+        {
+            button.Deselect();
+            activeWindow.Dectivate();
+            activeWindow = null;
+            SelectBottomWindowButtons();
+            return;
+        }
+
+        var newWindow = windows.First(w => w.name == name);
+        if(newWindow == null)
+        {
+            Debug.LogWarning($"There is no window called {name} to be activated, typo in button string parameter?", button);
+            return;
+        }
+
+        if(activeWindow == null)
+        {
+            DeselectAllWindowButtons();
+            activeWindow = newWindow;
+            activeWindow.Activate();
+            button.Select();
+            return;
+        }
+
+        if(activeWindow != null && name != activeWindow.name)
+        {
+            DeselectAllWindowButtons();
+            activeWindow.Dectivate();
+            activeWindow = newWindow;
+            activeWindow.Activate();
+            button.Select();
+            return;
+        }
+    }
+
+    private void SelectBottomWindowButtons()
+    {
+        foreach (var b in windowButtons)
+        {
+            if (!b.name.Contains("Setting"))
+            {
+                b.Select();
+            }        
+        }
+    }
+
+    private void DeselectAllWindowButtons()
+    {
+        foreach (var b in windowButtons)
+        {
+            b.Deselect();
+        }
+    }
+
+    public void DisableAllWindows()
+    {
+        foreach(var window in windows)
+        {
+            window.Dectivate();
+        }
+    }
+
+
+    #endregion
     public void CreateBallBar(BallData ballData)
     {
         var ballBar = Instantiate(ballBarPrefab, ballBarsParent);
@@ -263,7 +355,7 @@ public class GameView : BaseView
 
     public void SetMoneyDisplay(double value)
     {
-        moneyDisplay.text = $"Money: {NumberFormatter.Format(value)}";
+        moneyDisplay.text = NumberFormatter.Format(value);
     }
 
     public void SetPrestigeCurrencyDisplay(double value)

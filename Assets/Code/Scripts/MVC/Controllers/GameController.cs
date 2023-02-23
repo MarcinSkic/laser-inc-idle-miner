@@ -41,11 +41,13 @@ public class GameController : BaseController<GameView>
         #endregion
 
         #region UI Initialization
-        view.InitBottomButtonsEvent();
+        //view.InitBottomButtonsEventLegacy();
+        view.InitWindows();
         #endregion
 
         #region UI Default Execution
-        view.SwitchWindowButtons(null, "UpgradeWindow");
+        //view.SwitchWindowButtons(null, "UpgradeWindow");
+        view.DisableAllWindows();
         #endregion
 
         #region Event connections where loading data triggers event

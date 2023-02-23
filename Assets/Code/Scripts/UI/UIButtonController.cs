@@ -4,6 +4,11 @@ using TMPro;
 using UnityEngine;
 using UnityEngine.Events;
 using UnityEngine.UI;
+using MyBox;
+using System;
+
+[Flags]
+public enum TransitionType { SpriteSwap = 0b1, ObjectSwap = 0b10, FontColorSwap=0b100, ImageColorSwap=0b1000}
 
 public class UIButtonController : MonoBehaviour
 {
@@ -12,6 +17,27 @@ public class UIButtonController : MonoBehaviour
     [Tooltip("Optional")]
     [SerializeField] protected TMP_Text text;
     [SerializeField] protected bool hardDeactivate;
+    [SerializeField] protected TransitionType transitionType;
+
+    [ConditionalField(nameof(transitionType),false,TransitionType.SpriteSwap)]
+    [SerializeField] protected Sprite defaultSprite;
+    [ConditionalField(nameof(transitionType), false, TransitionType.SpriteSwap)]
+    [SerializeField] protected Sprite selectedSprite;
+
+    [ConditionalField(nameof(transitionType),false,TransitionType.ObjectSwap)]
+    [SerializeField] protected GameObject defaultObject;
+    [ConditionalField(nameof(transitionType), false, TransitionType.ObjectSwap)]
+    [SerializeField] protected GameObject selectedObject;
+
+    [ConditionalField(nameof(transitionType),false,TransitionType.FontColorSwap)]
+    [SerializeField] protected Color defaultFont;
+    [ConditionalField(nameof(transitionType), false, TransitionType.FontColorSwap)]
+    [SerializeField] protected Color selectedFont;
+
+    [ConditionalField(nameof(transitionType), false, TransitionType.ImageColorSwap)]
+    [SerializeField] protected Color defaultColor;
+    [ConditionalField(nameof(transitionType), false, TransitionType.ImageColorSwap)]
+    [SerializeField] protected Color selectedColor;
 
     public virtual void Init()
     {
@@ -41,6 +67,58 @@ public class UIButtonController : MonoBehaviour
     public void SetHardDeactivate(bool state)
     {
         hardDeactivate = state;
+    }
+
+    public void Select()
+    {
+        if (transitionType.HasFlag(TransitionType.SpriteSwap))
+        {
+            button.image.sprite = selectedSprite;
+        }
+
+        if (transitionType.HasFlag(TransitionType.ObjectSwap))
+        {
+            defaultObject.SetActive(false);
+            selectedObject.SetActive(true);
+        }
+
+        if (transitionType.HasFlag(TransitionType.FontColorSwap))
+        {
+            text.color = selectedFont;
+        }
+
+        if (transitionType.HasFlag(TransitionType.ImageColorSwap))
+        {
+            button.image.color = selectedColor;
+        }
+
+        Debug.Log($"Selected {gameObject.name}",this);
+    }
+
+    public void Deselect()
+    {
+        if (transitionType.HasFlag(TransitionType.SpriteSwap))
+        {
+            button.image.sprite = defaultSprite;
+        }
+
+        if (transitionType.HasFlag(TransitionType.ObjectSwap))
+        {
+            selectedObject.SetActive(false);
+            defaultObject.SetActive(true);
+        }
+
+        if (transitionType.HasFlag(TransitionType.FontColorSwap))
+        {
+            text.color = defaultFont;
+        }
+
+        if (transitionType.HasFlag(TransitionType.ImageColorSwap))
+        {
+            button.image.color = defaultColor;
+        }
+
+        Debug.Log($"Deselected {gameObject.name}", this);
     }
 
     public UnityAction onClick;
