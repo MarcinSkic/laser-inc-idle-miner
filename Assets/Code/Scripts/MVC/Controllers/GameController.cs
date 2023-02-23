@@ -195,6 +195,13 @@ public class GameController : BaseController<GameView>
             view.SetOfflineMoney(resourcesModel.offlineMoney); 
         };
 
+        view.cheatMoney.onClick += resourcesManager.CheatMoney;
+        view.cheatMoney.SetText($"Cheat {NumberFormatter.Format(resourcesModel.cheatMoney)}");
+
+        view.forcePrestige.onClick += ExecutePrestige;
+
+        view.eraseSaveFile.onClick += EraseSaveFile;
+
         view.is60fps.onValueChanged.AddListener(value => { SettingsModel.Instance.Is60fps = value; });
         SettingsModel.Instance.Is60fps = view.is60fps.isOn;
 
@@ -439,7 +446,6 @@ public class GameController : BaseController<GameView>
         FloatingTextSpawner.Instance.ClearBeforePrestige();
     }
 
-    [ContextMenu("Prestige")]
     public void ExecutePrestige()
     {
         PersistentData persistentData = new();
@@ -451,6 +457,12 @@ public class GameController : BaseController<GameView>
         savingManager.SavePersistentData(persistentData);
 
         ClearBeforePrestige();
+        SceneManager.LoadScene(SceneManager.GetActiveScene().name);
+    }
+
+    public void EraseSaveFile()
+    {
+        SavingManager.EraseSaveFile();
         SceneManager.LoadScene(SceneManager.GetActiveScene().name);
     }
 
