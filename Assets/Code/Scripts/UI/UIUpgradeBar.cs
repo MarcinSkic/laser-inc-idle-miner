@@ -9,7 +9,8 @@ public class UIUpgradeBar : MonoBehaviour
     [SerializeField] private GameObject lockedUpgradeHider;
     [SerializeField] private Image upgradeIcon;
     [SerializeField] private Image currencyIcon;
-    [SerializeField] private TMP_Text levelText;
+    [SerializeField] private TMP_Text levelOrValueText;
+    [SerializeField] private GameObject levelOrValueDisplay;
     [SerializeField] private TMP_Text descriptionText;
     [SerializeField] private UIButtonUpgradeController upgradeButton;
     [SerializeField] private TMP_Text toUnlockText;
@@ -40,20 +41,24 @@ public class UIUpgradeBar : MonoBehaviour
         descriptionText.text = description;
     }
 
-    public void SetCurrencySprite(Sprite sprite)
+    public void SetCurrencySprite(Sprite sprite)    //TODO-UGLY: With current UI this method is useless
     {
-        currencyIcon.sprite = sprite;
+        if(currencyIcon != null)
+        {
+            currencyIcon.sprite = sprite;
+        }
     }
 
     public void SetLevel(Upgrade upgrade)
     {
         if (upgrade.maxLevel == 1)
         {
-            levelText.gameObject.SetActive(false);
+            levelOrValueDisplay.SetActive(false);
         }
         else
         {
-            levelText.text = string.Format(upgrade.maxLevel == -1 ? "Lv {0}" : "Lv {0}/{1}", upgrade.currentLevel,upgrade.maxLevel);
+            levelOrValueDisplay.SetActive(true);
+            levelOrValueText.text = string.Format(upgrade.maxLevel == -1 ? "Lv {0}" : "Lv {0}/{1}", upgrade.currentLevel,upgrade.maxLevel);
         }
     }
 
