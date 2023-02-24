@@ -240,6 +240,12 @@ public class ResourcesManager : MonoBehaviour
         Money += value;
         EarnedMoney += value;
     }
+
+    public void CheatMoney()
+    {
+        Money += model.cheatMoney;
+        //TODO-@Filip: Should it increase earnedmoney?
+    }
     #endregion
 
     public double GetCurrency(Currency currency)

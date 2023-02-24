@@ -65,6 +65,10 @@ public class GameView : BaseView
     [Header("Settings Tab")]
     public Toggle is60fps;
     public Toggle displayFloatingDamage;
+    public UIButtonController cheatMoney;
+    public UIButtonController cheatDepth;
+    public UIButtonController forcePrestige;
+    public UIButtonController eraseSaveFile;
 
     [Header("AchievementsTab")]
     public AchievementSquare achievementPrefab;
@@ -109,6 +113,10 @@ public class GameView : BaseView
     {
         offlineConfirmButton.Init();
         offlineGetBonusButton.Init();
+        cheatMoney.Init();
+        cheatDepth.Init();
+        forcePrestige.Init();
+        eraseSaveFile.Init();
     }
 
     private void SwitchTab(UIButtonController button,string name)
