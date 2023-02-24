@@ -15,8 +15,8 @@ MonoBehaviour:
   blockType:
     name: diamond
     material: {fileID: 2100000, guid: ad560a930e452f34d8e8e98f9f6e39cb, type: 2}
-    hpMultiplier: 10
-    rewardMultiplier: 25
-    minDepth: 200
-    fullDepth: 750
-    maxChance: 0.03
+    hpMultiplier: 30
+    rewardMultiplier: 100
+    minDepth: 1000
+    fullDepth: 3500
+    maxChance: 0.01

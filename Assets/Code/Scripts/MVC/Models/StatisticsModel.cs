@@ -38,6 +38,22 @@ public class StatisticsModel : MonoBehaviour
     }
     public UnityAction<double> onMinedNormalBlocksChange;
     #endregion
+    #region minedCoalBlocks
+    [ReadOnly] [SerializeField] private int minedCoalBlocks;
+    public int MinedCoalBlocks
+    {
+        get
+        {
+            return minedCoalBlocks;
+        }
+        set
+        {
+            minedCoalBlocks = value;
+            onMinedCoalBlocksChange?.Invoke(value);
+        }
+    }
+    public UnityAction<double> onMinedCoalBlocksChange;
+    #endregion
     #region minedCopperBlocks
     [ReadOnly] [SerializeField] private int minedCopperBlocks;
     public int MinedCopperBlocks
@@ -86,6 +102,38 @@ public class StatisticsModel : MonoBehaviour
     }
     public UnityAction<double> onMinedGoldBlocksChange;
     #endregion
+    #region minedSapphireBlocks
+    [ReadOnly] [SerializeField] private int minedSapphireBlocks;
+    public int MinedSapphireBlocks
+    {
+        get
+        {
+            return minedSapphireBlocks;
+        }
+        set
+        {
+            minedSapphireBlocks = value;
+            onMinedSapphireBlocksChange?.Invoke(value);
+        }
+    }
+    public UnityAction<double> onMinedSapphireBlocksChange;
+    #endregion
+    #region minedRubyBlocks
+    [ReadOnly] [SerializeField] private int minedRubyBlocks;
+    public int MinedRubyBlocks
+    {
+        get
+        {
+            return minedRubyBlocks;
+        }
+        set
+        {
+            minedRubyBlocks = value;
+            onMinedRubyBlocksChange?.Invoke(value);
+        }
+    }
+    public UnityAction<double> onMinedRubyBlocksChange;
+    #endregion
     #region minedDiamondBlocks
     [ReadOnly] [SerializeField] private int minedDiamondBlocks;
     public int MinedDiamondBlocks
@@ -122,9 +170,12 @@ public class StatisticsModel : MonoBehaviour
     public void SavePersistentData(PersistentData data)
     {
         data.minedNormalBlocks = MinedNormalBlocks;
+        data.minedCoalBlocks = MinedCoalBlocks;
         data.minedCopperBlocks = MinedCopperBlocks;
         data.minedIronBlocks = MinedIronBlocks;
         data.minedGoldBlocks = MinedGoldBlocks;
+        data.minedSapphireBlocks = MinedSapphireBlocks;
+        data.minedRubyBlocks = MinedRubyBlocks;
         data.minedDiamondBlocks = MinedDiamondBlocks;
         data.minedUraniumBlocks = MinedUraniumBlocks;
     }
@@ -132,9 +183,12 @@ public class StatisticsModel : MonoBehaviour
     public void LoadPersistentData(PersistentData data)
     {
         MinedNormalBlocks = (int)(data?.minedNormalBlocks);
+        MinedCoalBlocks = (int)(data?.minedCoalBlocks);
         MinedCopperBlocks = (int)(data?.minedCopperBlocks);
         MinedIronBlocks = (int)(data?.minedIronBlocks);
         MinedGoldBlocks = (int)(data?.minedGoldBlocks);
+        MinedSapphireBlocks = (int)(data?.minedSapphireBlocks);
+        MinedRubyBlocks = (int)(data?.minedRubyBlocks);
         MinedDiamondBlocks = (int)(data?.minedDiamondBlocks);
         MinedUraniumBlocks = (int)(data?.minedUraniumBlocks);
     }

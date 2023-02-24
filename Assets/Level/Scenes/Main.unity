@@ -1052,11 +1052,14 @@ MonoBehaviour:
   minExistingY: 0
   blockTypeScriptables:
   - {fileID: 11400000, guid: ea8612a399f467441a07d0b393803659, type: 2}
+  - {fileID: 11400000, guid: 28f472fd566e9f84e8180456c8db4692, type: 2}
   - {fileID: 11400000, guid: 44a4eac19dac6ec4aa733111bb533b5c, type: 2}
   - {fileID: 11400000, guid: 59867da9890bbc64caab170ad0a14971, type: 2}
+  - {fileID: 11400000, guid: 5d8c5a2bf13464b4bbf998ff4c63f049, type: 2}
+  - {fileID: 11400000, guid: 30fe55db7e6b4a44fbed43fa6be79863, type: 2}
+  - {fileID: 11400000, guid: d9b095b7e86c4e042b0200614a641be0, type: 2}
   - {fileID: 11400000, guid: 0b075f9b0effd8a448c7aef507cb3ea4, type: 2}
   - {fileID: 11400000, guid: 7be4ea09a7529e54aac428532def278c, type: 2}
-  - {fileID: 11400000, guid: 5d8c5a2bf13464b4bbf998ff4c63f049, type: 2}
   blockTypes: []
   ifSpawningOnGrid: 1
   alwaysSpawnMinerals: 0
@@ -1199,7 +1202,7 @@ Transform:
   - {fileID: 1235393438}
   - {fileID: 54048869}
   m_Father: {fileID: 0}
-  m_RootOrder: 4
+  m_RootOrder: 5
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &252608479
 GameObject:
@@ -2527,7 +2530,7 @@ Transform:
   m_Children:
   - {fileID: 1843672939}
   m_Father: {fileID: 0}
-  m_RootOrder: 1
+  m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &398026421
 GameObject:
@@ -3142,7 +3145,7 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 2
+  m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &471126230
 GameObject:
@@ -3413,7 +3416,7 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 7
+  m_RootOrder: 8
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &506566440
 GameObject:
@@ -4260,6 +4263,9 @@ MonoBehaviour:
   - {fileID: 11400000, guid: e9d1a9260dc4bc04d801dfae0cc39f30, type: 2}
   - {fileID: 11400000, guid: 5554a3979607de141ae87d1ea7fba2e0, type: 2}
   - {fileID: 11400000, guid: e8ecf8fe7bd13304599b2e73c8848af9, type: 2}
+  - {fileID: 11400000, guid: 8f13a4997612ba646a01d4895028effe, type: 2}
+  - {fileID: 11400000, guid: 8a50ae1df34acae419bfa94d40f51c0e, type: 2}
+  - {fileID: 11400000, guid: d0c8ad79fdd3dae42a88579916308c38, type: 2}
   achievements: []
   achievementGrid: {fileID: 866237050}
   achievementSquare: {fileID: 7243954313712763706, guid: c47f897411e00a3448ab38d0873e87d7, type: 3}
@@ -6023,7 +6029,7 @@ Transform:
   - {fileID: 1947716356}
   - {fileID: 1508174524}
   m_Father: {fileID: 0}
-  m_RootOrder: 3
+  m_RootOrder: 4
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &847638776
 GameObject:
@@ -8005,7 +8011,7 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 5
+  m_RootOrder: 6
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1134417206
 GameObject:
@@ -10290,7 +10296,7 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 6
+  m_RootOrder: 7
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1525024118
 GameObject:
@@ -11689,7 +11695,7 @@ Transform:
   - {fileID: 1197683682}
   - {fileID: 1064644890}
   m_Father: {fileID: 0}
-  m_RootOrder: 0
+  m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1839642198
 GameObject:
@@ -12580,9 +12586,12 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   minedNormalBlocks: 0
+  minedCoalBlocks: 0
   minedCopperBlocks: 0
   minedIronBlocks: 0
   minedGoldBlocks: 0
+  minedSapphireBlocks: 0
+  minedRubyBlocks: 0
   minedDiamondBlocks: 0
   minedUraniumBlocks: 0
 --- !u!4 &1965313166
@@ -12598,7 +12607,7 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 8
+  m_RootOrder: 9
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1980080999
 GameObject:
@@ -13166,7 +13175,7 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 9
+  m_RootOrder: 10
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &2051652809
 GameObject:

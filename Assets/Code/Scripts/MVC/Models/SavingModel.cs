@@ -49,9 +49,12 @@ public class PersistentData
 
     #region StatisticsModel
     public int minedNormalBlocks;
+    public int minedCoalBlocks;
     public int minedCopperBlocks;
     public int minedIronBlocks;
     public int minedGoldBlocks;
+    public int minedSapphireBlocks;
+    public int minedRubyBlocks;
     public int minedDiamondBlocks;
     public int minedUraniumBlocks;
     #endregion
