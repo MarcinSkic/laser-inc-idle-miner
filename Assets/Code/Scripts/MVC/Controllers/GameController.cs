@@ -205,6 +205,20 @@ public class GameController : BaseController<GameView>
 
         view.eraseSaveFile.onClick += EraseSaveFile;
 
+        view.cheatSpeedUp.SetText($"speed x 2 (now: { Time.timeScale})");
+        view.cheatSpeedUp.onClick += delegate {
+            Time.timeScale *= 2f;
+            view.cheatSpeedUp.SetText($"speed x 2 (now: {Time.timeScale})");
+            view.cheatSlowDown.SetText($"speed x 0.5 (now: {Time.timeScale})");
+        };
+
+        view.cheatSlowDown.SetText($"speed x 0.5 (now: { Time.timeScale})");
+        view.cheatSlowDown.onClick += delegate {
+            Time.timeScale *= 0.5f;
+            view.cheatSpeedUp.SetText($"speed x 2 (now: {Time.timeScale})");
+            view.cheatSlowDown.SetText($"speed x 0.5 (now: {Time.timeScale})");
+        };
+
         view.is60fps.onValueChanged.AddListener(value => { SettingsModel.Instance.Is60fps = value; });
         SettingsModel.Instance.Is60fps = view.is60fps.isOn;
 

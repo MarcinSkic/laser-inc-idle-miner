@@ -69,6 +69,8 @@ public class GameView : BaseView
     public UIButtonController cheatDepth;
     public UIButtonController forcePrestige;
     public UIButtonController eraseSaveFile;
+    public UIButtonController cheatSpeedUp;
+    public UIButtonController cheatSlowDown;
 
     [Header("AchievementsTab")]
     public AchievementSquare achievementPrefab;
@@ -117,7 +119,9 @@ public class GameView : BaseView
         cheatDepth.Init();
         forcePrestige.Init();
         eraseSaveFile.Init();
-    }
+        cheatSpeedUp.Init();
+        cheatSlowDown.Init();
+}
 
     private void SwitchTab(UIButtonController button,string name)
     {
