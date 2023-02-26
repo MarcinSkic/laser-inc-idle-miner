@@ -12,9 +12,9 @@ public static class NumberFormatter
 
     private static string FormatToEngineering(double num)
     {
-        if (num == 0 || (Math.Abs(num) >= 1 && Math.Abs(num) <= 1e3))
+        if ((Math.Abs(num) > 1e-3 && Math.Abs(num) < 1) || num == 0 || (Math.Abs(num) >= 1 && Math.Abs(num) <= 1e3))
         {
-            return string.Format("{0:###.##}",num);
+            return string.Format("{0:##0.##}",num);
         }
 
         int exponent = 0;
