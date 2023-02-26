@@ -299,7 +299,6 @@ public class GameController : BaseController<GameView>
                     resourcesManager.onMoneyChange += buttonUpgrade.ChangeStateBasedOnMoney;
 
                     upgrade.doUpgrade += buttonUpgrade.SetUpgradeCost; //Upgrade -> Updates Button values
-                    upgrade.onValueUpdate += buttonUpgrade.SetText;  //TODO-FUTURE-BUG: There should be check if the button uses upgrade internal value or universal value, if universal then it should connect to not yet existing system of sending event on value change
 
                     if (upgrade.type == UpgradeType.SpawnUpgrade)
                     {
@@ -311,7 +310,13 @@ public class GameController : BaseController<GameView>
                         } else
                         {
                             ballBar.Unlock(upgrade);
-                        }               
+                        }
+
+                        upgrade.onValueUpdate += buttonUpgrade.SetText;
+                    } else
+                    {
+                        ballsModel.ballsData[upgrade.upgradedObjects].values[upgrade.upgradedValues].onValueChange += v => buttonUpgrade.SetText(NumberFormatter.Format(v));
+                        buttonUpgrade.SetText(NumberFormatter.Format(ballsModel.ballsData[upgrade.upgradedObjects].values[upgrade.upgradedValues].Value));
                     }
                 } 
                 else
@@ -358,7 +363,14 @@ public class GameController : BaseController<GameView>
                     break;
             }
 
-            upgrade.doUpgrade += upgradeBar.SetLevel;
+            if (upgrade.showUpgradedValueInsteadOfLevel)
+            {
+                upgrade.onValueUpdate += upgradeBar.SetValue;
+            } else
+            {
+                upgrade.doUpgrade += upgradeBar.SetLevel;
+            }
+            
             upgrade.doUpgrade += upgradeBar.UpgradeButton.SetUpgradeCost;
             upgrade.onMaxedUpgrade += upgradeBar.OnMaxed;
         }

@@ -231,7 +231,7 @@ public class GameView : BaseView
         upgradeBar.SetToUnlockDescription(upgrade.toUnlockDescription);
         upgradeBar.SetDescription(upgrade.description);
         upgradeBar.SetLevel(upgrade);
-        upgradeBar.UpgradeButton.SetText(upgrade.title);
+        upgradeBar.SetTitle(upgrade.title);
         upgradeBar.UpgradeButton.upgradeName = upgrade.name;
 
         return upgradeBar;

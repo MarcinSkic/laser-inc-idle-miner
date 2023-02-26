@@ -7,6 +7,7 @@ using UnityEngine.UI;
 public class UIUpgradeBar : MonoBehaviour
 {
     [SerializeField] private GameObject lockedUpgradeHider;
+    [SerializeField] private TMP_Text lockedTitle;
     [SerializeField] private Image upgradeIcon;
     [SerializeField] private Image currencyIcon;
     [SerializeField] private TMP_Text levelOrValueText;
@@ -16,6 +17,12 @@ public class UIUpgradeBar : MonoBehaviour
     [SerializeField] private TMP_Text toUnlockText;
 
     public UIButtonUpgradeController UpgradeButton => upgradeButton;
+
+    public void SetTitle(string value)
+    {
+        UpgradeButton.SetText(value);
+        lockedTitle.text = value;
+    }
 
     public void Lock()
     {
@@ -60,6 +67,12 @@ public class UIUpgradeBar : MonoBehaviour
             levelOrValueDisplay.SetActive(true);
             levelOrValueText.text = string.Format(upgrade.maxLevel == -1 ? "Lv {0}" : "Lv {0}/{1}", upgrade.currentLevel,upgrade.maxLevel);
         }
+    }
+
+    public void SetValue(string value)
+    {
+        levelOrValueDisplay.SetActive(true);
+        levelOrValueText.text = value;
     }
 
     public void SetToUnlockDescription(string description)

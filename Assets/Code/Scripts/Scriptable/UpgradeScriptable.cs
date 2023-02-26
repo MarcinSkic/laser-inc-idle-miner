@@ -11,7 +11,6 @@ public class UpgradeScriptable : ScriptableObject
         get
         {
             var up = Functions.GetObjectCopy(upgrade);
-            up.initialUpgrade = Functions.GetObjectCopy(upgrade);
             return up;
         }
         set => upgrade = value;

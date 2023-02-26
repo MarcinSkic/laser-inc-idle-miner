@@ -37,11 +37,9 @@ public class UpgradesManager : MonoBehaviour
             {
                 case UpgradeType.ValuesUpgrade:
                     upgrade.doUpgrade += OnValuesUpgrade;
-                    SetFirstUpgradeButtonValue(upgrade);    //UI setup
                     break;
                 case UpgradeType.SpawnUpgrade:
                     upgrade.doUpgrade += OnSpawnUpgrade;
-                    upgrade.onValueUpdate?.Invoke("0");  //UI setup
                     break;
             }
 
@@ -112,10 +110,12 @@ public class UpgradesManager : MonoBehaviour
         if (upgrade.upgradedValues.HasFlag(UpgradeableValues.ClickDamage))
         {
             SettingsModel.Instance.clickDamage *= upgrade.changeValue;
+            upgrade.onValueUpdate?.Invoke(string.Format(upgrade.upgradedValueFormatedString, NumberFormatter.Format(SettingsModel.Instance.clickDamage)));
         }
         if (upgrade.upgradedValues.HasFlag(UpgradeableValues.MoneyGainMultiplier))
         {
             resourcesModel.moneyGainMultiplier *= upgrade.changeValue;
+            upgrade.onValueUpdate?.Invoke(string.Format(upgrade.upgradedValueFormatedString, NumberFormatter.Format(resourcesModel.moneyGainMultiplier)));
         }
     }
 
@@ -204,11 +204,11 @@ public class UpgradesManager : MonoBehaviour
         if((upgrade.upgradedObjects <= UpgradeableObjects.AllBalls && ((int)upgrade.upgradedObjects % 2 == 0 || upgrade.upgradedObjects == UpgradeableObjects.BasicBall)) && ((int)upgrade.upgradedValues % 2 == 0 || upgrade.upgradedValues == UpgradeableValues.Speed))
         {
             var value = GetValueByType(upgrade.upgradedValues, ballsModel.ballsData[upgrade.upgradedObjects]);
-            upgrade.onValueUpdate?.Invoke(value.value.ToString());
+            upgrade.onValueUpdate?.Invoke(NumberFormatter.Format(value.Value));
         } 
         else
         {
-            upgrade.onValueUpdate?.Invoke(upgrade.upgradeValue.ToString());
+            upgrade.onValueUpdate?.Invoke(NumberFormatter.Format(upgrade.internalValue));
         }
     }
 
@@ -233,22 +233,21 @@ public class UpgradesManager : MonoBehaviour
         switch (upgrade.formula)
         {
             case ValueUpgradeFormula.Add:
-                value.value += upgrade.changeValue;
-                upgrade.upgradeValue += upgrade.changeValue;
+                value.Value += upgrade.changeValue;
+                upgrade.internalValue += upgrade.changeValue;
                 break;
             case ValueUpgradeFormula.Multiply:
-                value.value *= upgrade.changeValue;
-                upgrade.upgradeValue *= upgrade.changeValue;
+                value.Value *= upgrade.changeValue;
+                upgrade.internalValue *= upgrade.changeValue;
                 break;
         }
-        if (upgrade.onUpgradeButtonsShowUpgradeInternalValue)
+        if (upgrade.useInternalValueForUI)
         {
-            upgrade.onValueUpdate?.Invoke(NumberFormatter.Format(upgrade.upgradeValue));
-            //upgrade.onValueUpdate.Invoke(string.Format("{0:#.0e0}", upgrade.upgradeValue));
+            upgrade.onValueUpdate?.Invoke(string.Format(upgrade.upgradedValueFormatedString,NumberFormatter.Format(upgrade.internalValue)));
         } 
         else
         {
-            upgrade.onValueUpdate?.Invoke(NumberFormatter.Format(value.value));
+            upgrade.onValueUpdate?.Invoke(string.Format(upgrade.upgradedValueFormatedString, NumberFormatter.Format(value.Value)));
         }
     }
 

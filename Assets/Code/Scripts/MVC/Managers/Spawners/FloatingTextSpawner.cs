@@ -30,7 +30,12 @@ public class FloatingTextSpawner : BaseSpawner<FloatingText>
         Spawn(out FloatingText floatingText);
         floatingText.SetText(text);
         floatingText.Init(location.position);
-        floatingTexts.Add(floatingText);
+    }
+
+    protected override void Get(FloatingText element)
+    {
+        floatingTexts.Add(element);
+        base.Get(element);
     }
 
     protected override void Release(FloatingText element)
