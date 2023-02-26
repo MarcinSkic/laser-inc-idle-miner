@@ -204,7 +204,7 @@ public class UpgradesManager : MonoBehaviour
         if((upgrade.upgradedObjects <= UpgradeableObjects.AllBalls && ((int)upgrade.upgradedObjects % 2 == 0 || upgrade.upgradedObjects == UpgradeableObjects.BasicBall)) && ((int)upgrade.upgradedValues % 2 == 0 || upgrade.upgradedValues == UpgradeableValues.Speed))
         {
             var value = GetValueByType(upgrade.upgradedValues, ballsModel.ballsData[upgrade.upgradedObjects]);
-            upgrade.onValueUpdate?.Invoke(NumberFormatter.Format(value.value));
+            upgrade.onValueUpdate?.Invoke(NumberFormatter.Format(value.Value));
         } 
         else
         {
@@ -233,11 +233,11 @@ public class UpgradesManager : MonoBehaviour
         switch (upgrade.formula)
         {
             case ValueUpgradeFormula.Add:
-                value.value += upgrade.changeValue;
+                value.Value += upgrade.changeValue;
                 upgrade.internalValue += upgrade.changeValue;
                 break;
             case ValueUpgradeFormula.Multiply:
-                value.value *= upgrade.changeValue;
+                value.Value *= upgrade.changeValue;
                 upgrade.internalValue *= upgrade.changeValue;
                 break;
         }
@@ -247,7 +247,7 @@ public class UpgradesManager : MonoBehaviour
         } 
         else
         {
-            upgrade.onValueUpdate?.Invoke(string.Format(upgrade.upgradedValueFormatedString, NumberFormatter.Format(value.value)));
+            upgrade.onValueUpdate?.Invoke(string.Format(upgrade.upgradedValueFormatedString, NumberFormatter.Format(value.Value)));
         }
     }
 
