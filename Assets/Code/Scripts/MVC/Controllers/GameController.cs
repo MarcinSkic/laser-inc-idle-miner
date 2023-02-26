@@ -240,6 +240,7 @@ public class GameController : BaseController<GameView>
     private void UpdateSettings()
     {
         view.debugWindow.SetActive(SettingsModel.Instance.showDebugWindow);
+        view.cheatWindowButton.SetActive(SettingsModel.Instance.unlockCheatWindow);
 
         if (SettingsModel.Instance.changeTimeScale)
         {
