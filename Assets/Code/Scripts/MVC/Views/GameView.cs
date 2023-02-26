@@ -63,8 +63,8 @@ public class GameView : BaseView
     public Transform prestigeUpgradeBarsParent;
 
     [Header("Settings Tab")]
-    public Toggle is60fps;
-    public Toggle displayFloatingDamage;
+    public UIToggleController is60fps;
+    public UIToggleController displayFloatingDamage;
     public UIButtonController cheatMoney;
     public UIButtonController cheatDepth;
     public UIButtonController forcePrestige;
