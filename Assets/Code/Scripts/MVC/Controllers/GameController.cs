@@ -219,11 +219,11 @@ public class GameController : BaseController<GameView>
             view.cheatSlowDown.SetText($"speed x 0.5 (now: {Time.timeScale})");
         };
 
-        view.is60fps.onValueChanged.AddListener(value => { SettingsModel.Instance.Is60fps = value; });
-        SettingsModel.Instance.Is60fps = view.is60fps.isOn;
+        view.is60fps.onValueChanged += value => { SettingsModel.Instance.Is60fps = value; };
+        SettingsModel.Instance.Is60fps = view.is60fps.IsOn;
 
-        view.displayFloatingDamage.onValueChanged.AddListener(value => { SettingsModel.Instance.DisplayFloatingText = value; });
-        SettingsModel.Instance.DisplayFloatingText = view.displayFloatingDamage.isOn;
+        view.displayFloatingDamage.onValueChanged += value => { SettingsModel.Instance.DisplayFloatingText = value; };
+        SettingsModel.Instance.DisplayFloatingText = view.displayFloatingDamage.IsOn;
     }
 
     private void ConnectToAchievementsManager()
@@ -233,13 +233,14 @@ public class GameController : BaseController<GameView>
 
     private void UpdateSettingsViewBySavedData()
     {
-        view.is60fps.isOn = SettingsModel.Instance.Is60fps;
-        view.displayFloatingDamage.isOn = SettingsModel.Instance.DisplayFloatingText;
+        view.is60fps.IsOn = SettingsModel.Instance.Is60fps;
+        view.displayFloatingDamage.IsOn = SettingsModel.Instance.DisplayFloatingText;
     }
 
     private void UpdateSettings()
     {
         view.debugWindow.SetActive(SettingsModel.Instance.showDebugWindow);
+        view.cheatWindowButton.SetActive(SettingsModel.Instance.unlockCheatWindow);
 
         if (SettingsModel.Instance.changeTimeScale)
         {

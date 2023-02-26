@@ -29,6 +29,7 @@ public class SettingsModel : MonoBehaviour
     [Header("FALSE before build/commit")]
     public bool removeUpgradesRequirements;
     public bool showDebugWindow;
+    public bool unlockCheatWindow;
     [Space(5)]
     public bool changeTimeScale;
     [ConditionalField(nameof(changeTimeScale))]

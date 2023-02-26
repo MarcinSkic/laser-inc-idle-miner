@@ -27,6 +27,7 @@ public class GameView : BaseView
 
     [SerializeField] private UIWindow[] windows;
     [SerializeField] private UIButtonWithStringController[] windowButtons;
+    public GameObject cheatWindowButton;
 
     public Color bottomButton_Default;
     public Color bottomButton_Activated;
@@ -63,8 +64,8 @@ public class GameView : BaseView
     public Transform prestigeUpgradeBarsParent;
 
     [Header("Settings Tab")]
-    public Toggle is60fps;
-    public Toggle displayFloatingDamage;
+    public UIToggleController is60fps;
+    public UIToggleController displayFloatingDamage;
     public UIButtonController cheatMoney;
     public UIButtonController cheatDepth;
     public UIButtonController forcePrestige;
@@ -90,27 +91,6 @@ public class GameView : BaseView
     [ReadOnly]
     public List<UIBallBar> ballBars;
 
-    #region LEGACY WINDOWS-TABS SYSTEM
-    private UnityAction<Color> onTabClosing;
-    public void InitBottomButtonsEventLegacy()
-    {
-        foreach(var tabButtonsContainer in tabButtonsContainers)
-        {
-            foreach(var tabButton in tabButtonsContainer.GetComponentsInChildren<UIButtonWithStringController>())
-            {
-                tabButton.Init();
-                tabButton.onClick += SwitchTab;
-                onTabClosing += tabButton.SetColor;
-            }
-        }
-
-        foreach (var windowButton in legacyWindowButtons)
-        {
-            windowButton.Init();
-            windowButton.onClick += SwitchWindowButtons;
-        }
-    }
-
     public void InitButtons()
     {
         offlineConfirmButton.Init();
@@ -121,70 +101,9 @@ public class GameView : BaseView
         eraseSaveFile.Init();
         cheatSpeedUp.Init();
         cheatSlowDown.Init();
-}
-
-    private void SwitchTab(UIButtonController button,string name)
-    {
-        foreach (var window in windows)
-        {
-            var foundTab = window.transform.Find(name)?.gameObject;
-
-            if (foundTab != null)
-            {
-                bool previousTabState = foundTab.activeSelf;
-                DisableAllTabs();
-
-                if (!previousTabState)
-                {
-                    foundTab.SetActive(true);
-                    button.SetColor(bottomButton_Activated);
-                } 
-                else
-                {
-                    foundTab.SetActive(false);
-                    button.SetColor(bottomButton_Default);
-                }
-                return;
-            }
-        }
-
-        Debug.LogWarningFormat("Couldn't find tab of name {} to be activated by SwitchWindow method", name);
     }
 
-    public void DisableAllTabs()
-    {
-        foreach (var window in windows)
-        {
-            foreach (Transform tab in window.transform)
-            {
-                tab.gameObject.SetActive(false);
-            }
-        }
-
-        onTabClosing.Invoke(bottomButton_Default);
-    }
-
-    public void SwitchWindowButtons(UIButtonController button,string name)
-    {
-        foreach(var tabButtonsContainerInForeach in tabButtonsContainers)
-        {
-            tabButtonsContainerInForeach.SetActive(false);
-        }
-        DisableAllTabs();
-
-        var tabButtonsContainer = tabButtonsContainers.Find(tabButtonsContainer => tabButtonsContainer.name == name);
-        tabButtonsContainer.SetActive(true);
-
-        //If in window there is only one tab, it should be automatically opened
-        if (tabButtonsContainer.transform.childCount == 1)   
-        {
-            var tabButton = tabButtonsContainer.GetComponentInChildren<UIButtonWithStringController>();
-            SwitchTab(tabButton, tabButton.name);
-        }
-    }
-
-    #endregion
-    #region NEW WINDOWS-TABS SYSTEM
+    #region WINDOWS-TABS SYSTEM
     public UIWindow activeWindow = null;
 
     public void InitWindows()
@@ -208,7 +127,7 @@ public class GameView : BaseView
     {
         if (activeWindow != null && name == activeWindow.name)
         {
-            button.Deselect();
+            DeselectAllWindowButtons();
             activeWindow.Dectivate();
             activeWindow = null;
             SelectBottomWindowButtons();
@@ -246,7 +165,7 @@ public class GameView : BaseView
     {
         foreach (var b in windowButtons)
         {
-            if (!b.name.Contains("Setting"))
+            if (!b.name.Contains("Setting") && !b.name.Contains("Cheat"))
             {
                 b.Select();
             }        
@@ -268,7 +187,6 @@ public class GameView : BaseView
             window.Dectivate();
         }
     }
-
 
     #endregion
     public void CreateBallBar(BallData ballData)
