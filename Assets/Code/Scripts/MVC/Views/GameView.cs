@@ -127,7 +127,7 @@ public class GameView : BaseView
     {
         if (activeWindow != null && name == activeWindow.name)
         {
-            button.Deselect();
+            DeselectAllWindowButtons();
             activeWindow.Dectivate();
             activeWindow = null;
             SelectBottomWindowButtons();

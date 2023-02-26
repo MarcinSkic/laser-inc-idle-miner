@@ -91,8 +91,6 @@ public class UIButtonController : MonoBehaviour
         {
             button.image.color = selectedColor;
         }
-
-        Debug.Log($"Selected {gameObject.name}",this);
     }
 
     public void Deselect()
@@ -117,8 +115,6 @@ public class UIButtonController : MonoBehaviour
         {
             button.image.color = defaultColor;
         }
-
-        Debug.Log($"Deselected {gameObject.name}", this);
     }
 
     public UnityAction onClick;
