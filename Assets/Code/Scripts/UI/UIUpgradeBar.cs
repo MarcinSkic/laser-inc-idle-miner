@@ -69,6 +69,12 @@ public class UIUpgradeBar : MonoBehaviour
         }
     }
 
+    public void SetValue(string value)
+    {
+        levelOrValueDisplay.SetActive(true);
+        levelOrValueText.text = value;
+    }
+
     public void SetToUnlockDescription(string description)
     {
         toUnlockText.text = description;

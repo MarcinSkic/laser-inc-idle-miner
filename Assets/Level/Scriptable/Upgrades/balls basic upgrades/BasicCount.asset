@@ -29,8 +29,10 @@ MonoBehaviour:
     cost: 1
     costIncremental: -3
     costMultiplier: 5
-    onUpgradeButtonsShowUpgradeInternalValue: 0
-    upgradeValue: 0
+    showUpgradedValueInsteadOfLevel: 0
+    upgradedValueFormatedString: '{0}'
+    useInternalValueForUI: 0
+    internalValue: 0
     upgradedObjects: 1
     upgradedValues: 0
     changeValue: 0

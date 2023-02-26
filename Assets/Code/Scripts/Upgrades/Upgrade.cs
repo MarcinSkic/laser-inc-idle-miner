@@ -52,10 +52,15 @@ public class Upgrade
     public double costMultiplier = 1;
     #endregion
 
-    public bool onUpgradeButtonsShowUpgradeInternalValue = false;
+    public bool showUpgradedValueInsteadOfLevel = false;
+    [Tooltip("Invocation: string.Format(<this string>,NumberFormatter.Format(value));")]
+    [ConditionalField(nameof(showUpgradedValueInsteadOfLevel))]
+    public string upgradedValueFormatedString = "{0}";
 
-    [ConditionalField(nameof(onUpgradeButtonsShowUpgradeInternalValue))]
-    public double upgradeValue = 0;
+    public bool useInternalValueForUI = false;
+
+    [ConditionalField(nameof(useInternalValueForUI))]
+    public double internalValue = 0;
 
     [Space(5)]
 
@@ -82,7 +87,6 @@ public class Upgrade
     public UnityAction<string> onValueUpdate;
     public UnityAction<Upgrade> onMaxedUpgrade;
     public UnityAction<Upgrade> onUnlock;
-    public Upgrade initialUpgrade;
 
     public string GenerateName()
     {

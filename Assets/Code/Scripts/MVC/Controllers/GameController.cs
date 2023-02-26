@@ -358,7 +358,14 @@ public class GameController : BaseController<GameView>
                     break;
             }
 
-            upgrade.doUpgrade += upgradeBar.SetLevel;
+            if (upgrade.showUpgradedValueInsteadOfLevel)
+            {
+                upgrade.onValueUpdate += upgradeBar.SetValue;
+            } else
+            {
+                upgrade.doUpgrade += upgradeBar.SetLevel;
+            }
+            
             upgrade.doUpgrade += upgradeBar.UpgradeButton.SetUpgradeCost;
             upgrade.onMaxedUpgrade += upgradeBar.OnMaxed;
         }
