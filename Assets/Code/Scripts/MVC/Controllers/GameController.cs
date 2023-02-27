@@ -207,6 +207,9 @@ public class GameController : BaseController<GameView>
         view.displayFloatingDamage.onValueChanged += value => { SettingsModel.Instance.DisplayFloatingText = value; };
         SettingsModel.Instance.DisplayFloatingText = view.displayFloatingDamage.IsOn;
 
+        view.useAlternativeNotation.onValueChanged += value => { SettingsModel.Instance.UseAlternativeNotation = value; };
+        SettingsModel.Instance.UseAlternativeNotation = view.useAlternativeNotation.IsOn;
+
         view.eraseSaveFile.onClick += EraseSaveFile;
         #endregion
 
@@ -248,6 +251,7 @@ public class GameController : BaseController<GameView>
     {
         view.is60fps.IsOn = SettingsModel.Instance.Is60fps;
         view.displayFloatingDamage.IsOn = SettingsModel.Instance.DisplayFloatingText;
+        view.useAlternativeNotation.IsOn = SettingsModel.Instance.UseAlternativeNotation;
     }
 
     private void UpdateSettings()

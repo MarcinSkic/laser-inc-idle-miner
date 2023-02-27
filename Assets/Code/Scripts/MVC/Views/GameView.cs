@@ -66,6 +66,7 @@ public class GameView : BaseView
     [Header("Settings Tab")]
     public UIToggleController is60fps;
     public UIToggleController displayFloatingDamage;
+    public UIToggleController useAlternativeNotation;
     public UIButtonController eraseSaveFile;
 
 

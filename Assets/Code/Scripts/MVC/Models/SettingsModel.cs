@@ -68,6 +68,22 @@ public class SettingsModel : MonoBehaviour
     }
     #endregion
 
+    #region
+    [ReadOnly] [SerializeField] private bool useAlternativeNotation;
+    public bool UseAlternativeNotation
+    {
+        get
+        {
+            return useAlternativeNotation;
+        }
+        set
+        {
+            useAlternativeNotation = value;
+            onSettingsChange?.Invoke();
+        }
+    }
+    #endregion
+
     #region ShowDebugWindow
     [ReadOnly] [SerializeField] private bool showDebugWindow;
     public bool ShowDebugWindow
@@ -99,12 +115,14 @@ public class SettingsModel : MonoBehaviour
     {
         data.is60fps = Is60fps;
         data.displayFloatingText = DisplayFloatingText;
+        data.useAlternativeNotation = UseAlternativeNotation;
     }
 
     public void LoadPersistentData(PersistentData data)
     {
         Is60fps = data?.is60fps ?? true;
         DisplayFloatingText = data?.displayFloatingText ?? false;
+        UseAlternativeNotation = data?.useAlternativeNotation ?? false;
     }
 
     [ContextMenu("ERASE Save File")]
