@@ -86,6 +86,11 @@ public class BasicBlock : MonoBehaviour, IPoolable<BasicBlock>
         poisonPerSecond += damagePerSecond;
     }
 
+    public string GetTypeName()
+    {
+        return type.name;
+    }
+
     /// <summary>
     /// Double is maxHp that is used to money calculations
     /// </summary>

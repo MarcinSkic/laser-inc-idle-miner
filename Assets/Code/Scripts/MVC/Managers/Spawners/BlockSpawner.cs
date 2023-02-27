@@ -94,7 +94,14 @@ public class BlockSpawner : BaseSpawner<BasicBlock>
         for (int i=0; i<positions.Length; i++)
         {
             spawnPosition = positions[i];
-            spawnBlockTypeName = blockTypeNames[i] ?? "";
+            try
+            {
+                spawnBlockTypeName = blockTypeNames[i] ?? "";
+            } catch
+            {
+                spawnBlockTypeName = "";
+            }
+            
             Spawn(out var block);
             spawnedBlocks.Add(block);
         }

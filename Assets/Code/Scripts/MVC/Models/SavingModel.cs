@@ -32,6 +32,7 @@ public class PersistentData
 
     #region BlocksModel
     public Vector2[] blocksPositions;
+    public string[] blocksMaterials;
     #endregion
 
     #region UpgradesModel
