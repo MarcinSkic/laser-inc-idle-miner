@@ -206,9 +206,12 @@ public class UpgradesManager : MonoBehaviour
             var value = GetValueByType(upgrade.upgradedValues, ballsModel.ballsData[upgrade.upgradedObjects]);
             upgrade.onValueUpdate?.Invoke(NumberFormatter.Format(value.Value));
         } 
-        else
+        else if(upgrade.upgradedValues == UpgradeableValues.ClickDamage)
         {
-            upgrade.onValueUpdate?.Invoke(NumberFormatter.Format(upgrade.internalValue));
+            upgrade.onValueUpdate?.Invoke(string.Format(upgrade.upgradedValueFormatedString, NumberFormatter.Format(SettingsModel.Instance.clickDamage)));
+        } else if(upgrade.upgradedValues == UpgradeableValues.MoneyGainMultiplier)
+        {
+            upgrade.onValueUpdate?.Invoke(string.Format(upgrade.upgradedValueFormatedString, NumberFormatter.Format(resourcesModel.moneyGainMultiplier)));
         }
     }
 
