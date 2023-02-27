@@ -138,15 +138,16 @@ public class BlocksManager : MonoBehaviour
 
     public void SavePersistentData(PersistentData data)
     {
-        data.blocksPositions = model._dynamic_blocks.GetComponentsInChildren<BasicBlock>(false).Select(block => new Vector2(block.transform.position.x,block.transform.position.y)).ToArray();
+        var blocks = model._dynamic_blocks.GetComponentsInChildren<BasicBlock>(false);
+        data.blocksPositions = blocks.Select(block => new Vector2(block.transform.position.x,block.transform.position.y)).ToArray();
+        data.blocksMaterials = blocks.Select(block => block.GetTypeName()).ToArray();
     }
 
     public void LoadPersistentData(PersistentData data)
     {
         if(data.blocksPositions != null)
         {
-            // TODO: wczytaj tu poprawnie te nazwy typów klocków
-            string[] blockTypeNames = new string[data.blocksPositions.Length];
+            string[] blockTypeNames = data.blocksMaterials ?? new string[data.blocksPositions.Length];
 
             blockSpawner.SpawnBlocksOnPositions(data.blocksPositions, blockTypeNames, out List<BasicBlock> spawnedBlocks);
 
