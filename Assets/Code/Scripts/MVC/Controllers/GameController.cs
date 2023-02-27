@@ -101,7 +101,10 @@ public class GameController : BaseController<GameView>
 
     private void Update()
     {
-        DisplayFPS();
+        if (SettingsModel.Instance.ShowDebugWindow)
+        {
+            DisplayFPS();
+        }
     }
 
 
@@ -182,6 +185,7 @@ public class GameController : BaseController<GameView>
     {
         view.InitButtons();
 
+        #region OfflineTimePopup
         view.offlineConfirmButton.onClick += delegate {
             resourcesManager.IncreaseMoneyForOfflineByValue(resourcesModel.offlineMoney);
             view.offlineGetBonusButton.Activate();
@@ -194,7 +198,19 @@ public class GameController : BaseController<GameView>
             resourcesModel.offlineMoney *= 2;
             view.SetOfflineMoney(resourcesModel.offlineMoney); 
         };
+        #endregion
 
+        #region SettingsWindow
+        view.is60fps.onValueChanged += value => { SettingsModel.Instance.Is60fps = value; };
+        SettingsModel.Instance.Is60fps = view.is60fps.IsOn;
+
+        view.displayFloatingDamage.onValueChanged += value => { SettingsModel.Instance.DisplayFloatingText = value; };
+        SettingsModel.Instance.DisplayFloatingText = view.displayFloatingDamage.IsOn;
+
+        view.eraseSaveFile.onClick += EraseSaveFile;
+        #endregion
+
+        #region CheatsWindow
         view.cheatMoney.onClick += resourcesManager.CheatMoney;
         view.cheatMoney.SetText($"Cheat {NumberFormatter.Format(resourcesModel.cheatMoney)} money");
 
@@ -202,8 +218,6 @@ public class GameController : BaseController<GameView>
         view.cheatDepth.SetText($"Dive {NumberFormatter.Format(model.cheatDepth)}m");
 
         view.forcePrestige.onClick += ExecutePrestige;
-
-        view.eraseSaveFile.onClick += EraseSaveFile;
 
         view.cheatSpeedUp.SetText($"speed x 2 (now: { Time.timeScale})");
         view.cheatSpeedUp.onClick += delegate {
@@ -219,11 +233,10 @@ public class GameController : BaseController<GameView>
             view.cheatSlowDown.SetText($"speed x 0.5 (now: {Time.timeScale})");
         };
 
-        view.is60fps.onValueChanged += value => { SettingsModel.Instance.Is60fps = value; };
-        SettingsModel.Instance.Is60fps = view.is60fps.IsOn;
+        view.showDebugWindow.onValueChanged += v => {SettingsModel.Instance.ShowDebugWindow = v; };
+        SettingsModel.Instance.ShowDebugWindow = view.showDebugWindow.IsOn;
+        #endregion
 
-        view.displayFloatingDamage.onValueChanged += value => { SettingsModel.Instance.DisplayFloatingText = value; };
-        SettingsModel.Instance.DisplayFloatingText = view.displayFloatingDamage.IsOn;
     }
 
     private void ConnectToAchievementsManager()
@@ -239,7 +252,7 @@ public class GameController : BaseController<GameView>
 
     private void UpdateSettings()
     {
-        view.debugWindow.SetActive(SettingsModel.Instance.showDebugWindow);
+        view.debugWindow.SetActive(SettingsModel.Instance.ShowDebugWindow);
         view.cheatWindowButton.SetActive(SettingsModel.Instance.unlockCheatWindow);
 
         if (SettingsModel.Instance.changeTimeScale)
@@ -482,7 +495,9 @@ public class GameController : BaseController<GameView>
 
         SettingsModel.Instance.SavePersistentData(persistentData);
         achievementManager.SavePersistentData(persistentData);
-        persistentData.prestigeCurrency += resourcesManager.PrestigeCurrency + resourcesManager.PrestigeCurrencyForNextPrestige;
+        resourcesManager.IncreasePrestigeCurrency(resourcesManager.PrestigeCurrencyForNextPrestige);
+        resourcesManager.SavePrestigePersistentData(persistentData);
+        upgradesManager.SavePrestigePersistentData(persistentData);
 
         savingManager.SavePersistentData(persistentData);
 

@@ -66,10 +66,14 @@ public class GameView : BaseView
     [Header("Settings Tab")]
     public UIToggleController is60fps;
     public UIToggleController displayFloatingDamage;
+    public UIButtonController eraseSaveFile;
+
+
+    [Header("Cheats Tab")]
+    public UIToggleController showDebugWindow;
     public UIButtonController cheatMoney;
     public UIButtonController cheatDepth;
     public UIButtonController forcePrestige;
-    public UIButtonController eraseSaveFile;
     public UIButtonController cheatSpeedUp;
     public UIButtonController cheatSlowDown;
 
@@ -104,7 +108,7 @@ public class GameView : BaseView
     }
 
     #region WINDOWS-TABS SYSTEM
-    public UIWindow activeWindow = null;
+    private UIWindow activeWindow = null;
 
     public void InitWindows()
     {

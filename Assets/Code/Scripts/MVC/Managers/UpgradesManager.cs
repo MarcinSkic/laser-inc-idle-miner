@@ -206,9 +206,12 @@ public class UpgradesManager : MonoBehaviour
             var value = GetValueByType(upgrade.upgradedValues, ballsModel.ballsData[upgrade.upgradedObjects]);
             upgrade.onValueUpdate?.Invoke(NumberFormatter.Format(value.Value));
         } 
-        else
+        else if(upgrade.upgradedValues == UpgradeableValues.ClickDamage)
         {
-            upgrade.onValueUpdate?.Invoke(NumberFormatter.Format(upgrade.internalValue));
+            upgrade.onValueUpdate?.Invoke(string.Format(upgrade.upgradedValueFormatedString, NumberFormatter.Format(SettingsModel.Instance.clickDamage)));
+        } else if(upgrade.upgradedValues == UpgradeableValues.MoneyGainMultiplier)
+        {
+            upgrade.onValueUpdate?.Invoke(string.Format(upgrade.upgradedValueFormatedString, NumberFormatter.Format(resourcesModel.moneyGainMultiplier)));
         }
     }
 
@@ -267,6 +270,13 @@ public class UpgradesManager : MonoBehaviour
     public void SavePersistentData(PersistentData data)
     {
         data.upgrades = model.upgrades.Values.Select(upgrade => new PersistentUpgrade(upgrade.name, upgrade.currentLevel, upgrade.isUnlocked)).ToArray();
+    }
+
+    public void SavePrestigePersistentData(PersistentData data)
+    {
+        data.upgrades = model.upgrades.Values.Where(u => u.currency == Currency.Prestige)
+                                            .Select(u => new PersistentUpgrade(u.name, u.currentLevel, u.isUnlocked))
+                                            .ToArray();
     }
 
     public void LoadPersistentData(PersistentData data)
