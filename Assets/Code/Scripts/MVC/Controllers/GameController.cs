@@ -101,7 +101,10 @@ public class GameController : BaseController<GameView>
 
     private void Update()
     {
-        DisplayFPS();
+        if (SettingsModel.Instance.ShowDebugWindow)
+        {
+            DisplayFPS();
+        }
     }
 
 
@@ -492,7 +495,9 @@ public class GameController : BaseController<GameView>
 
         SettingsModel.Instance.SavePersistentData(persistentData);
         achievementManager.SavePersistentData(persistentData);
-        persistentData.prestigeCurrency += resourcesManager.PrestigeCurrency + resourcesManager.PrestigeCurrencyForNextPrestige;
+        resourcesManager.IncreasePrestigeCurrency(resourcesManager.PrestigeCurrencyForNextPrestige);
+        resourcesManager.SavePrestigePersistentData(persistentData);
+        upgradesManager.SavePrestigePersistentData(persistentData);
 
         savingManager.SavePersistentData(persistentData);
 

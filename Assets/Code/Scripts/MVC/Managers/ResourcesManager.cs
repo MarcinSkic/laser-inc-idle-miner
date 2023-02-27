@@ -342,6 +342,12 @@ public class ResourcesManager : MonoBehaviour
         data.earnedPowerUpTime = model.earnedPowerUpTime;
     }
 
+    public void SavePrestigePersistentData(PersistentData data)
+    {
+        data.prestigeCurrency = PrestigeCurrency;
+        data.earnedPrestigeCurrency = model.earnedPrestigeCurrency;
+    }
+
     public void LoadPersistentData(PersistentData data)
     {
         Money = data?.money ?? model.startMoney;

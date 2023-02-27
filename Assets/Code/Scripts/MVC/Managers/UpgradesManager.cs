@@ -272,6 +272,13 @@ public class UpgradesManager : MonoBehaviour
         data.upgrades = model.upgrades.Values.Select(upgrade => new PersistentUpgrade(upgrade.name, upgrade.currentLevel, upgrade.isUnlocked)).ToArray();
     }
 
+    public void SavePrestigePersistentData(PersistentData data)
+    {
+        data.upgrades = model.upgrades.Values.Where(u => u.currency == Currency.Prestige)
+                                            .Select(u => new PersistentUpgrade(u.name, u.currentLevel, u.isUnlocked))
+                                            .ToArray();
+    }
+
     public void LoadPersistentData(PersistentData data)
     {
         if (data.upgrades != null)
