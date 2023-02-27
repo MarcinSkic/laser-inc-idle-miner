@@ -28,7 +28,6 @@ public class SettingsModel : MonoBehaviour
 
     [Header("FALSE before build/commit")]
     public bool removeUpgradesRequirements;
-    public bool showDebugWindow;
     public bool unlockCheatWindow;
     [Space(5)]
     public bool changeTimeScale;
@@ -69,6 +68,22 @@ public class SettingsModel : MonoBehaviour
     }
     #endregion
 
+    #region ShowDebugWindow
+    [ReadOnly] [SerializeField] private bool showDebugWindow;
+    public bool ShowDebugWindow
+    {
+        get
+        {
+            return showDebugWindow;
+        }
+        set
+        {
+            showDebugWindow = value;
+            onSettingsChange?.Invoke();
+        }
+    }
+    #endregion
+
     [Header("Debug informations")]
     [ReadOnly] public int ballsAttemptedCorrections = 0;
     [ReadOnly] public int ballsAppliedCorrections = 0;
@@ -104,7 +119,7 @@ public class SettingsModel : MonoBehaviour
         saveAndLoadFile = true;
         doOfflineEarning = true;
         spawnBlocks = true;
-        showDebugWindow = false;
+        ShowDebugWindow = false;
         changeTimeScale = false;
     }
 }
