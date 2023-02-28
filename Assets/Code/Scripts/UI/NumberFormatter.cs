@@ -7,7 +7,11 @@ public static class NumberFormatter
 {
     public static string Format(double num)
     {
-        return FormatToEngineering(num);    //Here can be inserted controlling format with settings
+        if (SettingsModel.Instance.UseAlternativeNotation)
+        {
+            return FormatToEngineering(num);    //Here can be inserted controlling format with settings
+        }
+        return naukowa1(num);
     }
 
     private static string FormatToEngineering(double num)
