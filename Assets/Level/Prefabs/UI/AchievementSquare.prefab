@@ -178,7 +178,7 @@ MonoBehaviour:
     requirements: []
   button: {fileID: -4322887065346071738}
   image: {fileID: 7324660533847187030}
-  lockedColor: {r: 0.8207547, g: 0, b: 0, a: 1}
+  lockedColor: {r: 0.1882353, g: 0.1882353, b: 0.1882353, a: 1}
 --- !u!50 &5101611855634531833
 Rigidbody2D:
   serializedVersion: 4

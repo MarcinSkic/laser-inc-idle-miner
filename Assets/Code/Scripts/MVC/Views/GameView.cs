@@ -14,6 +14,7 @@ public class GameView : BaseView
     public Sprite moneyIcon;
     public Sprite prestigeCurrencyIcon;
     public Sprite premiumCurrencyIcon;
+    public Sprite lockedIcon;
 
     [Space(10)]
     [Header("IN GAME")]
@@ -260,13 +261,18 @@ public class GameView : BaseView
         AchievementSquare achievementSquareInstance = Instantiate(achievementPrefab, achievementsGlp.transform);
 
         achievementSquareInstance.Init(achievement);
-        achievementSquareInstance.onAchievementClicked += achievementTooltip.DisplayAchievement;
+        achievementSquareInstance.onAchievementClicked += DisplayAchievement;
 
         achievementSquares.Add(achievementSquareInstance);
 
         achievement.onAchievementUnlocked += achievementSquareInstance.SetColor;
 
         
+    }
+
+    private void DisplayAchievement(Achievement achievement)
+    {
+        MessagesManager.Instance.DisplayMessage(achievement.name, achievement.description,achievement.sprite, achievement.isCompleted ? Color.white : new Color(0.1875f, 0.1875f, 0.1875f, 1));
     }
 
     private void SetAchievementSquaresWidth()
