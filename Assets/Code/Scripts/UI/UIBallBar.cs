@@ -8,8 +8,10 @@ public class UIBallBar : MonoBehaviour
 {
     [SerializeField] private GameObject lockedUpgradeHider;
     public Image ballIcon;
+    public UIButtonController ballInfoButton;
     public List<UIButtonUpgradeController> buttonUpgrades;
     public UpgradeableObjects ballType;
+    public TMP_Text ballTitle;
     public TMP_Text toUnlockText;
 
     public void Lock()
@@ -20,6 +22,20 @@ public class UIBallBar : MonoBehaviour
     public void Unlock(Upgrade _)
     {
         lockedUpgradeHider.SetActive(false);
+    }
+
+    public void Init(BallData ballData)
+    {
+        SetUpgradesName(ballData.type);
+        ballIcon.sprite = ballData.sprite;
+        ballType = ballData.type;
+        ballTitle.text = ballData.nameForUI;
+        ballInfoButton.Init();
+        ballInfoButton.onClick += delegate
+        {
+            MessagesManager.Instance.DisplayMessage(ballData.nameForUI, ballData.description, ballData.sprite);
+        };
+
     }
 
     public void SetUpgradesName(UpgradeableObjects type)

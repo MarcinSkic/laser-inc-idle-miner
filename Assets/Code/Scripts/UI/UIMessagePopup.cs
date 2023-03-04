@@ -30,7 +30,6 @@ public class UIMessagePopup : MonoBehaviour
 
         if(icon != null)
         {
-            Debug.Log(iconColor);
             this.icon.sprite = icon;
             this.icon.color = iconColor ?? Color.white;
         } else
