@@ -15,26 +15,26 @@ MonoBehaviour:
   upgrade:
     type: 0
     name: 
-    identifier: enhanced lens
+    identifier: prestigeEnhancedLens
     isUnlocked: 0
     leftRequirements: 0
     requirements: []
     whereToGenerate: 3
     order: 0
     title: enhanced lens
-    description: damage * 2.5
+    description: damage * 1.5
     toUnlockDescription: 
     maxLevel: -1
     currency: 1
     cost: 10
     costIncremental: 0
-    costMultiplier: 10
+    costMultiplier: 5
     showUpgradedValueInsteadOfLevel: 0
     upgradedValueFormatedString: '{0}'
     useInternalValueForUI: 0
     internalValue: 0
     upgradedObjects: 63
     upgradedValues: 2
-    changeValue: 3
+    changeValue: 1.5
     formula: 1
     currentLevel: 0

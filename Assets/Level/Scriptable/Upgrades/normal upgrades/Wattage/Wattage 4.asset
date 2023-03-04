@@ -21,7 +21,7 @@ MonoBehaviour:
     requirements:
     - dependsOn: 0
       comparison: 1
-      requiredValue: 5000
+      requiredValue: 10000
       upgradeScriptable: {fileID: 0}
     - dependsOn: 16
       comparison: 1
@@ -31,10 +31,10 @@ MonoBehaviour:
     order: 500
     title: 8MW generator
     description: double power means double damage!
-    toUnlockDescription: 4MW generator & depth of 5000
+    toUnlockDescription: 4MW generator & depth of 10000
     maxLevel: 1
     currency: 0
-    cost: 200000000000
+    cost: 200000000000000
     costIncremental: 0
     costMultiplier: 1
     showUpgradedValueInsteadOfLevel: 0

@@ -21,20 +21,22 @@ MonoBehaviour:
     requirements:
     - dependsOn: 0
       comparison: 1
-      requiredValue: 12500
+      requiredValue: 50000
       upgradeScriptable: {fileID: 0}
     whereToGenerate: 0
     order: 0
     title: 
     description: 
-    toUnlockDescription: reach a depth of 12500
+    toUnlockDescription: reach a depth of 50000
     maxLevel: -1
     currency: 0
-    cost: 100000000
+    cost: 1e+17
     costIncremental: 0
     costMultiplier: 5
-    onUpgradeButtonsShowUpgradeInternalValue: 0
-    upgradeValue: 0
+    showUpgradedValueInsteadOfLevel: 0
+    upgradedValueFormatedString: '{0}'
+    useInternalValueForUI: 0
+    internalValue: 0
     upgradedObjects: 32
     upgradedValues: 0
     changeValue: 0

@@ -26,7 +26,7 @@ MonoBehaviour:
     toUnlockDescription: 
     maxLevel: -1
     currency: 0
-    cost: 300000
+    cost: 300000000
     costIncremental: 5
     costMultiplier: 3.16227766016838
     showUpgradedValueInsteadOfLevel: 0

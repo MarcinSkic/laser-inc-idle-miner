@@ -21,24 +21,26 @@ MonoBehaviour:
     requirements:
     - dependsOn: 0
       comparison: 1
-      requiredValue: 500
+      requiredValue: 1000
       upgradeScriptable: {fileID: 0}
     - dependsOn: 16
       comparison: 1
-      requiredValue: 3
+      requiredValue: 5
       upgradeScriptable: {fileID: 11400000, guid: 87c4dd4ba17df9842b5925eab17869c8, type: 2}
     whereToGenerate: 1
     order: 51
     title: Bigger Booms
     description: increases red laser's explosion area
-    toUnlockDescription: 500+ depth, 3+ bomb balls
+    toUnlockDescription: 1000+ depth, 5+ bomb balls
     maxLevel: 1
     currency: 0
     cost: 20000
     costIncremental: 0
     costMultiplier: 1
-    onUpgradeButtonsShowUpgradeInternalValue: 0
-    upgradeValue: 0
+    showUpgradedValueInsteadOfLevel: 0
+    upgradedValueFormatedString: '{0}'
+    useInternalValueForUI: 0
+    internalValue: 0
     upgradedObjects: 4
     upgradedValues: 4
     changeValue: 1

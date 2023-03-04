@@ -10,35 +10,31 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 5400be14b10cc7e47a7f3024d24c25bb, type: 3}
-  m_Name: PoisonCount
+  m_Name: MoneyGain
   m_EditorClassIdentifier: 
   upgrade:
-    type: 1
-    name: SniperCount
-    identifier: 
-    isUnlocked: 1
+    type: 0
+    name: 
+    identifier: prestigeMoneyGain
+    isUnlocked: 0
     leftRequirements: 0
-    requirements:
-    - dependsOn: 0
-      comparison: 1
-      requiredValue: 10000
-      upgradeScriptable: {fileID: 11400000, guid: 6bf44ee033c3f534598b981ea7fe19f3, type: 2}
-    whereToGenerate: 0
-    order: 0
-    title: 
-    description: 
-    toUnlockDescription: reach a depth of 10000
+    requirements: []
+    whereToGenerate: 3
+    order: 1
+    title: enhanced financing
+    description: money gain * 1.5
+    toUnlockDescription: 
     maxLevel: -1
-    currency: 0
-    cost: 5000000000000
+    currency: 1
+    cost: 10
     costIncremental: 0
-    costMultiplier: 5
+    costMultiplier: 10
     showUpgradedValueInsteadOfLevel: 0
     upgradedValueFormatedString: '{0}'
     useInternalValueForUI: 0
     internalValue: 0
-    upgradedObjects: 16
-    upgradedValues: 0
-    changeValue: 0
-    formula: 0
+    upgradedObjects: 256
+    upgradedValues: 16
+    changeValue: 1.5
+    formula: 1
     currentLevel: 0
