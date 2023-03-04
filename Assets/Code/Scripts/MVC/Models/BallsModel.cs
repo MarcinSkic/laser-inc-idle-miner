@@ -8,7 +8,7 @@ using MyBox;
 
 public class BallsModel : MonoBehaviour
 {
-    public BallData[] ballsDataList;
+    public BallDataScriptable[] ballDataScriptables;
     public Dictionary<UpgradeableObjects, BallData> ballsData;
 
     void Awake()
@@ -20,10 +20,11 @@ public class BallsModel : MonoBehaviour
     {
         ballsData = new Dictionary<UpgradeableObjects, BallData>() { };
 
-        foreach (var data in ballsDataList)
+        foreach (var data in ballDataScriptables)
         {
-            data.Init();
-            ballsData.Add(data.type, data);
+            var ballData = data.BallData;
+            ballData.Init();
+            ballsData.Add(ballData.type, ballData);
         }
     }
 }
