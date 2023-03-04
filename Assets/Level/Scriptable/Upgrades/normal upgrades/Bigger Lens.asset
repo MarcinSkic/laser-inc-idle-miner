@@ -22,17 +22,19 @@ MonoBehaviour:
     whereToGenerate: 1
     order: 0
     title: Larger lens
-    description: +20% damage
+    description: +25% damage
     toUnlockDescription: 
     maxLevel: -1
     currency: 0
     cost: 100
     costIncremental: 0
-    costMultiplier: 2.5
-    onUpgradeButtonsShowUpgradeInternalValue: 0
-    upgradeValue: 0
+    costMultiplier: 7.07106781186548
+    showUpgradedValueInsteadOfLevel: 0
+    upgradedValueFormatedString: '{0}'
+    useInternalValueForUI: 0
+    internalValue: 0
     upgradedObjects: 63
     upgradedValues: 2
-    changeValue: 1.2
+    changeValue: 1.25
     formula: 1
     currentLevel: 0

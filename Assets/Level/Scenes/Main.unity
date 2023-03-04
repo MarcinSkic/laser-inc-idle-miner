@@ -13508,6 +13508,8 @@ MonoBehaviour:
   - {fileID: 11400000, guid: 9ebb945fbb929484e9dcd49da19e38b6, type: 2}
   - {fileID: 11400000, guid: f7b680159857d894ba0550fc79dc99e6, type: 2}
   - {fileID: 11400000, guid: b3a599856d43d184097c2dc78f47756a, type: 2}
+  - {fileID: 11400000, guid: c4680740163624048b19d237cb932c06, type: 2}
+  - {fileID: 11400000, guid: a1e0dd4fe59ed6346b9b1ecf74ae59e8, type: 2}
 --- !u!114 &1947716358
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -13525,9 +13527,9 @@ MonoBehaviour:
   earnedPowerUpTime: 0
   premiumCurrency: 0
   earnedPremiumCurrency: 0
-  prestigeCurrency: 100
+  prestigeCurrency: 0
   earnedPrestigeCurrency: 0
-  prestigeCurrencyForNextPrestige: 1000
+  prestigeCurrencyForNextPrestige: 0
   startMoney: 0
   money: 0
   cheatMoney: 1e+99
@@ -13646,19 +13648,6 @@ MonoBehaviour:
     - type: 2
       name: 
       value: 1
-  - type: 2
-    nameForUI: 
-    sprite: {fileID: 21300000, guid: 0192c9fd2f408024fa0f75adeca8c000, type: 3}
-    valuesList:
-    - type: 1
-      name: 
-      value: 4
-    - type: 2
-      name: 
-      value: 1
-    - type: 4
-      name: SpeedBoost
-      value: 2
   - type: 4
     nameForUI: 
     sprite: {fileID: 21300000, guid: 96c5a551b5e64bd4b93fe972d4acd642, type: 3}
@@ -13668,9 +13657,22 @@ MonoBehaviour:
       value: 3
     - type: 2
       name: 
-      value: 3
+      value: 1
     - type: 4
       name: ExplosionSize
+      value: 2
+  - type: 2
+    nameForUI: 
+    sprite: {fileID: 21300000, guid: 0192c9fd2f408024fa0f75adeca8c000, type: 3}
+    valuesList:
+    - type: 1
+      name: 
+      value: 4
+    - type: 2
+      name: 
+      value: 2
+    - type: 4
+      name: SpeedBoost
       value: 2
   - type: 8
     nameForUI: 

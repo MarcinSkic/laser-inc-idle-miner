@@ -26,11 +26,13 @@ MonoBehaviour:
     toUnlockDescription: 
     maxLevel: -1
     currency: 0
-    cost: 300000
+    cost: 300000000
     costIncremental: 5
-    costMultiplier: 2.23606797749979
-    onUpgradeButtonsShowUpgradeInternalValue: 0
-    upgradeValue: 0
+    costMultiplier: 3.16227766016838
+    showUpgradedValueInsteadOfLevel: 0
+    upgradedValueFormatedString: '{0}'
+    useInternalValueForUI: 0
+    internalValue: 0
     upgradedObjects: 8
     upgradedValues: 2
     changeValue: 1.5
