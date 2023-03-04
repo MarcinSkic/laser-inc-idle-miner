@@ -10,6 +10,7 @@ public class UIBallBar : MonoBehaviour
     public Image ballIcon;
     public List<UIButtonUpgradeController> buttonUpgrades;
     public UpgradeableObjects ballType;
+    public TMP_Text ballTitle;
     public TMP_Text toUnlockText;
 
     public void Lock()

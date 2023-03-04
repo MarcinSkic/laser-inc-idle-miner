@@ -201,6 +201,7 @@ public class GameView : BaseView
         ballBar.SetUpgradesName(ballData.type);
         ballBar.ballIcon.sprite = ballData.sprite;
         ballBar.ballType = ballData.type;
+        ballBar.ballTitle.text = ballData.nameForUI;
 
         ballBars.Add(ballBar);
     }
