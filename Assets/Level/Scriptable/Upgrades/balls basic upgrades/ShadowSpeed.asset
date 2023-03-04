@@ -28,9 +28,11 @@ MonoBehaviour:
     currency: 0
     cost: 250000000
     costIncremental: 0
-    costMultiplier: 3.16227766016838
-    onUpgradeButtonsShowUpgradeInternalValue: 0
-    upgradeValue: 0
+    costMultiplier: 3.46410161513775
+    showUpgradedValueInsteadOfLevel: 0
+    upgradedValueFormatedString: '{0}'
+    useInternalValueForUI: 0
+    internalValue: 0
     upgradedObjects: 32
     upgradedValues: 1
     changeValue: 1

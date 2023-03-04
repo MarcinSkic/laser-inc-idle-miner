@@ -28,7 +28,7 @@ MonoBehaviour:
     currency: 0
     cost: 500
     costIncremental: 5
-    costMultiplier: 2.23606797749979
+    costMultiplier: 3.16227766016838
     showUpgradedValueInsteadOfLevel: 0
     upgradedValueFormatedString: '{0}'
     useInternalValueForUI: 0

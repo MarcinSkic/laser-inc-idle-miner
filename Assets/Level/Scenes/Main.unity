@@ -13656,7 +13656,7 @@ MonoBehaviour:
       value: 3
     - type: 2
       name: 
-      value: 3
+      value: 1
     - type: 4
       name: ExplosionSize
       value: 2
@@ -13669,7 +13669,7 @@ MonoBehaviour:
       value: 4
     - type: 2
       name: 
-      value: 1
+      value: 2
     - type: 4
       name: SpeedBoost
       value: 2
