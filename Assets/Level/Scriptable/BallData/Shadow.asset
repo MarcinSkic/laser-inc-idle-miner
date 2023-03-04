@@ -15,6 +15,8 @@ MonoBehaviour:
   ballData:
     type: 32
     nameForUI: Ghost
+    description: Laser with such light spectrum that allows it to pass right through
+      blocks
     sprite: {fileID: 21300000, guid: 3c0201ab08b7a554082f6d7da400c58b, type: 3}
     valuesList:
     - type: 1

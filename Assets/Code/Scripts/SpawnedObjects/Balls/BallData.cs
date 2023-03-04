@@ -8,6 +8,7 @@ public class BallData
 {
     public UpgradeableObjects type;
     public string nameForUI;
+    public string description;
     public Sprite sprite;
 
     [SerializeField]

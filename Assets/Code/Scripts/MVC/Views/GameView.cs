@@ -198,10 +198,7 @@ public class GameView : BaseView
     public void CreateBallBar(BallData ballData)
     {
         var ballBar = Instantiate(ballBarPrefab, ballBarsParent);
-        ballBar.SetUpgradesName(ballData.type);
-        ballBar.ballIcon.sprite = ballData.sprite;
-        ballBar.ballType = ballData.type;
-        ballBar.ballTitle.text = ballData.nameForUI;
+        ballBar.Init(ballData);
 
         ballBars.Add(ballBar);
     }
