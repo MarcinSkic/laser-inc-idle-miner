@@ -11,7 +11,7 @@ public class ResourcesManager : MonoBehaviour
 
     [SerializeField] GameModel gameModel;
 
-    public UnityAction<double> onPowerUpTimeChanged;
+    public UnityAction<double> onPowerUpTimeIncrease;
     public UnityAction<double> onPowerUpTimeEarned;
     public UnityAction<double> onPremiumCurrencyChange;
     public UnityAction<double> onPremiumCurrencyEarned;
@@ -37,7 +37,8 @@ public class ResourcesManager : MonoBehaviour
         {
             if(model.powerUpTimeLeft < value)
             {
-                onPowerUpTimeChanged?.Invoke(value);
+                Debug.Log("?!");
+                onPowerUpTimeIncrease?.Invoke(value);
             }
             model.powerUpTimeLeft = value;
         }

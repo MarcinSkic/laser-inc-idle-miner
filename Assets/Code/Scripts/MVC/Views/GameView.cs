@@ -36,6 +36,9 @@ public class GameView : BaseView
     [Header("Depth Meter")]
     public UIDepthMeter depthMeter;
 
+    [Header("PowerUps")]
+    public UIPowerUp damagePowerUp;
+
     [Header("Offline popup")]
     public GameObject offlinePopup;
     public TMP_Text offlineText;

@@ -185,6 +185,10 @@ public class GameController : BaseController<GameView>
     {
         view.InitButtons();
 
+        #region PowerUps
+        resourcesManager.onPowerUpTimeIncrease += _ => { view.damagePowerUp.StartTimer(); };
+        #endregion
+
         #region OfflineTimePopup
         view.offlineConfirmButton.onClick += delegate {
             resourcesManager.IncreaseMoneyForOfflineByValue(resourcesModel.offlineMoney);
