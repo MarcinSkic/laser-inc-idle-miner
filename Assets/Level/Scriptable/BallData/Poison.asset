@@ -16,7 +16,7 @@ MonoBehaviour:
     type: 16
     nameForUI: Acid
     description: Laser leaving acid on blocks upon hit, damaging them over time
-    sprite: {fileID: 21300000, guid: 0192c9fd2f408024fa0f75adeca8c000, type: 3}
+    sprite: {fileID: 21300000, guid: 0113c985f83afec41985439647a16fcc, type: 3}
     valuesList:
     - type: 1
       name: 
