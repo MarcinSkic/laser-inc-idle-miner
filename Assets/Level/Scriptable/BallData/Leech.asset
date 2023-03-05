@@ -15,8 +15,7 @@ MonoBehaviour:
   ballData:
     type: 8
     nameForUI: Pulsar
-    description: Laser that emites pulsation when connects to block and weakens its
-      structure
+    description: Laser pulsating upon connecting to block, weakening its structure
     sprite: {fileID: 21300000, guid: d81c38b8911f89d439a563274f2ce019, type: 3}
     valuesList:
     - type: 1

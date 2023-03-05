@@ -14,8 +14,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   ballData:
     type: 16
-    nameForUI: Nanobot
-    description: Laser that leaves nanobots in blocks after hit, damaging them overtime
+    nameForUI: Acid
+    description: Laser leaving acid on blocks upon hit, damaging them over time
     sprite: {fileID: 21300000, guid: 0192c9fd2f408024fa0f75adeca8c000, type: 3}
     valuesList:
     - type: 1

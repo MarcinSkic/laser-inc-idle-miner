@@ -14,8 +14,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   ballData:
     type: 2
-    nameForUI: Gravitational
-    description: Laser attracted to weak radiation of blocks
+    nameForUI: Precise
+    description: Laser that targets blocks upon bouncing off walls
     sprite: {fileID: 21300000, guid: 0192c9fd2f408024fa0f75adeca8c000, type: 3}
     valuesList:
     - type: 1
