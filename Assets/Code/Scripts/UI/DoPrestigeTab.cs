@@ -16,7 +16,7 @@ public class DoPrestigeTab : MonoBehaviour
         if (currentReward > 0)
         {
             resetButton.interactable = true;
-            rewardText.text = $"If you prestige now, you will get <color=\"green\">{currentReward}</color> prestige currency.";
+            rewardText.text = $"If you prestige now, you will get <color=\"green\">{NumberFormatter.Format(currentReward)}</color> prestige currency.";
         }
         else
         {

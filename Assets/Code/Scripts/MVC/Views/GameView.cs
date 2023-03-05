@@ -6,6 +6,7 @@ using UnityEngine.Events;
 using TMPro;
 using UnityEngine.UI;
 using MyBox;
+using System;
 
 public class GameView : BaseView
 {
@@ -246,11 +247,18 @@ public class GameView : BaseView
 
     public void ShowOfflineTimePopup(double seconds,double earnedMoney)
     {
+        TimeSpan t = TimeSpan.FromSeconds(seconds);
+        string timeText = string.Format(t.Days > 3 ? "{0:D}days" : "{1:D2}h:{2:D2}m:{3:D2}s",
+            t.Days,
+            t.Hours,
+            t.Minutes,
+            t.Seconds);
+
         offlinePopup.SetActive(true);
-        offlineText.text = $"You were offline for <color=#0bf>{seconds}</color>!";
+        offlineText.text = $"You were offline for <color=#0bf>{timeText}</color>!";
         SetOfflineMoney(earnedMoney);
     }
-
+                
     public void InitAchievementsWindow()
     {
         achievementSquares = new List<AchievementSquare>();
@@ -292,7 +300,7 @@ public class GameView : BaseView
 
     public void SetOfflineMoney(double earnedMoney)
     {
-        offlineMoney.text = string.Format("You made <color=#da0>{0:F0}</color>$ when away!", earnedMoney);
+        offlineMoney.text = $"You made <color=#da0>{NumberFormatter.Format(earnedMoney)}</color>$ when away!";
     }
 
     public void SetMoneyDisplay(double value)

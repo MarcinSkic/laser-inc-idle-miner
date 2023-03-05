@@ -27,7 +27,7 @@ MonoBehaviour:
     order: 0
     title: 
     description: 
-    toUnlockDescription: reach a depth of 10000
+    toUnlockDescription: reach a depth of 1e4
     maxLevel: -1
     currency: 0
     cost: 5000000000000

@@ -11,6 +11,7 @@ using UnityEngine.SceneManagement;
 /// </summary>
 public class GameController : BaseController<GameView>
 {
+    [Header("GAME CONTROLLER")]
     [Header("Models")]
     [SerializeField] private GameModel model;
     [SerializeField] private BallsModel ballsModel;
@@ -26,6 +27,7 @@ public class GameController : BaseController<GameView>
     [AutoProperty(AutoPropertyMode.Scene)] [SerializeField] private AchievementManager achievementManager;
     [AutoProperty(AutoPropertyMode.Scene)] [SerializeField] private SavingManager savingManager;
 
+    [Header("Bats!")]
     [SerializeField] RewardBat rewardBat;
     [SerializeField] Transform batParent;
     [SerializeField] int batsPer10000FixedUpdates;
