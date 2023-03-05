@@ -12,9 +12,7 @@ public class UIPowerUp : MonoBehaviour
 
     public void StartTimer()
     {
-        Debug.Log("?");
         gameObject.SetActive(true);
-        text.text = GetFormattedTime();
 
         StopAllCoroutines();
         StartCoroutine(Timer());
@@ -28,7 +26,7 @@ public class UIPowerUp : MonoBehaviour
 
     private IEnumerator Timer()
     {
-        yield return new WaitForSeconds(1f);
+        yield return new WaitForEndOfFrame();
 
         while (resourcesModel.powerUpTimeLeft > 0f)
         {
