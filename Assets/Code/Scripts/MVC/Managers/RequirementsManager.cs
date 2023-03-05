@@ -82,7 +82,7 @@ public class RequirementsManager : MonoBehaviour
                 resourcesManager.onPremiumCurrencyEarned += requirement.CheckIfFulfilled;
                 break;
             case DependsOn.PowerUpTimeLeft:
-                resourcesManager.onPowerUpTimeChanged += requirement.CheckIfFulfilled;
+                resourcesManager.onPowerUpTimeIncrease += requirement.CheckIfFulfilled;
                 break;
             case DependsOn.EarnedPowerUpTime:
                 resourcesManager.onPowerUpTimeEarned += requirement.CheckIfFulfilled;
@@ -149,7 +149,7 @@ public class RequirementsManager : MonoBehaviour
                 resourcesManager.onPremiumCurrencyEarned -= requirement.CheckIfFulfilled;
                 break;
             case DependsOn.PowerUpTimeLeft:
-                resourcesManager.onPowerUpTimeChanged -= requirement.CheckIfFulfilled;
+                resourcesManager.onPowerUpTimeIncrease -= requirement.CheckIfFulfilled;
                 break;
             case DependsOn.EarnedPowerUpTime:
                 resourcesManager.onPowerUpTimeEarned -= requirement.CheckIfFulfilled;

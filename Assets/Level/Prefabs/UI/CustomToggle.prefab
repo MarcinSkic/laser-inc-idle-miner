@@ -368,6 +368,7 @@ MonoBehaviour:
   toggle: {fileID: 1750430247953946955}
   handle: {fileID: 6984556780776512101}
   label: {fileID: 5194677913977320347}
+  disabledLabelFontColor: {r: 0.5529412, g: 0.5568628, b: 0.5568628, a: 1}
 --- !u!1 &6984556779238861097
 GameObject:
   m_ObjectHideFlags: 0

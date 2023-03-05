@@ -10,6 +10,7 @@ public class UIToggleController : MonoBehaviour
     [SerializeField] private Toggle toggle;
     [SerializeField] private RectTransform handle;
     [SerializeField] private TMP_Text label;
+    [SerializeField] private Color disabledLabelFontColor;
 
     public bool IsOn
     {
@@ -42,6 +43,7 @@ public class UIToggleController : MonoBehaviour
 
         handle.anchorMin = IsOn ? new Vector2(0.53f, handle.anchorMin.y) : new Vector2(0, handle.anchorMin.y);
         handle.anchorMax = IsOn ? new Vector2(1, handle.anchorMax.y) : new Vector2(0.47f, handle.anchorMax.y);
+        label.color = IsOn ? Color.white : disabledLabelFontColor;
 
         onValueChanged?.Invoke(IsOn);
     }
