@@ -157,7 +157,7 @@ public class GameController : BaseController<GameView>
     }
     private void SpawnBatOrNot()
     {
-        if (UnityEngine.Random.Range(0, 10000) < batsPer10000FixedUpdates)
+        if (settingsModel.spawnBats && UnityEngine.Random.Range(0, 10000) < batsPer10000FixedUpdates)
         {
             RewardBat newBat = Instantiate(rewardBat, batParent);
             newBat.resourcesManager = resourcesManager;
@@ -281,6 +281,26 @@ public class GameController : BaseController<GameView>
             Time.timeScale *= 0.5f;
             view.cheatSpeedUp.SetText($"speed x 2 (now: {Time.timeScale})");
             view.cheatSlowDown.SetText($"speed x 0.5 (now: {Time.timeScale})");
+        };
+
+        if (settingsModel.spawnBats)
+        {
+            view.cheatToggleBatsSpawn.SetText("turn bats off");
+        }
+        else
+        {
+            view.cheatToggleBatsSpawn.SetText("turn bats on");
+        }
+        view.cheatToggleBatsSpawn.onClick += delegate
+        {
+            settingsModel.spawnBats = !settingsModel.spawnBats;
+            if (settingsModel.spawnBats)
+            {
+                view.cheatToggleBatsSpawn.SetText("turn bats off");
+            } else
+            {
+                view.cheatToggleBatsSpawn.SetText("turn bats on");
+            }
         };
 
         view.showDebugWindow.onValueChanged += v => {SettingsModel.Instance.ShowDebugWindow = v; };

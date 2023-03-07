@@ -82,6 +82,7 @@ public class GameView : BaseView
     public UIButtonController forcePrestige;
     public UIButtonController cheatSpeedUp;
     public UIButtonController cheatSlowDown;
+    public UIButtonController cheatToggleBatsSpawn;
 
     [Header("AchievementsTab")]
     public AchievementSquare achievementPrefab;
@@ -111,6 +112,7 @@ public class GameView : BaseView
         eraseSaveFile.Init();
         cheatSpeedUp.Init();
         cheatSlowDown.Init();
+        cheatToggleBatsSpawn.Init();
     }
 
     #region WINDOWS-TABS SYSTEM
