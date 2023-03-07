@@ -44,7 +44,8 @@ public class UIDepthMeter : MonoBehaviour
         {
             labels[i+ labelsWithHigherThanCurrentDepth].rectTransform.anchoredPosition = new Vector2(0, labelsBottomPadding + (gapsBeetwenLabels * i * gapWidth) + ((float)depth - labeledDepth) * gapWidth);
 
-            labels[i+ labelsWithHigherThanCurrentDepth].text = string.Format("{0}m", NumberFormatter.Format(labeledDepth - gapsBeetwenLabels * i));
+            //labels[i+ labelsWithHigherThanCurrentDepth].text = string.Format("{0}m", NumberFormatter.Format(labeledDepth - gapsBeetwenLabels * i));
+            labels[i + labelsWithHigherThanCurrentDepth].text = string.Format("{0:D}m", labeledDepth - gapsBeetwenLabels * i);
         }
     }
 }
