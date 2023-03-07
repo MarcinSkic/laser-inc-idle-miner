@@ -21,6 +21,8 @@ public class ResourcesManager : MonoBehaviour
     public UnityAction<double> onMoneyChange;
     public UnityAction<double> onMoneyEarned;
 
+    public float prevLog10Time = 0;
+
     private void Update()
     {
         DecreasePowerUpTimeLeft(Time.deltaTime);
@@ -222,8 +224,14 @@ public class ResourcesManager : MonoBehaviour
         }
         set
         {
+            double prev = model.earnedMoney;
             model.earnedMoney = value;
             onMoneyEarned?.Invoke(value);
+            if (Math.Floor(Math.Log10(model.earnedMoney)) > Math.Floor(Math.Log10(prev)))
+            {
+                Debug.LogError($"1e{Math.Floor(Math.Log10(model.earnedMoney))} - {Time.time-prevLog10Time}");
+                prevLog10Time = Time.time;
+            }
         }
     }
 
