@@ -122,9 +122,13 @@ public class GameController : BaseController<GameView>
     {
         if(Math.Floor(Math.Log10(resourcesModel.earnedMoney)) > Math.Floor(Math.Log10(previousEarnedMoney)))
         {
-            earnedMoneyMessages.Add($"e{Math.Floor(Math.Log10(resourcesModel.earnedMoney))} - {Time.time - previousMoneyProgressionDebugTime}");
-            if (settingsModel.showProgressionDebugMessages){
-                Debug.Log($"e{Math.Floor(Math.Log10(resourcesModel.earnedMoney))} - {Time.time - previousMoneyProgressionDebugTime}");
+            string s = string.Format("e{0:000} {1,6:N0}s {2,7:N0}s", Math.Floor(Math.Log10(resourcesModel.earnedMoney)), Math.Round(Time.time - previousMoneyProgressionDebugTime),Math.Round(Time.time));
+            earnedMoneyMessages.Add(s);
+            //earnedMoneyMessages.Add($"e{Math.Floor(Math.Log10(resourcesModel.earnedMoney))} - {Time.time - previousMoneyProgressionDebugTime} - {Time.time}");
+            if (settingsModel.showProgressionDebugMessages)
+            {
+                Debug.Log(s);
+                //Debug.Log($"e{Math.Floor(Math.Log10(resourcesModel.earnedMoney))} - {Time.time - previousMoneyProgressionDebugTime} - {Time.time}");
             }
             previousMoneyProgressionDebugTime = Time.time;
         }
@@ -132,10 +136,13 @@ public class GameController : BaseController<GameView>
 
         if (Math.Floor(gameModel.Depth / 100f) > Math.Floor(previousDepth)/100f)
         {
-            depthMessages.Add($"{Math.Floor(gameModel.Depth)}d - {Time.time - previousDepthProgressionDebugTime}");
+            string s = string.Format("{0,5:N0}m {1,6:N0}s {2,7:N0}s", gameModel.Depth, Time.time - previousDepthProgressionDebugTime, Time.time);
+            //depthMessages.Add($"{Math.Floor(gameModel.Depth)}d - {Time.time - previousDepthProgressionDebugTime} - {Time.time}");
+            depthMessages.Add(s);
             if (settingsModel.showProgressionDebugMessages)
             {
-                Debug.Log($"{Math.Floor(gameModel.Depth)}d - {Time.time - previousDepthProgressionDebugTime}");
+                Debug.Log(s);
+                //Debug.Log($"{Math.Floor(gameModel.Depth)}d - {Time.time - previousDepthProgressionDebugTime} - {Time.time}");
             }
             previousDepthProgressionDebugTime = Time.time;
         }

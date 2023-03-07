@@ -17,7 +17,7 @@ public class CheatsWindow : MonoBehaviour
 
     private void ShowProgressionDebugData()
     {
-        moneyDebugText.text = string.Join("\n",gameController.earnedMoneyMessages);
-        depthDebugText.text = string.Join("\n",gameController.depthMessages);
+        moneyDebugText.text = "<mspace=20px>" + string.Join("\n",gameController.earnedMoneyMessages);
+        depthDebugText.text = "<mspace=20px>" + string.Join("\n",gameController.depthMessages);
     }
 }
