@@ -2804,6 +2804,8 @@ MonoBehaviour:
   ballsModel: {fileID: 1947716361}
   upgradesModel: {fileID: 1947716357}
   resourcesModel: {fileID: 1947716358}
+  settingsModel: {fileID: 1513135932}
+  gameModel: {fileID: 1947716359}
   upgradesManager: {fileID: 567613851}
   blockSpawner: {fileID: 231626579}
   resourcesManager: {fileID: 567613852}
@@ -2814,6 +2816,12 @@ MonoBehaviour:
   rewardBat: {fileID: 7232551561847147341, guid: 213b8b2afa656744a8e5f09b36b46cf9, type: 3}
   batParent: {fileID: 240033866}
   batsPer10000FixedUpdates: 1
+  previousMoneyProgressionDebugTime: 0
+  previousEarnedMoney: 0
+  earnedMoneyMessages: []
+  previousDepthProgressionDebugTime: 0
+  previousDepth: 0
+  depthMessages: []
 --- !u!4 &383171361
 Transform:
   m_ObjectHideFlags: 0
@@ -11477,6 +11485,7 @@ MonoBehaviour:
   spawnBlocks: 1
   removeUpgradesRequirements: 0
   unlockCheatWindow: 1
+  showProgressionDebugMessages: 1
   changeTimeScale: 0
   timeScale: 0.1
   clickDamage: 1

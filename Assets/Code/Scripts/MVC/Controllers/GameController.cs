@@ -5,6 +5,8 @@ using MyBox;
 using UnityEngine.Events;
 using System.Linq;
 using UnityEngine.SceneManagement;
+// for Math.Log10 for progression debugging
+using System;
 
 /// <summary>
 /// Methods from this object should not be called by other objects. When such action direction is needed (for example UI or world events) it should connect methods to events HERE.
@@ -17,6 +19,8 @@ public class GameController : BaseController<GameView>
     [SerializeField] private BallsModel ballsModel;
     [SerializeField] private UpgradesModel upgradesModel;
     [SerializeField] private ResourcesModel resourcesModel;
+    [SerializeField] private SettingsModel settingsModel;
+    [SerializeField] private GameModel gameModel;
 
     [Header("Managers")]
     [AutoProperty(AutoPropertyMode.Scene)] [SerializeField] private UpgradesManager upgradesManager;
@@ -31,6 +35,15 @@ public class GameController : BaseController<GameView>
     [SerializeField] RewardBat rewardBat;
     [SerializeField] Transform batParent;
     [SerializeField] int batsPer10000FixedUpdates;
+
+    [Header("ProgressionDebug")]
+    [SerializeField] float previousMoneyProgressionDebugTime = 0;
+    [SerializeField] double previousEarnedMoney;
+    public List<string> earnedMoneyMessages;
+    [SerializeField] float previousDepthProgressionDebugTime = 0;
+    [SerializeField] double previousDepth;
+    public List<string> depthMessages;
+
 
     //KEEP MONOBEHAVIOUR METHODS (Start, Update etc.) ON TOP
     /// <summary>
@@ -97,9 +110,37 @@ public class GameController : BaseController<GameView>
 
         onSetupFinished?.Invoke();
 
+        // FILIPOWY SYF, WEŹ DAJ TO GDZIE ZECHCESZ
+        if (settingsModel.unlockCheatWindow)
+        {
+            InvokeRepeating("DebugProgression", 0f, 1f);
+        }
     }
     public UnityAction onSetupFinished;
 
+    private void DebugProgression()
+    {
+        if(Math.Floor(Math.Log10(resourcesModel.earnedMoney)) > Math.Floor(Math.Log10(previousEarnedMoney)))
+        {
+            earnedMoneyMessages.Add($"e{Math.Floor(Math.Log10(resourcesModel.earnedMoney))} - {Time.time - previousMoneyProgressionDebugTime}");
+            if (settingsModel.showProgressionDebugMessages){
+                Debug.Log($"e{Math.Floor(Math.Log10(resourcesModel.earnedMoney))} - {Time.time - previousMoneyProgressionDebugTime}");
+            }
+            previousMoneyProgressionDebugTime = Time.time;
+        }
+        previousEarnedMoney = resourcesModel.earnedMoney;
+
+        if (Math.Floor(gameModel.Depth / 100f) > Math.Floor(previousDepth)/100f)
+        {
+            depthMessages.Add($"{Math.Floor(gameModel.Depth)}d - {Time.time - previousDepthProgressionDebugTime}");
+            if (settingsModel.showProgressionDebugMessages)
+            {
+                Debug.Log($"{Math.Floor(gameModel.Depth)}d - {Time.time - previousDepthProgressionDebugTime}");
+            }
+            previousDepthProgressionDebugTime = Time.time;
+        }
+        previousDepth = gameModel.Depth;
+    }
 
     private void Update()
     {
@@ -116,7 +157,7 @@ public class GameController : BaseController<GameView>
     }
     private void SpawnBatOrNot()
     {
-        if (Random.Range(0, 10000) < batsPer10000FixedUpdates)
+        if (UnityEngine.Random.Range(0, 10000) < batsPer10000FixedUpdates)
         {
             RewardBat newBat = Instantiate(rewardBat, batParent);
             newBat.resourcesManager = resourcesManager;
