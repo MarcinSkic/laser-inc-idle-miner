@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using MyBox;
 
 public enum BatRewardType
 {
@@ -27,6 +28,10 @@ public class RewardBat : MonoBehaviour
     [SerializeField] float horizontalSpeed;
     int direction;
     [SerializeField] SpriteRenderer batSprite;
+    [SerializeField] GameObject batFBX;
+    [SerializeField] float obrotPrawo;
+    [SerializeField] float obrotLewo;
+    [SerializeField] float rotationSpeed;
     [SerializeField] BatOption[] batOptions;
     private BatOption batOption;
     public ResourcesManager resourcesManager;
@@ -38,6 +43,18 @@ public class RewardBat : MonoBehaviour
         handleDirectionChange();
         batOption = batOptions[Random.Range(0, batOptions.Length)];
         batSprite.sprite = batOption.batSprite;
+    }
+
+    void HandleBatRotation()
+    {
+        if (direction == 1 && (batFBX.transform.rotation.eulerAngles.y > obrotPrawo))
+        {
+            batFBX.transform.Rotate(new Vector3(0, -rotationSpeed, 0));
+        }
+        if (direction != 1 && (batFBX.transform.rotation.eulerAngles.y < obrotLewo))
+        {
+            batFBX.transform.Rotate(new Vector3(0, rotationSpeed, 0));
+        }
     }
 
     void FixedUpdate()
@@ -52,6 +69,7 @@ public class RewardBat : MonoBehaviour
         {
             Destroy(gameObject);
         }
+        HandleBatRotation();
     }
 
     void handleDirectionChange()
