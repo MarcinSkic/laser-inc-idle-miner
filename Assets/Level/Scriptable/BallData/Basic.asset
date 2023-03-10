@@ -14,9 +14,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   ballData:
     type: 1
-    nameForUI: Base
+    nameForUI: Basic
     description: Standard laser used by Noxiom company
-    sprite: {fileID: 21300000, guid: 3c0201ab08b7a554082f6d7da400c58b, type: 3}
+    sprite: {fileID: 21300000, guid: 0566604d4a94aea4da6759faed74ce05, type: 3}
     valuesList:
     - type: 1
       name: 

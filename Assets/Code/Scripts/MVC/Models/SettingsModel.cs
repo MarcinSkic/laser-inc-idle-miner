@@ -25,10 +25,12 @@ public class SettingsModel : MonoBehaviour
     public bool saveAndLoadFile = true;
     public bool doOfflineEarning = true;
     public bool spawnBlocks = true;
+    public bool spawnBats = true;
 
     [Header("FALSE before build/commit")]
     public bool removeUpgradesRequirements;
     public bool unlockCheatWindow;
+    public bool showProgressionDebugMessages;
     [Space(5)]
     public bool changeTimeScale;
     [ConditionalField(nameof(changeTimeScale))]
@@ -137,6 +139,7 @@ public class SettingsModel : MonoBehaviour
         saveAndLoadFile = true;
         doOfflineEarning = true;
         spawnBlocks = true;
+        spawnBats = true;
         ShowDebugWindow = false;
         changeTimeScale = false;
     }
