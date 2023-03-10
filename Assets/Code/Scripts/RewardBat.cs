@@ -33,6 +33,9 @@ public class RewardBat : MonoBehaviour
     [SerializeField] float obrotLewo;
     [SerializeField] float rotationSpeed;
     [SerializeField] BatOption[] batOptions;
+    [SerializeField] GameObject coinGO;
+    [SerializeField] GameObject crystalGO;
+    [SerializeField] GameObject sphereGO;
     private BatOption batOption;
     public ResourcesManager resourcesManager;
 
@@ -40,9 +43,21 @@ public class RewardBat : MonoBehaviour
     {
         transform.position = new Vector3(Random.Range(-xDeviation, xDeviation), -yBorders, Random.Range(-3f, -5f));
         direction = Random.Range(0, 2) * 2 - 1; // either 1 or -1
-        handleDirectionChange();
+        //handleDirectionChange();
         batOption = batOptions[Random.Range(0, batOptions.Length)];
-        batSprite.sprite = batOption.batSprite;
+        switch (batOption.rewardType)
+        {
+            case BatRewardType.money:
+                coinGO.SetActive(true);
+                break;
+            case BatRewardType.premium:
+                crystalGO.SetActive(true);
+                break;
+            case BatRewardType.powerup:
+                sphereGO.SetActive(true);
+                break;
+        }
+        //batSprite.sprite = batOption.batSprite;
     }
 
     void HandleBatRotation()
@@ -63,7 +78,7 @@ public class RewardBat : MonoBehaviour
         if (Mathf.Abs(transform.position.x) >= xDeviation)
         {
             direction = -direction;
-            handleDirectionChange();
+            //handleDirectionChange();
         }
         if (transform.position.y > yBorders)
         {
@@ -72,10 +87,10 @@ public class RewardBat : MonoBehaviour
         HandleBatRotation();
     }
 
-    void handleDirectionChange()
-    {
-        batSprite.flipX = direction<0;
-    }
+    //void handleDirectionChange()
+    //{
+    //    batSprite.flipX = direction<0;
+    //}
 
     public void getClicked()
     {
