@@ -56,12 +56,14 @@ public class UIButtonController : MonoBehaviour
         if (!hardDeactivate)
         {
             button.interactable = true;
+            Select();
         }
     }
 
     public void Deactivate()
     {
         button.interactable = false;
+        Deselect();
     }
 
     public void SetHardDeactivate(bool state)
