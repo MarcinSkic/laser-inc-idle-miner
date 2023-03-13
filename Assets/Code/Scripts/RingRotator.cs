@@ -25,7 +25,7 @@ public class RingRotator : MonoBehaviour
 
         foreach (GameObject ring in rings)
         {
-            ring.transform.Rotate(Vector3.up, rotation * Time.deltaTime);
+            ring.transform.Rotate(Vector3.forward, rotation * Time.deltaTime);
         }
         foreach (Light light in lights)
         {
