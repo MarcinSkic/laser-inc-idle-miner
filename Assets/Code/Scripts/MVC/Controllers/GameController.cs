@@ -30,6 +30,7 @@ public class GameController : BaseController<GameView>
     [SerializeField] private BlocksManager blocksManager;
     [AutoProperty(AutoPropertyMode.Scene)] [SerializeField] private AchievementManager achievementManager;
     [AutoProperty(AutoPropertyMode.Scene)] [SerializeField] private SavingManager savingManager;
+    [AutoProperty(AutoPropertyMode.Scene)] [SerializeField] private TutorialManager tutorialManager;
 
     [Header("Bats!")]
     [SerializeField] RewardBat rewardBat;
@@ -70,6 +71,7 @@ public class GameController : BaseController<GameView>
         ConnectToGameModelEvents();
         ConnectToSettingsModelEvents();
         ConnectToViewElements();
+        tutorialManager.Init();
         #endregion
 
         #region Loading Saved Data
@@ -106,6 +108,7 @@ public class GameController : BaseController<GameView>
         ConnectToAchievementsManager();
         UpdateSettings();
         MoveBorderToMatchScreenSize();
+        ManageTutorial();
         #endregion
 
         onSetupFinished?.Invoke();
@@ -113,41 +116,10 @@ public class GameController : BaseController<GameView>
         // FILIPOWY SYF, WEŹ DAJ TO GDZIE ZECHCESZ
         if (settingsModel.unlockCheatWindow)
         {
-            InvokeRepeating("DebugProgression", 0f, 1f);
+            InvokeRepeating(nameof(DebugProgression), 0f, 1f);
         }
     }
     public UnityAction onSetupFinished;
-
-    private void DebugProgression()
-    {
-        if(Math.Floor(Math.Log10(resourcesModel.earnedMoney)) > Math.Floor(Math.Log10(previousEarnedMoney)))
-        {
-            string s = string.Format("e{0:000} {1,6:N0}s {2,7:N0}s", Math.Floor(Math.Log10(resourcesModel.earnedMoney)), Math.Round(Time.time - previousMoneyProgressionDebugTime),Math.Round(Time.time));
-            earnedMoneyMessages.Add(s);
-            //earnedMoneyMessages.Add($"e{Math.Floor(Math.Log10(resourcesModel.earnedMoney))} - {Time.time - previousMoneyProgressionDebugTime} - {Time.time}");
-            if (settingsModel.showProgressionDebugMessages)
-            {
-                Debug.Log(s);
-                //Debug.Log($"e{Math.Floor(Math.Log10(resourcesModel.earnedMoney))} - {Time.time - previousMoneyProgressionDebugTime} - {Time.time}");
-            }
-            previousMoneyProgressionDebugTime = Time.time;
-        }
-        previousEarnedMoney = resourcesModel.earnedMoney;
-
-        if (Math.Floor(gameModel.Depth / 100f) > Math.Floor(previousDepth)/100f)
-        {
-            string s = string.Format("{0,5:N0}m {1,6:N0}s {2,7:N0}s", gameModel.Depth, Time.time - previousDepthProgressionDebugTime, Time.time);
-            //depthMessages.Add($"{Math.Floor(gameModel.Depth)}d - {Time.time - previousDepthProgressionDebugTime} - {Time.time}");
-            depthMessages.Add(s);
-            if (settingsModel.showProgressionDebugMessages)
-            {
-                Debug.Log(s);
-                //Debug.Log($"{Math.Floor(gameModel.Depth)}d - {Time.time - previousDepthProgressionDebugTime} - {Time.time}");
-            }
-            previousDepthProgressionDebugTime = Time.time;
-        }
-        previousDepth = gameModel.Depth;
-    }
 
     private void Update()
     {
@@ -156,7 +128,6 @@ public class GameController : BaseController<GameView>
             DisplayFPS();
         }
     }
-
 
     private void FixedUpdate()
     {
@@ -197,6 +168,14 @@ public class GameController : BaseController<GameView>
         foreach (var upgrade in upgradesModel.upgrades.Values)
         {
             upgrade.doTryUpgrade += TryBuyUpgrade;
+        }
+    }
+
+    private void ManageTutorial()
+    {
+        if (!tutorialManager.finishedTutorial)
+        {
+            tutorialManager.BeginTutorial();
         }
     }
 
@@ -528,6 +507,7 @@ public class GameController : BaseController<GameView>
         persistentData.depth = model.Depth;
         upgradesManager.SavePersistentData(persistentData);
         blocksManager.SavePersistentData(persistentData);
+        tutorialManager.SavePersistentData(persistentData);
 
         SettingsModel.Instance.SavePersistentData(persistentData);
         achievementManager.SavePersistentData(persistentData);
@@ -550,6 +530,7 @@ public class GameController : BaseController<GameView>
         achievementManager.LoadPersistentData(persistentData);
         SettingsModel.Instance.LoadPersistentData(persistentData);
         StatisticsModel.Instance.LoadPersistentData(persistentData);
+        tutorialManager.LoadPersistentData(persistentData);
         model.Depth = persistentData.depth;
         #endregion
         
@@ -592,6 +573,7 @@ public class GameController : BaseController<GameView>
         resourcesManager.IncreasePrestigeCurrency(resourcesManager.PrestigeCurrencyForNextPrestige);
         resourcesManager.SavePrestigePersistentData(persistentData);
         upgradesManager.SavePrestigePersistentData(persistentData);
+        tutorialManager.SavePersistentData(persistentData);
 
         savingManager.SavePersistentData(persistentData);
 
@@ -623,5 +605,35 @@ public class GameController : BaseController<GameView>
         {
             fpsRefreshCounter--;
         }
+    }
+    private void DebugProgression()
+    {
+        if (Math.Floor(Math.Log10(resourcesModel.earnedMoney)) > Math.Floor(Math.Log10(previousEarnedMoney)))
+        {
+            string s = string.Format("e{0:000} {1,6:N0}s {2,7:N0}s", Math.Floor(Math.Log10(resourcesModel.earnedMoney)), Math.Round(Time.time - previousMoneyProgressionDebugTime), Math.Round(Time.time));
+            earnedMoneyMessages.Add(s);
+            //earnedMoneyMessages.Add($"e{Math.Floor(Math.Log10(resourcesModel.earnedMoney))} - {Time.time - previousMoneyProgressionDebugTime} - {Time.time}");
+            if (settingsModel.showProgressionDebugMessages)
+            {
+                Debug.Log(s);
+                //Debug.Log($"e{Math.Floor(Math.Log10(resourcesModel.earnedMoney))} - {Time.time - previousMoneyProgressionDebugTime} - {Time.time}");
+            }
+            previousMoneyProgressionDebugTime = Time.time;
+        }
+        previousEarnedMoney = resourcesModel.earnedMoney;
+
+        if (Math.Floor(gameModel.Depth / 100f) > Math.Floor(previousDepth) / 100f)
+        {
+            string s = string.Format("{0,5:N0}m {1,6:N0}s {2,7:N0}s", gameModel.Depth, Time.time - previousDepthProgressionDebugTime, Time.time);
+            //depthMessages.Add($"{Math.Floor(gameModel.Depth)}d - {Time.time - previousDepthProgressionDebugTime} - {Time.time}");
+            depthMessages.Add(s);
+            if (settingsModel.showProgressionDebugMessages)
+            {
+                Debug.Log(s);
+                //Debug.Log($"{Math.Floor(gameModel.Depth)}d - {Time.time - previousDepthProgressionDebugTime} - {Time.time}");
+            }
+            previousDepthProgressionDebugTime = Time.time;
+        }
+        previousDepth = gameModel.Depth;
     }
 }
