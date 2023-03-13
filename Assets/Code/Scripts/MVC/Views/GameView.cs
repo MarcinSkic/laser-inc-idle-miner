@@ -132,6 +132,7 @@ public class GameView : BaseView
             button.onClick += SwitchWindow;
         }
 
+        DeselectAllWindowButtons();
         SelectBottomWindowButtons();
     }
 

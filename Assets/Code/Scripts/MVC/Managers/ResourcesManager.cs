@@ -17,7 +17,6 @@ public class ResourcesManager : MonoBehaviour
     public UnityAction<double> onPremiumCurrencyEarned;
     public UnityAction<double> onPrestigeCurrencyChange;
     public UnityAction<double> onPrestigeCurrencyEarned;
-    public UnityAction<double> onPrestigeCurrencyForNextPrestigeChange;
     public UnityAction<double> onMoneyChange;
     public UnityAction<double> onMoneyEarned;
 
@@ -150,11 +149,6 @@ public class ResourcesManager : MonoBehaviour
             }
             return 0f;
         }
-        set
-        {
-            model.prestigeCurrencyForNextPrestige = value;
-            onPrestigeCurrencyForNextPrestigeChange?.Invoke(value);
-        }
     }
 
     public void IncreasePrestigeCurrency(double value)
@@ -165,6 +159,11 @@ public class ResourcesManager : MonoBehaviour
         }
         EarnedPrestigeCurrency += value;    //TODO-@FILIP: Should it save beetwen prestiges? I guess Yes, but then i want ACCURATE and COMPREHENSIVE list of prestige persistent variables
         PrestigeCurrency += value;
+    }
+
+    public bool IsPrestigeWorth()
+    {
+        return PrestigeCurrency < (PrestigeCurrencyForNextPrestige + PrestigeCurrency) / model.prestigeCurrencyMultiplierWorthThreshold;
     }
     #endregion
 

@@ -29,7 +29,7 @@ public class DoPrestigeTab : MonoBehaviour
     private void Start()
     {
         resetButton.Init();
-        resetButton.onClick += gameController.ExecutePrestige;
+        resetButton.onClick += gameController.TryExecutePrestige;
         UpdateDisplay();
     }
 

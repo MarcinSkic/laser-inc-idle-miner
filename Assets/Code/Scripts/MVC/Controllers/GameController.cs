@@ -264,7 +264,7 @@ public class GameController : BaseController<GameView>
         view.useAlternativeNotation.onValueChanged += value => { SettingsModel.Instance.UseAlternativeNotation = value; };
         SettingsModel.Instance.UseAlternativeNotation = view.useAlternativeNotation.IsOn;
 
-        view.eraseSaveFile.onClick += EraseSaveFile;
+        view.eraseSaveFile.onClick += TryEraseSaveFile;
         #endregion
 
         #region CheatsWindow
@@ -274,7 +274,7 @@ public class GameController : BaseController<GameView>
         view.cheatDepth.onClick += delegate { model.Depth += model.cheatDepth; };
         view.cheatDepth.SetText($"Dive {NumberFormatter.Format(model.cheatDepth)}m");
 
-        view.forcePrestige.onClick += ExecutePrestige;
+        view.forcePrestige.onClick += TryExecutePrestige;
 
         view.cheatSpeedUp.SetText($"speed x 2 (now: { Time.timeScale})");
         view.cheatSpeedUp.onClick += delegate {
@@ -567,7 +567,23 @@ public class GameController : BaseController<GameView>
         FloatingTextSpawner.Instance.ClearBeforePrestige();
     }
 
-    public void ExecutePrestige()
+    public void TryExecutePrestige()
+    {
+        if (resourcesManager.IsPrestigeWorth())
+        {
+            ExecutePrestige();
+        }
+        else
+        {
+            MessagesManager.Instance.DisplayConfirmQuestion("You will not earn much prestige currency",
+            () =>
+            {
+                ExecutePrestige();
+            });
+        }          
+    }
+
+    private void ExecutePrestige()
     {
         PersistentData persistentData = new();
 
@@ -583,10 +599,13 @@ public class GameController : BaseController<GameView>
         SceneManager.LoadScene(SceneManager.GetActiveScene().name);
     }
 
-    public void EraseSaveFile()
+    public void TryEraseSaveFile()
     {
-        SavingManager.EraseSaveFile();
-        SceneManager.LoadScene(SceneManager.GetActiveScene().name);
+        MessagesManager.Instance.DisplayConfirmQuestion("All progress will be lost!",
+        () => {
+            SavingManager.EraseSaveFile();
+            SceneManager.LoadScene(SceneManager.GetActiveScene().name);
+        });
     }
 
     private int fpsRefreshCounter = 0;
