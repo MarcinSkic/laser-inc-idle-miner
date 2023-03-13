@@ -61,18 +61,11 @@ public class AchievementManager : MonoBehaviour
     public List<Achievement> achievements;
     public UnityAction<Achievement> onAchievementUnlocked;
 
-    public GameObject achievementGrid;
-    public AchievementSquare achievementSquare;
-    public AchievementTooltip achievementTooltip;
-
-    private List<AchievementSquare> achievementSquares;
-
     [SerializeField] UpgradeScriptable achievementReward;
     [SerializeField] UpgradeScriptable rowReward;
     [SerializeField] UpgradesModel upgradesModel;
 
-    [SerializeField] int achievementsInRow;
-    [SerializeField] GridLayoutGroup glp;
+    public int achievementsInRow;
 
     private void Awake()
     {

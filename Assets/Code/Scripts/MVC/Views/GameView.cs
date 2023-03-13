@@ -86,10 +86,8 @@ public class GameView : BaseView
 
     [Header("AchievementsTab")]
     public AchievementSquare achievementPrefab;
-    public AchievementTooltip achievementTooltip;
 
     private List<AchievementSquare> achievementSquares;
-    [SerializeField] int achievementsInRow;
     [SerializeField] GridLayoutGroup achievementsGlp;
 
     [Header("Debug Window")]
@@ -262,10 +260,10 @@ public class GameView : BaseView
         SetOfflineMoney(earnedMoney);
     }
                 
-    public void InitAchievementsWindow()
+    public void InitAchievementsWindow(int achievementsInRow)
     {
         achievementSquares = new List<AchievementSquare>();
-        SetAchievementSquaresWidth();
+        SetAchievementSquaresWidth(achievementsInRow);
     }
 
     public void CreateAchievement(Achievement achievement)
@@ -287,7 +285,7 @@ public class GameView : BaseView
         MessagesManager.Instance.DisplayMessage(achievement.name, achievement.description,achievement.sprite, achievement.isCompleted ? Color.white : new Color(0.1875f, 0.1875f, 0.1875f, 1));
     }
 
-    private void SetAchievementSquaresWidth()
+    private void SetAchievementSquaresWidth(int achievementsInRow)
     {
         int squareWidth = Mathf.RoundToInt(1120 / (achievementsInRow + 0.5f));
         int squareSpacing = (1120 - achievementsInRow * squareWidth) / (achievementsInRow - 1);

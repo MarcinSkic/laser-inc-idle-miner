@@ -368,7 +368,7 @@ public class GameController : BaseController<GameView>
 
     private void CreateAchievementsWindow()
     {
-        view.InitAchievementsWindow();
+        view.InitAchievementsWindow(achievementManager.achievementsInRow);
         foreach(var achievement in achievementManager.achievements)
         {
             view.CreateAchievement(achievement);
