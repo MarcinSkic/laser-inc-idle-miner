@@ -30,7 +30,7 @@ public class ResourcesModel : MonoBehaviour
     [ReadOnly]
     [Tooltip("Total of prestige currency earned")]
     public double earnedPrestigeCurrency = 0;
-    public double prestigeCurrencyForNextPrestige = 0;
+    public double prestigeCurrencyMultiplierWorthThreshold = 5;
 
     [Header("CURRENT MONEY DATA")]
     public double startMoney = 1;
