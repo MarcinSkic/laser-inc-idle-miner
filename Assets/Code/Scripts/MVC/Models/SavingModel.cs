@@ -65,6 +65,10 @@ public class PersistentData
     public PersistentAchievement[] unlockedAchievements;
     #endregion
 
+    #region TutorialModel
+    public bool finishedTutorial;
+    #endregion
+
     public PersistentData()
     {
 
