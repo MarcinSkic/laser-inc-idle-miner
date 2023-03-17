@@ -22,7 +22,7 @@ MonoBehaviour:
     whereToGenerate: 1
     order: -5
     title: Faster basic lasers
-    description: +3 speed
+    description: +3 speed for basic lasers
     toUnlockDescription: 
     maxLevel: 1
     currency: 0

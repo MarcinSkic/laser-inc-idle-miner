@@ -94,5 +94,5 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   rb: {fileID: 5416772939318271907}
-  laserColor: {r: 0.06666667, g: 1, b: 0, a: 1}
+  laserColor: {r: 1, g: 1, b: 0, a: 1}
   laserRotationSpeedDegrees: 360
