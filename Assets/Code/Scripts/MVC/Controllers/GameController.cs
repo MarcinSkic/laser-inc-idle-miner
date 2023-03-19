@@ -183,10 +183,12 @@ public class GameController : BaseController<GameView>
     {
         resourcesManager.onMoneyChange += view.SetMoneyDisplay;
         resourcesManager.onPrestigeCurrencyChange += view.SetPrestigeCurrencyDisplay;
+        resourcesManager.onPremiumCurrencyChange += view.SetPremiumCurrencyDisplay;
 
         onSetupFinished += () => { 
             resourcesManager.Money = resourcesManager.Money;
             resourcesManager.PrestigeCurrency = resourcesManager.PrestigeCurrency;
+            resourcesManager.PremiumCurrency = resourcesManager.PremiumCurrency;
         }; //Welp ¯\_(ツ)_/¯
     }
 

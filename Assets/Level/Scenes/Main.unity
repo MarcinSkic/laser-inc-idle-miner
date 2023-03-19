@@ -421,7 +421,8 @@ MonoBehaviour:
   prestigeCurrencyIcon: {fileID: 21300000, guid: 1088740ef3a73c34ab0e106aa91c8816, type: 3}
   premiumCurrencyIcon: {fileID: 21300000, guid: 91d0291ab33e7dd4fac00feacbdb136f, type: 3}
   lockedIcon: {fileID: 21300000, guid: 008150065ad433f4cae9b038cf519738, type: 3}
-  moneyDisplay: {fileID: 1351149919}
+  moneyCurrencyDisplay: {fileID: 1351149919}
+  premiumCurrencyDisplay: {fileID: 2095578585}
   tabButtonsContainers:
   - {fileID: 0}
   - {fileID: 0}
