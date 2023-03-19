@@ -20,7 +20,8 @@ public class GameView : BaseView
     [Space(10)]
     [Header("IN GAME")]
     [Header("Top Bar")]
-    [SerializeField] private TMP_Text moneyDisplay;
+    [SerializeField] private TMP_Text moneyCurrencyDisplay;
+    [SerializeField] private TMP_Text premiumCurrencyDisplay;
 
     [Header("Tabs Switching")]
     [SerializeField] private List<GameObject> tabButtonsContainers;
@@ -306,7 +307,12 @@ public class GameView : BaseView
 
     public void SetMoneyDisplay(double value)
     {
-        moneyDisplay.text = NumberFormatter.Format(value);
+        moneyCurrencyDisplay.text = NumberFormatter.Format(value);
+    }
+
+    public void SetPremiumCurrencyDisplay(double value)
+    {
+        premiumCurrencyDisplay.text = NumberFormatter.Format(value);
     }
 
     public void SetPrestigeCurrencyDisplay(double value)
