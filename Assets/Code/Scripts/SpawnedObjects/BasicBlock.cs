@@ -77,6 +77,7 @@ public class BasicBlock : MonoBehaviour, IPoolable<BasicBlock>
 
         if (hp <= 0 && gameObject.activeSelf)
         {
+            AudioManager.Instance.Play("block_destroyed");
             RemoveBlock();
         }
     }
