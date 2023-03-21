@@ -46,13 +46,16 @@ public class GameController : BaseController<GameView>
     [SerializeField] double previousDepth;
     public List<string> depthMessages;
 
-    public VideoPlayer logoVideoPlayer;
     public bool isLogoOpaque = true;
+    public bool isBGOpaque = true;
     public float logoOpaqueTime;
     public float logoTransparentTime;
+    public float bgOpaqueTime;
+    public float bgTransparentTime;
     public float logoCurrentTime = 0f;
 
-    public CanvasGroup canvasGroup;
+    public CanvasGroup canvasGroupLogo;
+    public CanvasGroup canvasGroupBG;
     public Camera[] cameras;
 
 
@@ -139,28 +142,31 @@ public class GameController : BaseController<GameView>
         }
 
         logoCurrentTime += Time.deltaTime;
-        if (isLogoOpaque && logoCurrentTime > logoOpaqueTime)
+        if (logoCurrentTime > logoOpaqueTime && isBGOpaque)
         {
-            isLogoOpaque = false;
-            AudioManager.Instance.IncreaseVolumeOverTime();
-            for (int i=0; i<cameras.Length; i++)
+            if (!isLogoOpaque)
             {
-                cameras[i].nearClipPlane = 0.3f;
+                AudioManager.Instance.IncreaseVolumeOverTime();
+                for (int i = 0; i < cameras.Length; i++)
+                {
+                    cameras[i].nearClipPlane = 0.3f;
+                }
             }
-        }
-        if (!isLogoOpaque)
-        {
+            isLogoOpaque = false;
+
             if (logoCurrentTime < logoOpaqueTime + logoTransparentTime)
             {
-                float alphaTransition = ((logoCurrentTime - logoOpaqueTime) / (logoTransparentTime));
-                logoVideoPlayer.targetCameraAlpha = 1 - alphaTransition;
-                canvasGroup.alpha = alphaTransition;
+                canvasGroupLogo.alpha = 1 - ((logoCurrentTime - logoOpaqueTime) / (logoTransparentTime));
             }
             else
             {
-                logoVideoPlayer.targetCameraAlpha = 0;
-                canvasGroup.alpha = 1;
+                canvasGroupLogo.alpha = 0;
+                isBGOpaque = false;
             }
+        }
+        if (!isBGOpaque && canvasGroupBG.alpha>0)
+        {
+            canvasGroupBG.alpha = 1 - ((logoCurrentTime-logoOpaqueTime-logoTransparentTime-bgOpaqueTime) / (bgTransparentTime));
         }
 
         /*
