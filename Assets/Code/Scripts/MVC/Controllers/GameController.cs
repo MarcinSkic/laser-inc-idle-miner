@@ -52,6 +52,8 @@ public class GameController : BaseController<GameView>
     public float logoTransparentTime;
     public float logoCurrentTime = 0f;
 
+    public CanvasGroup canvasGroup;
+
 
     //KEEP MONOBEHAVIOUR METHODS (Start, Update etc.) ON TOP
     /// <summary>
@@ -145,11 +147,14 @@ public class GameController : BaseController<GameView>
         {
             if (logoCurrentTime < logoOpaqueTime + logoTransparentTime)
             {
-                logoVideoPlayer.targetCameraAlpha = 1f - ((logoCurrentTime - logoOpaqueTime) / (logoTransparentTime));
+                float alphaTransition = ((logoCurrentTime - logoOpaqueTime) / (logoTransparentTime));
+                logoVideoPlayer.targetCameraAlpha = 1 - alphaTransition;
+                canvasGroup.alpha = alphaTransition;
             }
             else
             {
                 logoVideoPlayer.targetCameraAlpha = 0;
+                canvasGroup.alpha = 1;
             }
         }
 

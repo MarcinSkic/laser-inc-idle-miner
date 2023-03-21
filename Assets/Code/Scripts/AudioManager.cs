@@ -15,7 +15,7 @@ public class AudioManager : MonoBehaviour
         audioMixer.GetFloat("volume", out vol);
         if (vol < 0)
         {
-            audioMixer.SetFloat("volume", vol * 0.99f + 0.001f);
+            audioMixer.SetFloat("volume", vol * 0.92f + 0.001f);
         }
     }
 
