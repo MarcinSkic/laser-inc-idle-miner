@@ -6,6 +6,23 @@ public class AudioManager : MonoBehaviour
 {
     public Sound[] sounds;
     public static AudioManager Instance;
+    public AudioMixer audioMixer;
+    public AudioMixerGroup audioMixerGroup;
+
+    private void IncreaseVolumeABit()
+    {
+        float vol;
+        audioMixer.GetFloat("volume", out vol);
+        if (vol < 0)
+        {
+            audioMixer.SetFloat("volume", vol * 0.99f + 0.001f);
+        }
+    }
+
+    public void IncreaseVolumeOverTime()
+    {
+        InvokeRepeating(nameof(IncreaseVolumeABit), 0, 0.01f);
+    }
 
     private void Awake()
     {
@@ -27,8 +44,8 @@ public class AudioManager : MonoBehaviour
             s.source.volume = s.volume;
             s.source.pitch = s.pitch;
             s.source.loop = s.loop;
+            s.source.outputAudioMixerGroup = audioMixerGroup;
         }
-
         Play("theme");
     }
 

@@ -7,6 +7,7 @@ using System.Linq;
 using UnityEngine.SceneManagement;
 // for Math.Log10 for progression debugging
 using System;
+using UnityEngine.Video;
 
 /// <summary>
 /// Methods from this object should not be called by other objects. When such action direction is needed (for example UI or world events) it should connect methods to events HERE.
@@ -44,6 +45,12 @@ public class GameController : BaseController<GameView>
     [SerializeField] float previousDepthProgressionDebugTime = 0;
     [SerializeField] double previousDepth;
     public List<string> depthMessages;
+
+    public VideoPlayer logoVideoPlayer;
+    public bool isLogoOpaque = true;
+    public float logoOpaqueTime;
+    public float logoTransparentTime;
+    public float logoCurrentTime = 0f;
 
 
     //KEEP MONOBEHAVIOUR METHODS (Start, Update etc.) ON TOP
@@ -127,6 +134,31 @@ public class GameController : BaseController<GameView>
         {
             DisplayFPS();
         }
+
+        logoCurrentTime += Time.deltaTime;
+        if (isLogoOpaque && logoCurrentTime > logoOpaqueTime)
+        {
+            isLogoOpaque = false;
+            AudioManager.Instance.IncreaseVolumeOverTime();
+        }
+        if (!isLogoOpaque)
+        {
+            if (logoCurrentTime < logoOpaqueTime + logoTransparentTime)
+            {
+                logoVideoPlayer.targetCameraAlpha = 1f - ((logoCurrentTime - logoOpaqueTime) / (logoTransparentTime));
+            }
+            else
+            {
+                logoVideoPlayer.targetCameraAlpha = 0;
+            }
+        }
+
+        /*
+        logoVideoPlayer
+        logoOpaqueTime
+        logoTransparentTime
+        logoCurrentTime
+        */
     }
 
     private void FixedUpdate()

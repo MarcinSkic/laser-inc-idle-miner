@@ -1131,7 +1131,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 0, y: 1}
-  m_AnchoredPosition: {x: 324, y: -520}
+  m_AnchoredPosition: {x: 323.99997, y: -520}
   m_SizeDelta: {x: 568, y: 100}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &154380260
@@ -2125,7 +2125,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 0, y: 1}
-  m_AnchoredPosition: {x: 324, y: -50}
+  m_AnchoredPosition: {x: 323.99997, y: -50}
   m_SizeDelta: {x: 568, y: 80}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &308153096
@@ -2263,7 +2263,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 0, y: 1}
-  m_AnchoredPosition: {x: 324, y: -400}
+  m_AnchoredPosition: {x: 323.99997, y: -400}
   m_SizeDelta: {x: 568, y: 100}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &328459493
@@ -2638,7 +2638,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 0, y: 1}
-  m_AnchoredPosition: {x: 324, y: -280}
+  m_AnchoredPosition: {x: 323.99997, y: -280}
   m_SizeDelta: {x: 568, y: 100}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &346815700
@@ -3045,6 +3045,11 @@ MonoBehaviour:
   previousDepthProgressionDebugTime: 0
   previousDepth: 0
   depthMessages: []
+  logoVideoPlayer: {fileID: 1330594231}
+  isLogoOpaque: 1
+  logoOpaqueTime: 4
+  logoTransparentTime: 1
+  logoCurrentTime: 0
 --- !u!4 &383171361
 Transform:
   m_ObjectHideFlags: 0
@@ -4676,7 +4681,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 0, y: 1}
-  m_AnchoredPosition: {x: 324, y: -640}
+  m_AnchoredPosition: {x: 323.99997, y: -640}
   m_SizeDelta: {x: 568, y: 100}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &549708300
@@ -4820,7 +4825,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 1}
   m_AnchorMax: {x: 0.5, y: 1}
-  m_AnchoredPosition: {x: 0, y: -670.7447}
+  m_AnchoredPosition: {x: 0, y: -670.7446}
   m_SizeDelta: {x: 1000, y: 552.549}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &567005471
@@ -7635,7 +7640,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 0.9}
-  m_AnchoredPosition: {x: 0, y: -30}
+  m_AnchoredPosition: {x: 0, y: -30.000015}
   m_SizeDelta: {x: 0, y: -30}
   m_Pivot: {x: 0.5, y: 1}
 --- !u!114 &801875037
@@ -10320,6 +10325,8 @@ MonoBehaviour:
   - {fileID: 11400000, guid: 74731a49c94449147baebf8d89d73519, type: 2}
   - {fileID: 11400000, guid: 0802675deaf03e5469c3d30e0ff82cde, type: 2}
   - {fileID: 11400000, guid: 50eb49a8d6aa9b545b062eddb371caff, type: 2}
+  audioMixer: {fileID: 24100000, guid: baee987282ca27143915d1a3ddc9da5d, type: 2}
+  audioMixerGroup: {fileID: 24300002, guid: baee987282ca27143915d1a3ddc9da5d, type: 2}
 --- !u!4 &1108994771
 Transform:
   m_ObjectHideFlags: 0
@@ -10760,7 +10767,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1392567110110132145, guid: ee6aaf1769c0b7c4893ef871dcc9cf7f, type: 3}
       propertyPath: m_AnchoredPosition.x
-      value: 997
+      value: 996.99994
       objectReference: {fileID: 0}
     - target: {fileID: 1392567110110132145, guid: ee6aaf1769c0b7c4893ef871dcc9cf7f, type: 3}
       propertyPath: m_AnchoredPosition.y
@@ -11015,7 +11022,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 1, y: 0.5}
   m_AnchorMax: {x: 1, y: 0.5}
-  m_AnchoredPosition: {x: -425, y: -110}
+  m_AnchoredPosition: {x: -424.99994, y: -110}
   m_SizeDelta: {x: 300, y: 50}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1180616895
@@ -11701,7 +11708,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0.1}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: 0, y: 0}
+  m_AnchoredPosition: {x: 0, y: 0.00048828125}
   m_SizeDelta: {x: -100, y: 0}
   m_Pivot: {x: 0.5, y: 1}
 --- !u!222 &1293810468
@@ -11945,7 +11952,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1330594230}
   - component: {fileID: 1330594231}
-  m_Layer: 5
+  m_Layer: 8
   m_Name: Logo
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -11959,7 +11966,7 @@ RectTransform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1330594229}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 5}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
@@ -11983,16 +11990,16 @@ VideoPlayer:
   m_VideoClip: {fileID: 32900000, guid: 925ddf49c184bbf45ae8d2c8ff4629b3, type: 3}
   m_TargetCameraAlpha: 1
   m_TargetCamera3DLayout: 0
-  m_TargetCamera: {fileID: 726198939}
+  m_TargetCamera: {fileID: 1134417211}
   m_TargetTexture: {fileID: 0}
   m_TimeReference: 0
   m_TargetMaterialRenderer: {fileID: 0}
   m_TargetMaterialProperty: <noninit>
-  m_RenderMode: 1
+  m_RenderMode: 0
   m_AspectRatio: 1
   m_DataSource: 0
   m_PlaybackSpeed: 1
-  m_AudioOutputMode: 2
+  m_AudioOutputMode: 0
   m_TargetAudioSources:
   - {fileID: 0}
   m_DirectAudioVolumes:
@@ -12185,7 +12192,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 0, y: 1}
-  m_AnchoredPosition: {x: 324, y: -760}
+  m_AnchoredPosition: {x: 323.99997, y: -760}
   m_SizeDelta: {x: 568, y: 100}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1388375416
@@ -12734,7 +12741,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 0.7}
-  m_AnchoredPosition: {x: 0, y: -25}
+  m_AnchoredPosition: {x: 0, y: -25.000015}
   m_SizeDelta: {x: -20, y: -50}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1448697925
@@ -18321,7 +18328,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 0, y: 1}
-  m_AnchoredPosition: {x: 324, y: -160}
+  m_AnchoredPosition: {x: 323.99997, y: -160}
   m_SizeDelta: {x: 568, y: 100}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &2118015330
