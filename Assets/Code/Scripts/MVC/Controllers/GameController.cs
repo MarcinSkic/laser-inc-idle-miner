@@ -53,6 +53,7 @@ public class GameController : BaseController<GameView>
     public float logoCurrentTime = 0f;
 
     public CanvasGroup canvasGroup;
+    public Camera[] cameras;
 
 
     //KEEP MONOBEHAVIOUR METHODS (Start, Update etc.) ON TOP
@@ -142,6 +143,10 @@ public class GameController : BaseController<GameView>
         {
             isLogoOpaque = false;
             AudioManager.Instance.IncreaseVolumeOverTime();
+            for (int i=0; i<cameras.Length; i++)
+            {
+                cameras[i].nearClipPlane = 0.3f;
+            }
         }
         if (!isLogoOpaque)
         {
