@@ -141,33 +141,48 @@ public class GameController : BaseController<GameView>
             DisplayFPS();
         }
 
-        logoCurrentTime += Time.deltaTime;
-        if (logoCurrentTime > logoOpaqueTime && isBGOpaque)
+        if (!SettingsModel.Instance.showMBIntro)
         {
-            if (!isLogoOpaque)
+            if (canvasGroupLogo.alpha > 0)
             {
-                AudioManager.Instance.IncreaseVolumeOverTime();
                 for (int i = 0; i < cameras.Length; i++)
                 {
                     cameras[i].nearClipPlane = 0.3f;
                 }
-            }
-            isLogoOpaque = false;
-
-            if (logoCurrentTime < logoOpaqueTime + logoTransparentTime)
-            {
-                canvasGroupLogo.alpha = 1 - ((logoCurrentTime - logoOpaqueTime) / (logoTransparentTime));
-            }
-            else
-            {
+                canvasGroupBG.alpha = 0;
                 canvasGroupLogo.alpha = 0;
-                isBGOpaque = false;
+                AudioManager.Instance.IncreaseVolumeOverTime();
+            }
+        } else {
+            logoCurrentTime += Time.deltaTime;
+            if (logoCurrentTime > logoOpaqueTime && isBGOpaque)
+            {
+                if (!isLogoOpaque)
+                {
+                    AudioManager.Instance.IncreaseVolumeOverTime();
+                    for (int i = 0; i < cameras.Length; i++)
+                    {
+                        cameras[i].nearClipPlane = 0.3f;
+                    }
+                }
+                isLogoOpaque = false;
+
+                if (logoCurrentTime < logoOpaqueTime + logoTransparentTime)
+                {
+                    canvasGroupLogo.alpha = 1 - ((logoCurrentTime - logoOpaqueTime) / (logoTransparentTime));
+                }
+                else
+                {
+                    canvasGroupLogo.alpha = 0;
+                    isBGOpaque = false;
+                }
+            }
+            if (!isBGOpaque && canvasGroupBG.alpha > 0)
+            {
+                canvasGroupBG.alpha = 1 - ((logoCurrentTime - logoOpaqueTime - logoTransparentTime - bgOpaqueTime) / (bgTransparentTime));
             }
         }
-        if (!isBGOpaque && canvasGroupBG.alpha>0)
-        {
-            canvasGroupBG.alpha = 1 - ((logoCurrentTime-logoOpaqueTime-logoTransparentTime-bgOpaqueTime) / (bgTransparentTime));
-        }
+
 
         /*
         logoVideoPlayer

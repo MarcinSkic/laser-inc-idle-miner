@@ -11919,7 +11919,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0.1}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: 0, y: 0.00024414062}
+  m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: -100, y: 0}
   m_Pivot: {x: 0.5, y: 1}
 --- !u!222 &1293810468
@@ -13622,9 +13622,10 @@ MonoBehaviour:
   doOfflineEarning: 1
   spawnBlocks: 1
   spawnBats: 1
+  showMBIntro: 1
   removeUpgradesRequirements: 0
-  unlockCheatWindow: 1
-  showProgressionDebugMessages: 1
+  unlockCheatWindow: 0
+  showProgressionDebugMessages: 0
   changeTimeScale: 0
   timeScale: 0.1
   clickDamage: 1

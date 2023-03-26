@@ -26,6 +26,7 @@ public class SettingsModel : MonoBehaviour
     public bool doOfflineEarning = true;
     public bool spawnBlocks = true;
     public bool spawnBats = true;
+    public bool showMBIntro = true;
 
     [Header("FALSE before build/commit")]
     public bool removeUpgradesRequirements;
@@ -140,6 +141,7 @@ public class SettingsModel : MonoBehaviour
         doOfflineEarning = true;
         spawnBlocks = true;
         spawnBats = true;
+        showMBIntro = true;
         ShowDebugWindow = false;
         changeTimeScale = false;
     }
