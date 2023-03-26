@@ -15,7 +15,7 @@ MonoBehaviour:
   achievement:
     name: it's a sapphire!
     description: break a sapphire block
-    sprite: {fileID: 21300000, guid: 0b23623fe9870894288909233996fbcd, type: 3}
+    sprite: {fileID: 21300000, guid: 228e9f7c691aeb54fafb1d89e2c336cd, type: 3}
     isCompleted: 0
     leftRequirements: 0
     requirements:

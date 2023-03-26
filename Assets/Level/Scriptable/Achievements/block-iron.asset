@@ -13,12 +13,13 @@ MonoBehaviour:
   m_Name: block-iron
   m_EditorClassIdentifier: 
   achievement:
-    achievementManager: {fileID: 0}
     name: iron
     description: mine iron ore for the first time
-    sprite: {fileID: 21300000, guid: 0c4986413cb11c242a3283d4a0a3f44b, type: 3}
+    sprite: {fileID: 21300000, guid: faace19c51d623e4385dc3786b4e87c0, type: 3}
     isCompleted: 0
+    leftRequirements: 0
     requirements:
     - dependsOn: 6
       comparison: 0
       requiredValue: 0
+      upgradeScriptable: {fileID: 0}

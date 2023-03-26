@@ -13,12 +13,13 @@ MonoBehaviour:
   m_Name: block-uranium
   m_EditorClassIdentifier: 
   achievement:
-    achievementManager: {fileID: 0}
     name: Radioactive
     description: mine uranium for the first time
-    sprite: {fileID: 21300000, guid: 30b1b08c70958ba478a773b44b9c6739, type: 3}
+    sprite: {fileID: 21300000, guid: 899e5cd089fdf934fba7410d3e24d5fe, type: 3}
     isCompleted: 0
+    leftRequirements: 0
     requirements:
     - dependsOn: 9
       comparison: 0
       requiredValue: 0
+      upgradeScriptable: {fileID: 0}
