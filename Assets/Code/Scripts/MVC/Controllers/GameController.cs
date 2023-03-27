@@ -46,6 +46,7 @@ public class GameController : BaseController<GameView>
     [SerializeField] double previousDepth;
     public List<string> depthMessages;
 
+    [Header("Logo")]
     public bool isLogoOpaque = true;
     public bool isBGOpaque = true;
     public float logoOpaqueTime;
@@ -57,6 +58,7 @@ public class GameController : BaseController<GameView>
     public CanvasGroup canvasGroupLogo;
     public CanvasGroup canvasGroupBG;
     public Camera[] cameras;
+    public GameObject logo;
 
 
     //KEEP MONOBEHAVIOUR METHODS (Start, Update etc.) ON TOP
@@ -126,10 +128,14 @@ public class GameController : BaseController<GameView>
 
         onSetupFinished?.Invoke();
 
-        // FILIPOWY SYF, WEŹ DAJ TO GDZIE ZECHCESZ
         if (settingsModel.unlockCheatWindow)
         {
             InvokeRepeating(nameof(DebugProgression), 0f, 1f);
+        }
+
+        if (SettingsModel.Instance.showMBIntro)
+        {
+            logo.SetActive(true);
         }
     }
     public UnityAction onSetupFinished;
