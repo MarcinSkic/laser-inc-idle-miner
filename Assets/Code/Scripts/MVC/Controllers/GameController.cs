@@ -314,6 +314,9 @@ public class GameController : BaseController<GameView>
         view.useAlternativeNotation.onValueChanged += value => { SettingsModel.Instance.UseAlternativeNotation = value; };
         SettingsModel.Instance.UseAlternativeNotation = view.useAlternativeNotation.IsOn;
 
+        view.playSounds.onValueChanged += value => { SettingsModel.Instance.PlaySounds = value; };
+        SettingsModel.Instance.PlaySounds = view.playSounds.IsOn;
+
         view.eraseSaveFile.onClick += TryEraseSaveFile;
         #endregion
 
@@ -376,6 +379,7 @@ public class GameController : BaseController<GameView>
         view.is60fps.IsOn = SettingsModel.Instance.Is60fps;
         view.displayFloatingDamage.IsOn = SettingsModel.Instance.DisplayFloatingText;
         view.useAlternativeNotation.IsOn = SettingsModel.Instance.UseAlternativeNotation;
+        view.playSounds.IsOn = SettingsModel.Instance.PlaySounds;
     }
 
     private void UpdateSettings()
@@ -399,6 +403,14 @@ public class GameController : BaseController<GameView>
         else
         {
             Application.targetFrameRate = 30;
+        }
+
+        if (SettingsModel.Instance.PlaySounds)
+        {
+            AudioManager.Instance.Play("theme");
+        } else
+        {
+            AudioManager.Instance.Stop("theme");
         }
     }
 

@@ -11,8 +11,7 @@ public class AudioManager : MonoBehaviour
 
     private void IncreaseVolumeABit()
     {
-        float vol;
-        audioMixer.GetFloat("volume", out vol);
+        audioMixer.GetFloat("volume", out float vol);
         if (vol < 0)
         {
             audioMixer.SetFloat("volume", vol * 0.92f + 0.001f);
@@ -46,16 +45,28 @@ public class AudioManager : MonoBehaviour
             s.source.loop = s.loop;
             s.source.outputAudioMixerGroup = audioMixerGroup;
         }
-        Play("theme");
     }
 
     public void Play (string name)
     {
+        //TODO-UGLY: This is ugly as hell
+        if (!SettingsModel.Instance.PlaySounds) return;
+
         Sound s = Array.Find(sounds, sound => sound.name == name);
         if (s == null)
         {
             Debug.LogError("Sound " + name + " wasn't not found!");
         }
         s.source.Play();
+    }
+
+    public void Stop(string name)
+    {
+        Sound s = Array.Find(sounds, sound => sound.name == name);
+        if (s == null)
+        {
+            Debug.LogError("Sound " + name + " wasn't not found!");
+        }
+        s.source.Stop();
     }
 }
