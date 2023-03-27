@@ -681,6 +681,9 @@ MonoBehaviour:
   transitionType: 0
   defaultSprite: {fileID: 0}
   selectedSprite: {fileID: 0}
+  icon: {fileID: 0}
+  defaultIconSprite: {fileID: 0}
+  selectedIconSprite: {fileID: 0}
   defaultObject: {fileID: 0}
   selectedObject: {fileID: 0}
   defaultFont: {r: 0, g: 0, b: 0, a: 0}
@@ -1166,6 +1169,9 @@ MonoBehaviour:
   transitionType: 0
   defaultSprite: {fileID: 0}
   selectedSprite: {fileID: 0}
+  icon: {fileID: 0}
+  defaultIconSprite: {fileID: 0}
+  selectedIconSprite: {fileID: 0}
   defaultObject: {fileID: 0}
   selectedObject: {fileID: 0}
   defaultFont: {r: 0, g: 0, b: 0, a: 0}
@@ -1901,6 +1907,9 @@ MonoBehaviour:
   transitionType: 0
   defaultSprite: {fileID: 0}
   selectedSprite: {fileID: 0}
+  icon: {fileID: 0}
+  defaultIconSprite: {fileID: 0}
+  selectedIconSprite: {fileID: 0}
   defaultObject: {fileID: 0}
   selectedObject: {fileID: 0}
   defaultFont: {r: 0, g: 0, b: 0, a: 0}
@@ -2298,6 +2307,9 @@ MonoBehaviour:
   transitionType: 0
   defaultSprite: {fileID: 0}
   selectedSprite: {fileID: 0}
+  icon: {fileID: 0}
+  defaultIconSprite: {fileID: 0}
+  selectedIconSprite: {fileID: 0}
   defaultObject: {fileID: 0}
   selectedObject: {fileID: 0}
   defaultFont: {r: 0, g: 0, b: 0, a: 0}
@@ -2673,6 +2685,9 @@ MonoBehaviour:
   transitionType: 0
   defaultSprite: {fileID: 0}
   selectedSprite: {fileID: 0}
+  icon: {fileID: 0}
+  defaultIconSprite: {fileID: 0}
+  selectedIconSprite: {fileID: 0}
   defaultObject: {fileID: 0}
   selectedObject: {fileID: 0}
   defaultFont: {r: 0, g: 0, b: 0, a: 0}
@@ -4724,6 +4739,9 @@ MonoBehaviour:
   transitionType: 0
   defaultSprite: {fileID: 0}
   selectedSprite: {fileID: 0}
+  icon: {fileID: 0}
+  defaultIconSprite: {fileID: 0}
+  selectedIconSprite: {fileID: 0}
   defaultObject: {fileID: 0}
   selectedObject: {fileID: 0}
   defaultFont: {r: 0, g: 0, b: 0, a: 0}
@@ -5435,6 +5453,9 @@ MonoBehaviour:
   transitionType: 0
   defaultSprite: {fileID: 0}
   selectedSprite: {fileID: 0}
+  icon: {fileID: 0}
+  defaultIconSprite: {fileID: 0}
+  selectedIconSprite: {fileID: 0}
   defaultObject: {fileID: 0}
   selectedObject: {fileID: 0}
   defaultFont: {r: 0, g: 0, b: 0, a: 0}
@@ -5991,6 +6012,9 @@ MonoBehaviour:
   transitionType: 0
   defaultSprite: {fileID: 0}
   selectedSprite: {fileID: 0}
+  icon: {fileID: 0}
+  defaultIconSprite: {fileID: 0}
+  selectedIconSprite: {fileID: 0}
   defaultObject: {fileID: 0}
   selectedObject: {fileID: 0}
   defaultFont: {r: 0, g: 0, b: 0, a: 0}
@@ -7171,6 +7195,9 @@ MonoBehaviour:
   transitionType: 0
   defaultSprite: {fileID: 0}
   selectedSprite: {fileID: 0}
+  icon: {fileID: 0}
+  defaultIconSprite: {fileID: 0}
+  selectedIconSprite: {fileID: 0}
   defaultObject: {fileID: 0}
   selectedObject: {fileID: 0}
   defaultFont: {r: 0, g: 0, b: 0, a: 0}
@@ -7749,6 +7776,9 @@ MonoBehaviour:
   transitionType: 0
   defaultSprite: {fileID: 0}
   selectedSprite: {fileID: 0}
+  icon: {fileID: 0}
+  defaultIconSprite: {fileID: 0}
+  selectedIconSprite: {fileID: 0}
   defaultObject: {fileID: 0}
   selectedObject: {fileID: 0}
   defaultFont: {r: 0, g: 0, b: 0, a: 0}
@@ -8137,6 +8167,9 @@ MonoBehaviour:
   transitionType: 1
   defaultSprite: {fileID: 21300000, guid: bf554982889b857478385a4ed40e27b9, type: 3}
   selectedSprite: {fileID: 21300000, guid: a20e73e44f783f5459e70e9b7f985bba, type: 3}
+  icon: {fileID: 0}
+  defaultIconSprite: {fileID: 0}
+  selectedIconSprite: {fileID: 0}
   defaultObject: {fileID: 0}
   selectedObject: {fileID: 0}
   defaultFont: {r: 0, g: 0, b: 0, a: 0}
@@ -9437,7 +9470,7 @@ PrefabInstance:
     - target: {fileID: 2009796500936212543, guid: 5603374ae95497144bb1aa3eb81c8154, type: 3}
       propertyPath: m_Sprite
       value: 
-      objectReference: {fileID: 21300000, guid: 413a8d24045088b44a27fefb67a3ffc2, type: 3}
+      objectReference: {fileID: 21300000, guid: bf4dacab591bc26408dcb0035a504abc, type: 3}
     - target: {fileID: 2664354778777213683, guid: 5603374ae95497144bb1aa3eb81c8154, type: 3}
       propertyPath: m_text
       value: Prestige
@@ -9454,6 +9487,14 @@ PrefabInstance:
       propertyPath: selectedSprite
       value: 
       objectReference: {fileID: 21300000, guid: fbcc2f7f7a9508a4fac45730816ca1d3, type: 3}
+    - target: {fileID: 2664354778814268240, guid: 5603374ae95497144bb1aa3eb81c8154, type: 3}
+      propertyPath: defaultIconSprite
+      value: 
+      objectReference: {fileID: 21300000, guid: bf4dacab591bc26408dcb0035a504abc, type: 3}
+    - target: {fileID: 2664354778814268240, guid: 5603374ae95497144bb1aa3eb81c8154, type: 3}
+      propertyPath: selectedIconSprite
+      value: 
+      objectReference: {fileID: 21300000, guid: edf05fe675f984e42beb316894a47e65, type: 3}
     - target: {fileID: 2664354778814268242, guid: 5603374ae95497144bb1aa3eb81c8154, type: 3}
       propertyPath: m_Type
       value: 0
@@ -10261,6 +10302,9 @@ MonoBehaviour:
   transitionType: 0
   defaultSprite: {fileID: 0}
   selectedSprite: {fileID: 0}
+  icon: {fileID: 0}
+  defaultIconSprite: {fileID: 0}
+  selectedIconSprite: {fileID: 0}
   defaultObject: {fileID: 0}
   selectedObject: {fileID: 0}
   defaultFont: {r: 0, g: 0, b: 0, a: 0}
@@ -10459,6 +10503,9 @@ MonoBehaviour:
   transitionType: 0
   defaultSprite: {fileID: 0}
   selectedSprite: {fileID: 0}
+  icon: {fileID: 0}
+  defaultIconSprite: {fileID: 0}
+  selectedIconSprite: {fileID: 0}
   defaultObject: {fileID: 0}
   selectedObject: {fileID: 0}
   defaultFont: {r: 0, g: 0, b: 0, a: 0}
@@ -12590,6 +12637,9 @@ MonoBehaviour:
   transitionType: 0
   defaultSprite: {fileID: 0}
   selectedSprite: {fileID: 0}
+  icon: {fileID: 0}
+  defaultIconSprite: {fileID: 0}
+  selectedIconSprite: {fileID: 0}
   defaultObject: {fileID: 0}
   selectedObject: {fileID: 0}
   defaultFont: {r: 0, g: 0, b: 0, a: 0}
@@ -13545,6 +13595,9 @@ MonoBehaviour:
   transitionType: 0
   defaultSprite: {fileID: 0}
   selectedSprite: {fileID: 0}
+  icon: {fileID: 0}
+  defaultIconSprite: {fileID: 0}
+  selectedIconSprite: {fileID: 0}
   defaultObject: {fileID: 0}
   selectedObject: {fileID: 0}
   defaultFont: {r: 0, g: 0, b: 0, a: 0}
@@ -14318,6 +14371,9 @@ MonoBehaviour:
   transitionType: 8
   defaultSprite: {fileID: 0}
   selectedSprite: {fileID: 0}
+  icon: {fileID: 0}
+  defaultIconSprite: {fileID: 0}
+  selectedIconSprite: {fileID: 0}
   defaultObject: {fileID: 0}
   selectedObject: {fileID: 0}
   defaultFont: {r: 0, g: 0, b: 0, a: 0}
@@ -14467,6 +14523,9 @@ MonoBehaviour:
   transitionType: 0
   defaultSprite: {fileID: 0}
   selectedSprite: {fileID: 0}
+  icon: {fileID: 0}
+  defaultIconSprite: {fileID: 0}
+  selectedIconSprite: {fileID: 0}
   defaultObject: {fileID: 0}
   selectedObject: {fileID: 0}
   defaultFont: {r: 0, g: 0, b: 0, a: 0}
@@ -15409,7 +15468,7 @@ PrefabInstance:
     - target: {fileID: 2009796500936212543, guid: 5603374ae95497144bb1aa3eb81c8154, type: 3}
       propertyPath: m_Sprite
       value: 
-      objectReference: {fileID: 21300000, guid: e5ce9e234a28c894580ad58f7091eace, type: 3}
+      objectReference: {fileID: 21300000, guid: 69d6ddbed5f0d2241946b5f9687d6a32, type: 3}
     - target: {fileID: 2664354778777213683, guid: 5603374ae95497144bb1aa3eb81c8154, type: 3}
       propertyPath: m_text
       value: Achievements
@@ -15426,6 +15485,14 @@ PrefabInstance:
       propertyPath: selectedSprite
       value: 
       objectReference: {fileID: 21300000, guid: 90f12eb62fc61ea40a0d4ea93f55e948, type: 3}
+    - target: {fileID: 2664354778814268240, guid: 5603374ae95497144bb1aa3eb81c8154, type: 3}
+      propertyPath: defaultIconSprite
+      value: 
+      objectReference: {fileID: 21300000, guid: 69d6ddbed5f0d2241946b5f9687d6a32, type: 3}
+    - target: {fileID: 2664354778814268240, guid: 5603374ae95497144bb1aa3eb81c8154, type: 3}
+      propertyPath: selectedIconSprite
+      value: 
+      objectReference: {fileID: 21300000, guid: c85b96de29cc61c4bbbce24acc70e92f, type: 3}
     - target: {fileID: 2664354778814268242, guid: 5603374ae95497144bb1aa3eb81c8154, type: 3}
       propertyPath: m_Type
       value: 0
@@ -15806,6 +15873,9 @@ MonoBehaviour:
   transitionType: 13
   defaultSprite: {fileID: 21300000, guid: c741273b9a28fa84f915742efe8caee8, type: 3}
   selectedSprite: {fileID: 21300000, guid: 9720bc3869b680c44b46294402554335, type: 3}
+  icon: {fileID: 0}
+  defaultIconSprite: {fileID: 0}
+  selectedIconSprite: {fileID: 0}
   defaultObject: {fileID: 0}
   selectedObject: {fileID: 0}
   defaultFont: {r: 0.18039216, g: 0.18039216, b: 0.18039216, a: 1}
@@ -18728,6 +18798,9 @@ MonoBehaviour:
   transitionType: 0
   defaultSprite: {fileID: 0}
   selectedSprite: {fileID: 0}
+  icon: {fileID: 0}
+  defaultIconSprite: {fileID: 0}
+  selectedIconSprite: {fileID: 0}
   defaultObject: {fileID: 0}
   selectedObject: {fileID: 0}
   defaultFont: {r: 0, g: 0, b: 0, a: 0}
@@ -19673,23 +19746,19 @@ PrefabInstance:
     - target: {fileID: 2009796500936212543, guid: 5603374ae95497144bb1aa3eb81c8154, type: 3}
       propertyPath: m_Sprite
       value: 
-      objectReference: {fileID: 21300000, guid: b72e53bcab18daa42b875701dc962611, type: 3}
+      objectReference: {fileID: 21300000, guid: 26437fb8e8dc3d640b5412c1ae3cf2ff, type: 3}
     - target: {fileID: 2664354778777213683, guid: 5603374ae95497144bb1aa3eb81c8154, type: 3}
       propertyPath: m_text
       value: Upgrades
       objectReference: {fileID: 0}
     - target: {fileID: 2664354778814268240, guid: 5603374ae95497144bb1aa3eb81c8154, type: 3}
-      propertyPath: parameter
-      value: UpgradeWindow
-      objectReference: {fileID: 0}
-    - target: {fileID: 2664354778814268240, guid: 5603374ae95497144bb1aa3eb81c8154, type: 3}
-      propertyPath: defaultSprite
+      propertyPath: defaultIconSprite
       value: 
-      objectReference: {fileID: 21300000, guid: 834491ddb64a06f4e8d09c07f70f4e77, type: 3}
+      objectReference: {fileID: 21300000, guid: 26437fb8e8dc3d640b5412c1ae3cf2ff, type: 3}
     - target: {fileID: 2664354778814268240, guid: 5603374ae95497144bb1aa3eb81c8154, type: 3}
-      propertyPath: selectedSprite
+      propertyPath: selectedIconSprite
       value: 
-      objectReference: {fileID: 21300000, guid: 1d44a29346741e34aa226a6529ad1844, type: 3}
+      objectReference: {fileID: 21300000, guid: 20beb9a1ab42a0144a90059fe3bcd3a3, type: 3}
     - target: {fileID: 2664354778814268242, guid: 5603374ae95497144bb1aa3eb81c8154, type: 3}
       propertyPath: m_Type
       value: 0

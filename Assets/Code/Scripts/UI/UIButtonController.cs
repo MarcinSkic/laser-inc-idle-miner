@@ -8,7 +8,7 @@ using MyBox;
 using System;
 
 [Flags]
-public enum TransitionType { SpriteSwap = 0b1, ObjectSwap = 0b10, FontColorSwap=0b100, ImageColorSwap=0b1000}
+public enum TransitionType { SpriteSwap = 0b1, ObjectSwap = 0b10, FontColorSwap=0b100, ImageColorSwap=0b1000, IconSpriteSwap=0b10000}
 
 public class UIButtonController : MonoBehaviour
 {
@@ -23,6 +23,13 @@ public class UIButtonController : MonoBehaviour
     [SerializeField] protected Sprite defaultSprite;
     [ConditionalField(nameof(transitionType), false, TransitionType.SpriteSwap)]
     [SerializeField] protected Sprite selectedSprite;
+
+    [ConditionalField(nameof(transitionType), false, TransitionType.IconSpriteSwap)]
+    [SerializeField] protected Image icon;
+    [ConditionalField(nameof(transitionType), false, TransitionType.IconSpriteSwap)]
+    [SerializeField] protected Sprite defaultIconSprite;
+    [ConditionalField(nameof(transitionType), false, TransitionType.IconSpriteSwap)]
+    [SerializeField] protected Sprite selectedIconSprite;
 
     [ConditionalField(nameof(transitionType),false,TransitionType.ObjectSwap)]
     [SerializeField] protected GameObject defaultObject;
@@ -93,6 +100,11 @@ public class UIButtonController : MonoBehaviour
         {
             button.image.color = selectedColor;
         }
+
+        if (transitionType.HasFlag(TransitionType.IconSpriteSwap))
+        {
+            icon.sprite = selectedIconSprite;
+        }
     }
 
     public void Deselect()
@@ -116,6 +128,11 @@ public class UIButtonController : MonoBehaviour
         if (transitionType.HasFlag(TransitionType.ImageColorSwap))
         {
             button.image.color = defaultColor;
+        }
+
+        if (transitionType.HasFlag(TransitionType.IconSpriteSwap))
+        {
+            icon.sprite = defaultIconSprite;
         }
     }
 
