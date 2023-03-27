@@ -229,7 +229,10 @@ public class GameController : BaseController<GameView>
 
     private void OnApplicationQuit()
     {
-        
+        if (SettingsModel.Instance.saveAndLoadFile)
+        {
+            SavePersistentData();
+        }
     }
 
     private void ConnectToUpgradesEvents()
