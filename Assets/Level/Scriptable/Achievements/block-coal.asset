@@ -15,7 +15,7 @@ MonoBehaviour:
   achievement:
     name: COAL!
     description: it was COAL!
-    sprite: {fileID: 21300000, guid: e96dbba8249cfb24d9b6d4e49212ae99, type: 3}
+    sprite: {fileID: 21300000, guid: a4d08f5e7743e284b9c7b7bd9a2ce0c2, type: 3}
     isCompleted: 0
     leftRequirements: 0
     requirements:

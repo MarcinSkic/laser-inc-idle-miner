@@ -53,6 +53,7 @@ public class BaseBall<T> : MonoBehaviour, IPoolable<BaseBall<T>>, IUpgradeable<T
 
     protected virtual void OnCollisionEnter(Collision collision)
     {
+        AudioManager.Instance.Play("bounce");
         SetVelocity();
         UpdateLaserRotation();
         TryDealDamage(collision);

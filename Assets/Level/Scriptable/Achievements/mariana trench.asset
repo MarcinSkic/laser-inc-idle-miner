@@ -13,12 +13,13 @@ MonoBehaviour:
   m_Name: mariana trench
   m_EditorClassIdentifier: 
   achievement:
-    achievementManager: {fileID: 0}
     name: deeper than Mariana Trench
     description: Reach a depth of 10984 meters
-    sprite: {fileID: 21300000, guid: cbec5d7520886824f8dd7fc1d4263874, type: 3}
+    sprite: {fileID: 21300000, guid: 25bd5d9ccb568524e938422e63eef228, type: 3}
     isCompleted: 0
+    leftRequirements: 0
     requirements:
     - dependsOn: 0
       comparison: 1
       requiredValue: 10984
+      upgradeScriptable: {fileID: 0}
