@@ -112,15 +112,5 @@ public class TutorialPopup : MonoBehaviour
         float timeToSet = Mathf.Min(1.0f, currentTime);
         arrowCycleOffset = currentTime - timeToSet;
         currentTime = timeToSet;
-        /*startXScale = 0.2f;
-        startYScale = 0.0f;
-        timeToStartXScaling = 0.3f;
-        timeToEndXScaling = 0.8f;
-        timeToStartYScaling = 0.0f;
-        timeToEndYScaling = 0.3f;
-        timeToStartRobotAppearing = 0.8f;
-        timeToEndRobotAppearing = 1.2f;
-        arrowMovementPeriod = 2.6f;
-        arrowMovementAmplitude = 80;*/
     }
 }
