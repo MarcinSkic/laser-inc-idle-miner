@@ -24,6 +24,8 @@ public class TutorialPopup : MonoBehaviour
     float timeToEndRobotAppearing = 1.2f;
     float arrowMovementPeriod = 2.6f;
     float arrowMovementAmplitude = 80;
+    bool turningOff = false;
+    float arrowCycleOffset = 0f;
 
     float Sigmoid(float value)
     {
@@ -40,7 +42,18 @@ public class TutorialPopup : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        currentTime += Time.deltaTime;
+        if (turningOff)
+        {
+            currentTime -= Time.deltaTime;
+            if (currentTime <= 0)
+            {
+                gameObject.SetActive(false);
+            }
+        }
+        else
+        {
+            currentTime += Time.deltaTime;
+        }
 
         if (currentTime >= 0)
         {
@@ -83,9 +96,29 @@ public class TutorialPopup : MonoBehaviour
                 {
                     arrow.color = new Color(1, 1, 1, Mathf.Max(0, (currentTime - timeToStartArrowAppearing) / (timeToEndArrowAppearing - timeToStartArrowAppearing)));
                 }
-                arrow.transform.localPosition = new Vector3(Mathf.Sin(currentTime * 6.28f / arrowMovementPeriod) * arrowMovementAmplitude, arrow.transform.localPosition.y, arrow.transform.localPosition.z);
+                arrow.transform.localPosition = new Vector3(Mathf.Sin((currentTime+arrowCycleOffset) * 6.28f / arrowMovementPeriod) * arrowMovementAmplitude, arrow.transform.localPosition.y, arrow.transform.localPosition.z);
 
             }
         }
+    }
+
+    public void StartFinishingSequence()
+    {
+        turningOff = true;
+        float timeToSet = Mathf.Min(1.8f, currentTime);
+        arrowCycleOffset = currentTime - timeToSet;
+        currentTime = timeToSet;
+        /*startXScale = 0.2f;
+        startYScale = 0.0f;
+        timeToStartXScaling = 0.3f;
+        timeToEndXScaling = 0.8f;
+        timeToStartYScaling = 0.0f;
+        timeToEndYScaling = 0.3f;
+        timeToStartArrowAppearing = 1.4f;
+        timeToEndArrowAppearing = 1.8f;
+        timeToStartRobotAppearing = 0.8f;
+        timeToEndRobotAppearing = 1.2f;
+        arrowMovementPeriod = 2.6f;
+        arrowMovementAmplitude = 80;*/
     }
 }
