@@ -105,7 +105,11 @@ public class TutorialPopup : MonoBehaviour
     public void StartFinishingSequence()
     {
         turningOff = true;
-        float timeToSet = Mathf.Min(1.8f, currentTime);
+        timeToStartRobotAppearing = 0.8f;
+        timeToEndRobotAppearing = 1.0f;
+        timeToStartArrowAppearing = 0.8f;
+        timeToEndArrowAppearing = 1.0f;
+        float timeToSet = Mathf.Min(1.0f, currentTime);
         arrowCycleOffset = currentTime - timeToSet;
         currentTime = timeToSet;
         /*startXScale = 0.2f;
@@ -114,8 +118,6 @@ public class TutorialPopup : MonoBehaviour
         timeToEndXScaling = 0.8f;
         timeToStartYScaling = 0.0f;
         timeToEndYScaling = 0.3f;
-        timeToStartArrowAppearing = 1.4f;
-        timeToEndArrowAppearing = 1.8f;
         timeToStartRobotAppearing = 0.8f;
         timeToEndRobotAppearing = 1.2f;
         arrowMovementPeriod = 2.6f;
