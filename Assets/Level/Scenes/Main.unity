@@ -10992,6 +10992,10 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 1197928615}
     m_Modifications:
+    - target: {fileID: 1750430247953946955, guid: eeceaeb252270da45a11d62bccc249e4, type: 3}
+      propertyPath: m_IsOn
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 5194677913977320347, guid: eeceaeb252270da45a11d62bccc249e4, type: 3}
       propertyPath: m_text
       value: Sound
@@ -11090,6 +11094,14 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6984556779125044719, guid: eeceaeb252270da45a11d62bccc249e4, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6984556780776512101, guid: eeceaeb252270da45a11d62bccc249e4, type: 3}
+      propertyPath: m_AnchorMax.x
+      value: 0.47
+      objectReference: {fileID: 0}
+    - target: {fileID: 6984556780776512101, guid: eeceaeb252270da45a11d62bccc249e4, type: 3}
+      propertyPath: m_AnchorMin.x
       value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
@@ -14408,13 +14420,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8df5f7b5fed88884bbe63da0e99d0e50, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  saveAndLoadFile: 0
-  doOfflineEarning: 0
+  saveAndLoadFile: 1
+  doOfflineEarning: 1
   spawnBlocks: 1
-  spawnBats: 0
+  spawnBats: 1
   showMBIntro: 0
   removeUpgradesRequirements: 0
-  unlockCheatWindow: 0
+  unlockCheatWindow: 1
   showProgressionDebugMessages: 0
   changeTimeScale: 0
   timeScale: 0.1
