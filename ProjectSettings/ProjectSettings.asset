@@ -250,7 +250,7 @@ PlayerSettings:
   AndroidTargetDevices: 0
   AndroidSplashScreenScale: 0
   androidSplashScreen: {fileID: 0}
-  AndroidKeystoreName: F:/repos-unity/keys/user.keystore
+  AndroidKeystoreName: C:/Keystores/user.keystore
   AndroidKeyaliasName: key_alias
   AndroidBuildApkPerCpuArchitecture: 0
   AndroidTVCompatibility: 0
