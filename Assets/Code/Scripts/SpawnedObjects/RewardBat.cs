@@ -121,6 +121,7 @@ public class RewardBat : MonoBehaviour
                 break;
         }
         Debug.Log(debugString);
+        AudioManager.Instance.Play("bat_caught");
         Destroy(gameObject);
     }
 }

@@ -73,6 +73,7 @@ public class GameView : BaseView
     public UIToggleController is60fps;
     public UIToggleController displayFloatingDamage;
     public UIToggleController useAlternativeNotation;
+    public UIToggleController playSounds;
     public UIButtonController eraseSaveFile;
 
 

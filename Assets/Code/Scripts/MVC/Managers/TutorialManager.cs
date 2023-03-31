@@ -51,7 +51,7 @@ public class TutorialManager : MonoBehaviour
 [System.Serializable]
 public class TutorialSection
 {
-    [SerializeField] private GameObject[] popups;
+    [SerializeField] private TutorialPopup[] popups;
     [SerializeField] private Requirement[] requirements;
     private int leftRequirements = 0;
 
@@ -123,7 +123,12 @@ public class TutorialSection
     {
         foreach(var popup in popups)
         {
-            popup.SetActive(state);
+            if (state)
+            {
+                popup.gameObject.SetActive(true);
+            } else if (popup.gameObject.activeSelf){
+                popup.StartFinishingSequence();
+            }
         }
     }
 }

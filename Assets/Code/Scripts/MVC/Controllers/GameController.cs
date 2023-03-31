@@ -7,6 +7,7 @@ using System.Linq;
 using UnityEngine.SceneManagement;
 // for Math.Log10 for progression debugging
 using System;
+using UnityEngine.Video;
 
 /// <summary>
 /// Methods from this object should not be called by other objects. When such action direction is needed (for example UI or world events) it should connect methods to events HERE.
@@ -44,6 +45,20 @@ public class GameController : BaseController<GameView>
     [SerializeField] float previousDepthProgressionDebugTime = 0;
     [SerializeField] double previousDepth;
     public List<string> depthMessages;
+
+    [Header("Logo")]
+    public bool isLogoOpaque = true;
+    public bool isBGOpaque = true;
+    public float logoOpaqueTime;
+    public float logoTransparentTime;
+    public float bgOpaqueTime;
+    public float bgTransparentTime;
+    public float logoCurrentTime = 0f;
+
+    public CanvasGroup canvasGroupLogo;
+    public CanvasGroup canvasGroupBG;
+    public Camera[] cameras;
+    public GameObject logo;
 
 
     //KEEP MONOBEHAVIOUR METHODS (Start, Update etc.) ON TOP
@@ -113,10 +128,14 @@ public class GameController : BaseController<GameView>
 
         onSetupFinished?.Invoke();
 
-        // FILIPOWY SYF, WEŹ DAJ TO GDZIE ZECHCESZ
         if (settingsModel.unlockCheatWindow)
         {
             InvokeRepeating(nameof(DebugProgression), 0f, 1f);
+        }
+
+        if (SettingsModel.Instance.showMBIntro)
+        {
+            logo.SetActive(true);
         }
     }
     public UnityAction onSetupFinished;
@@ -127,6 +146,56 @@ public class GameController : BaseController<GameView>
         {
             DisplayFPS();
         }
+
+        if (!SettingsModel.Instance.showMBIntro)
+        {
+            if (canvasGroupLogo.alpha > 0)
+            {
+                for (int i = 0; i < cameras.Length; i++)
+                {
+                    cameras[i].nearClipPlane = 0.3f;
+                }
+                canvasGroupBG.alpha = 0;
+                canvasGroupLogo.alpha = 0;
+                AudioManager.Instance.IncreaseVolumeOverTime();
+            }
+        } else {
+            logoCurrentTime += Time.deltaTime;
+            if (logoCurrentTime > logoOpaqueTime && isBGOpaque)
+            {
+                if (!isLogoOpaque)
+                {
+                    AudioManager.Instance.IncreaseVolumeOverTime();
+                    for (int i = 0; i < cameras.Length; i++)
+                    {
+                        cameras[i].nearClipPlane = 0.3f;
+                    }
+                }
+                isLogoOpaque = false;
+
+                if (logoCurrentTime < logoOpaqueTime + logoTransparentTime)
+                {
+                    canvasGroupLogo.alpha = 1 - ((logoCurrentTime - logoOpaqueTime) / (logoTransparentTime));
+                }
+                else
+                {
+                    canvasGroupLogo.alpha = 0;
+                    isBGOpaque = false;
+                }
+            }
+            if (!isBGOpaque && canvasGroupBG.alpha > 0)
+            {
+                canvasGroupBG.alpha = 1 - ((logoCurrentTime - logoOpaqueTime - logoTransparentTime - bgOpaqueTime) / (bgTransparentTime));
+            }
+        }
+
+
+        /*
+        logoVideoPlayer
+        logoOpaqueTime
+        logoTransparentTime
+        logoCurrentTime
+        */
     }
 
     private void FixedUpdate()
@@ -160,7 +229,10 @@ public class GameController : BaseController<GameView>
 
     private void OnApplicationQuit()
     {
-        
+        if (SettingsModel.Instance.saveAndLoadFile)
+        {
+            SavePersistentData();
+        }
     }
 
     private void ConnectToUpgradesEvents()
@@ -245,6 +317,9 @@ public class GameController : BaseController<GameView>
         view.useAlternativeNotation.onValueChanged += value => { SettingsModel.Instance.UseAlternativeNotation = value; };
         SettingsModel.Instance.UseAlternativeNotation = view.useAlternativeNotation.IsOn;
 
+        view.playSounds.onValueChanged += value => { SettingsModel.Instance.PlaySounds = value; };
+        SettingsModel.Instance.PlaySounds = view.playSounds.IsOn;
+
         view.eraseSaveFile.onClick += TryEraseSaveFile;
         #endregion
 
@@ -307,6 +382,7 @@ public class GameController : BaseController<GameView>
         view.is60fps.IsOn = SettingsModel.Instance.Is60fps;
         view.displayFloatingDamage.IsOn = SettingsModel.Instance.DisplayFloatingText;
         view.useAlternativeNotation.IsOn = SettingsModel.Instance.UseAlternativeNotation;
+        view.playSounds.IsOn = SettingsModel.Instance.PlaySounds;
     }
 
     private void UpdateSettings()
@@ -330,6 +406,14 @@ public class GameController : BaseController<GameView>
         else
         {
             Application.targetFrameRate = 30;
+        }
+
+        if (SettingsModel.Instance.PlaySounds)
+        {
+            AudioManager.Instance.Play("theme");
+        } else
+        {
+            AudioManager.Instance.Stop("theme");
         }
     }
 

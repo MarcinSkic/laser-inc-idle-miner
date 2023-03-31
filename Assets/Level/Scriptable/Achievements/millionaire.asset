@@ -15,10 +15,11 @@ MonoBehaviour:
   achievement:
     name: Millionaire
     description: accumulate $1000000
-    sprite: {fileID: 21300000, guid: ea7160dfa17c9b7469feaf347218a62d, type: 3}
+    sprite: {fileID: 21300000, guid: fc3220ab5d09cd14ab297b92f4e4fa63, type: 3}
     isCompleted: 0
     leftRequirements: 0
     requirements:
     - dependsOn: 2
       comparison: 1
       requiredValue: 1000000
+      upgradeScriptable: {fileID: 0}

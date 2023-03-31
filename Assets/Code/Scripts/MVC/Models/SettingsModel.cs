@@ -26,6 +26,7 @@ public class SettingsModel : MonoBehaviour
     public bool doOfflineEarning = true;
     public bool spawnBlocks = true;
     public bool spawnBats = true;
+    public bool showMBIntro = true;
 
     [Header("FALSE before build/commit")]
     public bool removeUpgradesRequirements;
@@ -38,6 +39,19 @@ public class SettingsModel : MonoBehaviour
     public double clickDamage;
 
     [Header("Settings edited from game UI")]
+    #region PlaySounds
+    [ReadOnly] [SerializeField] private bool playSounds;
+    public bool PlaySounds
+    {
+        get => playSounds;
+        set
+        {
+            playSounds = value;
+            onSettingsChange?.Invoke();
+        }
+    }
+    #endregion
+
     #region Is60fps
     [ReadOnly][SerializeField] private bool is60fps;
     public bool Is60fps
@@ -115,6 +129,7 @@ public class SettingsModel : MonoBehaviour
 
     public void SavePersistentData(PersistentData data)
     {
+        data.playSounds = PlaySounds;
         data.is60fps = Is60fps;
         data.displayFloatingText = DisplayFloatingText;
         data.useAlternativeNotation = UseAlternativeNotation;
@@ -122,6 +137,7 @@ public class SettingsModel : MonoBehaviour
 
     public void LoadPersistentData(PersistentData data)
     {
+        PlaySounds = data?.playSounds ?? true;
         Is60fps = data?.is60fps ?? true;
         DisplayFloatingText = data?.displayFloatingText ?? false;
         UseAlternativeNotation = data?.useAlternativeNotation ?? false;
@@ -140,6 +156,7 @@ public class SettingsModel : MonoBehaviour
         doOfflineEarning = true;
         spawnBlocks = true;
         spawnBats = true;
+        showMBIntro = true;
         ShowDebugWindow = false;
         changeTimeScale = false;
     }
