@@ -9,6 +9,13 @@
       },
       "hash": "701527564a2ce99a26a65b8ad9fe53772a3f0739"
     },
+    "com.fyber.fairbid.unity": {
+      "version": "3.36.0",
+      "depth": 0,
+      "source": "registry",
+      "dependencies": {},
+      "url": "https://registry.npmjs.org"
+    },
     "com.unity.2d.sprite": {
       "version": "1.0.0",
       "depth": 0,
