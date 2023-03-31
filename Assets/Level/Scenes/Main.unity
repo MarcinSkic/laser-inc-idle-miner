@@ -14426,7 +14426,7 @@ MonoBehaviour:
   spawnBats: 1
   showMBIntro: 0
   removeUpgradesRequirements: 0
-  unlockCheatWindow: 1
+  unlockCheatWindow: 0
   showProgressionDebugMessages: 0
   changeTimeScale: 0
   timeScale: 0.1
