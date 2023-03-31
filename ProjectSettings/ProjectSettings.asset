@@ -13,7 +13,7 @@ PlayerSettings:
   useOnDemandResources: 0
   accelerometerFrequency: 60
   companyName: Misty Bytes
-  productName: Idle Balls
+  productName: 'Laser Inc: Idle Miner'
   defaultCursor: {fileID: 0}
   cursorHotspot: {x: 0, y: 0}
   m_SplashScreenBackgroundColor: {r: 0.13725491, g: 0.12156863, b: 0.1254902, a: 1}
@@ -155,7 +155,7 @@ PlayerSettings:
   androidSupportedAspectRatio: 1
   androidMaxAspectRatio: 2.1
   applicationIdentifier:
-    Android: com.MistyBytes.IdleBalls
+    Android: laser.inc.idle.miner
     Standalone: com.Misty-Bytes.Idle-Balls
   buildNumber:
     Standalone: 0
@@ -239,12 +239,12 @@ PlayerSettings:
   clonedFromGUID: c0afd0d1d80e3634a9dac47e8a0426ea
   templatePackageId: com.unity.template.3d@5.0.4
   templateDefaultScene: Assets/Scenes/SampleScene.unity
-  useCustomMainManifest: 0
+  useCustomMainManifest: 1
   useCustomLauncherManifest: 0
-  useCustomMainGradleTemplate: 0
-  useCustomLauncherGradleManifest: 0
+  useCustomMainGradleTemplate: 1
+  useCustomLauncherGradleManifest: 1
   useCustomBaseGradleTemplate: 0
-  useCustomGradlePropertiesTemplate: 0
+  useCustomGradlePropertiesTemplate: 1
   useCustomProguardFile: 0
   AndroidTargetArchitectures: 3
   AndroidTargetDevices: 0
@@ -274,7 +274,7 @@ PlayerSettings:
   - m_BuildTarget: 
     m_Icons:
     - serializedVersion: 2
-      m_Icon: {fileID: 2800000, guid: b3e348b971f9d4b4ba57b7a759cff166, type: 3}
+      m_Icon: {fileID: 2800000, guid: 367eceb4ef82e5b449869453519edba7, type: 3}
       m_Width: 128
       m_Height: 128
       m_Kind: 0
