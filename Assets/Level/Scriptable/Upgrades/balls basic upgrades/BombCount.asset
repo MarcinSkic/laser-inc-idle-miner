@@ -28,7 +28,7 @@ MonoBehaviour:
     title: 
     description: 
     toUnlockDescription: reach a depth of 50
-    maxLevel: -1
+    maxLevel: 5
     currency: 0
     cost: 200
     costIncremental: 0
