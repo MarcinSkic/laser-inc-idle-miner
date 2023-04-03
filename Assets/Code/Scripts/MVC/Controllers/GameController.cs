@@ -469,6 +469,13 @@ public class GameController : BaseController<GameView>
 
                     if (upgrade.type == UpgradeType.SpawnUpgrade)
                     {
+                        if(upgrade.currentLevel >= upgrade.maxLevel)
+                        {
+                            buttonUpgrade.MaxLock();
+                        } else
+                        {
+                            upgrade.onMaxedUpgrade += delegate (Upgrade _) { buttonUpgrade.MaxLock(); };
+                        }
                         if (!upgrade.isUnlocked)
                         {
                             ballBar.Lock();
