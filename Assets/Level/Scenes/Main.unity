@@ -12152,7 +12152,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 1750430247953946955, guid: eeceaeb252270da45a11d62bccc249e4, type: 3}
       propertyPath: m_IsOn
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 5194677913977320347, guid: eeceaeb252270da45a11d62bccc249e4, type: 3}
       propertyPath: m_text
@@ -12723,7 +12723,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0.1}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: 0, y: -0.0007324219}
+  m_AnchoredPosition: {x: 0, y: -0.00061035156}
   m_SizeDelta: {x: -100, y: 0}
   m_Pivot: {x: 0.5, y: 1}
 --- !u!222 &1293810468
@@ -17420,6 +17420,7 @@ MonoBehaviour:
   - {fileID: 11400000, guid: b3a599856d43d184097c2dc78f47756a, type: 2}
   - {fileID: 11400000, guid: c4680740163624048b19d237cb932c06, type: 2}
   - {fileID: 11400000, guid: a1e0dd4fe59ed6346b9b1ecf74ae59e8, type: 2}
+  - {fileID: 11400000, guid: 7b61ec5139b04c545bfb1fe86c1b863e, type: 2}
 --- !u!114 &1947716358
 MonoBehaviour:
   m_ObjectHideFlags: 0

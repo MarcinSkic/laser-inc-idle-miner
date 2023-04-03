@@ -20,13 +20,13 @@ MonoBehaviour:
     leftRequirements: 0
     requirements: []
     whereToGenerate: 3
-    order: 1
+    order: -1
     title: enhanced financing
     description: money gain * 1.5
     toUnlockDescription: 
     maxLevel: -1
     currency: 1
-    cost: 10
+    cost: 1
     costIncremental: 0
     costMultiplier: 10
     showUpgradedValueInsteadOfLevel: 0
