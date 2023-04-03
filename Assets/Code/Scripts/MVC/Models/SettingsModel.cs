@@ -39,6 +39,18 @@ public class SettingsModel : MonoBehaviour
     public double clickDamage;
 
     [Header("Settings edited from game UI")]
+    #region PlayMusic
+    [ReadOnly] [SerializeField] private bool playMusic;
+    public bool PlayMusic
+    {
+        get => playMusic;
+        set
+        {
+            playMusic = value;
+            onSettingsChange?.Invoke();
+        }
+    }
+    #endregion
     #region PlaySounds
     [ReadOnly] [SerializeField] private bool playSounds;
     public bool PlaySounds
@@ -129,6 +141,7 @@ public class SettingsModel : MonoBehaviour
 
     public void SavePersistentData(PersistentData data)
     {
+        data.playMusic = PlayMusic;
         data.playSounds = PlaySounds;
         data.is60fps = Is60fps;
         data.displayFloatingText = DisplayFloatingText;
@@ -137,6 +150,7 @@ public class SettingsModel : MonoBehaviour
 
     public void LoadPersistentData(PersistentData data)
     {
+        PlayMusic = data?.playMusic ?? true;
         PlaySounds = data?.playSounds ?? true;
         Is60fps = data?.is60fps ?? true;
         DisplayFloatingText = data?.displayFloatingText ?? false;

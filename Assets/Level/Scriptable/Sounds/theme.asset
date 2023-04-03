@@ -17,4 +17,5 @@ MonoBehaviour:
   volume: 0.25
   pitch: 1
   loop: 1
+  isMusic: 1
   source: {fileID: 0}

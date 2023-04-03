@@ -11,6 +11,7 @@ public class Sound : ScriptableObject
     [Range(0.1f, 3f)]
     public float pitch = 1f;
     public bool loop = false;
+    public bool isMusic = false;
 
     [HideInInspector]
     public AudioSource source;
