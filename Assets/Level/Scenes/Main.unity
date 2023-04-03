@@ -12268,11 +12268,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6984556780776512101, guid: eeceaeb252270da45a11d62bccc249e4, type: 3}
       propertyPath: m_AnchorMax.x
-      value: 0.47
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 6984556780776512101, guid: eeceaeb252270da45a11d62bccc249e4, type: 3}
       propertyPath: m_AnchorMin.x
-      value: 0
+      value: 0.53
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: eeceaeb252270da45a11d62bccc249e4, type: 3}
@@ -17421,6 +17421,9 @@ MonoBehaviour:
   - {fileID: 11400000, guid: c4680740163624048b19d237cb932c06, type: 2}
   - {fileID: 11400000, guid: a1e0dd4fe59ed6346b9b1ecf74ae59e8, type: 2}
   - {fileID: 11400000, guid: 7b61ec5139b04c545bfb1fe86c1b863e, type: 2}
+  - {fileID: 11400000, guid: 03266181235a5274f96cba23f4f67a4c, type: 2}
+  - {fileID: 11400000, guid: 797d6a0788e0d984c9c7a9a47380bbf3, type: 2}
+  - {fileID: 11400000, guid: 368b3f7e94d18f74db6dacd9a50849ba, type: 2}
 --- !u!114 &1947716358
 MonoBehaviour:
   m_ObjectHideFlags: 0

@@ -10,42 +10,34 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 5400be14b10cc7e47a7f3024d24c25bb, type: 3}
-  m_Name: BonusEasyBallsCount
+  m_Name: BonusLeechCount
   m_EditorClassIdentifier: 
   upgrade:
     type: 1
     name: 
-    identifier: BonusEasyBallsCount
+    identifier: BonusLeechCount
     isUnlocked: 0
     leftRequirements: 0
     requirements:
     - dependsOn: 16
       comparison: 1
       requiredValue: 5
-      upgradeScriptable: {fileID: 11400000, guid: e22a5b184ca2ae74c8a77e52a0882d7f, type: 2}
-    - dependsOn: 16
-      comparison: 1
-      requiredValue: 5
-      upgradeScriptable: {fileID: 11400000, guid: 87c4dd4ba17df9842b5925eab17869c8, type: 2}
-    - dependsOn: 16
-      comparison: 1
-      requiredValue: 5
-      upgradeScriptable: {fileID: 11400000, guid: 150a26e47bf7008428974c85a0a64b47, type: 2}
+      upgradeScriptable: {fileID: 11400000, guid: efa8117b943802c42bce34c5cf03c57b, type: 2}
     whereToGenerate: 3
-    order: 0
+    order: 501
     title: Bonus lasers
-    description: +1 basic, explosive and precise laser each
-    toUnlockDescription: maxed count of basic, explosive and precise laser
+    description: +1 leech laser
+    toUnlockDescription: maxed count of corresponding laser type
     maxLevel: 3
     currency: 1
-    cost: 1
+    cost: 10
     costIncremental: 0
-    costMultiplier: 1000
+    costMultiplier: 1000000
     showUpgradedValueInsteadOfLevel: 0
     upgradedValueFormatedString: '{0}'
     useInternalValueForUI: 0
     internalValue: 0
-    upgradedObjects: 7
+    upgradedObjects: 8
     upgradedValues: 0
     changeValue: 0
     formula: 0

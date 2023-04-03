@@ -10,31 +10,35 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 5400be14b10cc7e47a7f3024d24c25bb, type: 3}
-  m_Name: SuperDuperOp
+  m_Name: BonusShadowCount
   m_EditorClassIdentifier: 
   upgrade:
-    type: 0
+    type: 1
     name: 
-    identifier: prestigeEnhancedLens
+    identifier: BonusShadowCount
     isUnlocked: 0
     leftRequirements: 0
-    requirements: []
+    requirements:
+    - dependsOn: 16
+      comparison: 1
+      requiredValue: 5
+      upgradeScriptable: {fileID: 11400000, guid: 3bc399c159830074fb87bb08206835e0, type: 2}
     whereToGenerate: 3
-    order: -2
-    title: enhanced lens
-    description: damage * 1.5
-    toUnlockDescription: 
-    maxLevel: -1
+    order: 503
+    title: Bonus lasers
+    description: +1 shadow laser
+    toUnlockDescription: maxed count of corresponding laser type
+    maxLevel: 3
     currency: 1
-    cost: 1
+    cost: 100
     costIncremental: 0
-    costMultiplier: 5
+    costMultiplier: 1000000
     showUpgradedValueInsteadOfLevel: 0
     upgradedValueFormatedString: '{0}'
     useInternalValueForUI: 0
     internalValue: 0
-    upgradedObjects: 63
-    upgradedValues: 2
-    changeValue: 1.5
-    formula: 1
+    upgradedObjects: 8
+    upgradedValues: 0
+    changeValue: 0
+    formula: 0
     currentLevel: 0
