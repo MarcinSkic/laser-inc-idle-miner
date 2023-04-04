@@ -64,7 +64,8 @@ public class GameController : BaseController<GameView>
     //KEEP MONOBEHAVIOUR METHODS (Start, Update etc.) ON TOP
     /// <summary>
     /// This Start should be considered root Start of game, all inits where order of operations is important should originate from here
-    /// </summary>
+    /// </summary> 
+
     void Start()
     {
         #region UI Creation
@@ -137,6 +138,8 @@ public class GameController : BaseController<GameView>
         {
             logo.SetActive(true);
         }
+
+        AudioManager.Instance.Play("theme");
     }
     public UnityAction onSetupFinished;
 
@@ -188,14 +191,6 @@ public class GameController : BaseController<GameView>
                 canvasGroupBG.alpha = 1 - ((logoCurrentTime - logoOpaqueTime - logoTransparentTime - bgOpaqueTime) / (bgTransparentTime));
             }
         }
-
-
-        /*
-        logoVideoPlayer
-        logoOpaqueTime
-        logoTransparentTime
-        logoCurrentTime
-        */
     }
 
     private void FixedUpdate()
@@ -317,6 +312,9 @@ public class GameController : BaseController<GameView>
         view.useAlternativeNotation.onValueChanged += value => { SettingsModel.Instance.UseAlternativeNotation = value; };
         SettingsModel.Instance.UseAlternativeNotation = view.useAlternativeNotation.IsOn;
 
+        view.playMusic.onValueChanged += value => { SettingsModel.Instance.PlayMusic = value; };
+        SettingsModel.Instance.PlayMusic = view.playMusic.IsOn;
+
         view.playSounds.onValueChanged += value => { SettingsModel.Instance.PlaySounds = value; };
         SettingsModel.Instance.PlaySounds = view.playSounds.IsOn;
 
@@ -382,6 +380,7 @@ public class GameController : BaseController<GameView>
         view.is60fps.IsOn = SettingsModel.Instance.Is60fps;
         view.displayFloatingDamage.IsOn = SettingsModel.Instance.DisplayFloatingText;
         view.useAlternativeNotation.IsOn = SettingsModel.Instance.UseAlternativeNotation;
+        view.playMusic.IsOn = SettingsModel.Instance.PlayMusic;
         view.playSounds.IsOn = SettingsModel.Instance.PlaySounds;
     }
 
@@ -408,14 +407,26 @@ public class GameController : BaseController<GameView>
             Application.targetFrameRate = 30;
         }
 
+
+        if (SettingsModel.Instance.PlayMusic)
+        {
+            AudioManager.Instance.SetMusicPlaying(true);
+        }
+        else
+        {
+            AudioManager.Instance.SetMusicPlaying(false);
+        }
         if (SettingsModel.Instance.PlaySounds)
         {
-            AudioManager.Instance.Play("theme");
-        } else
+            AudioManager.Instance.SetSoundPlaying(true);
+        }
+        else
         {
-            AudioManager.Instance.Stop("theme");
+            AudioManager.Instance.SetSoundPlaying(false);
         }
     }
+
+    
 
 
     private void MoveBorderToMatchScreenSize()
@@ -458,6 +469,13 @@ public class GameController : BaseController<GameView>
 
                     if (upgrade.type == UpgradeType.SpawnUpgrade)
                     {
+                        if(upgrade.currentLevel >= upgrade.maxLevel)
+                        {
+                            buttonUpgrade.MaxLock();
+                        } else
+                        {
+                            upgrade.onMaxedUpgrade += delegate (Upgrade _) { buttonUpgrade.MaxLock(); };
+                        }
                         if (!upgrade.isUnlocked)
                         {
                             ballBar.Lock();
@@ -468,7 +486,8 @@ public class GameController : BaseController<GameView>
                             ballBar.Unlock(upgrade);
                         }
 
-                        upgrade.onValueUpdate += buttonUpgrade.SetText;
+                        ballsModel.ballsCount[upgrade.upgradedObjects].onValueChange += v => buttonUpgrade.SetText(v.ToString());
+                        buttonUpgrade.SetText("0");
                     } else
                     {
                         ballsModel.ballsData[upgrade.upgradedObjects].values[upgrade.upgradedValues].onValueChange += v => buttonUpgrade.SetText(NumberFormatter.Format(v));

@@ -18,6 +18,12 @@ public class UIButtonUpgradeController : UIButtonController
         Deactivate();
     }
 
+    public void MaxLock()
+    {
+        SetHardDeactivate(true);
+        Deactivate();
+    }
+
     public void SetUpgradeCost(Upgrade upgrade)
     {
         cost = upgrade.cost;

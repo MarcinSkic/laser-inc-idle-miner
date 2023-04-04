@@ -36,8 +36,7 @@ public class UIUpgradeBar : MonoBehaviour
 
     public void OnMaxed(Upgrade _)
     {
-        upgradeButton.SetHardDeactivate(true);
-        upgradeButton.Deactivate();
+        upgradeButton.MaxLock();
 
         //TODO-@FILIP: It should disappear?
         //gameObject.SetActive(false);

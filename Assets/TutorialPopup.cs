@@ -33,6 +33,15 @@ public class TutorialPopup : MonoBehaviour
         return 1.0f / (1.0f + Mathf.Exp(-value));
     }
 
+    private void OnDisable()
+    {
+        if (turningOff)
+        {
+            currentTime = -1;
+            gameObject.transform.localScale = new Vector3(0, 0, 1);
+        }
+    }
+
     // Start is called before the first frame update
     void Start()
     {

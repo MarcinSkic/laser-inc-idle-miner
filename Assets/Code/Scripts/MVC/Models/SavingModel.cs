@@ -44,6 +44,7 @@ public class PersistentData
     #endregion
 
     #region SettingsModel
+    public bool playMusic;
     public bool playSounds;
     public bool is60fps;
     public bool displayFloatingText;

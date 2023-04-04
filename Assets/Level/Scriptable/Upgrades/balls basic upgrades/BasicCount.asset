@@ -24,7 +24,7 @@ MonoBehaviour:
     title: 
     description: 
     toUnlockDescription: 
-    maxLevel: -1
+    maxLevel: 5
     currency: 0
     cost: 1
     costIncremental: -3
