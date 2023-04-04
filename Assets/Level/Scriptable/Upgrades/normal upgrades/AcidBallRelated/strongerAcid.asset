@@ -10,35 +10,35 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 5400be14b10cc7e47a7f3024d24c25bb, type: 3}
-  m_Name: Wattage 1
+  m_Name: strongerAcid
   m_EditorClassIdentifier: 
   upgrade:
     type: 0
     name: 
-    identifier: wattage1
+    identifier: strongerAcid
     isUnlocked: 0
     leftRequirements: 0
     requirements:
     - dependsOn: 0
       comparison: 1
-      requiredValue: 500
+      requiredValue: 25000
       upgradeScriptable: {fileID: 0}
     whereToGenerate: 1
-    order: 20
-    title: 1MW generator
-    description: double power means double damage!
-    toUnlockDescription: depth of 500
+    order: 700
+    title: Stronger acid
+    description: x5 acid damage over time
+    toUnlockDescription: depth of 25000
     maxLevel: 1
     currency: 0
-    cost: 100000
+    cost: 1000000000000000
     costIncremental: 0
     costMultiplier: 1
     showUpgradedValueInsteadOfLevel: 0
     upgradedValueFormatedString: '{0}'
     useInternalValueForUI: 0
     internalValue: 0
-    upgradedObjects: 63
-    upgradedValues: 2
-    changeValue: 2
+    upgradedObjects: 16
+    upgradedValues: 4
+    changeValue: 5
     formula: 1
     currentLevel: 0

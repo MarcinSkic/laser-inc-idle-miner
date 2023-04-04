@@ -10,35 +10,35 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 5400be14b10cc7e47a7f3024d24c25bb, type: 3}
-  m_Name: Wattage 1
+  m_Name: CompoundLenses
   m_EditorClassIdentifier: 
   upgrade:
     type: 0
     name: 
-    identifier: wattage1
+    identifier: CompoundLenses
     isUnlocked: 0
     leftRequirements: 0
     requirements:
     - dependsOn: 0
       comparison: 1
-      requiredValue: 500
+      requiredValue: 2500
       upgradeScriptable: {fileID: 0}
     whereToGenerate: 1
-    order: 20
-    title: 1MW generator
-    description: double power means double damage!
-    toUnlockDescription: depth of 500
-    maxLevel: 1
+    order: 150
+    title: Compound lenses
+    description: x1.5 damage
+    toUnlockDescription: depth of 2500
+    maxLevel: 5
     currency: 0
-    cost: 100000
+    cost: 10000000000
     costIncremental: 0
-    costMultiplier: 1
+    costMultiplier: 100
     showUpgradedValueInsteadOfLevel: 0
     upgradedValueFormatedString: '{0}'
     useInternalValueForUI: 0
     internalValue: 0
     upgradedObjects: 63
     upgradedValues: 2
-    changeValue: 2
+    changeValue: 1.5
     formula: 1
     currentLevel: 0

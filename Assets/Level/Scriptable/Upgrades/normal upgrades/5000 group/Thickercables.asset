@@ -10,35 +10,35 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 5400be14b10cc7e47a7f3024d24c25bb, type: 3}
-  m_Name: Wattage 1
+  m_Name: Thickercables
   m_EditorClassIdentifier: 
   upgrade:
     type: 0
     name: 
-    identifier: wattage1
+    identifier: Thickercables
     isUnlocked: 0
     leftRequirements: 0
     requirements:
-    - dependsOn: 0
-      comparison: 1
-      requiredValue: 500
-      upgradeScriptable: {fileID: 0}
+    - dependsOn: 16
+      comparison: 0
+      requiredValue: 0
+      upgradeScriptable: {fileID: 11400000, guid: f1c51f7ef3d98324793746d5a17855fa, type: 2}
     whereToGenerate: 1
-    order: 20
-    title: 1MW generator
-    description: double power means double damage!
-    toUnlockDescription: depth of 500
-    maxLevel: 1
+    order: 301
+    title: Thicker cables
+    description: x1.2 dmg
+    toUnlockDescription: reinforced platform
+    maxLevel: 5
     currency: 0
-    cost: 100000
-    costIncremental: 0
-    costMultiplier: 1
+    cost: 0
+    costIncremental: 5000000000000
+    costMultiplier: 3.16227766016838
     showUpgradedValueInsteadOfLevel: 0
     upgradedValueFormatedString: '{0}'
     useInternalValueForUI: 0
     internalValue: 0
     upgradedObjects: 63
     upgradedValues: 2
-    changeValue: 2
+    changeValue: 1.2
     formula: 1
     currentLevel: 0

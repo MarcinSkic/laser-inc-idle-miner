@@ -21,7 +21,7 @@ MonoBehaviour:
     requirements:
     - dependsOn: 0
       comparison: 1
-      requiredValue: 1000
+      requiredValue: 1500
       upgradeScriptable: {fileID: 0}
     - dependsOn: 16
       comparison: 1
@@ -31,7 +31,7 @@ MonoBehaviour:
     order: 75
     title: 2MW generator
     description: double power means double damage!
-    toUnlockDescription: 1MW generator & depth of 1000
+    toUnlockDescription: 1MW generator & depth of 1500
     maxLevel: 1
     currency: 0
     cost: 50000000
