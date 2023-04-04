@@ -7,16 +7,28 @@ public class CameraFovEnforcer : MonoBehaviour
     [SerializeField] Camera this_camera;
     [SerializeField] float target_fov;
     public static float calculatedFov;
+    public float previous_aspect;
 
     [Header("a")]
     [SerializeField] float a;
     [SerializeField] float b;
 
-    // Update is called once per frame
-    void Update()
+    private void Start()
     {
+        previous_aspect = this_camera.aspect;
         SetFOV(target_fov);
         SetCameraOffset();
+    }
+
+    void Update()
+    {
+        // check if recalculation needed
+        if (this_camera.aspect != previous_aspect)
+        {
+            SetFOV(target_fov);
+            SetCameraOffset();
+            previous_aspect = this_camera.aspect;
+        }
     }
 
     private void SetFOV(float f)
