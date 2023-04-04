@@ -486,7 +486,8 @@ public class GameController : BaseController<GameView>
                             ballBar.Unlock(upgrade);
                         }
 
-                        upgrade.onValueUpdate += buttonUpgrade.SetText;
+                        ballsModel.ballsCount[upgrade.upgradedObjects].onValueChange += v => buttonUpgrade.SetText(v.ToString());
+                        buttonUpgrade.SetText("0");
                     } else
                     {
                         ballsModel.ballsData[upgrade.upgradedObjects].values[upgrade.upgradedValues].onValueChange += v => buttonUpgrade.SetText(NumberFormatter.Format(v));

@@ -9,7 +9,6 @@ public class UpgradeableData<T>
 {
     public UpgradeableValues type;
     [ConditionalField(nameof(type),false,UpgradeableValues.Special)]
-    public string name;
     [SerializeField] private T value;
     public UnityAction<T> onValueChange;
     public T Value
@@ -23,6 +22,11 @@ public class UpgradeableData<T>
             this.value = value;
             onValueChange?.Invoke(value);
         }
+    }
+
+    public UpgradeableData(T value)
+    {
+        this.value = value;
     }
     
     public static implicit operator T(UpgradeableData<T> data) => data.Value; //Used to simplify bombBallData.speed.value => bombBallData.speed

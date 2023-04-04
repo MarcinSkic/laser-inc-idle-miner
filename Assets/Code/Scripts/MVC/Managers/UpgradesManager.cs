@@ -74,9 +74,6 @@ public class UpgradesManager : MonoBehaviour
                 case UpgradeType.ValuesUpgrade:
                     SetFirstUpgradeButtonValue(upgrade);    //UI setup
                     break;
-                case UpgradeType.SpawnUpgrade:
-                    upgrade.onValueUpdate?.Invoke("0");  //UI setup
-                    break;
             }
         }
     }
@@ -119,6 +116,7 @@ public class UpgradesManager : MonoBehaviour
         }
     }
 
+    //TODO: Transform this upgrade into values upgrade. When value of balls changes balls controller reacts accordingly (decreseases / increases) number of spawned balls
     private void OnSpawnUpgrade(Upgrade upgrade)
     {
         if(upgrade.upgradedObjects <= UpgradeableObjects.AllBalls)
@@ -134,6 +132,7 @@ public class UpgradesManager : MonoBehaviour
                 {
                     speedUpgrade.onValueUpdate += ball.Upgrade;
                 }
+                ballsModel.ballsCount[UpgradeableObjects.BasicBall].Value++;
             }
 
             if (upgrade.upgradedObjects.HasFlag(UpgradeableObjects.BombBall))
@@ -146,6 +145,7 @@ public class UpgradesManager : MonoBehaviour
                 {
                     speedUpgrade.onValueUpdate += ball.Upgrade;
                 }
+                ballsModel.ballsCount[UpgradeableObjects.BombBall].Value++;
             }
 
             if (upgrade.upgradedObjects.HasFlag(UpgradeableObjects.SniperBall))
@@ -158,6 +158,7 @@ public class UpgradesManager : MonoBehaviour
                 {
                     speedUpgrade.onValueUpdate += ball.Upgrade;
                 }
+                ballsModel.ballsCount[UpgradeableObjects.SniperBall].Value++;
             }
 
             if (upgrade.upgradedObjects.HasFlag(UpgradeableObjects.LeechBall))
@@ -169,6 +170,7 @@ public class UpgradesManager : MonoBehaviour
                 {
                     speedUpgrade.onValueUpdate += ball.Upgrade;
                 }
+                ballsModel.ballsCount[UpgradeableObjects.LeechBall].Value++;
             }
 
             if (upgrade.upgradedObjects.HasFlag(UpgradeableObjects.PoisonBall))
@@ -180,6 +182,7 @@ public class UpgradesManager : MonoBehaviour
                 {
                     speedUpgrade.onValueUpdate += ball.Upgrade;
                 }
+                ballsModel.ballsCount[UpgradeableObjects.PoisonBall].Value++;
             }
 
             if (upgrade.upgradedObjects.HasFlag(UpgradeableObjects.ShadowBall))
@@ -191,7 +194,10 @@ public class UpgradesManager : MonoBehaviour
                 {
                     speedUpgrade.onValueUpdate += ball.Upgrade;
                 }
+                ballsModel.ballsCount[UpgradeableObjects.ShadowBall].Value++;
             }
+
+            
         } 
         else
         {
