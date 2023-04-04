@@ -7197,9 +7197,13 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   this_camera: {fileID: 726198939}
+  other_cameras:
+  - {fileID: 1134417211}
   target_fov: 33
+  previous_aspect: 0
   a: 1.09
   b: 18.5
+  gameController: {fileID: 383171360}
 --- !u!114 &726198943
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -11265,7 +11269,6 @@ GameObject:
   - component: {fileID: 1134417207}
   - component: {fileID: 1134417211}
   - component: {fileID: 1134417209}
-  - component: {fileID: 1134417208}
   m_Layer: 0
   m_Name: PriorityCamera
   m_TagString: Untagged
@@ -11288,22 +11291,6 @@ Transform:
   m_Father: {fileID: 1833445684}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &1134417208
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1134417206}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: be6a5d15f7f47e54a8a959cb1806bcd0, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  this_camera: {fileID: 1134417211}
-  target_fov: 33
-  a: 1.09
-  b: 18.5
 --- !u!114 &1134417209
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -12742,7 +12729,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0.1}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: 0, y: -0.00061035156}
+  m_AnchoredPosition: {x: 0, y: -0.00048828125}
   m_SizeDelta: {x: -100, y: 0}
   m_Pivot: {x: 0.5, y: 1}
 --- !u!222 &1293810468

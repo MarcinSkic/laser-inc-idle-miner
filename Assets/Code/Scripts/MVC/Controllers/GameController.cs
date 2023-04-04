@@ -577,6 +577,12 @@ public class GameController : BaseController<GameView>
         view.ShowOfflineTimePopup(seconds, resourcesModel.offlineMoney);
     }
     
+    // TODO - ugly?
+    public void RedrawDepthMeter()
+    {
+        OnDepthChange(model.Depth);
+    }
+
     private void OnDepthChange(double depth)
     {
         view.depthMeter.SetDepth(depth);
