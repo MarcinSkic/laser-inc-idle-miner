@@ -47,6 +47,7 @@ public class TutorialPopup : MonoBehaviour
     void Start()
     {
         resizedPanel.transform.localScale = new Vector3(0, 0, 1);
+        arrow.color = new Color(1, 1, 1, 0);
     }
 
     // Update is called once per frame
