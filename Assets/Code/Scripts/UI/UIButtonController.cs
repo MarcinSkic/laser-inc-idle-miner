@@ -140,6 +140,7 @@ public class UIButtonController : MonoBehaviour
     protected virtual void OnClicked()
     {
         onClick?.Invoke();
+        AudioManager.Instance.Play("button_click");
     }
 
     public void SetText(string value)

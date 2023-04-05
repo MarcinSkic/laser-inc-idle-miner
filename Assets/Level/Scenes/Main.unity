@@ -5606,7 +5606,19 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 583045014}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 0}
+        m_TargetAssemblyTypeName: 
+        m_MethodName: 
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: 
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &583045014
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -10702,6 +10714,10 @@ MonoBehaviour:
   - {fileID: 11400000, guid: 74731a49c94449147baebf8d89d73519, type: 2}
   - {fileID: 11400000, guid: 0802675deaf03e5469c3d30e0ff82cde, type: 2}
   - {fileID: 11400000, guid: 50eb49a8d6aa9b545b062eddb371caff, type: 2}
+  - {fileID: 11400000, guid: 57e12b58576398e4d85f84a54adbf5d7, type: 2}
+  - {fileID: 11400000, guid: e2dd0562c4f026841bfc4c5b48a4804e, type: 2}
+  - {fileID: 11400000, guid: e8235d5cd561f8d4992add8cacc0c2ef, type: 2}
+  - {fileID: 11400000, guid: b7e84b806a933a7408a4e40785dfdf95, type: 2}
   audioMixer: {fileID: 24100000, guid: baee987282ca27143915d1a3ddc9da5d, type: 2}
   musicMixerGroup: {fileID: 8791210139980076492, guid: baee987282ca27143915d1a3ddc9da5d, type: 2}
   soundMixerGroup: {fileID: -7741117406134579582, guid: baee987282ca27143915d1a3ddc9da5d, type: 2}
@@ -10729,7 +10745,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 1750430247953946955, guid: eeceaeb252270da45a11d62bccc249e4, type: 3}
       propertyPath: m_IsOn
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 5194677913977320347, guid: eeceaeb252270da45a11d62bccc249e4, type: 3}
       propertyPath: m_text
@@ -10833,11 +10849,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6984556780776512101, guid: eeceaeb252270da45a11d62bccc249e4, type: 3}
       propertyPath: m_AnchorMax.x
-      value: 0.47
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 6984556780776512101, guid: eeceaeb252270da45a11d62bccc249e4, type: 3}
       propertyPath: m_AnchorMin.x
-      value: 0
+      value: 0.53
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: eeceaeb252270da45a11d62bccc249e4, type: 3}

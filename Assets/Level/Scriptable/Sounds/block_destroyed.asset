@@ -13,7 +13,9 @@ MonoBehaviour:
   m_Name: block_destroyed
   m_EditorClassIdentifier: 
   name: block_destroyed
-  clip: {fileID: 8300000, guid: fb08da49caac0234799ca27a9d1f63d8, type: 3}
-  volume: 0.5
-  pitch: 1
+  clip: {fileID: 8300000, guid: 1404ae374f2b29c4dbf96c6d4628defe, type: 3}
+  volume: 0.3
+  pitch: 0.5
+  loop: 0
+  isMusic: 0
   source: {fileID: 0}

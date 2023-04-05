@@ -10,12 +10,12 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: f16d089d710e87542ba7cf0c11406227, type: 3}
-  m_Name: bounce
+  m_Name: block_hit
   m_EditorClassIdentifier: 
-  name: bounce
-  clip: {fileID: 8300000, guid: 5d6a8bf8aaf2b9f4ea4e0b206082c21f, type: 3}
-  volume: 0
-  pitch: 1
+  name: block_hit
+  clip: {fileID: 8300000, guid: 1404ae374f2b29c4dbf96c6d4628defe, type: 3}
+  volume: 0.2
+  pitch: 1.5
   loop: 0
   isMusic: 0
   source: {fileID: 0}
