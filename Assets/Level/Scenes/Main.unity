@@ -5294,31 +5294,25 @@ MonoBehaviour:
   resourcesManager: {fileID: 567613852}
   resourcesModel: {fileID: 1947716358}
   achievementsScriptable:
-  - {fileID: 11400000, guid: a703a6121bcfb1e42b3b5c517763ffb5, type: 2}
-  - {fileID: 11400000, guid: e5889a7cdab27674596e14f00253f6fb, type: 2}
-  - {fileID: 11400000, guid: e420ae134cc148f4eb3ec510e62255a9, type: 2}
-  - {fileID: 11400000, guid: 2d2e4d5b8ca49184dbb975dd35c615b7, type: 2}
-  - {fileID: 11400000, guid: 4d0fa48c7ebf7a446b1cd7c00523a235, type: 2}
-  - {fileID: 11400000, guid: ba0590c8c794dd64683710960023b023, type: 2}
+  - {fileID: 11400000, guid: 8a50ae1df34acae419bfa94d40f51c0e, type: 2}
   - {fileID: 11400000, guid: df28d399eaaa552469ab81708d0351be, type: 2}
-  - {fileID: 11400000, guid: 023e530f223fc54449009b64c8686804, type: 2}
-  - {fileID: 11400000, guid: 887a083a86054934e817a2a414b95615, type: 2}
   - {fileID: 11400000, guid: 586763e781d8262448ebd0fddf0c2e0d, type: 2}
+  - {fileID: 11400000, guid: 887a083a86054934e817a2a414b95615, type: 2}
+  - {fileID: 11400000, guid: e5889a7cdab27674596e14f00253f6fb, type: 2}
+  - {fileID: 11400000, guid: d0c8ad79fdd3dae42a88579916308c38, type: 2}
+  - {fileID: 11400000, guid: 4d0fa48c7ebf7a446b1cd7c00523a235, type: 2}
+  - {fileID: 11400000, guid: 8f13a4997612ba646a01d4895028effe, type: 2}
+  - {fileID: 11400000, guid: 2d2e4d5b8ca49184dbb975dd35c615b7, type: 2}
+  - {fileID: 11400000, guid: 023e530f223fc54449009b64c8686804, type: 2}
   - {fileID: 11400000, guid: b977b4ccb055cdf4c8019fde3b5c6a8f, type: 2}
-  - {fileID: 11400000, guid: 2f1a9e66d586ae2429274e115ff1c13a, type: 2}
-  - {fileID: 11400000, guid: 6f2c2374559b1a248bcd3403815ae38e, type: 2}
-  - {fileID: 11400000, guid: ce679308f10faa84bbd79d46ac3f8057, type: 2}
+  - {fileID: 11400000, guid: e420ae134cc148f4eb3ec510e62255a9, type: 2}
   - {fileID: 11400000, guid: e9d1a9260dc4bc04d801dfae0cc39f30, type: 2}
   - {fileID: 11400000, guid: 5554a3979607de141ae87d1ea7fba2e0, type: 2}
-  - {fileID: 11400000, guid: e8ecf8fe7bd13304599b2e73c8848af9, type: 2}
-  - {fileID: 11400000, guid: 8f13a4997612ba646a01d4895028effe, type: 2}
-  - {fileID: 11400000, guid: 8a50ae1df34acae419bfa94d40f51c0e, type: 2}
-  - {fileID: 11400000, guid: d0c8ad79fdd3dae42a88579916308c38, type: 2}
   achievements: []
   achievementReward: {fileID: 11400000, guid: db42842ea9366ae42a168a81239b8154, type: 2}
   rowReward: {fileID: 11400000, guid: 1e34e3c037f9de24e803391bd9542231, type: 2}
   upgradesModel: {fileID: 1947716357}
-  achievementsInRow: 5
+  achievementsInRow: 4
 --- !u!114 &567613857
 MonoBehaviour:
   m_ObjectHideFlags: 0
