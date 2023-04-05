@@ -11,6 +11,7 @@ public class UIButtonWithStringController : UIButtonController
 
     protected override void OnClicked()
     {
+        base.OnClicked();
         onClick?.Invoke(this,parameter);
     }
 }
