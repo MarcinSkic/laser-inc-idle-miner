@@ -14692,7 +14692,7 @@ RectTransform:
   m_AnchorMin: {x: 0, y: 0.2}
   m_AnchorMax: {x: 1, y: 1}
   m_AnchoredPosition: {x: 0, y: 0}
-  m_SizeDelta: {x: 0, y: 0}
+  m_SizeDelta: {x: -6, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1540359554
 MonoBehaviour:
@@ -15266,7 +15266,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &1684797440
 RectTransform:
   m_ObjectHideFlags: 0
@@ -15284,10 +15284,10 @@ RectTransform:
   m_Father: {fileID: 1284445372}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0, y: 0}
-  m_AnchorMax: {x: 0, y: 0}
-  m_AnchoredPosition: {x: 0, y: 0}
-  m_SizeDelta: {x: 0, y: 200}
+  m_AnchorMin: {x: 0, y: 1}
+  m_AnchorMax: {x: 0, y: 1}
+  m_AnchoredPosition: {x: 133, y: -100}
+  m_SizeDelta: {x: 166, y: 200}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1684797441
 MonoBehaviour:
@@ -20946,19 +20946,23 @@ PrefabInstance:
     - target: {fileID: 2009796500936212543, guid: 5603374ae95497144bb1aa3eb81c8154, type: 3}
       propertyPath: m_Sprite
       value: 
-      objectReference: {fileID: 21300000, guid: 26437fb8e8dc3d640b5412c1ae3cf2ff, type: 3}
+      objectReference: {fileID: 21300000, guid: f115c9170b37a694bac408613aa8892a, type: 3}
     - target: {fileID: 2664354778777213683, guid: 5603374ae95497144bb1aa3eb81c8154, type: 3}
       propertyPath: m_text
-      value: Upgrades
+      value: Workshop
+      objectReference: {fileID: 0}
+    - target: {fileID: 2664354778777213683, guid: 5603374ae95497144bb1aa3eb81c8154, type: 3}
+      propertyPath: m_fontSize
+      value: 52.1
       objectReference: {fileID: 0}
     - target: {fileID: 2664354778814268240, guid: 5603374ae95497144bb1aa3eb81c8154, type: 3}
       propertyPath: defaultIconSprite
       value: 
-      objectReference: {fileID: 21300000, guid: 26437fb8e8dc3d640b5412c1ae3cf2ff, type: 3}
+      objectReference: {fileID: 21300000, guid: f115c9170b37a694bac408613aa8892a, type: 3}
     - target: {fileID: 2664354778814268240, guid: 5603374ae95497144bb1aa3eb81c8154, type: 3}
       propertyPath: selectedIconSprite
       value: 
-      objectReference: {fileID: 21300000, guid: 20beb9a1ab42a0144a90059fe3bcd3a3, type: 3}
+      objectReference: {fileID: 21300000, guid: 33522036fd5345a46bf19566a5fc1b5f, type: 3}
     - target: {fileID: 2664354778814268242, guid: 5603374ae95497144bb1aa3eb81c8154, type: 3}
       propertyPath: m_Type
       value: 0
