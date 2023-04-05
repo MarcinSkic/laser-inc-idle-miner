@@ -28,6 +28,8 @@ public class TutorialPopup : MonoBehaviour
     bool turningOff = false;
     float arrowCycleOffset = 0f;
 
+    [SerializeField] bool soundToPlay = true;
+
     float Sigmoid(float value)
     {
         value = (value - 0.5f)*12f;
@@ -68,6 +70,11 @@ public class TutorialPopup : MonoBehaviour
 
         if (currentTime >= 0)
         {
+            if (soundToPlay)
+            {
+                AudioManager.Instance.Play("robot");
+                soundToPlay = false;
+            }
             float xScale;
             if (currentTime > timeToEndXScaling)
             {

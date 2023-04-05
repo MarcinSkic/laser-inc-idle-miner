@@ -6175,7 +6175,7 @@ MonoBehaviour:
   m_margin: {x: 0, y: 0, z: 0, w: 0}
   m_isUsingLegacyAnimationComponent: 0
   m_isVolumetricText: 0
-  m_hasFontAssetChanged: 1
+  m_hasFontAssetChanged: 0
   m_baseMaterial: {fileID: 0}
   m_maskOffset: {x: 0, y: 0, z: 0, w: 0}
 --- !u!222 &611548404
@@ -10736,6 +10736,11 @@ MonoBehaviour:
   - {fileID: 11400000, guid: e2dd0562c4f026841bfc4c5b48a4804e, type: 2}
   - {fileID: 11400000, guid: e8235d5cd561f8d4992add8cacc0c2ef, type: 2}
   - {fileID: 11400000, guid: b7e84b806a933a7408a4e40785dfdf95, type: 2}
+  - {fileID: 11400000, guid: 266b04a80da81c54d84e81f3be675e3d, type: 2}
+  - {fileID: 11400000, guid: d5303717edec94145a1c262a859e7bc5, type: 2}
+  - {fileID: 11400000, guid: 06fa14c2ae1b38540819a314d1c52bc5, type: 2}
+  - {fileID: 11400000, guid: ad6ec45928de14d45bbbc41a57e2df81, type: 2}
+  - {fileID: 11400000, guid: dc6565b954c0b804ca44b691935b0eb3, type: 2}
   audioMixer: {fileID: 24100000, guid: baee987282ca27143915d1a3ddc9da5d, type: 2}
   musicMixerGroup: {fileID: 8791210139980076492, guid: baee987282ca27143915d1a3ddc9da5d, type: 2}
   soundMixerGroup: {fileID: -7741117406134579582, guid: baee987282ca27143915d1a3ddc9da5d, type: 2}
@@ -13812,6 +13817,10 @@ PrefabInstance:
       propertyPath: currentTime
       value: -2
       objectReference: {fileID: 0}
+    - target: {fileID: 1450712506647141698, guid: 4737738861777bd4484a4377164e6271, type: 3}
+      propertyPath: soundToPlay
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 1450712506647141699, guid: 4737738861777bd4484a4377164e6271, type: 3}
       propertyPath: m_Pivot.x
       value: 0.5
@@ -15738,6 +15747,10 @@ PrefabInstance:
       propertyPath: currentTime
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 1450712506647141698, guid: 4737738861777bd4484a4377164e6271, type: 3}
+      propertyPath: soundToPlay
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 1450712506647141699, guid: 4737738861777bd4484a4377164e6271, type: 3}
       propertyPath: m_Pivot.x
       value: 0.5
@@ -17637,6 +17650,10 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1450712506647141698, guid: 4737738861777bd4484a4377164e6271, type: 3}
       propertyPath: currentTime
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1450712506647141698, guid: 4737738861777bd4484a4377164e6271, type: 3}
+      propertyPath: soundToPlay
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 1450712506647141699, guid: 4737738861777bd4484a4377164e6271, type: 3}
@@ -20752,6 +20769,10 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1450712506647141698, guid: 4737738861777bd4484a4377164e6271, type: 3}
       propertyPath: currentTime
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1450712506647141698, guid: 4737738861777bd4484a4377164e6271, type: 3}
+      propertyPath: soundToPlay
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 1450712506647141699, guid: 4737738861777bd4484a4377164e6271, type: 3}

@@ -58,6 +58,7 @@ public class RewardBat : MonoBehaviour
                 break;
         }
         //batSprite.sprite = batOption.batSprite;
+        AudioManager.Instance.Play("bat_warning");
     }
 
     void HandleBatRotation()
@@ -110,14 +111,17 @@ public class RewardBat : MonoBehaviour
             case BatRewardType.money:
                 debugString += " seconds worth of offlineReward";
                 resourcesManager.IncreaseMoneyForOfflineByTime(value);
+                AudioManager.Instance.Play("caught_coins");
                 break;
             case BatRewardType.powerup:
                 debugString += " seconds of double laser power";
                 resourcesManager.IncreasePowerUpTimeLeft(value);
+                AudioManager.Instance.Play("caught_p_up");
                 break;
             case BatRewardType.premium:
                 debugString += " premium curency";
                 resourcesManager.IncreasePremiumCurrency(value);
+                AudioManager.Instance.Play("caught_crystal");
                 break;
         }
         Debug.Log(debugString);
