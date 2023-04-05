@@ -4725,12 +4725,20 @@ PrefabInstance:
       propertyPath: m_IsActive
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 1450712507333612136, guid: 4737738861777bd4484a4377164e6271, type: 3}
+      propertyPath: m_RaycastTarget
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 1450712507333612138, guid: 4737738861777bd4484a4377164e6271, type: 3}
       propertyPath: m_IsActive
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 1450712507412401528, guid: 4737738861777bd4484a4377164e6271, type: 3}
       propertyPath: m_SizeDelta.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1450712507542324013, guid: 4737738861777bd4484a4377164e6271, type: 3}
+      propertyPath: m_RaycastTarget
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 1450712507542324015, guid: 4737738861777bd4484a4377164e6271, type: 3}
@@ -12955,6 +12963,14 @@ PrefabInstance:
       propertyPath: m_text
       value: I think you can afford a big upgrade!
       objectReference: {fileID: 0}
+    - target: {fileID: 1450712507333612136, guid: 4737738861777bd4484a4377164e6271, type: 3}
+      propertyPath: m_RaycastTarget
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1450712507542324013, guid: 4737738861777bd4484a4377164e6271, type: 3}
+      propertyPath: m_RaycastTarget
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 1450712507542324015, guid: 4737738861777bd4484a4377164e6271, type: 3}
       propertyPath: m_AnchorMax.y
       value: 0.5
@@ -13869,6 +13885,14 @@ PrefabInstance:
     - target: {fileID: 1450712507234498648, guid: 4737738861777bd4484a4377164e6271, type: 3}
       propertyPath: m_text
       value: You can invest your money in the shop!
+      objectReference: {fileID: 0}
+    - target: {fileID: 1450712507333612136, guid: 4737738861777bd4484a4377164e6271, type: 3}
+      propertyPath: m_RaycastTarget
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1450712507542324013, guid: 4737738861777bd4484a4377164e6271, type: 3}
+      propertyPath: m_RaycastTarget
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 1450712507542324015, guid: 4737738861777bd4484a4377164e6271, type: 3}
       propertyPath: m_AnchorMax.y
@@ -15796,6 +15820,14 @@ PrefabInstance:
       propertyPath: m_margin.z
       value: -60.534058
       objectReference: {fileID: 0}
+    - target: {fileID: 1450712507333612136, guid: 4737738861777bd4484a4377164e6271, type: 3}
+      propertyPath: m_RaycastTarget
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1450712507542324013, guid: 4737738861777bd4484a4377164e6271, type: 3}
+      propertyPath: m_RaycastTarget
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 1450712507542324015, guid: 4737738861777bd4484a4377164e6271, type: 3}
       propertyPath: m_AnchorMax.x
       value: 0.5
@@ -17688,6 +17720,14 @@ PrefabInstance:
     - target: {fileID: 1450712507234498648, guid: 4737738861777bd4484a4377164e6271, type: 3}
       propertyPath: m_fontSizeMax
       value: 100
+      objectReference: {fileID: 0}
+    - target: {fileID: 1450712507333612136, guid: 4737738861777bd4484a4377164e6271, type: 3}
+      propertyPath: m_RaycastTarget
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1450712507542324013, guid: 4737738861777bd4484a4377164e6271, type: 3}
+      propertyPath: m_RaycastTarget
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 1450712507542324015, guid: 4737738861777bd4484a4377164e6271, type: 3}
       propertyPath: m_AnchorMax.x
@@ -20771,6 +20811,14 @@ PrefabInstance:
     - target: {fileID: 1450712507234498648, guid: 4737738861777bd4484a4377164e6271, type: 3}
       propertyPath: m_margin.z
       value: -75.11255
+      objectReference: {fileID: 0}
+    - target: {fileID: 1450712507333612136, guid: 4737738861777bd4484a4377164e6271, type: 3}
+      propertyPath: m_RaycastTarget
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1450712507542324013, guid: 4737738861777bd4484a4377164e6271, type: 3}
+      propertyPath: m_RaycastTarget
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 1450712507542324015, guid: 4737738861777bd4484a4377164e6271, type: 3}
       propertyPath: m_Pivot.x
