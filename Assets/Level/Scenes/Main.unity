@@ -217,7 +217,7 @@ PrefabInstance:
     - target: {fileID: 1392567110110132140, guid: ee6aaf1769c0b7c4893ef871dcc9cf7f, type: 3}
       propertyPath: m_Sprite
       value: 
-      objectReference: {fileID: 21300000, guid: fbca734018a52464fbb4366cbafe637a, type: 3}
+      objectReference: {fileID: 21300000, guid: 02b44be07bcdfc841812424e4d48f173, type: 3}
     - target: {fileID: 1392567110110132142, guid: ee6aaf1769c0b7c4893ef871dcc9cf7f, type: 3}
       propertyPath: parameter
       value: Normal
@@ -225,11 +225,11 @@ PrefabInstance:
     - target: {fileID: 1392567110110132142, guid: ee6aaf1769c0b7c4893ef871dcc9cf7f, type: 3}
       propertyPath: defaultSprite
       value: 
-      objectReference: {fileID: 21300000, guid: 00b561a417e1d3047a6267af27d998e5, type: 3}
+      objectReference: {fileID: 21300000, guid: e58930959ddd1a74e8f3cc0ce7a25683, type: 3}
     - target: {fileID: 1392567110110132142, guid: ee6aaf1769c0b7c4893ef871dcc9cf7f, type: 3}
       propertyPath: selectedSprite
       value: 
-      objectReference: {fileID: 21300000, guid: fbca734018a52464fbb4366cbafe637a, type: 3}
+      objectReference: {fileID: 21300000, guid: 02b44be07bcdfc841812424e4d48f173, type: 3}
     - target: {fileID: 1392567110110132142, guid: ee6aaf1769c0b7c4893ef871dcc9cf7f, type: 3}
       propertyPath: transitionType
       value: 1
@@ -11194,7 +11194,7 @@ PrefabInstance:
     - target: {fileID: 1392567110110132140, guid: ee6aaf1769c0b7c4893ef871dcc9cf7f, type: 3}
       propertyPath: m_Sprite
       value: 
-      objectReference: {fileID: 21300000, guid: fbca734018a52464fbb4366cbafe637a, type: 3}
+      objectReference: {fileID: 21300000, guid: 02b44be07bcdfc841812424e4d48f173, type: 3}
     - target: {fileID: 1392567110110132142, guid: ee6aaf1769c0b7c4893ef871dcc9cf7f, type: 3}
       propertyPath: parameter
       value: PrestigeUpgrades
@@ -11202,11 +11202,11 @@ PrefabInstance:
     - target: {fileID: 1392567110110132142, guid: ee6aaf1769c0b7c4893ef871dcc9cf7f, type: 3}
       propertyPath: defaultSprite
       value: 
-      objectReference: {fileID: 21300000, guid: 00b561a417e1d3047a6267af27d998e5, type: 3}
+      objectReference: {fileID: 21300000, guid: e58930959ddd1a74e8f3cc0ce7a25683, type: 3}
     - target: {fileID: 1392567110110132142, guid: ee6aaf1769c0b7c4893ef871dcc9cf7f, type: 3}
       propertyPath: selectedSprite
       value: 
-      objectReference: {fileID: 21300000, guid: fbca734018a52464fbb4366cbafe637a, type: 3}
+      objectReference: {fileID: 21300000, guid: 02b44be07bcdfc841812424e4d48f173, type: 3}
     - target: {fileID: 1392567110110132142, guid: ee6aaf1769c0b7c4893ef871dcc9cf7f, type: 3}
       propertyPath: transitionType
       value: 1
