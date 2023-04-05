@@ -10,6 +10,7 @@ public class TutorialPopup : MonoBehaviour
     public Image robotImage;
     public TMP_Text text;
     public Image arrow;
+    public GameObject resizedPanel;
 
     public float currentTime = 0f;
     float startXScale = 0.2f;
@@ -38,14 +39,14 @@ public class TutorialPopup : MonoBehaviour
         if (turningOff)
         {
             currentTime = -1;
-            gameObject.transform.localScale = new Vector3(0, 0, 1);
+            resizedPanel.transform.localScale = new Vector3(0, 0, 1);
         }
     }
 
     // Start is called before the first frame update
     void Start()
     {
-        gameObject.transform.localScale = new Vector3(0, 0, 1);
+        resizedPanel.transform.localScale = new Vector3(0, 0, 1);
     }
 
     // Update is called once per frame
@@ -56,7 +57,7 @@ public class TutorialPopup : MonoBehaviour
             currentTime -= Time.deltaTime;
             if (currentTime <= 0)
             {
-                gameObject.SetActive(false);
+                resizedPanel.SetActive(false);
             }
         }
         else
@@ -84,7 +85,7 @@ public class TutorialPopup : MonoBehaviour
             {
                 yScale = startYScale + Mathf.Max(0, Sigmoid((currentTime - timeToStartYScaling) / (timeToEndYScaling - timeToStartYScaling)) * (1f - startYScale));
             }
-            gameObject.transform.localScale = new Vector3(xScale, yScale, 1);
+            resizedPanel.transform.localScale = new Vector3(xScale, yScale, 1);
 
             if (currentTime > timeToEndRobotAppearing)
             {

@@ -92,6 +92,7 @@ MonoBehaviour:
   robotImage: {fileID: 1450712507180845982}
   text: {fileID: 1450712507234498648}
   arrow: {fileID: 1450712507333612136}
+  resizedPanel: {fileID: 1450712507542324000}
   currentTime: 0
 --- !u!1 &1450712507180845969
 GameObject:
