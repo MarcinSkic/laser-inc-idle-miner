@@ -93,7 +93,7 @@ public class AudioManager : MonoBehaviour
     {
         if (shouldPlay)
         {
-            musicMixerGroup.audioMixer.SetFloat("soundVolume", 0);
+            musicMixerGroup.audioMixer.SetFloat("soundVolume", -5);
         }
         else
         {

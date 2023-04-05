@@ -17,6 +17,7 @@ public class ClickDetector : MonoBehaviour
                 if (hit.collider.gameObject.TryGetComponent<BasicBlock>(out var block))
                 {
                     block.TakeDamage(SettingsModel.Instance.clickDamage);
+                    AudioManager.Instance.Play("block_hit");
                 }
                 else if (hit.collider.gameObject.TryGetComponent<RewardBat>(out var bat))
                 {

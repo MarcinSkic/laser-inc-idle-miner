@@ -114,6 +114,7 @@ public class AchievementManager : MonoBehaviour
         DoAchievementsUpgrades(achievement);
 
         onAchievementUnlocked?.Invoke(achievement);
+        AudioManager.Instance.Play("achievement_get");
 
         DisconnectAchievement(achievement);
     }
