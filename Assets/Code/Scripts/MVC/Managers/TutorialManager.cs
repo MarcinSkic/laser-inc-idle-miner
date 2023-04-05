@@ -62,7 +62,10 @@ public class TutorialSection
     public void Init()
     {
         leftRequirements = requirements.Length;
-        ChangePopupsState(false);
+        foreach(var popup in popups)
+        {
+            popup.gameObject.SetActive(false);
+        }
 
         if (!lateCompletion)
         {
