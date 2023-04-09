@@ -3073,7 +3073,7 @@ MonoBehaviour:
   tutorialManager: {fileID: 567613857}
   rewardBat: {fileID: 7232551561847147341, guid: 213b8b2afa656744a8e5f09b36b46cf9, type: 3}
   batParent: {fileID: 240033866}
-  batsPer10000FixedUpdates: 50
+  batsPer10000FixedUpdates: 1
   previousMoneyProgressionDebugTime: 0
   previousEarnedMoney: 0
   earnedMoneyMessages: []
@@ -14433,9 +14433,9 @@ MonoBehaviour:
   doOfflineEarning: 1
   spawnBlocks: 1
   spawnBats: 1
-  showMBIntro: 0
+  showMBIntro: 1
   removeUpgradesRequirements: 0
-  unlockCheatWindow: 1
+  unlockCheatWindow: 0
   showProgressionDebugMessages: 0
   changeTimeScale: 0
   timeScale: 0.1
