@@ -46,21 +46,6 @@ public class GameController : BaseController<GameView>
     [SerializeField] double previousDepth;
     public List<string> depthMessages;
 
-    [Header("Logo")]
-    public bool isLogoOpaque = true;
-    public bool isBGOpaque = true;
-    public float logoOpaqueTime;
-    public float logoTransparentTime;
-    public float bgOpaqueTime;
-    public float bgTransparentTime;
-    public float logoCurrentTime = 0f;
-
-    public CanvasGroup canvasGroupLogo;
-    public CanvasGroup canvasGroupBG;
-    public Camera[] cameras;
-    public GameObject logo;
-
-
     //KEEP MONOBEHAVIOUR METHODS (Start, Update etc.) ON TOP
     /// <summary>
     /// This Start should be considered root Start of game, all inits where order of operations is important should originate from here
@@ -134,12 +119,8 @@ public class GameController : BaseController<GameView>
             InvokeRepeating(nameof(DebugProgression), 0f, 1f);
         }
 
-        if (SettingsModel.Instance.showMBIntro)
-        {
-            logo.SetActive(true);
-        }
-
         AudioManager.Instance.Play("theme");
+        AudioManager.Instance.IncreaseVolumeOverTime();
     }
     public UnityAction onSetupFinished;
 
@@ -148,48 +129,6 @@ public class GameController : BaseController<GameView>
         if (SettingsModel.Instance.ShowDebugWindow)
         {
             DisplayFPS();
-        }
-
-        if (!SettingsModel.Instance.showMBIntro)
-        {
-            if (canvasGroupLogo.alpha > 0)
-            {
-                for (int i = 0; i < cameras.Length; i++)
-                {
-                    cameras[i].nearClipPlane = 0.3f;
-                }
-                canvasGroupBG.alpha = 0;
-                canvasGroupLogo.alpha = 0;
-                AudioManager.Instance.IncreaseVolumeOverTime();
-            }
-        } else {
-            logoCurrentTime += Time.deltaTime;
-            if (logoCurrentTime > logoOpaqueTime && isBGOpaque)
-            {
-                if (!isLogoOpaque)
-                {
-                    AudioManager.Instance.IncreaseVolumeOverTime();
-                    for (int i = 0; i < cameras.Length; i++)
-                    {
-                        cameras[i].nearClipPlane = 0.3f;
-                    }
-                }
-                isLogoOpaque = false;
-
-                if (logoCurrentTime < logoOpaqueTime + logoTransparentTime)
-                {
-                    canvasGroupLogo.alpha = 1 - ((logoCurrentTime - logoOpaqueTime) / (logoTransparentTime));
-                }
-                else
-                {
-                    canvasGroupLogo.alpha = 0;
-                    isBGOpaque = false;
-                }
-            }
-            if (!isBGOpaque && canvasGroupBG.alpha > 0)
-            {
-                canvasGroupBG.alpha = 1 - ((logoCurrentTime - logoOpaqueTime - logoTransparentTime - bgOpaqueTime) / (bgTransparentTime));
-            }
         }
     }
 
