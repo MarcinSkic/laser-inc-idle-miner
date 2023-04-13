@@ -11,7 +11,10 @@ public class TutorialPopup : MonoBehaviour
     public TMP_Text text;
     public Image arrow;
     public GameObject resizedPanel;
+    public RectTransform arrowParent;
+    public RectTransform objectForArrowToFollow;
 
+    Vector2 arrowDefaultPosition;
     public float currentTime = 0f;
     float startXScale = 0.2f;
     float startYScale = 0.0f;
@@ -49,6 +52,7 @@ public class TutorialPopup : MonoBehaviour
     void Start()
     {
         resizedPanel.transform.localScale = new Vector3(0, 0, 1);
+        arrowDefaultPosition = arrowParent.anchoredPosition;
         arrow.color = new Color(1, 1, 1, 0);
     }
 
@@ -115,7 +119,10 @@ public class TutorialPopup : MonoBehaviour
                     arrow.color = new Color(1, 1, 1, Mathf.Max(0, (currentTime - timeToStartArrowAppearing) / (timeToEndArrowAppearing - timeToStartArrowAppearing)));
                 }
                 arrow.transform.localPosition = new Vector3(Mathf.Sin((currentTime+arrowCycleOffset) * 6.28f / arrowMovementPeriod) * arrowMovementAmplitude, arrow.transform.localPosition.y, arrow.transform.localPosition.z);
-
+                if(objectForArrowToFollow != null)
+                {
+                    arrowParent.anchoredPosition = new Vector3(arrowDefaultPosition.x, arrowDefaultPosition.y + objectForArrowToFollow.anchoredPosition.y);
+                }    
             }
         }
     }
