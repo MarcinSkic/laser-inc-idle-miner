@@ -3080,19 +3080,6 @@ MonoBehaviour:
   previousDepthProgressionDebugTime: 0
   previousDepth: 0
   depthMessages: []
-  isLogoOpaque: 1
-  isBGOpaque: 1
-  logoOpaqueTime: 4
-  logoTransparentTime: 0.5
-  bgOpaqueTime: 0.5
-  bgTransparentTime: 1
-  logoCurrentTime: 0
-  canvasGroupLogo: {fileID: 934194015}
-  canvasGroupBG: {fileID: 784180977}
-  cameras:
-  - {fileID: 726198939}
-  - {fileID: 1134417211}
-  logo: {fileID: 588743548}
 --- !u!4 &383171361
 Transform:
   m_ObjectHideFlags: 0
@@ -7099,7 +7086,7 @@ Camera:
     y: 0
     width: 1
     height: 1
-  near clip plane: 999
+  near clip plane: 0.3
   far clip plane: 1000
   field of view: 53.68814
   orthographic: 0
@@ -11100,7 +11087,7 @@ Camera:
     y: 0
     width: 1
     height: 1
-  near clip plane: 999
+  near clip plane: 0.3
   far clip plane: 1000
   field of view: 53.68814
   orthographic: 0
