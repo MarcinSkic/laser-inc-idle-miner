@@ -93,7 +93,10 @@ MonoBehaviour:
   text: {fileID: 1450712507234498648}
   arrow: {fileID: 1450712507333612136}
   resizedPanel: {fileID: 1450712507542324000}
+  arrowParent: {fileID: 1450712506375978137}
+  objectForArrowToFollow: {fileID: 0}
   currentTime: 0
+  soundToPlay: 1
 --- !u!1 &1450712507180845969
 GameObject:
   m_ObjectHideFlags: 0
