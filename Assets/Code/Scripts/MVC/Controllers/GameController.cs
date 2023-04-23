@@ -46,6 +46,9 @@ public class GameController : BaseController<GameView>
     [SerializeField] double previousDepth;
     public List<string> depthMessages;
 
+    [Header("Integrations and other shit")]
+    private Firebase.FirebaseApp app;
+
     //KEEP MONOBEHAVIOUR METHODS (Start, Update etc.) ON TOP
     /// <summary>
     /// This Start should be considered root Start of game, all inits where order of operations is important should originate from here
@@ -121,6 +124,32 @@ public class GameController : BaseController<GameView>
 
         AudioManager.Instance.Play("theme");
         AudioManager.Instance.IncreaseVolumeOverTime();
+
+        Firebase.FirebaseApp.CheckAndFixDependenciesAsync().ContinueWith(task =>
+        {
+
+            var dependencyStatus = task.Result;
+            if (dependencyStatus == Firebase.DependencyStatus.Available)
+            {
+                // Create and hold a reference to your FirebaseApp,
+                // where app is a Firebase.FirebaseApp property of your application class.
+                app = Firebase.FirebaseApp.DefaultInstance;
+                Debug.Log(app);
+                // Set a flag here to indicate whether Firebase is ready to use by your app.
+            }
+            else
+            {
+                UnityEngine.Debug.LogError(System.String.Format("Could not resolve all Firebase dependencies: {0}", dependencyStatus));
+                // Firebase Unity SDK is not safe to use here.
+            }
+        });
+
+        #if UNITY_IOS && !UNITY_EDITOR
+                if(Unity.Advertisement.IosSupport.ATTrackingStatusBinding.GetAuthorizationTrackingStatus() == Unity.Advertisement.IosSupport.ATTrackingStatusBinding.AuthorizationTrackingStatus.NOT_DETERMINED) {
+                    Unity.Advertisement.IosSupport.ATTrackingStatusBinding.RequestAuthorizationTracking();
+                }
+        #endif
+
     }
     public UnityAction onSetupFinished;
 
