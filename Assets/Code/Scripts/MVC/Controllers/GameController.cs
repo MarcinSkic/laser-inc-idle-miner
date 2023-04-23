@@ -143,6 +143,13 @@ public class GameController : BaseController<GameView>
                 // Firebase Unity SDK is not safe to use here.
             }
         });
+
+        #if UNITY_IOS && !UNITY_EDITOR
+                if(Unity.Advertisement.IosSupport.ATTrackingStatusBinding.GetAuthorizationTrackingStatus() == Unity.Advertisement.IosSupport.ATTrackingStatusBinding.AuthorizationTrackingStatus.NOT_DETERMINED) {
+                    Unity.Advertisement.IosSupport.ATTrackingStatusBinding.RequestAuthorizationTracking();
+                }
+        #endif
+
     }
     public UnityAction onSetupFinished;
 
