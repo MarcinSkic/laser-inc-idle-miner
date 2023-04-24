@@ -267,6 +267,7 @@ public class GameController : BaseController<GameView>
 
         #region OfflineTimePopup
         view.offlineConfirmButton.onClick += delegate {
+            offlineManager.offlineRewardWasReceived = true;
             resourcesManager.IncreaseMoneyForOfflineByValue(resourcesModel.offlineMoney);
             view.offlineGetBonusButton.Activate();
             view.offlinePopup.SetActive(false); 
