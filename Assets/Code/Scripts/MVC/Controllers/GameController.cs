@@ -252,9 +252,21 @@ public class GameController : BaseController<GameView>
 
     public void HandleDoubleOfflineReward()
     {
+        // TODO dla marcina - jakiś check czy już nie było x2? choć w sumie nie wiem czy potrzebne
         view.offlineGetBonusButton.Deactivate();
         resourcesModel.offlineMoney *= 2;
         view.SetOfflineMoney(resourcesModel.offlineMoney);
+    }
+
+    public void AcceptOfflineReward(int limit = 0){
+        if (limit == 0 || limit >= offlineManager.currentlyInvokedOfflineTime)
+        {
+            offlineManager.offlineRewardWasReceived = true;
+            resourcesManager.IncreaseMoneyForOfflineByValue(resourcesModel.offlineMoney);
+            view.offlineGetBonusButton.Activate();
+            view.offlinePopup.SetActive(false);
+            offlineManager.currentlyInvokedOfflineTime = 0;
+        }
     }
 
     private void ConnectToViewElements()
@@ -267,10 +279,7 @@ public class GameController : BaseController<GameView>
 
         #region OfflineTimePopup
         view.offlineConfirmButton.onClick += delegate {
-            offlineManager.offlineRewardWasReceived = true;
-            resourcesManager.IncreaseMoneyForOfflineByValue(resourcesModel.offlineMoney);
-            view.offlineGetBonusButton.Activate();
-            view.offlinePopup.SetActive(false); 
+            AcceptOfflineReward();
         };
 
         view.offlineGetBonusButton.onClick += delegate {

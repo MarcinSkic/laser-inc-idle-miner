@@ -26,6 +26,8 @@ public class OfflineManager : MonoBehaviour
     private DateTime lastActivitySaveTime = DateTime.MinValue;
     private DateTime oldTime;
 
+    public double currentlyInvokedOfflineTime = 0;
+
     public bool offlineRewardWasReceived;
 
     //TODO-FEATURE: Protection against forwarding date
@@ -83,6 +85,7 @@ public class OfflineManager : MonoBehaviour
             Debug.LogWarning(offlineData.accumulatedOfflineTime);*/
             offlineSecondsRounded = Math.Round(offlineSeconds, 1);
             onReturnFromOffline.Invoke(offlineSecondsRounded);
+            currentlyInvokedOfflineTime = offlineSecondsRounded;
         }
         lastOfflineSeconds = offlineSeconds;
         /*Debug.LogError("77");

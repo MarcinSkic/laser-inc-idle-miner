@@ -183,13 +183,14 @@ public class AdManager : MonoBehaviour
 
     public bool TryToShowRewardedAd(bool argDoubleAfkReward = false, BatRewardType argBatType = BatRewardType.money, int argBatRewardValue = 0)
     {
-/*#if UNITY_EDITOR
+#if UNITY_EDITOR
         doubleAfkReward = argDoubleAfkReward;
         batType = argBatType;
         batRewardValue = argBatRewardValue;
         OnRewardComplete();
+        Debug.Log("Reward given, skipping ad - in-editor!");
         return true;
-#endif*/
+#endif
 
         if (Rewarded.IsAvailable(RewardID))
         {
@@ -223,12 +224,10 @@ public class AdManager : MonoBehaviour
 
     public void OnRewardComplete()
     {
-        if (doubleAfkReward)
+        gameController.HandleDoubleOfflineReward();
+        if (batRewardValue > 0)
         {
-            gameController.HandleDoubleOfflineReward();
-        }
-        else if (batRewardValue > 0)
-        {
+            gameController.AcceptOfflineReward(120);
             switch (batType)
             {
                 case BatRewardType.money:
@@ -247,7 +246,6 @@ public class AdManager : MonoBehaviour
                     AudioManager.Instance.Play("caught_crystal");
                     break;
             }
-
         }
 
         TotalRewardAds++;
