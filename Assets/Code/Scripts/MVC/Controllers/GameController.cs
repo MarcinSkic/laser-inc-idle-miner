@@ -8,6 +8,7 @@ using UnityEngine.SceneManagement;
 // for Math.Log10 for progression debugging
 using System;
 using UnityEngine.Video;
+using Fyber;
 
 /// <summary>
 /// Methods from this object should not be called by other objects. When such action direction is needed (for example UI or world events) it should connect methods to events HERE.
@@ -22,6 +23,7 @@ public class GameController : BaseController<GameView>
     [SerializeField] private ResourcesModel resourcesModel;
     [SerializeField] private SettingsModel settingsModel;
     [SerializeField] private GameModel gameModel;
+    [SerializeField] private AdManager adManager;
 
     [Header("Managers")]
     [AutoProperty(AutoPropertyMode.Scene)] [SerializeField] private UpgradesManager upgradesManager;
@@ -144,11 +146,11 @@ public class GameController : BaseController<GameView>
             }
         });
 
-        #if UNITY_IOS && !UNITY_EDITOR
+#if UNITY_IOS && !UNITY_EDITOR
                 if(Unity.Advertisement.IosSupport.ATTrackingStatusBinding.GetAuthorizationTrackingStatus() == Unity.Advertisement.IosSupport.ATTrackingStatusBinding.AuthorizationTrackingStatus.NOT_DETERMINED) {
                     Unity.Advertisement.IosSupport.ATTrackingStatusBinding.RequestAuthorizationTracking();
                 }
-        #endif
+#endif
 
     }
     public UnityAction onSetupFinished;
@@ -171,6 +173,7 @@ public class GameController : BaseController<GameView>
         {
             RewardBat newBat = Instantiate(rewardBat, batParent);
             newBat.resourcesManager = resourcesManager;
+            newBat.adManager = adManager;
         }
     }
 
@@ -247,6 +250,13 @@ public class GameController : BaseController<GameView>
         SettingsModel.Instance.onSettingsChange += UpdateSettings;
     }
 
+    public void HandleDoubleOfflineReward()
+    {
+        view.offlineGetBonusButton.Deactivate();
+        resourcesModel.offlineMoney *= 2;
+        view.SetOfflineMoney(resourcesModel.offlineMoney);
+    }
+
     private void ConnectToViewElements()
     {
         view.InitButtons();
@@ -263,10 +273,7 @@ public class GameController : BaseController<GameView>
         };
 
         view.offlineGetBonusButton.onClick += delegate {
-            //TODO-FEATURE: Play AD, and do bonus if successful
-            view.offlineGetBonusButton.Deactivate();
-            resourcesModel.offlineMoney *= 2;
-            view.SetOfflineMoney(resourcesModel.offlineMoney); 
+            adManager.TryShowDoubleOfflineGainAd();
         };
         #endregion
 

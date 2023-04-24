@@ -38,6 +38,7 @@ public class RewardBat : MonoBehaviour
     [SerializeField] GameObject sphereGO;
     private BatOption batOption;
     public ResourcesManager resourcesManager;
+    public AdManager adManager;
 
     void Start()
     {
@@ -106,23 +107,29 @@ public class RewardBat : MonoBehaviour
         int value = batOption.rewardAmount[Random.Range(0, batOption.rewardAmount.Length)];
         debugString += $"{value}";
         // TODO: connect to ads
-        switch (batOption.rewardType)
+        if (batOption.needsAd)
         {
-            case BatRewardType.money:
-                debugString += " seconds worth of offlineReward";
-                resourcesManager.IncreaseMoneyForOfflineByTime(value);
-                AudioManager.Instance.Play("caught_coins");
-                break;
-            case BatRewardType.powerup:
-                debugString += " seconds of double laser power";
-                resourcesManager.IncreasePowerUpTimeLeft(value);
-                AudioManager.Instance.Play("caught_p_up");
-                break;
-            case BatRewardType.premium:
-                debugString += " premium curency";
-                resourcesManager.IncreasePremiumCurrency(value);
-                AudioManager.Instance.Play("caught_crystal");
-                break;
+            adManager.TryShowBatAd(batOption.rewardType, value);
+        } else
+        {
+            switch (batOption.rewardType)
+            {
+                case BatRewardType.money:
+                    debugString += " seconds worth of offlineReward";
+                    resourcesManager.IncreaseMoneyForOfflineByTime(value);
+                    AudioManager.Instance.Play("caught_coins");
+                    break;
+                case BatRewardType.powerup:
+                    debugString += " seconds of double laser power";
+                    resourcesManager.IncreasePowerUpTimeLeft(value);
+                    AudioManager.Instance.Play("caught_p_up");
+                    break;
+                case BatRewardType.premium:
+                    debugString += " premium curency";
+                    resourcesManager.IncreasePremiumCurrency(value);
+                    AudioManager.Instance.Play("caught_crystal");
+                    break;
+            }
         }
         Debug.Log(debugString);
         AudioManager.Instance.Play("bat_caught");
