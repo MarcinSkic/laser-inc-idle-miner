@@ -5765,6 +5765,14 @@ PrefabInstance:
       propertyPath: appID
       value: laser.inc.idle.miner
       objectReference: {fileID: 0}
+    - target: {fileID: 4405976200006927252, guid: 0bfe3b149145747cc92dc53bb4df4e9b, type: 3}
+      propertyPath: devKey
+      value: hjjbZWhKrvXcyiUKcW2kDf
+      objectReference: {fileID: 0}
+    - target: {fileID: 4405976200006927252, guid: 0bfe3b149145747cc92dc53bb4df4e9b, type: 3}
+      propertyPath: getConversionData
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 6207133488976360133, guid: 0bfe3b149145747cc92dc53bb4df4e9b, type: 3}
       propertyPath: m_RootOrder
       value: 12
