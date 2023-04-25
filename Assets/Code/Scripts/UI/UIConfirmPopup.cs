@@ -8,7 +8,8 @@ public class UIConfirmPopup : MonoBehaviour
 {
     [SerializeField] private UIButtonController[] confirmButtons;
     [SerializeField] private UIButtonController[] cancelButtons;
-    [SerializeField] private TMP_Text message;
+    [SerializeField] private TMP_Text title;
+    [SerializeField] private TMP_Text description;
 
     public void Init()
     {
@@ -28,10 +29,11 @@ public class UIConfirmPopup : MonoBehaviour
 
     public UnityAction<bool> onResponse;
 
-    public void Display(string message = "")
+    public void Display(string title = "Are you certain?", string description = "")
     {
         gameObject.SetActive(true);
-        this.message.text = message;
+        this.title.text = title;
+        this.description.text = description;
     }
 
     private void Confirm()

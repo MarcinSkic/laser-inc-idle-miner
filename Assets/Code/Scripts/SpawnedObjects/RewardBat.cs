@@ -38,6 +38,7 @@ public class RewardBat : MonoBehaviour
     [SerializeField] GameObject sphereGO;
     private BatOption batOption;
     public ResourcesManager resourcesManager;
+    public AdManager adManager;
 
     void Start()
     {
@@ -106,26 +107,51 @@ public class RewardBat : MonoBehaviour
         int value = batOption.rewardAmount[Random.Range(0, batOption.rewardAmount.Length)];
         debugString += $"{value}";
         // TODO: connect to ads
-        switch (batOption.rewardType)
+        if (batOption.needsAd)
         {
-            case BatRewardType.money:
-                debugString += " seconds worth of offlineReward";
-                resourcesManager.IncreaseMoneyForOfflineByTime(value);
-                AudioManager.Instance.Play("caught_coins");
-                break;
-            case BatRewardType.powerup:
-                debugString += " seconds of double laser power";
-                resourcesManager.IncreasePowerUpTimeLeft(value);
-                AudioManager.Instance.Play("caught_p_up");
-                break;
-            case BatRewardType.premium:
-                debugString += " premium curency";
-                resourcesManager.IncreasePremiumCurrency(value);
-                AudioManager.Instance.Play("caught_crystal");
-                break;
+            MessagesManager.Instance.DisplayConfirmQuestion("Do you want to watch ad?", GetAdDescription(batOption, value), () =>
+              {
+                  adManager.TryShowBatAd(batOption.rewardType, value);
+              });
+        } else
+        {
+            switch (batOption.rewardType)
+            {
+                case BatRewardType.money:
+                    debugString += " seconds worth of offlineReward";
+                    resourcesManager.IncreaseMoneyForOfflineByTime(value);
+                    AudioManager.Instance.Play("caught_coins");
+                    break;
+                case BatRewardType.powerup:
+                    debugString += " seconds of double laser power";
+                    resourcesManager.IncreasePowerUpTimeLeft(value);
+                    AudioManager.Instance.Play("caught_p_up");
+                    break;
+                case BatRewardType.premium:
+                    debugString += " premium curency";
+                    resourcesManager.IncreasePremiumCurrency(value);
+                    AudioManager.Instance.Play("caught_crystal");
+                    break;
+            }
         }
         Debug.Log(debugString);
         AudioManager.Instance.Play("bat_caught");
         Destroy(gameObject);
+    }
+
+    private string GetAdDescription(BatOption batOption, int value)
+    {
+        string formattedDescription = $"You will earn {{0}} for that!";
+        switch (batOption.rewardType)
+        {
+            case BatRewardType.money:
+                return string.Format(formattedDescription, $"<color=#da0>{NumberFormatter.FormatSecondsToHours(value)}</color> worth of offline earnings");
+            case BatRewardType.powerup:
+                return string.Format(formattedDescription, $"<color=#da0>{NumberFormatter.FormatSecondsToHours(value)}</color> of double laser power");
+            case BatRewardType.premium:
+                return string.Format(formattedDescription, $"<color=#da0>{NumberFormatter.Format(value)}</color> premium curency");
+            default:
+                return "?";
+        }
     }
 }

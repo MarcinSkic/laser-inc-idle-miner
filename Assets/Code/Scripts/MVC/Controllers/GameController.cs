@@ -8,6 +8,7 @@ using UnityEngine.SceneManagement;
 // for Math.Log10 for progression debugging
 using System;
 using UnityEngine.Video;
+using Fyber;
 
 /// <summary>
 /// Methods from this object should not be called by other objects. When such action direction is needed (for example UI or world events) it should connect methods to events HERE.
@@ -22,6 +23,7 @@ public class GameController : BaseController<GameView>
     [SerializeField] private ResourcesModel resourcesModel;
     [SerializeField] private SettingsModel settingsModel;
     [SerializeField] private GameModel gameModel;
+    [SerializeField] private AdManager adManager;
 
     [Header("Managers")]
     [AutoProperty(AutoPropertyMode.Scene)] [SerializeField] private UpgradesManager upgradesManager;
@@ -144,12 +146,6 @@ public class GameController : BaseController<GameView>
             }
         });
 
-        #if UNITY_IOS && !UNITY_EDITOR
-                if(Unity.Advertisement.IosSupport.ATTrackingStatusBinding.GetAuthorizationTrackingStatus() == Unity.Advertisement.IosSupport.ATTrackingStatusBinding.AuthorizationTrackingStatus.NOT_DETERMINED) {
-                    Unity.Advertisement.IosSupport.ATTrackingStatusBinding.RequestAuthorizationTracking();
-                }
-        #endif
-
     }
     public UnityAction onSetupFinished;
 
@@ -171,6 +167,7 @@ public class GameController : BaseController<GameView>
         {
             RewardBat newBat = Instantiate(rewardBat, batParent);
             newBat.resourcesManager = resourcesManager;
+            newBat.adManager = adManager;
         }
     }
 
@@ -247,6 +244,25 @@ public class GameController : BaseController<GameView>
         SettingsModel.Instance.onSettingsChange += UpdateSettings;
     }
 
+    public void HandleDoubleOfflineReward()
+    {
+        // TODO dla marcina - jakiś check czy już nie było x2? choć w sumie nie wiem czy potrzebne
+        view.offlineGetBonusButton.Deactivate();
+        resourcesModel.offlineMoney *= 2;
+        view.SetOfflineMoney(resourcesModel.offlineMoney);
+    }
+
+    public void AcceptOfflineReward(int limit = 0){
+        if (limit == 0 || limit >= offlineManager.currentlyInvokedOfflineTime)
+        {
+            offlineManager.offlineRewardWasReceived = true;
+            resourcesManager.IncreaseMoneyForOfflineByValue(resourcesModel.offlineMoney);
+            view.offlineGetBonusButton.Activate();
+            view.offlinePopup.SetActive(false);
+            offlineManager.currentlyInvokedOfflineTime = 0;
+        }
+    }
+
     private void ConnectToViewElements()
     {
         view.InitButtons();
@@ -257,16 +273,11 @@ public class GameController : BaseController<GameView>
 
         #region OfflineTimePopup
         view.offlineConfirmButton.onClick += delegate {
-            resourcesManager.IncreaseMoneyForOfflineByValue(resourcesModel.offlineMoney);
-            view.offlineGetBonusButton.Activate();
-            view.offlinePopup.SetActive(false); 
+            AcceptOfflineReward();
         };
 
         view.offlineGetBonusButton.onClick += delegate {
-            //TODO-FEATURE: Play AD, and do bonus if successful
-            view.offlineGetBonusButton.Deactivate();
-            resourcesModel.offlineMoney *= 2;
-            view.SetOfflineMoney(resourcesModel.offlineMoney); 
+            adManager.TryShowDoubleOfflineGainAd();
         };
         #endregion
 
@@ -635,7 +646,7 @@ public class GameController : BaseController<GameView>
         }
         else
         {
-            MessagesManager.Instance.DisplayConfirmQuestion("You will not earn much prestige currency",
+            MessagesManager.Instance.DisplayConfirmQuestion("Are you certain?", "You will not earn much prestige currency",
             () =>
             {
                 ExecutePrestige();
@@ -662,7 +673,7 @@ public class GameController : BaseController<GameView>
 
     public void TryEraseSaveFile()
     {
-        MessagesManager.Instance.DisplayConfirmQuestion("All progress will be lost!",
+        MessagesManager.Instance.DisplayConfirmQuestion("Are you certain?", "All progress will be lost!",
         () => {
             SavingManager.EraseSaveFile();
             SceneManager.LoadScene(SceneManager.GetActiveScene().name);

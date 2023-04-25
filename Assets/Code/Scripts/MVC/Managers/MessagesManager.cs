@@ -34,9 +34,9 @@ public class MessagesManager : MonoBehaviour
         messagePopup.DisplayMessage(title, value, icon,iconColor, delay);
     }
 
-    public void DisplayConfirmQuestion(string messsage, UnityAction confirmAction, UnityAction cancelAction = null)
+    public void DisplayConfirmQuestion(string title, string description, UnityAction confirmAction,  UnityAction cancelAction = null)
     {
-        confirmPopup.Display(messsage);
+        confirmPopup.Display(title,description);
         confirmPopup.onResponse += r =>
         {
             if (r)

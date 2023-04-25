@@ -14,6 +14,22 @@ public static class NumberFormatter
         return naukowa1(num);
     }
 
+    public static string FormatSecondsToReadable(double seconds)
+    {
+        TimeSpan t = TimeSpan.FromSeconds(seconds);
+        return string.Format(t.Days > 3 ? "{0:D}days" : "{1:D2}h:{2:D2}m:{3:D2}s",
+            t.Days,
+            t.Hours,
+            t.Minutes,
+            t.Seconds);
+    }
+
+    public static string FormatSecondsToHours(double seconds)
+    {
+        TimeSpan t= TimeSpan.FromSeconds(seconds);
+        return string.Format(t.TotalHours <= 1 ? "{0} hour" : "{0} hours",t.TotalHours);
+    }
+
     private static string FormatToEngineering(double num)
     {
         if ((Math.Abs(num) > 1e-3 && Math.Abs(num) < 1) || num == 0 || (Math.Abs(num) >= 1 && Math.Abs(num) <= 1e3))
