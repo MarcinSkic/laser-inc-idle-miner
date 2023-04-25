@@ -121,7 +121,6 @@ public class AdManager : MonoBehaviour
     public bool RewardAvailable()
     {
 #if UNITY_EDITOR
-        //return false;
         return true;
 #endif
 

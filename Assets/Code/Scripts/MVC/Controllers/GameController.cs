@@ -146,12 +146,6 @@ public class GameController : BaseController<GameView>
             }
         });
 
-#if UNITY_IOS && !UNITY_EDITOR
-                if(Unity.Advertisement.IosSupport.ATTrackingStatusBinding.GetAuthorizationTrackingStatus() == Unity.Advertisement.IosSupport.ATTrackingStatusBinding.AuthorizationTrackingStatus.NOT_DETERMINED) {
-                    Unity.Advertisement.IosSupport.ATTrackingStatusBinding.RequestAuthorizationTracking();
-                }
-#endif
-
     }
     public UnityAction onSetupFinished;
 
