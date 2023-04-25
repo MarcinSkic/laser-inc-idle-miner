@@ -646,7 +646,7 @@ public class GameController : BaseController<GameView>
         }
         else
         {
-            MessagesManager.Instance.DisplayConfirmQuestion("You will not earn much prestige currency",
+            MessagesManager.Instance.DisplayConfirmQuestion("Are you certain?", "You will not earn much prestige currency",
             () =>
             {
                 ExecutePrestige();
@@ -673,7 +673,7 @@ public class GameController : BaseController<GameView>
 
     public void TryEraseSaveFile()
     {
-        MessagesManager.Instance.DisplayConfirmQuestion("All progress will be lost!",
+        MessagesManager.Instance.DisplayConfirmQuestion("Are you certain?", "All progress will be lost!",
         () => {
             SavingManager.EraseSaveFile();
             SceneManager.LoadScene(SceneManager.GetActiveScene().name);

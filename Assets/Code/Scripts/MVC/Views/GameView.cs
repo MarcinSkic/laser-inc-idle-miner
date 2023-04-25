@@ -251,15 +251,8 @@ public class GameView : BaseView
 
     public void ShowOfflineTimePopup(double seconds,double earnedMoney)
     {
-        TimeSpan t = TimeSpan.FromSeconds(seconds);
-        string timeText = string.Format(t.Days > 3 ? "{0:D}days" : "{1:D2}h:{2:D2}m:{3:D2}s",
-            t.Days,
-            t.Hours,
-            t.Minutes,
-            t.Seconds);
-
         offlinePopup.SetActive(true);
-        offlineText.text = $"You were offline for <color=#0bf>{timeText}</color>!";
+        offlineText.text = $"You were offline for <color=#0bf>{NumberFormatter.FormatSecondsToReadable(seconds)}</color>!";
         SetOfflineMoney(earnedMoney);
     }
                 
