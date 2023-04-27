@@ -25,6 +25,7 @@ public class PremiumStoreManager : MonoBehaviour
 
         foreach(var button in buttons)
         {
+            //TODO: Assign button to event
             button.Text = GetValueFromID(button.iapButton.productId);
         }
     }
@@ -44,11 +45,13 @@ public class PremiumStoreManager : MonoBehaviour
     
     public void OnPremiumBuy(Product product)
     {
+        //TODO: Add logic of buying stuff
         onPremiumBuy?.Invoke();
     }
 
     public void OnInGameCurrencyBuy()
     {
+        //TODO: Add logic of buying stuff
         onPremiumBuy?.Invoke();
     }
 }
