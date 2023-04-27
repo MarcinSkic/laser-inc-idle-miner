@@ -34,6 +34,7 @@ public class GameController : BaseController<GameView>
     [AutoProperty(AutoPropertyMode.Scene)] [SerializeField] private AchievementManager achievementManager;
     [AutoProperty(AutoPropertyMode.Scene)] [SerializeField] private SavingManager savingManager;
     [AutoProperty(AutoPropertyMode.Scene)] [SerializeField] private TutorialManager tutorialManager;
+    [AutoProperty(AutoPropertyMode.Scene)] [SerializeField] private PremiumStoreManager premiumStoreManager;
 
     [Header("Bats!")]
     [SerializeField] RewardBat rewardBat;
@@ -112,6 +113,7 @@ public class GameController : BaseController<GameView>
         ConnectToOfflineManagerEvents();
         ConnectToBlocksManagerEvents();
         ConnectToAchievementsManager();
+        ConnectToPremiumStoreManagerEvents();
         UpdateSettings();
         MoveBorderToMatchScreenSize();
         ManageTutorial();
@@ -242,6 +244,12 @@ public class GameController : BaseController<GameView>
     private void ConnectToSettingsModelEvents()
     {
         SettingsModel.Instance.onSettingsChange += UpdateSettings;
+    }
+
+    private void ConnectToPremiumStoreManagerEvents()
+    {
+        premiumStoreManager.Setup();
+        premiumStoreManager.onPremiumBuy += SavePersistentData;
     }
 
     public void HandleDoubleOfflineReward()
