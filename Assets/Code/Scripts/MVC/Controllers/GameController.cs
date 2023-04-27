@@ -673,7 +673,7 @@ public class GameController : BaseController<GameView>
 
     public void TryEraseSaveFile()
     {
-        MessagesManager.Instance.DisplayConfirmQuestion("Are you certain?", "All progress will be lost!",
+        MessagesManager.Instance.DisplayConfirmQuestion("Are you certain?", "All progress will be lost! (this includes premium purchases)", //TODO-FIXME: In the future exclude premium purchases from file erasing
         () => {
             SavingManager.EraseSaveFile();
             SceneManager.LoadScene(SceneManager.GetActiveScene().name);
