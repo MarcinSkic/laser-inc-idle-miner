@@ -109,10 +109,18 @@ public class RewardBat : MonoBehaviour
         // TODO: connect to ads
         if (batOption.needsAd)
         {
-            MessagesManager.Instance.DisplayConfirmQuestion("Do you want to watch ad?", GetAdDescription(batOption, value), () =>
-              {
-                  adManager.TryShowBatAd(batOption.rewardType, value);
-              });
+            if (adManager.subscribedNoAds)
+            {
+                adManager.TryShowBatAd(batOption.rewardType, value);    //TODO-@Filip: When subscribed it should skip calling adManager alltogether and just reward
+            } 
+            else
+            {
+                MessagesManager.Instance.DisplayConfirmQuestion("Do you want to watch ad?", GetAdDescription(batOption, value), () =>
+                {
+                    adManager.TryShowBatAd(batOption.rewardType, value);
+                });
+            }
+            
         } else
         {
             switch (batOption.rewardType)

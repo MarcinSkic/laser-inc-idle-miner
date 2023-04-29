@@ -2028,6 +2028,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   savingManager: {fileID: 567613855}
   resourcesManager: {fileID: 567613852}
+  adManager: {fileID: 2062366017}
   buttons:
   - {fileID: 1180538993}
   - {fileID: 845520375}
@@ -25710,7 +25711,7 @@ MonoBehaviour:
   gameModel: {fileID: 1947716359}
   gameController: {fileID: 383171360}
   BannerDisplayed: 0
-  NoAdsActive: 0
+  subscribedNoAds: 0
 --- !u!4 &2062366018
 Transform:
   m_ObjectHideFlags: 0
