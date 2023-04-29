@@ -8,7 +8,13 @@ public class UIPremiumElement : MonoBehaviour
 {
     public IAPButton iapButton;
     [SerializeField] private TMP_Text valueText;
-
+    public bool HasValue
+    {
+        get
+        {
+            return valueText != null;
+        }
+    }
     public string Text
     {
         set

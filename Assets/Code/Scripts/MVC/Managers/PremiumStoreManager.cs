@@ -7,7 +7,11 @@ using UnityEngine.Events;
 
 public class PremiumStoreManager : MonoBehaviour
 {
+    [Header("Managers and Models")]
     [AutoProperty(AutoPropertyMode.Scene)] [SerializeField] private SavingManager savingManager;
+    [AutoProperty(AutoPropertyMode.Scene)] [SerializeField] private ResourcesManager resourcesManager;
+
+    [Header("UI")]
     [SerializeField] List<UIPremiumElement> buttons;
     Dictionary<string, double> crystalPacksValues;
 
@@ -25,8 +29,13 @@ public class PremiumStoreManager : MonoBehaviour
 
         foreach(var button in buttons)
         {
-            //TODO: Assign button to event
-            button.Text = GetValueFromID(button.iapButton.productId);
+            button.iapButton.onPurchaseComplete.AddListener(OnPremiumBuy);
+            button.iapButton.onPurchaseFailed.AddListener(OnPremiumFailed);
+
+            if (button.HasValue)
+            {
+                button.Text = GetValueFromID(button.iapButton.productId);
+            }
         }
     }
 
@@ -45,8 +54,21 @@ public class PremiumStoreManager : MonoBehaviour
     
     public void OnPremiumBuy(Product product)
     {
-        //TODO: Add logic of buying stuff
+        switch (product.definition.id)
+        {
+            case var x when x.Contains("liim.crystals"):
+                resourcesManager.IncreasePremiumCurrency(crystalPacksValues[x]);
+                break;
+            default:
+                Debug.Log(product.definition.id);
+                break;
+        }
         onPremiumBuy?.Invoke();
+    }
+
+    public void OnPremiumFailed(Product product, PurchaseFailureReason reason)
+    {
+
     }
 
     public void OnInGameCurrencyBuy()
