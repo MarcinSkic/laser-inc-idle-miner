@@ -2026,9 +2026,19 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4e5fe6c10ae0cea4291a8ea82b26b592, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  costOfEarnOfflineTime: 40
+  rewardedOfflineTime_Seconds: 36000
+  costOfEarnPrestigeReward: 50
+  percentageOfPrestigeReward: 0.35
   savingManager: {fileID: 567613855}
   resourcesManager: {fileID: 567613852}
   adManager: {fileID: 2062366017}
+  earnOffline_Title: {fileID: 2033633065990066318}
+  earnOffline_Button: {fileID: 2136725580409792421}
+  earnOffline_Display: {fileID: 6241257465115940308}
+  earnPrestige_Title: {fileID: 1331849228}
+  earnPrestige_Button: {fileID: 1506803963}
+  earnPrestige_Display: {fileID: 1419211791}
   buttons:
   - {fileID: 1180538993}
   - {fileID: 845520375}
@@ -7855,7 +7865,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &622476608
 RectTransform:
   m_ObjectHideFlags: 0
@@ -7878,10 +7888,10 @@ RectTransform:
   m_Father: {fileID: 1963206590}
   m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0, y: 0}
-  m_AnchorMax: {x: 0, y: 0}
-  m_AnchoredPosition: {x: 0, y: 0}
-  m_SizeDelta: {x: 0, y: 250}
+  m_AnchorMin: {x: 0, y: 1}
+  m_AnchorMax: {x: 0, y: 1}
+  m_AnchoredPosition: {x: 576, y: -965}
+  m_SizeDelta: {x: 1052, y: 250}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &622476609
 MonoBehaviour:
@@ -7934,6 +7944,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   iapButton: {fileID: 692818876}
+  button: {fileID: 0}
   valueText: {fileID: 0}
 --- !u!1 &628792820
 GameObject:
@@ -11907,6 +11918,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   iapButton: {fileID: 1318570846}
+  button: {fileID: 0}
   valueText: {fileID: 0}
 --- !u!1 &964560471
 GameObject:
@@ -16153,7 +16165,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 21300000, guid: c741273b9a28fa84f915742efe8caee8, type: 3}
+  m_Sprite: {fileID: 21300000, guid: 9720bc3869b680c44b46294402554335, type: 3}
   m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1
@@ -16343,7 +16355,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: Instant 50% prestige reward without reset
+  m_text: Instant 56% prestige reward without reset
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 87e8f046b71e6bd4bbfc1319fe4b6b12, type: 2}
   m_sharedMaterial: {fileID: -3191390661562951992, guid: 87e8f046b71e6bd4bbfc1319fe4b6b12, type: 2}
@@ -18996,7 +19008,7 @@ GameObject:
   - component: {fileID: 1506803962}
   - component: {fileID: 1506803961}
   - component: {fileID: 1506803960}
-  - component: {fileID: 1506803959}
+  - component: {fileID: 1506803963}
   m_Layer: 5
   m_Name: UpgradeButton
   m_TagString: Untagged
@@ -19026,35 +19038,6 @@ RectTransform:
   m_AnchoredPosition: {x: -20.000002, y: 0}
   m_SizeDelta: {x: -39.999996, y: 100}
   m_Pivot: {x: 0.5, y: 0.5}
---- !u!114 &1506803959
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1506803957}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: c00ed48db324c334d8e88e1221ba8778, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  button: {fileID: 1506803960}
-  text: {fileID: 1331849228}
-  hardDeactivate: 0
-  transitionType: 1
-  defaultSprite: {fileID: 21300000, guid: c741273b9a28fa84f915742efe8caee8, type: 3}
-  selectedSprite: {fileID: 21300000, guid: 9720bc3869b680c44b46294402554335, type: 3}
-  icon: {fileID: 0}
-  defaultIconSprite: {fileID: 0}
-  selectedIconSprite: {fileID: 0}
-  defaultObject: {fileID: 0}
-  selectedObject: {fileID: 0}
-  defaultFont: {r: 0, g: 0, b: 0, a: 0}
-  selectedFont: {r: 0, g: 0, b: 0, a: 0}
-  defaultColor: {r: 0, g: 0, b: 0, a: 0}
-  selectedColor: {r: 0, g: 0, b: 0, a: 0}
-  upgradeName: 
-  costText: {fileID: 1798348898}
 --- !u!114 &1506803960
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -19119,7 +19102,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 21300000, guid: c741273b9a28fa84f915742efe8caee8, type: 3}
+  m_Sprite: {fileID: 21300000, guid: 9720bc3869b680c44b46294402554335, type: 3}
   m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1
@@ -19137,6 +19120,33 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1506803957}
   m_CullTransparentMesh: 1
+--- !u!114 &1506803963
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1506803957}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 30fdc19ddefbe674bab28bad58bae581, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  button: {fileID: 1506803960}
+  text: {fileID: 1798348898}
+  hardDeactivate: 0
+  transitionType: 0
+  defaultSprite: {fileID: 0}
+  selectedSprite: {fileID: 0}
+  icon: {fileID: 0}
+  defaultIconSprite: {fileID: 0}
+  selectedIconSprite: {fileID: 0}
+  defaultObject: {fileID: 0}
+  selectedObject: {fileID: 0}
+  defaultFont: {r: 0, g: 0, b: 0, a: 0}
+  selectedFont: {r: 0, g: 0, b: 0, a: 0}
+  defaultColor: {r: 0, g: 0, b: 0, a: 0}
+  selectedColor: {r: 0, g: 0, b: 0, a: 0}
 --- !u!1 &1508174523
 GameObject:
   m_ObjectHideFlags: 0
@@ -27489,7 +27499,7 @@ GameObject:
   - component: {fileID: 276993715263689388}
   - component: {fileID: 1173688403588034898}
   - component: {fileID: 37686685079061635}
-  - component: {fileID: 7184693839229745041}
+  - component: {fileID: 2136725580409792421}
   m_Layer: 5
   m_Name: UpgradeButton
   m_TagString: Untagged
@@ -27642,7 +27652,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 21300000, guid: c741273b9a28fa84f915742efe8caee8, type: 3}
+  m_Sprite: {fileID: 21300000, guid: 9720bc3869b680c44b46294402554335, type: 3}
   m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1
@@ -28177,6 +28187,33 @@ RectTransform:
   m_AnchoredPosition: {x: -20.000002, y: 0}
   m_SizeDelta: {x: -39.999996, y: 100}
   m_Pivot: {x: 0.5, y: 0.5}
+--- !u!114 &2136725580409792421
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 297318792006791902}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 30fdc19ddefbe674bab28bad58bae581, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  button: {fileID: 37686685079061635}
+  text: {fileID: 5456200725988236022}
+  hardDeactivate: 0
+  transitionType: 0
+  defaultSprite: {fileID: 0}
+  selectedSprite: {fileID: 0}
+  icon: {fileID: 0}
+  defaultIconSprite: {fileID: 0}
+  selectedIconSprite: {fileID: 0}
+  defaultObject: {fileID: 0}
+  selectedObject: {fileID: 0}
+  defaultFont: {r: 0, g: 0, b: 0, a: 0}
+  selectedFont: {r: 0, g: 0, b: 0, a: 0}
+  defaultColor: {r: 0, g: 0, b: 0, a: 0}
+  selectedColor: {r: 0, g: 0, b: 0, a: 0}
 --- !u!222 &2402244087768867586
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -28974,35 +29011,6 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 8557819628252026688}
   m_CullTransparentMesh: 1
---- !u!114 &7184693839229745041
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 297318792006791902}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: c00ed48db324c334d8e88e1221ba8778, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  button: {fileID: 37686685079061635}
-  text: {fileID: 2033633065990066318}
-  hardDeactivate: 0
-  transitionType: 1
-  defaultSprite: {fileID: 21300000, guid: c741273b9a28fa84f915742efe8caee8, type: 3}
-  selectedSprite: {fileID: 21300000, guid: 9720bc3869b680c44b46294402554335, type: 3}
-  icon: {fileID: 0}
-  defaultIconSprite: {fileID: 0}
-  selectedIconSprite: {fileID: 0}
-  defaultObject: {fileID: 0}
-  selectedObject: {fileID: 0}
-  defaultFont: {r: 0, g: 0, b: 0, a: 0}
-  selectedFont: {r: 0, g: 0, b: 0, a: 0}
-  defaultColor: {r: 0, g: 0, b: 0, a: 0}
-  selectedColor: {r: 0, g: 0, b: 0, a: 0}
-  upgradeName: 
-  costText: {fileID: 5456200725988236022}
 --- !u!1 &7194494945667787103
 GameObject:
   m_ObjectHideFlags: 0

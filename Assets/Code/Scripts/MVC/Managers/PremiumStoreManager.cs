@@ -4,15 +4,33 @@ using UnityEngine;
 using UnityEngine.Purchasing;
 using MyBox;
 using UnityEngine.Events;
+using TMPro;
+using System;
 
 public class PremiumStoreManager : MonoBehaviour
 {
+    [Header("Values")]
+    [SerializeField] float costOfEarnOfflineTime = 40;
+    [SerializeField] int rewardedOfflineTime_Seconds = 36000;
+
+    [Space(10)]
+    [SerializeField] float costOfEarnPrestigeReward = 50;
+    [SerializeField] [Range(0f, 1f)] float percentageOfPrestigeReward = 0.5f;
+
     [Header("Managers and Models")]
     [AutoProperty(AutoPropertyMode.Scene)] [SerializeField] private SavingManager savingManager;
     [AutoProperty(AutoPropertyMode.Scene)] [SerializeField] private ResourcesManager resourcesManager;
     [AutoProperty(AutoPropertyMode.Scene)] [SerializeField] private AdManager adManager;
 
     [Header("UI")]
+    [SerializeField] private TMP_Text earnOffline_Title;
+    [SerializeField] private UIButtonController earnOffline_Button;
+    [SerializeField] private TMP_Text earnOffline_Display;
+
+    [Space(10)]
+    [SerializeField] private TMP_Text earnPrestige_Title;
+    [SerializeField] private UIButtonController earnPrestige_Button;
+    [SerializeField] private TMP_Text earnPrestige_Display;
     [SerializeField] List<UIPremiumElement> buttons;
 
     [Header("Other")]
@@ -53,6 +71,24 @@ public class PremiumStoreManager : MonoBehaviour
                 button.Text = GetValueFromID(button.iapButton.productId);
             }
         }
+
+        #region Earn Offline Time
+        earnOffline_Title.text = $"Instant money equal to {TimeSpan.FromSeconds(rewardedOfflineTime_Seconds).TotalHours}h of offline gain";
+
+        earnOffline_Button.Init();
+        earnOffline_Button.SetText($"{costOfEarnOfflineTime}");
+        earnOffline_Button.onClick += () => {
+            if (resourcesManager.TryDecreaseCurrency(costOfEarnOfflineTime, Currency.Premium))
+            {
+                resourcesManager.IncreaseMoneyForOfflineByTime(rewardedOfflineTime_Seconds);
+            }
+            
+        };
+
+        resourcesManager.onAfkGainChange += (gainPerSec) => { earnOffline_Display.text = NumberFormatter.Format(gainPerSec*rewardedOfflineTime_Seconds); };
+
+        //resourcesManager.IncreaseMoneyForOfflineByTime
+        #endregion
     }
 
     private string GetValueFromID(string id)
@@ -111,11 +147,5 @@ public class PremiumStoreManager : MonoBehaviour
     public void OnPremiumFailed(Product product, PurchaseFailureReason reason)
     {
 
-    }
-
-    public void OnInGameCurrencyBuy()
-    {
-        //TODO: Add logic of buying stuff
-        onPremiumBuy?.Invoke();
     }
 }
