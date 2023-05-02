@@ -140,6 +140,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   iapButton: {fileID: 2475007830214696298}
+  button: {fileID: 6295009275044365683}
   valueText: {fileID: 3650997961401735307}
 --- !u!114 &2475007830214696298
 MonoBehaviour:

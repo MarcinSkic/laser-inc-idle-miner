@@ -83,7 +83,7 @@ public class PremiumStoreManager : MonoBehaviour
                 resourcesManager.IncreaseMoneyForOfflineByTime(rewardedOfflineTime_Seconds);
             } else
             {
-                //TODO: Try to buy lowest price crystals pack
+                buttons[0].Click();
             }
             
         };
@@ -98,13 +98,13 @@ public class PremiumStoreManager : MonoBehaviour
         earnPrestige_Button.SetText($"{costOfEarnPrestigeReward}");
         earnPrestige_Button.onClick += () =>
         {
-            if (resourcesManager.TryDecreaseCurrency(costOfEarnOfflineTime, Currency.Premium))
+            if (resourcesManager.TryDecreaseCurrency(costOfEarnPrestigeReward, Currency.Premium))
             {
                 resourcesManager.IncreasePrestigeCurrency(resourcesManager.PrestigeCurrencyForNextPrestige*percentageOfPrestigeReward);
             }
             else
             {
-                //TODO: Try to buy lowest price crystals pack
+                buttons[0].Click();
             }
         };
 
