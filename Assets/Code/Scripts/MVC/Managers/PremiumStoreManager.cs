@@ -81,14 +81,45 @@ public class PremiumStoreManager : MonoBehaviour
             if (resourcesManager.TryDecreaseCurrency(costOfEarnOfflineTime, Currency.Premium))
             {
                 resourcesManager.IncreaseMoneyForOfflineByTime(rewardedOfflineTime_Seconds);
+            } else
+            {
+                //TODO: Try to buy lowest price crystals pack
             }
             
         };
 
         resourcesManager.onAfkGainChange += (gainPerSec) => { earnOffline_Display.text = NumberFormatter.Format(gainPerSec*rewardedOfflineTime_Seconds); };
-
-        //resourcesManager.IncreaseMoneyForOfflineByTime
         #endregion
+
+        #region Earn Prestige Reward
+        earnPrestige_Title.text = $"Instant {percentageOfPrestigeReward*100}% prestige reward without reset";
+
+        earnPrestige_Button.Init();
+        earnPrestige_Button.SetText($"{costOfEarnPrestigeReward}");
+        earnPrestige_Button.onClick += () =>
+        {
+            if (resourcesManager.TryDecreaseCurrency(costOfEarnOfflineTime, Currency.Premium))
+            {
+                resourcesManager.IncreasePrestigeCurrency(resourcesManager.PrestigeCurrencyForNextPrestige*percentageOfPrestigeReward);
+            }
+            else
+            {
+                //TODO: Try to buy lowest price crystals pack
+            }
+        };
+
+        StartCoroutine(DisplayPrestigeReward());
+        #endregion
+    }
+
+    IEnumerator DisplayPrestigeReward()
+    {
+        while (true)
+        {
+            earnPrestige_Display.text = NumberFormatter.Format(resourcesManager.PrestigeCurrencyForNextPrestige * percentageOfPrestigeReward);
+            yield return new WaitForSeconds(1);
+        }
+        
     }
 
     private string GetValueFromID(string id)
