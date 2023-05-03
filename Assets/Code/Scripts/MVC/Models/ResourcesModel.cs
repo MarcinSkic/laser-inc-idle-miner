@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using MyBox;
 
-public enum Currency { Money, Prestige, Premium }
+public enum Currency { Money, Prestige, Premium, IAP }
 public class ResourcesModel : MonoBehaviour
 {
     [AutoProperty(AutoPropertyMode.Scene)]

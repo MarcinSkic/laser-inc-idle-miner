@@ -280,7 +280,7 @@ public class UpgradesManager : MonoBehaviour
 
     public void SavePrestigePersistentData(PersistentData data)
     {
-        data.upgrades = model.upgrades.Values.Where(u => u.currency == Currency.Prestige)
+        data.upgrades = model.upgrades.Values.Where(u => (u.currency == Currency.Prestige || u.currency == Currency.Premium || u.currency == Currency.IAP))
                                             .Select(u => new PersistentUpgrade(u.name, u.currentLevel, u.isUnlocked))
                                             .ToArray();
     }

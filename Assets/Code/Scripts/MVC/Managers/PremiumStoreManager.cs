@@ -6,12 +6,19 @@ using MyBox;
 using UnityEngine.Events;
 using TMPro;
 using System;
+using UnityEngine.UI;
 
 public class PremiumStoreManager : MonoBehaviour
 {
+    [Header("Upgrades")]
+    [SerializeField] UpgradeScriptable doubleMoneyUpgrade;
+
     [Header("Values")]
     [SerializeField] float costOfEarnOfflineTime = 40;
     [SerializeField] int rewardedOfflineTime_Seconds = 36000;
+
+    [SerializeField] float costOfEarnOfflineTime2 = 40;
+    [SerializeField] int rewardedOfflineTime_Seconds2 = 36000;
 
     [Space(10)]
     [SerializeField] float costOfEarnPrestigeReward = 50;
@@ -21,11 +28,19 @@ public class PremiumStoreManager : MonoBehaviour
     [AutoProperty(AutoPropertyMode.Scene)] [SerializeField] private SavingManager savingManager;
     [AutoProperty(AutoPropertyMode.Scene)] [SerializeField] private ResourcesManager resourcesManager;
     [AutoProperty(AutoPropertyMode.Scene)] [SerializeField] private AdManager adManager;
+    [AutoProperty(AutoPropertyMode.Scene)] [SerializeField] private UpgradesModel upgradesModel;
 
     [Header("UI")]
     [SerializeField] private TMP_Text earnOffline_Title;
     [SerializeField] private UIButtonController earnOffline_Button;
     [SerializeField] private TMP_Text earnOffline_Display;
+
+    [SerializeField] private TMP_Text earnOffline_Title2;
+    [SerializeField] private UIButtonController earnOffline_Button2;
+    [SerializeField] private TMP_Text earnOffline_Display2;
+
+    [SerializeField] private Button doubleMoneyButton;
+    [SerializeField] private Button noAdsButton;
 
     [Space(10)]
     [SerializeField] private TMP_Text earnPrestige_Title;
@@ -46,6 +61,7 @@ public class PremiumStoreManager : MonoBehaviour
 #if !UNITY_EDITOR
             CheckNoAdSub();
 #endif
+            noAdsButton.gameObject.SetActive(!adManager.subscribedNoAds);
         }
     }
 
@@ -71,7 +87,7 @@ public class PremiumStoreManager : MonoBehaviour
                 button.Text = GetValueFromID(button.iapButton.productId);
             }
         }
-
+        
         #region Earn Offline Time
         earnOffline_Title.text = $"Instant money equal to {TimeSpan.FromSeconds(rewardedOfflineTime_Seconds).TotalHours}h of offline gain";
 
@@ -89,6 +105,27 @@ public class PremiumStoreManager : MonoBehaviour
         };
 
         resourcesManager.onAfkGainChange += (gainPerSec) => { earnOffline_Display.text = NumberFormatter.Format(gainPerSec*rewardedOfflineTime_Seconds); };
+        #endregion
+
+
+        #region Earn Offline Time 2
+        earnOffline_Title2.text = $"Instant money equal to {TimeSpan.FromSeconds(rewardedOfflineTime_Seconds2).TotalHours}h of offline gain";
+
+        earnOffline_Button2.Init();
+        earnOffline_Button2.SetText($"{costOfEarnOfflineTime2}");
+        earnOffline_Button2.onClick += () => {
+            if (resourcesManager.TryDecreaseCurrency(costOfEarnOfflineTime2, Currency.Premium))
+            {
+                resourcesManager.IncreaseMoneyForOfflineByTime(rewardedOfflineTime_Seconds2);
+            }
+            else
+            {
+                buttons[0].Click();
+            }
+
+        };
+
+        resourcesManager.onAfkGainChange += (gainPerSec) => { earnOffline_Display2.text = NumberFormatter.Format(gainPerSec * rewardedOfflineTime_Seconds2); };
         #endregion
 
         #region Earn Prestige Reward
@@ -110,6 +147,13 @@ public class PremiumStoreManager : MonoBehaviour
 
         StartCoroutine(DisplayPrestigeReward());
         #endregion
+
+
+        Upgrade temp = upgradesModel.upgrades[doubleMoneyUpgrade.Upgrade.GenerateName()];
+        if (temp.currentLevel == temp.maxLevel)
+        {
+            doubleMoneyButton.gameObject.gameObject.gameObject.SetActive(false);
+        }
     }
 
     IEnumerator DisplayPrestigeReward()
@@ -167,6 +211,13 @@ public class PremiumStoreManager : MonoBehaviour
                 break;
             case "liim.noads":
                 adManager.subscribedNoAds = true;
+                noAdsButton.gameObject.SetActive(false);
+                break;
+            case "liim.doublemoney":
+                upgradesModel.upgrades[doubleMoneyUpgrade.Upgrade.GenerateName()].DoUpgrade();
+
+                // vewwy impowtant cowd UwU
+                doubleMoneyButton.gameObject.SetActive(false);
                 break;
             default:
                 Debug.Log(product.definition.id);
