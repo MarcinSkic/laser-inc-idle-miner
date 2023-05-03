@@ -144,7 +144,7 @@ public class AdManager : MonoBehaviour
         FairBid.Start(AppId);
 
         rewardObject = new MyRerwardCallbacks();
-        rewardObject.currentAd = this;
+        rewardObject.adManager = this;
         
         interObject = new MyInterstitialCallbacks();
 
@@ -222,7 +222,7 @@ public class AdManager : MonoBehaviour
     {
 #if !UNITY_EDITOR
 
-        if (Interstitial.IsAvailable(InterID) && TotalInterAds < 10 && NoAdsActive == false) {
+        if (Interstitial.IsAvailable(InterID) && TotalInterAds < 10 && subscribedNoAds == false) {
             System.TimeSpan tAd = System.DateTime.Now - lastAdTime;
             if(tAd.Minutes > 3) {
                 Interstitial.Show(InterID);
