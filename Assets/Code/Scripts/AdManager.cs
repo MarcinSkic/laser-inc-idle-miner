@@ -19,7 +19,7 @@ public class AdManager : MonoBehaviour
 
     public bool BannerDisplayed;
 
-    public bool NoAdsActive;
+    public bool subscribedNoAds = false;
 
     string AppId = "148809";
     string BannerID = "1230284";
@@ -180,15 +180,17 @@ public class AdManager : MonoBehaviour
         TryToShowRewardedAd(true);
     }
 
+    // TODO: From here all the way down code is ABSOLUTELY HORRIBLE, it should connect functions to onRewardCollect action which would be called in reward callbacks or instantly when skip allowed 
     public bool TryToShowRewardedAd(bool argDoubleAfkReward = false, BatRewardType argBatType = BatRewardType.money, int argBatRewardValue = 0)
     {
+
+        if (subscribedNoAds)
+        {
+            return SkipAd("Reward given, skipping ad - subscribed", argDoubleAfkReward, argBatType, argBatRewardValue);
+        }
+
 #if UNITY_EDITOR
-        doubleAfkReward = argDoubleAfkReward;
-        batType = argBatType;
-        batRewardValue = argBatRewardValue;
-        OnRewardComplete();
-        Debug.Log("Reward given, skipping ad - in-editor!");
-        return true;
+        return SkipAd("Reward given, skipping ad - in-editor!", argDoubleAfkReward, argBatType, argBatRewardValue);
 #endif
 
         if (Rewarded.IsAvailable(RewardID))
@@ -204,6 +206,16 @@ public class AdManager : MonoBehaviour
         Debug.Log("204");
         return false;
 
+    }
+
+    private bool SkipAd(string reason, bool argDoubleAfkReward, BatRewardType argBatType, int argBatRewardValue)
+    {
+        doubleAfkReward = argDoubleAfkReward;
+        batType = argBatType;
+        batRewardValue = argBatRewardValue;
+        OnRewardComplete();
+        Debug.Log(reason);
+        return true;
     }
 
     public void TryToShowInterstitial()
@@ -254,7 +266,7 @@ public class AdManager : MonoBehaviour
 public class MyRerwardCallbacks : RewardedListener
 {
 
-    public AdManager currentAd;
+    public AdManager adManager;
 
     public void OnShow(string placementId, ImpressionData impressionData)
     {
@@ -290,7 +302,7 @@ public class MyRerwardCallbacks : RewardedListener
     public void OnCompletion(string placementId, bool userRewarded)
     {
         // Called when a rewarded ad from placement 'placementId' finishes playing. In case the ad is a video, audio play will stop here.
-        currentAd.OnRewardComplete();
+        adManager.OnRewardComplete();
     }
 
     public void OnRequestStart(string placementId)

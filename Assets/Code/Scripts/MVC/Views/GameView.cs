@@ -179,7 +179,7 @@ public class GameView : BaseView
     {
         foreach (var b in windowButtons)
         {
-            if (!b.name.Contains("Setting") && !b.name.Contains("Cheat"))
+            if (!b.name.Contains("Setting") && !b.name.Contains("Cheat") && !b.name.Contains("Premium"))
             {
                 b.Select();
             }        

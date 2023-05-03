@@ -19,7 +19,13 @@ public class ResourcesManager : MonoBehaviour
     public UnityAction<double> onPrestigeCurrencyEarned;
     public UnityAction<double> onMoneyChange;
     public UnityAction<double> onMoneyEarned;
+    public UnityAction<double> onAfkGainChange;
 
+
+    private void Start()
+    {
+        InvokeRepeating(nameof(UpdateLastEarnedMoneyStates), 1f, 1f);
+    }
     private void Update()
     {
         DecreasePowerUpTimeLeft(Time.deltaTime);
@@ -167,10 +173,7 @@ public class ResourcesManager : MonoBehaviour
     }
     #endregion
 
-
-    #region AFK gain test
-
-    void updateLastEarnedMoneyStates()
+    void UpdateLastEarnedMoneyStates()
     {
         int secs = model.secondsForOfflineRewardCalculation;
 
@@ -190,14 +193,9 @@ public class ResourcesManager : MonoBehaviour
             model.maxPerSecOverSecs = model.maxEarnedOverSecs / 5f;
             model.afkGainPerSec = model.maxPerSecOverSecs / model.maxToAfkProportion;
         }
-    }
 
-    private void Start()
-    {
-        InvokeRepeating("updateLastEarnedMoneyStates", 1f, 1f);
+        onAfkGainChange?.Invoke(model.afkGainPerSec);
     }
-
-    #endregion
 
     #region Money
     public double Money
