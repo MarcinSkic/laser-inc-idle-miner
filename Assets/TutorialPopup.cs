@@ -13,6 +13,7 @@ public class TutorialPopup : MonoBehaviour
     public GameObject resizedPanel;
     public RectTransform arrowParent;
     public RectTransform objectForArrowToFollow;
+    public UIButtonController closePopup;
 
     Vector2 arrowDefaultPosition;
     public float currentTime = 0f;

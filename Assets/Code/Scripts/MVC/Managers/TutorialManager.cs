@@ -65,6 +65,8 @@ public class TutorialSection
         foreach(var popup in popups)
         {
             popup.gameObject.SetActive(false);
+            popup.closePopup.Init();
+            popup.closePopup.onClick += Complete;
         }
 
         if (!lateCompletion)
@@ -99,6 +101,8 @@ public class TutorialSection
 
         isCompleted = true;
         ChangePopupsState(false);
+
+        Debug.Log("Completed");
 
         onCompletion?.Invoke();     
     }

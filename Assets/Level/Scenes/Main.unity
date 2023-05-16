@@ -19652,7 +19652,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1450712507234498648, guid: 4737738861777bd4484a4377164e6271, type: 3}
       propertyPath: m_hasFontAssetChanged
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 1450712507333612136, guid: 4737738861777bd4484a4377164e6271, type: 3}
       propertyPath: m_RaycastTarget
