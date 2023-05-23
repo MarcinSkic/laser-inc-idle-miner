@@ -9,9 +9,9 @@ public static class NumberFormatter
     {
         if (SettingsModel.Instance.UseAlternativeNotation)
         {
-            return FormatToEngineering(num);    //Here can be inserted controlling format with settings
+            return FormatToEngineering(num);
         }
-        return naukowa1(num);
+        return naukowa1(num);    //Here can be inserted controlling format with settings
     }
 
     public static string FormatSecondsToReadable(double seconds)
@@ -51,7 +51,43 @@ public static class NumberFormatter
         String rounded = RoundToSignificantDigits(num, 3).ToString();
         if (rounded.Length == 1) { rounded = rounded + ".00"; }
         if (rounded.Length == 3 && rounded.Contains(".")) { rounded = rounded + "0"; }
-        return String.Format("{0}e{1}", rounded, exponent);
+        string suffix = exponent.ToString();
+        switch (suffix)
+        {
+            case "3":
+                suffix = "K";
+                break;
+            case "6":
+                suffix = "M";
+                break;
+            case "9":
+                suffix = "B";
+                break;
+            case "12":
+                suffix = "T";
+                break;
+            case "15":
+                suffix = "Qa";
+                break;
+            case "18":
+                suffix = "Qi";
+                break;
+            case "21":
+                suffix = "Sx";
+                break;
+            case "24":
+                suffix = "Sp";
+                break;
+            case "27":
+                suffix = "Oc";
+                break;
+            case "30":
+                suffix = "N";
+                break;
+            default:
+                return string.Format("{0}e{1}", rounded, suffix);
+        }
+        return string.Format("{0}{1}", rounded, suffix);
     }
 
     private static string naukowa1(double num)
