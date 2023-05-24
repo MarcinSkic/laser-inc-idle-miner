@@ -76,7 +76,8 @@ public class GameView : BaseView
     public UIToggleController playMusic;
     public UIToggleController playSounds;
     public UIButtonController eraseSaveFile;
-
+    public UIButtonController termsOfUse;
+    public UIButtonController privacyPolicy;
 
     [Header("Cheats Tab")]
     public UIToggleController showDebugWindow;
@@ -114,6 +115,12 @@ public class GameView : BaseView
         cheatSpeedUp.Init();
         cheatSlowDown.Init();
         cheatToggleBatsSpawn.Init();
+
+        termsOfUse.Init();
+        termsOfUse.onClick += () => { Application.OpenURL("https://www.apple.com/legal/internet-services/itunes/dev/stdeula/"); };
+
+        privacyPolicy.Init();
+        privacyPolicy.onClick += () => { Application.OpenURL("https://mistybytes.com/privacy-policy/"); };
     }
 
     #region WINDOWS-TABS SYSTEM
