@@ -282,6 +282,7 @@ public class GameController : BaseController<GameView>
             if (adManager.RewardAvailable())
             {
                 view.offlineGetBonusButton.Activate();
+                view.offlineGetBonusButton.GetComponentInChildren<Spinner>().gameObject.SetActive(false);
                 yield break;
             }
             else
