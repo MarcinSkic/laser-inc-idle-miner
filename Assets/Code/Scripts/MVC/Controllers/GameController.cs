@@ -271,9 +271,30 @@ public class GameController : BaseController<GameView>
         }
     }
 
+    IEnumerator TryActivateOfflineGetBonusButton()
+    {
+        while (true)
+        {
+            if (!view.offlineGetBonusButton.enabled)
+            {
+                yield break;
+            }
+            if (adManager.RewardAvailable())
+            {
+                view.offlineGetBonusButton.Activate();
+                yield break;
+            }
+            else
+            {
+                yield return new WaitForSeconds(1);
+            }
+        }
+    }
+
     private void ConnectToViewElements()
     {
         view.InitButtons();
+        view.offlineGetBonusButton.Deactivate();
 
         #region PowerUps
         resourcesManager.onPowerUpTimeIncrease += _ => { view.damagePowerUp.StartTimer(); };
@@ -287,6 +308,7 @@ public class GameController : BaseController<GameView>
         view.offlineGetBonusButton.onClick += delegate {
             adManager.TryShowDoubleOfflineGainAd();
         };
+        StartCoroutine(TryActivateOfflineGetBonusButton());
         #endregion
 
         #region SettingsWindow
