@@ -70,6 +70,7 @@ public class GameView : BaseView
     public Transform prestigeUpgradeBarsParent;
 
     [Header("Settings Tab")]
+    public TMP_InputField username;
     public UIToggleController is60fps;
     public UIToggleController displayFloatingDamage;
     public UIToggleController useAlternativeNotation;
