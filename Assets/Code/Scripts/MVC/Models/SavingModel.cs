@@ -49,6 +49,7 @@ public class PersistentData
     public bool is60fps;
     public bool displayFloatingText;
     public bool useAlternativeNotation;
+    public string username;
     #endregion
 
     #region StatisticsModel

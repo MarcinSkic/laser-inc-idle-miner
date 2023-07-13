@@ -4,6 +4,8 @@
     <package>com.appsflyer:af-android-sdk:6.10.1</package>
     <package>com.appsflyer:unity-wrapper:6.10.1</package>
     <package>com.google.android.gms:play-services-base:18.2.0</package>
+    <package>com.google.android.play:core-common:2.0.0</package>
+    <package>com.google.android.play:review:2.0.0</package>
     <package>com.google.firebase:firebase-analytics:21.2.1</package>
     <package>com.google.firebase:firebase-analytics-unity:10.7.0</package>
     <package>com.google.firebase:firebase-app-unity:10.7.0</package>

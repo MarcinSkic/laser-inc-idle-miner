@@ -271,9 +271,31 @@ public class GameController : BaseController<GameView>
         }
     }
 
+    IEnumerator TryActivateOfflineGetBonusButton()
+    {
+        while (true)
+        {
+            if (!view.offlineGetBonusButton.enabled)
+            {
+                yield break;
+            }
+            if (adManager.RewardAvailable())
+            {
+                view.offlineGetBonusButton.Activate();
+                view.offlineGetBonusButton.GetComponentInChildren<Spinner>().gameObject.SetActive(false);
+                yield break;
+            }
+            else
+            {
+                yield return new WaitForSeconds(1);
+            }
+        }
+    }
+
     private void ConnectToViewElements()
     {
         view.InitButtons();
+        view.offlineGetBonusButton.Deactivate();
 
         #region PowerUps
         resourcesManager.onPowerUpTimeIncrease += _ => { view.damagePowerUp.StartTimer(); };
@@ -287,6 +309,7 @@ public class GameController : BaseController<GameView>
         view.offlineGetBonusButton.onClick += delegate {
             adManager.TryShowDoubleOfflineGainAd();
         };
+        StartCoroutine(TryActivateOfflineGetBonusButton());
         #endregion
 
         #region SettingsWindow
@@ -304,6 +327,9 @@ public class GameController : BaseController<GameView>
 
         view.playSounds.onValueChanged += value => { SettingsModel.Instance.PlaySounds = value; };
         SettingsModel.Instance.PlaySounds = view.playSounds.IsOn;
+
+        view.username.onEndEdit.AddListener(value => { SettingsModel.Instance.Username = value; } );
+        SettingsModel.Instance.Username = view.username.text;
 
         view.eraseSaveFile.onClick += TryEraseSaveFile;
         #endregion
@@ -369,6 +395,7 @@ public class GameController : BaseController<GameView>
         view.useAlternativeNotation.IsOn = SettingsModel.Instance.UseAlternativeNotation;
         view.playMusic.IsOn = SettingsModel.Instance.PlayMusic;
         view.playSounds.IsOn = SettingsModel.Instance.PlaySounds;
+        view.username.text = SettingsModel.Instance.Username;
     }
 
     private void UpdateSettings()

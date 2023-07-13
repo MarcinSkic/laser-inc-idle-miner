@@ -208,14 +208,16 @@ public class PremiumStoreManager : MonoBehaviour
         {
             case var x when x.Contains("liim.crystals"):
                 resourcesManager.IncreasePremiumCurrency(crystalPacksValues[x]);
+                Firebase.Analytics.FirebaseAnalytics.LogEvent($"LI_purchase_{crystalPacksValues[x]}_diamonds");
                 break;
             case "liim.noads":
                 adManager.subscribedNoAds = true;
                 noAdsButton.gameObject.SetActive(false);
-                break;
+                Firebase.Analytics.FirebaseAnalytics.LogEvent("LI_purchase_NoAds");
+                break; 
             case "liim.doublemoney":
                 upgradesModel.upgrades[doubleMoneyUpgrade.Upgrade.GenerateName()].DoUpgrade();
-
+                Firebase.Analytics.FirebaseAnalytics.LogEvent("LI_purchase_DoubleMoney");
                 // vewwy impowtant cowd UwU
                 doubleMoneyButton.gameObject.SetActive(false);
                 break;

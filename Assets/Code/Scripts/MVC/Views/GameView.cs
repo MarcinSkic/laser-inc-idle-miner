@@ -70,13 +70,18 @@ public class GameView : BaseView
     public Transform prestigeUpgradeBarsParent;
 
     [Header("Settings Tab")]
+    public TMP_InputField username;
     public UIToggleController is60fps;
     public UIToggleController displayFloatingDamage;
     public UIToggleController useAlternativeNotation;
     public UIToggleController playMusic;
     public UIToggleController playSounds;
     public UIButtonController eraseSaveFile;
-
+    public UIButtonController rateUs;
+    public UIButtonController facebook;
+    public UIButtonController instagram;
+    public UIButtonController termsOfUse;
+    public UIButtonController privacyPolicy;
 
     [Header("Cheats Tab")]
     public UIToggleController showDebugWindow;
@@ -114,6 +119,21 @@ public class GameView : BaseView
         cheatSpeedUp.Init();
         cheatSlowDown.Init();
         cheatToggleBatsSpawn.Init();
+
+        rateUs.Init();
+        rateUs.onClick += ReviewPopup.Instance.ShowReviewPopup;
+
+        facebook.Init();
+        facebook.onClick += () => { Application.OpenURL("https://www.facebook.com/profile.php?id=100091986607863"); };
+
+        instagram.Init();
+        instagram.onClick += () => { Application.OpenURL("https://www.instagram.com/laserinc.idleminer/?fbclid=IwAR2kcIsm0G-7cLZTtM9f9PJw39UYG6oPGZrcV8E2YBqbUdkyABgHWqdET9w"); };
+
+        termsOfUse.Init();
+        termsOfUse.onClick += () => { Application.OpenURL("https://www.apple.com/legal/internet-services/itunes/dev/stdeula/"); };
+
+        privacyPolicy.Init();
+        privacyPolicy.onClick += () => { Application.OpenURL("https://mistybytes.com/privacy-policy/"); };
     }
 
     #region WINDOWS-TABS SYSTEM
@@ -139,6 +159,7 @@ public class GameView : BaseView
 
     private void SwitchWindow(UIButtonController button, string name)
     {
+        ReviewPopup.Instance.AdvanceReviewPopupCounter();
         if (activeWindow != null && name == activeWindow.name)
         {
             DeselectAllWindowButtons();
