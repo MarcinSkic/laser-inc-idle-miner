@@ -96,7 +96,7 @@ public class SettingsModel : MonoBehaviour
     }
     #endregion
 
-    #region
+    #region UseAlternativeNotation
     [ReadOnly] [SerializeField] private bool useAlternativeNotation;
     public bool UseAlternativeNotation
     {
@@ -128,6 +128,22 @@ public class SettingsModel : MonoBehaviour
     }
     #endregion
 
+    #region Username
+    [ReadOnly] [SerializeField] private string username;
+    public string Username
+    {
+        get
+        {
+            return username;
+        }
+        set
+        {
+            username = value;
+            onSettingsChange?.Invoke();
+        }
+    }
+    #endregion
+
     [Header("Debug informations")]
     [ReadOnly] public int ballsAttemptedCorrections = 0;
     [ReadOnly] public int ballsAppliedCorrections = 0;
@@ -146,6 +162,7 @@ public class SettingsModel : MonoBehaviour
         data.is60fps = Is60fps;
         data.displayFloatingText = DisplayFloatingText;
         data.useAlternativeNotation = UseAlternativeNotation;
+        data.username = Username;
     }
 
     public void LoadPersistentData(PersistentData data)
@@ -155,6 +172,7 @@ public class SettingsModel : MonoBehaviour
         Is60fps = data?.is60fps ?? true;
         DisplayFloatingText = data?.displayFloatingText ?? false;
         UseAlternativeNotation = data?.useAlternativeNotation ?? false;
+        Username = data?.username ?? "Brian";
     }
 
     [ContextMenu("ERASE Save File")]
