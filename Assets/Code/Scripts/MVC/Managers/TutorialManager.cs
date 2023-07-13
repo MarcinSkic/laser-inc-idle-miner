@@ -30,6 +30,7 @@ public class TutorialManager : MonoBehaviour
         if(currentSection >= sections.Length)
         {
             finishedTutorial = true;
+            Firebase.Analytics.FirebaseAnalytics.LogEvent("LI_tutorial_Finished");
             return;
         }
 
@@ -101,8 +102,6 @@ public class TutorialSection
 
         isCompleted = true;
         ChangePopupsState(false);
-
-        Debug.Log("Completed");
 
         onCompletion?.Invoke();     
     }

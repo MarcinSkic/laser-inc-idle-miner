@@ -29,7 +29,7 @@ public class BallsModel : MonoBehaviour
             ballsData.Add(ballData.type, ballData);
 
             UpgradeableData<int> ballCount = new (0);
-            ballCount.onValueChange += v => { Debug.Log($"Count changed for {ballData.type} = {v}"); };
+            //ballCount.onValueChange += v => { Debug.Log($"Count changed for {ballData.type} = {v}"); };
             ballsCount.Add(ballData.type, ballCount);
         }
     }
