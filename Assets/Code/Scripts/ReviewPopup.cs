@@ -10,7 +10,7 @@ public class ReviewPopup : MonoBehaviour
     [SerializeField] private int maxCountToDisplayReviewPopup = 5;
     [SerializeField] private int currentCountToDisplayReviewPopup = 0;
 
-    void Start()
+    void Awake()
     {
         Load();
         if (Instance == null)
