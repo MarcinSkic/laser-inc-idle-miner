@@ -228,6 +228,26 @@ public class PremiumStoreManager : MonoBehaviour
         onPremiumBuy?.Invoke();
     }
 
+    public void OnPurchaseRestoration(bool result,string message)
+    {
+        if (result)
+        {
+#if !UNITY_EDITOR
+            CheckNoAdSub();
+#endif
+            var products = CodelessIAPStoreListener.Instance?.StoreController?.products;
+            var doubleMoney = products.WithID("liim.doublemoney");
+            if (doubleMoney.appleProductIsRestored)
+            {
+                OnPremiumBuy(doubleMoney);
+            }
+        } 
+        else
+        {
+            Debug.LogError($"Purchase restoration failed: {message}");
+        }
+    }
+
     public void OnPremiumFailed(Product product, PurchaseFailureReason reason)
     {
 

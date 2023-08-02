@@ -82,6 +82,7 @@ public class GameView : BaseView
     public UIButtonController instagram;
     public UIButtonController termsOfUse;
     public UIButtonController privacyPolicy;
+    public UIButtonController restorePurchases;
 
     [Header("Cheats Tab")]
     public UIToggleController showDebugWindow;
@@ -134,6 +135,13 @@ public class GameView : BaseView
 
         privacyPolicy.Init();
         privacyPolicy.onClick += () => { Application.OpenURL("https://mistybytes.com/privacy-policy/"); };
+
+#if UNITY_ANDROID
+        restorePurchases.gameObject.SetActive(false);
+#else
+        restorePurchases.gameObject.SetActive(true);
+        restorePurchases.Init();
+#endif
     }
 
     #region WINDOWS-TABS SYSTEM
@@ -223,7 +231,7 @@ public class GameView : BaseView
         }
     }
 
-    #endregion
+#endregion
     public void CreateBallBar(BallData ballData)
     {
         var ballBar = Instantiate(ballBarPrefab, ballBarsParent);
