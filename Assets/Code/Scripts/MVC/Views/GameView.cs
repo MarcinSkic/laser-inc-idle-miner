@@ -121,9 +121,6 @@ public class GameView : BaseView
         cheatSlowDown.Init();
         cheatToggleBatsSpawn.Init();
 
-        rateUs.Init();
-        rateUs.onClick += ReviewPopup.Instance.ShowReviewPopup;
-
         facebook.Init();
         facebook.onClick += () => { Application.OpenURL("https://www.facebook.com/profile.php?id=100091986607863"); };
 
@@ -137,6 +134,14 @@ public class GameView : BaseView
         privacyPolicy.onClick += () => { Application.OpenURL("https://mistybytes.com/privacy-policy/"); };
 
 #if UNITY_ANDROID
+        rateUs.gameObject.SetActive(true);
+        rateUs.Init();
+        rateUs.onClick += ReviewPopup.Instance.ShowReviewPopup;
+#else
+        rateUs.gameObject.SetActive(false);
+#endif
+
+#if UNITY_ANDROID
         restorePurchases.gameObject.SetActive(false);
 #else
         restorePurchases.gameObject.SetActive(true);
@@ -144,7 +149,7 @@ public class GameView : BaseView
 #endif
     }
 
-    #region WINDOWS-TABS SYSTEM
+#region WINDOWS-TABS SYSTEM
     private UIWindow activeWindow = null;
 
     public void InitWindows()
@@ -167,7 +172,9 @@ public class GameView : BaseView
 
     private void SwitchWindow(UIButtonController button, string name)
     {
+#if UNITY_ANDROID
         ReviewPopup.Instance.AdvanceReviewPopupCounter();
+#endif
         if (activeWindow != null && name == activeWindow.name)
         {
             DeselectAllWindowButtons();
