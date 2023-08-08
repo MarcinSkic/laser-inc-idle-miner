@@ -90,6 +90,12 @@ public class RequirementsManager : MonoBehaviour
             case DependsOn.UpgradeLevel:
                 upgradesModel.upgrades[requirement.upgradeScriptable.Upgrade.GenerateName()].doUpgrade += requirement.CheckUpgradeLevel;
                 break;
+            case DependsOn.CaughtBats:
+                StatisticsModel.Instance.onCaughtBatsChange += requirement.CheckIfFulfilled;
+                break;
+            case DependsOn.AchievementsCount:
+                StatisticsModel.Instance.onAchievementsCountChange += requirement.CheckIfFulfilled;
+                break;
         }
     }
 
@@ -157,6 +163,12 @@ public class RequirementsManager : MonoBehaviour
             case DependsOn.UpgradeLevel:
                 upgradesModel.upgrades[requirement.upgradeScriptable.Upgrade.GenerateName()].doUpgrade -= requirement.CheckUpgradeLevel;
                 break;
+            case DependsOn.CaughtBats:
+                StatisticsModel.Instance.onCaughtBatsChange -= requirement.CheckIfFulfilled;
+                break;
+            case DependsOn.AchievementsCount:
+                StatisticsModel.Instance.onAchievementsCountChange -= requirement.CheckIfFulfilled;
+                break;
         }
     }
 }
@@ -183,6 +195,8 @@ public enum DependsOn
     MinedCoalBlocks,
     MinedRubyBlocks,
     MinedSapphireBlocks,
+    CaughtBats,
+    AchievementsCount,
 }
 public enum Comparison
 {

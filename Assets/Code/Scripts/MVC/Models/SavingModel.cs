@@ -62,6 +62,7 @@ public class PersistentData
     public int minedRubyBlocks;
     public int minedDiamondBlocks;
     public int minedUraniumBlocks;
+    public int caughtBats;
     #endregion
 
     #region AchievementsModel

@@ -144,6 +144,7 @@ public class RewardBat : MonoBehaviour
         }
         Debug.Log(debugString);
         AudioManager.Instance.Play("bat_caught");
+        StatisticsModel.Instance.CaughtBats = StatisticsModel.Instance.CaughtBats + 1;
         Destroy(gameObject);
     }
 

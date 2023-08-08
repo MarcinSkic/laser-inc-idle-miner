@@ -166,6 +166,38 @@ public class StatisticsModel : MonoBehaviour
     }
     public UnityAction<double> onMinedUraniumBlocksChange;
     #endregion
+    #region caughtBats
+    [ReadOnly] [SerializeField] private int caughtBats;
+    public int CaughtBats
+    {
+        get
+        {
+            return caughtBats;
+        }
+        set
+        {
+            caughtBats = value;
+            onCaughtBatsChange?.Invoke(value);
+        }
+    }
+    public UnityAction<double> onCaughtBatsChange;
+    #endregion
+    #region achievementsCount
+    [ReadOnly] [SerializeField] private int achievementsCount;
+    public int AchievementsCount
+    {
+        get
+        {
+            return achievementsCount;
+        }
+        set
+        {
+            achievementsCount = value;
+            onAchievementsCountChange?.Invoke(value);
+        }
+    }
+    public UnityAction<double> onAchievementsCountChange;
+    #endregion
 
     public void SavePersistentData(PersistentData data)
     {
@@ -178,6 +210,7 @@ public class StatisticsModel : MonoBehaviour
         data.minedRubyBlocks = MinedRubyBlocks;
         data.minedDiamondBlocks = MinedDiamondBlocks;
         data.minedUraniumBlocks = MinedUraniumBlocks;
+        data.caughtBats = CaughtBats;
     }
 
     public void LoadPersistentData(PersistentData data)
@@ -191,5 +224,6 @@ public class StatisticsModel : MonoBehaviour
         MinedRubyBlocks = (int)(data?.minedRubyBlocks);
         MinedDiamondBlocks = (int)(data?.minedDiamondBlocks);
         MinedUraniumBlocks = (int)(data?.minedUraniumBlocks);
+        CaughtBats = (int)(data?.caughtBats);
     }
 }
