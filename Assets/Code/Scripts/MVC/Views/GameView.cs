@@ -25,9 +25,6 @@ public class GameView : BaseView
 
     [Header("Tabs Switching")]
     [SerializeField] private List<GameObject> tabButtonsContainers;
-    [SerializeField] private List<UIButtonWithStringController> legacyWindowButtons;
-    [SerializeField] private List<GameObject> legacyWindows;
-
     [SerializeField] private UIWindow[] windows;
     [SerializeField] private UIButtonWithStringController[] windowButtons;
     public GameObject cheatWindowButton;
@@ -215,7 +212,7 @@ public class GameView : BaseView
     {
         foreach (var b in windowButtons)
         {
-            if (!b.name.Contains("Setting") && !b.name.Contains("Cheat") && !b.name.Contains("Premium"))
+            if (!b.name.Contains("Setting") && !b.name.Contains("Cheat") && !b.name.Contains("Premium") && !b.name.Contains("Display"))
             {
                 b.Select();
             }        
