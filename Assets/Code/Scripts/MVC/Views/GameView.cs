@@ -125,7 +125,7 @@ public class GameView : BaseView
         instagram.onClick += () => { Application.OpenURL("https://www.instagram.com/laserinc.idleminer/?fbclid=IwAR2kcIsm0G-7cLZTtM9f9PJw39UYG6oPGZrcV8E2YBqbUdkyABgHWqdET9w"); };
 
         termsOfUse.Init();
-        termsOfUse.onClick += () => { Application.OpenURL("https://www.apple.com/legal/internet-services/itunes/dev/stdeula/"); };
+        termsOfUse.onClick += () => { Application.OpenURL("https://mistybytes.com/terms-of-service/"); };
 
         privacyPolicy.Init();
         privacyPolicy.onClick += () => { Application.OpenURL("https://mistybytes.com/privacy-policy/"); };
