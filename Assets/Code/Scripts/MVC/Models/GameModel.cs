@@ -27,7 +27,10 @@ public class GameModel : MonoBehaviour
 
     public float heightOfBottomBar;
     public Transform bottomBorder;
-    
+    [Tooltip("Equals to bats per ~166s with current (2023/08/18) settings")]
+    public int batsPer10000FixedUpdates = 1;
+    public bool batFrenzyActive = false;
+
 
     private void OnValidate()
     {
