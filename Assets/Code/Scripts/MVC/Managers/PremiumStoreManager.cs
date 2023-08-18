@@ -27,7 +27,7 @@ public class PremiumStoreManager : MonoBehaviour
     [SerializeField] float costOfBatFrenzy = 100;
     [Tooltip("Equals to bats per ~166s with current (2023/08/18) settings")]
     [SerializeField] [Range(1, 1000)] int batsPer10000FixedUpdatesInFrenzy = 100;
-    [SerializeField] float durationOfBatFrenzy_Seconds = 20;
+    [SerializeField] int durationOfBatFrenzy_Seconds = 20;
 
     [Header("Managers and Models")]
     [AutoProperty(AutoPropertyMode.Scene)] [SerializeField] private SavingManager savingManager;
@@ -57,8 +57,12 @@ public class PremiumStoreManager : MonoBehaviour
     [SerializeField] private Button noAdsButton;
     [SerializeField] List<UIPremiumElement> buttons;
 
+    [SerializeField] private UIPowerUp batFrenzyTimer;
+
     [Header("Other")]
     Dictionary<string, double> crystalPacksValues;
+    int standardBatSpawnRate = 0;
+    Coroutine batFrenzy = null;
     float subTimer = 1;
 
     private void Update()
@@ -76,6 +80,8 @@ public class PremiumStoreManager : MonoBehaviour
 
     public void Setup()
     {
+        standardBatSpawnRate = gameModel.batsPer10000FixedUpdates;
+
         foreach (UpgradeableObjects ballType in Enum.GetValues(typeof(UpgradeableObjects)))
         {
             if(ballType >= UpgradeableObjects.BasicBall && ballType < UpgradeableObjects.AllBalls)
@@ -171,7 +177,14 @@ public class PremiumStoreManager : MonoBehaviour
         doBatFrenzy_Button.SetText($"{costOfBatFrenzy}");
         doBatFrenzy_Button.onClick += () =>
         {
-            StartCoroutine(BatFrenzy());
+            Debug.Log("Stopping coroutine");
+            if(batFrenzy != null)
+            {
+                StopCoroutine(batFrenzy);
+            }
+            
+            Debug.Log("Starting coroutine");
+            batFrenzy = StartCoroutine(BatFrenzy());
         };
         #endregion
 
@@ -195,12 +208,19 @@ public class PremiumStoreManager : MonoBehaviour
 
     IEnumerator BatFrenzy()
     {
-        var previousValue = gameModel.batsPer10000FixedUpdates;
 
         gameModel.batFrenzyActive = true;
         gameModel.batsPer10000FixedUpdates = batsPer10000FixedUpdatesInFrenzy;
-        yield return new WaitForSeconds(durationOfBatFrenzy_Seconds);
-        gameModel.batsPer10000FixedUpdates = previousValue;
+
+        for(var i = durationOfBatFrenzy_Seconds; i >= 0; i--)
+        {
+            yield return new WaitForSeconds(1);
+            Debug.Log($"Left {i}");
+            batFrenzyTimer.SetValueDirectly(string.Format($"00:{i:D2}"));
+        }
+
+        batFrenzyTimer.DisableDirectly();
+        gameModel.batsPer10000FixedUpdates = standardBatSpawnRate;
         gameModel.batFrenzyActive = false;
     }
 
