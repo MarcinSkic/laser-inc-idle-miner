@@ -3140,8 +3140,8 @@ MonoBehaviour:
   costOfEarnPrestigeReward: 200
   percentageOfPrestigeReward: 0.5
   costOfBatFrenzy: 100
-  batsPer10000FixedUpdatesInFrenzy: 200
-  durationOfBatFrenzy_Seconds: 20
+  batsPer10000FixedUpdatesInFrenzy: 400
+  durationOfBatFrenzy_Seconds: 10
   savingManager: {fileID: 567613855}
   resourcesManager: {fileID: 567613852}
   adManager: {fileID: 2062366017}
@@ -10086,7 +10086,7 @@ RectTransform:
   - {fileID: 1844267156}
   - {fileID: 781013133}
   m_Father: {fileID: 1963206590}
-  m_RootOrder: 3
+  m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 0, y: 0}
@@ -26249,7 +26249,7 @@ RectTransform:
   - {fileID: 1423466372}
   - {fileID: 2113280851}
   m_Father: {fileID: 1963206590}
-  m_RootOrder: 2
+  m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 0, y: 0}
@@ -30338,8 +30338,8 @@ RectTransform:
   m_Children:
   - {fileID: 8477277238930550811}
   - {fileID: 1843224544}
-  - {fileID: 1695756783}
   - {fileID: 585120913}
+  - {fileID: 1695756783}
   - {fileID: 936631123}
   - {fileID: 622476608}
   - {fileID: 1949473864}

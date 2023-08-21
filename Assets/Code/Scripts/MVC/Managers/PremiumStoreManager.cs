@@ -163,7 +163,13 @@ public class PremiumStoreManager : MonoBehaviour
             }
             else
             {
-                buttons[0].Click();
+                if (costOfEarnPrestigeReward - resourcesManager.PremiumCurrency > 100)
+                {
+                    buttons[1].Click();
+                } else
+                {
+                    buttons[0].Click();
+                }
             }
         };
 
