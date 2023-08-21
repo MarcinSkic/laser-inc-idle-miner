@@ -23,12 +23,18 @@ public class PremiumStoreManager : MonoBehaviour
     [Space(10)]
     [SerializeField] float costOfEarnPrestigeReward = 50;
     [SerializeField] [Range(0f, 1f)] float percentageOfPrestigeReward = 0.5f;
+    
+    [SerializeField] float costOfBatFrenzy = 100;
+    [Tooltip("Equals to bats per ~166s with current (2023/08/18) settings")]
+    [SerializeField] [Range(1, 1000)] int batsPer10000FixedUpdatesInFrenzy = 100;
+    [SerializeField] int durationOfBatFrenzy_Seconds = 20;
 
     [Header("Managers and Models")]
     [AutoProperty(AutoPropertyMode.Scene)] [SerializeField] private SavingManager savingManager;
     [AutoProperty(AutoPropertyMode.Scene)] [SerializeField] private ResourcesManager resourcesManager;
     [AutoProperty(AutoPropertyMode.Scene)] [SerializeField] private AdManager adManager;
     [AutoProperty(AutoPropertyMode.Scene)] [SerializeField] private UpgradesModel upgradesModel;
+    [AutoProperty(AutoPropertyMode.Scene)] [SerializeField] private GameModel gameModel;
 
     [Header("UI")]
     [SerializeField] private TMP_Text earnOffline_Title;
@@ -39,17 +45,24 @@ public class PremiumStoreManager : MonoBehaviour
     [SerializeField] private UIButtonController earnOffline_Button2;
     [SerializeField] private TMP_Text earnOffline_Display2;
 
-    [SerializeField] private Button doubleMoneyButton;
-    [SerializeField] private Button noAdsButton;
-
-    [Space(10)]
     [SerializeField] private TMP_Text earnPrestige_Title;
     [SerializeField] private UIButtonController earnPrestige_Button;
     [SerializeField] private TMP_Text earnPrestige_Display;
+
+    [SerializeField] private TMP_Text doBatFrenzy_Title;
+    [SerializeField] private UIButtonController doBatFrenzy_Button;
+
+    [Space(10)]
+    [SerializeField] private Button doubleMoneyButton;
+    [SerializeField] private Button noAdsButton;
     [SerializeField] List<UIPremiumElement> buttons;
+
+    [SerializeField] private UIPowerUp batFrenzyTimer;
 
     [Header("Other")]
     Dictionary<string, double> crystalPacksValues;
+    int standardBatSpawnRate = 0;
+    Coroutine batFrenzy = null;
     float subTimer = 1;
 
     private void Update()
@@ -67,6 +80,16 @@ public class PremiumStoreManager : MonoBehaviour
 
     public void Setup()
     {
+        standardBatSpawnRate = gameModel.batsPer10000FixedUpdates;
+
+        foreach (UpgradeableObjects ballType in Enum.GetValues(typeof(UpgradeableObjects)))
+        {
+            if(ballType >= UpgradeableObjects.BasicBall && ballType < UpgradeableObjects.AllBalls)
+            {
+                Debug.Log(ballType);
+            }
+            
+        }
         crystalPacksValues = new Dictionary<string, double>
         {
             {"liim.crystals1",100 },
@@ -106,7 +129,6 @@ public class PremiumStoreManager : MonoBehaviour
 
         resourcesManager.onAfkGainChange += (gainPerSec) => { earnOffline_Display.text = NumberFormatter.Format(gainPerSec*rewardedOfflineTime_Seconds); };
         #endregion
-
 
         #region Earn Offline Time 2
         earnOffline_Title2.text = $"Instant money equal to {TimeSpan.FromSeconds(rewardedOfflineTime_Seconds2).TotalHours}h of offline gain";
@@ -148,6 +170,30 @@ public class PremiumStoreManager : MonoBehaviour
         StartCoroutine(DisplayPrestigeReward());
         #endregion
 
+        #region Bats Frenzy
+        doBatFrenzy_Title.text = $"Awake bat frenzy for {durationOfBatFrenzy_Seconds} seconds";
+
+        doBatFrenzy_Button.Init();
+        doBatFrenzy_Button.SetText($"{costOfBatFrenzy}");
+        doBatFrenzy_Button.onClick += () =>
+        {
+            if (resourcesManager.TryDecreaseCurrency(costOfBatFrenzy, Currency.Premium))
+            {
+                if (batFrenzy != null)
+                {
+                    StopCoroutine(batFrenzy);
+                }
+
+                batFrenzy = StartCoroutine(BatFrenzy());
+            }
+            else
+            {
+                buttons[0].Click();
+            }
+            
+        };
+        #endregion
+
 
         Upgrade temp = upgradesModel.upgrades[doubleMoneyUpgrade.Upgrade.GenerateName()];
         if (temp.currentLevel == temp.maxLevel)
@@ -164,6 +210,24 @@ public class PremiumStoreManager : MonoBehaviour
             yield return new WaitForSeconds(1);
         }
         
+    }
+
+    IEnumerator BatFrenzy()
+    {
+
+        gameModel.batFrenzyActive = true;
+        gameModel.batsPer10000FixedUpdates = batsPer10000FixedUpdatesInFrenzy;
+
+        for(var i = durationOfBatFrenzy_Seconds; i >= 0; i--)
+        {
+            yield return new WaitForSeconds(1);
+            Debug.Log($"Left {i}");
+            batFrenzyTimer.SetValueDirectly(string.Format($"00:{i:D2}"));
+        }
+
+        batFrenzyTimer.DisableDirectly();
+        gameModel.batsPer10000FixedUpdates = standardBatSpawnRate;
+        gameModel.batFrenzyActive = false;
     }
 
     private string GetValueFromID(string id)

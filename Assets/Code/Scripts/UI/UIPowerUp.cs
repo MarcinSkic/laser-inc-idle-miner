@@ -37,4 +37,16 @@ public class UIPowerUp : MonoBehaviour
 
         gameObject.SetActive(false);
     }
+
+    public void SetValueDirectly(string value)
+    {
+        gameObject.SetActive(true);
+
+        text.text = value;
+    }
+
+    public void DisableDirectly()
+    {
+        gameObject.SetActive(false);
+    }
 }

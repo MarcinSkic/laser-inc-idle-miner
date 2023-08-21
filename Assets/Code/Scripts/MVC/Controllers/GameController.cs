@@ -39,7 +39,6 @@ public class GameController : BaseController<GameView>
     [Header("Bats!")]
     [SerializeField] RewardBat rewardBat;
     [SerializeField] Transform batParent;
-    [SerializeField] int batsPer10000FixedUpdates;
 
     [Header("ProgressionDebug")]
     [SerializeField] float previousMoneyProgressionDebugTime = 0;
@@ -161,15 +160,14 @@ public class GameController : BaseController<GameView>
 
     private void FixedUpdate()
     {
-        SpawnBatOrNot();
+        TrySpawnBat();
     }
-    private void SpawnBatOrNot()
+    private void TrySpawnBat()
     {
-        if (settingsModel.spawnBats && UnityEngine.Random.Range(0, 10000) < batsPer10000FixedUpdates)
+        if (settingsModel.spawnBats && UnityEngine.Random.Range(0, 10000) < gameModel.batsPer10000FixedUpdates)
         {
             RewardBat newBat = Instantiate(rewardBat, batParent);
-            newBat.resourcesManager = resourcesManager;
-            newBat.adManager = adManager;
+            newBat.Init(resourcesManager,adManager, !gameModel.batFrenzyActive);
         }
     }
 
