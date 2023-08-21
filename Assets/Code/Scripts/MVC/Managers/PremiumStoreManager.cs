@@ -177,14 +177,20 @@ public class PremiumStoreManager : MonoBehaviour
         doBatFrenzy_Button.SetText($"{costOfBatFrenzy}");
         doBatFrenzy_Button.onClick += () =>
         {
-            Debug.Log("Stopping coroutine");
-            if(batFrenzy != null)
+            if (resourcesManager.TryDecreaseCurrency(costOfBatFrenzy, Currency.Premium))
             {
-                StopCoroutine(batFrenzy);
+                if (batFrenzy != null)
+                {
+                    StopCoroutine(batFrenzy);
+                }
+
+                batFrenzy = StartCoroutine(BatFrenzy());
+            }
+            else
+            {
+                buttons[0].Click();
             }
             
-            Debug.Log("Starting coroutine");
-            batFrenzy = StartCoroutine(BatFrenzy());
         };
         #endregion
 
