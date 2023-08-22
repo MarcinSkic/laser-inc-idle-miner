@@ -41,6 +41,9 @@ public class ResourcesModel : MonoBehaviour
     [Tooltip("Total of money earned")]
     public double earnedMoney = 0;
     [ReadOnly]
+    [Tooltip("Total of money earned, including over prestiges")]
+    public double undecreasableEarnedMoney = 0;
+    [ReadOnly]
     [Tooltip("Calculated reward for last offline time")]
     public double offlineMoney = 0;
     [ReadOnly]

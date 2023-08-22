@@ -17,6 +17,7 @@ public class PersistentData
     #region ResourceModel
     public double money;
     public double earnedMoney;
+    public double undecreasableEarnedMoney;
     public double offlineEarnedMoney;
     public double afkGainPerSec;
     public List<double> lastOnlineEarnedMoneyStates;

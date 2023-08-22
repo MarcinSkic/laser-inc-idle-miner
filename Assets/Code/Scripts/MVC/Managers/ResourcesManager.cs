@@ -20,6 +20,8 @@ public class ResourcesManager : MonoBehaviour
     public UnityAction<double> onMoneyChange;
     public UnityAction<double> onMoneyEarned;
     public UnityAction<double> onAfkGainChange;
+    public PanelParentParent panelParentParent;
+    public float panelCountBonus = 0.01f;
 
 
     private void Start()
@@ -151,7 +153,7 @@ public class ResourcesManager : MonoBehaviour
             //return model.prestigeCurrencyForNextPrestige;
             if (gameModel.Depth >= 500f)
             {
-                return Math.Pow(2f, (gameModel.Depth/500f));
+                return (1.0f+panelParentParent.panelsCount*panelCountBonus)*Math.Pow(2f, (gameModel.Depth/500f));
             }
             return 0f;
         }
@@ -224,6 +226,18 @@ public class ResourcesManager : MonoBehaviour
         }
     }
 
+    public double UndecreasableEarnedMoney
+    {
+        get
+        {
+            return model.undecreasableEarnedMoney;
+        }
+        set
+        {
+            model.undecreasableEarnedMoney = value;
+        }
+    }
+
     public void IncreaseMoney(double value, bool forBreakingBlocks = false)
     {
         if (value < 1)
@@ -238,6 +252,7 @@ public class ResourcesManager : MonoBehaviour
 
         Money += value;
         EarnedMoney += value;
+        UndecreasableEarnedMoney += value;
     }
 
     public void CheatMoney()
@@ -327,6 +342,7 @@ public class ResourcesManager : MonoBehaviour
     {
         data.money = Money;
         data.earnedMoney = model.earnedMoney;
+        data.undecreasableEarnedMoney = model.undecreasableEarnedMoney;
         data.offlineEarnedMoney = model.offlineEarnedMoney;
         data.afkGainPerSec = model.afkGainPerSec;
         data.lastOnlineEarnedMoneyStates = model.lastOnlineEarnedMoneyStates;
@@ -345,12 +361,14 @@ public class ResourcesManager : MonoBehaviour
     {
         data.prestigeCurrency = PrestigeCurrency;
         data.earnedPrestigeCurrency = model.earnedPrestigeCurrency;
+        data.undecreasableEarnedMoney = model.undecreasableEarnedMoney;
     }
 
     public void LoadPersistentData(PersistentData data)
     {
         Money = data?.money ?? model.startMoney;
         EarnedMoney = data?.earnedMoney ?? 0;
+        UndecreasableEarnedMoney = data?.undecreasableEarnedMoney ?? 0;
         model.offlineEarnedMoney = data?.offlineEarnedMoney ?? 0;
         model.afkGainPerSec = data?.afkGainPerSec ?? 0;
         model.lastOnlineEarnedMoneyStates = data?.lastOnlineEarnedMoneyStates ?? new List<double>();
