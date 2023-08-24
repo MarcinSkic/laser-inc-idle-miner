@@ -44,6 +44,7 @@ public class GameController : BaseController<GameView>
     [SerializeField] GameObject[] cavernCameras;
     [SerializeField] GameObject dysonCamera;
     [SerializeField] Worlds currentWorld = Worlds.Cavern;
+    [SerializeField] bool visitedDyson = false;
 
     [Header("ProgressionDebug")]
     [SerializeField] float previousMoneyProgressionDebugTime = 0;
@@ -105,6 +106,7 @@ public class GameController : BaseController<GameView>
         CreateAchievementsWindow();
         ConnectToUpgradesEvents();
         UpdateSettingsViewBySavedData();
+        ConfigureDysonSwarm();
         achievementManager.SetupAchievements();
         upgradesManager.SetupUpgrades();  //Order important #beforeUI
         SetupBallBars();    //Order important #UI
@@ -202,12 +204,14 @@ public class GameController : BaseController<GameView>
 
     private void SwitchWorld(UIButtonController button, string parameter)
     {
-        if(currentWorld != Worlds.Cavern)
+        var switchingToCaverns = currentWorld != Worlds.Cavern;
+        if (switchingToCaverns)
         {
             currentWorld = Worlds.Cavern;
             dysonCamera.SetActive(false);   // if more worlds then change it to dictionary or something
             cavernCameras.ForEach((c) => { c.SetActive(true); });
             view.depthMeter.gameObject.SetActive(true);
+            view.dysonSwarmStory.Hide();
 
             FloatingTextSpawner.Instance.disableSpawning = false;
 
@@ -227,6 +231,13 @@ public class GameController : BaseController<GameView>
             switch (parameter)
             {
                 case "dyson":
+                    var atLeastOnePrestige = resourcesManager.ExecutedPrestigesCount != 0;
+                    if (atLeastOnePrestige && !visitedDyson)
+                    {
+                        view.dysonSwarmStory.Show();
+                    }
+                    
+                    visitedDyson = true;
                     dysonCamera.SetActive(true);
                     currentWorld = Worlds.DysonSwarm;
                     break;
@@ -289,6 +300,38 @@ public class GameController : BaseController<GameView>
     {
         premiumStoreManager.Setup();
         premiumStoreManager.onPremiumBuy += SavePersistentData;
+    }
+
+    private void ConfigureDysonSwarm()
+    {
+        var atLeastOnePrestige = resourcesManager.ExecutedPrestigesCount != 0;
+
+        view.dysonSwarmButton.gameObject.SetActive(atLeastOnePrestige);
+
+        if (atLeastOnePrestige && !visitedDyson)
+        {
+            view.flashingDysonSwarmButtonCoroutine = StartCoroutine(FlashingDysonSwarmButton());
+
+            view.dysonSwarmButton.onClick += StopFlashingOfDysonSwarm;
+        }
+    }
+
+    private IEnumerator FlashingDysonSwarmButton()
+    {
+        while (true)
+        {
+            yield return new WaitForSeconds(0.5f);
+            view.dysonSwarmButton.Select();
+            yield return new WaitForSeconds(0.5f);
+            view.dysonSwarmButton.Deselect();
+        }
+    }
+
+    private void StopFlashingOfDysonSwarm(UIButtonController button, string _)
+    {
+        StopCoroutine(view.flashingDysonSwarmButtonCoroutine);
+        view.dysonSwarmButton.onClick -= StopFlashingOfDysonSwarm;
+        view.dysonSwarmButton.Select();
     }
 
     public void HandleDoubleOfflineReward()
@@ -671,6 +714,7 @@ public class GameController : BaseController<GameView>
         resourcesManager.SavePersistentData(persistentData);
         StatisticsModel.Instance.SavePersistentData(persistentData);
         persistentData.depth = model.Depth;
+        persistentData.visitedDyson = visitedDyson;
         upgradesManager.SavePersistentData(persistentData);
         blocksManager.SavePersistentData(persistentData);
         tutorialManager.SavePersistentData(persistentData);
@@ -698,8 +742,9 @@ public class GameController : BaseController<GameView>
         StatisticsModel.Instance.LoadPersistentData(persistentData);
         tutorialManager.LoadPersistentData(persistentData);
         model.Depth = persistentData.depth;
+        visitedDyson = persistentData?.visitedDyson ?? false;
         #endregion
-        
+
         #region OrderImportant
         blocksManager.LoadPersistentData(persistentData);
         upgradesManager.LoadPersistentData(persistentData);
@@ -732,11 +777,14 @@ public class GameController : BaseController<GameView>
 
     private void ExecutePrestige()
     {
+        resourcesManager.IncreasePrestigeCurrency(resourcesManager.PrestigeCurrencyForNextPrestige);
+        resourcesManager.ExecutedPrestigesCount += 1;
+
         PersistentData persistentData = new();
 
+        persistentData.visitedDyson = visitedDyson;
         SettingsModel.Instance.SavePersistentData(persistentData);
-        achievementManager.SavePersistentData(persistentData);
-        resourcesManager.IncreasePrestigeCurrency(resourcesManager.PrestigeCurrencyForNextPrestige);
+        achievementManager.SavePersistentData(persistentData);  
         resourcesManager.SavePrestigePersistentData(persistentData);
         upgradesManager.SavePrestigePersistentData(persistentData);
         tutorialManager.SavePersistentData(persistentData);

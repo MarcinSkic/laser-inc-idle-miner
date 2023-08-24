@@ -199,6 +199,7 @@ public class StatisticsModel : MonoBehaviour
     public UnityAction<double> onAchievementsCountChange;
     #endregion
 
+
     public void SavePersistentData(PersistentData data)
     {
         data.minedNormalBlocks = MinedNormalBlocks;
@@ -211,6 +212,7 @@ public class StatisticsModel : MonoBehaviour
         data.minedDiamondBlocks = MinedDiamondBlocks;
         data.minedUraniumBlocks = MinedUraniumBlocks;
         data.caughtBats = CaughtBats;
+        
     }
 
     public void LoadPersistentData(PersistentData data)
@@ -226,6 +228,6 @@ public class StatisticsModel : MonoBehaviour
         MinedUraniumBlocks = (int)(data?.minedUraniumBlocks);
         CaughtBats = (int)(data?.caughtBats);
         AchievementsCount = data?.unlockedAchievements.Length ?? 0;
-        Debug.Log(AchievementsCount);
+        
     }
 }

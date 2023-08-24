@@ -42,6 +42,7 @@ public class PersistentData
 
     #region GameModel
     public double depth;
+    public bool visitedDyson;
     #endregion
 
     #region SettingsModel
@@ -64,6 +65,7 @@ public class PersistentData
     public int minedDiamondBlocks;
     public int minedUraniumBlocks;
     public int caughtBats;
+    public int executedPrestigesCount;
     #endregion
 
     #region AchievementsModel

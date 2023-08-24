@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Events;
 using System;
+using MyBox;
 
 public class ResourcesManager : MonoBehaviour
 {
@@ -173,6 +174,23 @@ public class ResourcesManager : MonoBehaviour
     {
         return PrestigeCurrency < (PrestigeCurrencyForNextPrestige + PrestigeCurrency) / model.prestigeCurrencyMultiplierWorthThreshold;
     }
+    #endregion
+
+    #region ExecutedPrestigesCount
+    [ReadOnly] [SerializeField] private int executedPrestigesCount;
+    public int ExecutedPrestigesCount
+    {
+        get
+        {
+            return executedPrestigesCount;
+        }
+        set
+        {
+            executedPrestigesCount = value;
+            onExecutedPrestigesCount?.Invoke(value);
+        }
+    }
+    public UnityAction<int> onExecutedPrestigesCount;
     #endregion
 
     void UpdateLastEarnedMoneyStates()
@@ -355,6 +373,8 @@ public class ResourcesManager : MonoBehaviour
 
         data.powerUpTime = model.powerUpTimeLeft;
         data.earnedPowerUpTime = model.earnedPowerUpTime;
+
+        data.executedPrestigesCount = ExecutedPrestigesCount;
     }
 
     public void SavePrestigePersistentData(PersistentData data)
@@ -362,6 +382,7 @@ public class ResourcesManager : MonoBehaviour
         data.prestigeCurrency = PrestigeCurrency;
         data.earnedPrestigeCurrency = model.earnedPrestigeCurrency;
         data.undecreasableEarnedMoney = model.undecreasableEarnedMoney;
+        data.executedPrestigesCount = ExecutedPrestigesCount;
     }
 
     public void LoadPersistentData(PersistentData data)
@@ -380,5 +401,7 @@ public class ResourcesManager : MonoBehaviour
 
         PowerUpTimeLeft = data?.powerUpTime ?? 0;
         EarnedPowerUpTime = data?.earnedPowerUpTime ?? 0;
+
+        ExecutedPrestigesCount = data?.executedPrestigesCount ?? 0;
     }
 }
