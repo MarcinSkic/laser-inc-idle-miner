@@ -225,5 +225,7 @@ public class StatisticsModel : MonoBehaviour
         MinedDiamondBlocks = (int)(data?.minedDiamondBlocks);
         MinedUraniumBlocks = (int)(data?.minedUraniumBlocks);
         CaughtBats = (int)(data?.caughtBats);
+        AchievementsCount = data?.unlockedAchievements.Length ?? 0;
+        Debug.Log(AchievementsCount);
     }
 }

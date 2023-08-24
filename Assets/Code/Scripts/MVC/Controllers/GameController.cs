@@ -221,6 +221,7 @@ public class GameController : BaseController<GameView>
             resourcesManager.Money = resourcesManager.Money;
             resourcesManager.PrestigeCurrency = resourcesManager.PrestigeCurrency;
             resourcesManager.PremiumCurrency = resourcesManager.PremiumCurrency;
+            StatisticsModel.Instance.AchievementsCount = StatisticsModel.Instance.AchievementsCount;
         }; //Welp ¯\_(ツ)_/¯
     }
 

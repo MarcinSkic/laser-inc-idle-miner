@@ -30135,7 +30135,6 @@ MonoBehaviour:
   block_spawning_trigger_minimum_y: -21
   _dynamic_blocks: {fileID: 1235393438}
   floatingTexts: {fileID: 1460261072}
-  _dynamic_balls: {fileID: 0}
   movingBorderTexturesParent: {fileID: 74388550}
   movingBackgrounds:
   - {fileID: 382267505}
