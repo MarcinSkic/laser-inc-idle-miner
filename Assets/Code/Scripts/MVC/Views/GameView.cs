@@ -32,11 +32,17 @@ public class GameView : BaseView
     public Color bottomButton_Default;
     public Color bottomButton_Activated;
 
+    [Header("Worlds Switching")]
+    public UIButtonWithStringController dysonSwarmButton;
+
     [Header("Depth Meter")]
     public UIDepthMeter depthMeter;
 
     [Header("PowerUps")]
     public UIPowerUp damagePowerUp;
+
+    [Header("Floating texts")]
+    public GameObject floatingTextsDisplay;
 
     [Header("Offline popup")]
     public GameObject offlinePopup;
@@ -117,6 +123,8 @@ public class GameView : BaseView
         cheatSpeedUp.Init();
         cheatSlowDown.Init();
         cheatToggleBatsSpawn.Init();
+        dysonSwarmButton.Init();
+        dysonSwarmButton.Deselect();
 
         facebook.Init();
         facebook.onClick += () => { Application.OpenURL("https://www.facebook.com/profile.php?id=100091986607863"); };

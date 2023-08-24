@@ -40,6 +40,11 @@ public class GameController : BaseController<GameView>
     [SerializeField] RewardBat rewardBat;
     [SerializeField] Transform batParent;
 
+    [Header("Dyson swarm")]
+    [SerializeField] GameObject[] cavernCameras;
+    [SerializeField] GameObject dysonCamera;
+    [SerializeField] Worlds currentWorld = Worlds.Cavern;
+
     [Header("ProgressionDebug")]
     [SerializeField] float previousMoneyProgressionDebugTime = 0;
     [SerializeField] double previousEarnedMoney;
@@ -194,6 +199,41 @@ public class GameController : BaseController<GameView>
             SavePersistentData();
         }
     }
+
+    private void SwitchWorld(UIButtonController button, string parameter)
+    {
+        if(currentWorld != Worlds.Cavern)
+        {
+            currentWorld = Worlds.Cavern;
+            dysonCamera.SetActive(false);   // if more worlds then change it to dictionary or something
+            cavernCameras.ForEach((c) => { c.SetActive(true); });
+            view.depthMeter.gameObject.SetActive(true);
+
+            FloatingTextSpawner.Instance.disableSpawning = false;
+
+            button.Deselect();
+            
+        } 
+        else
+        {
+            view.depthMeter.gameObject.SetActive(false);
+            FloatingTextSpawner.Instance.disableSpawning = true;
+            FloatingTextSpawner.Instance.DisableHanging();
+
+            cavernCameras.ForEach((c) => { c.SetActive(false); });
+            button.Select();
+            
+
+            switch (parameter)
+            {
+                case "dyson":
+                    dysonCamera.SetActive(true);
+                    currentWorld = Worlds.DysonSwarm;
+                    break;
+            }
+        }
+    }
+
 
     private void ConnectToUpgradesEvents()
     {
@@ -379,6 +419,8 @@ public class GameController : BaseController<GameView>
         view.showDebugWindow.onValueChanged += v => {SettingsModel.Instance.ShowDebugWindow = v; };
         SettingsModel.Instance.ShowDebugWindow = view.showDebugWindow.IsOn;
         #endregion
+
+        view.dysonSwarmButton.onClick += SwitchWorld;
 
     }
 
