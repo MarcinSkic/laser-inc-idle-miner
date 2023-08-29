@@ -24088,6 +24088,10 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 48386112}
     m_Modifications:
+    - target: {fileID: 287563052805010851, guid: 4737738861777bd4484a4377164e6271, type: 3}
+      propertyPath: m_SizeDelta.x
+      value: 90
+      objectReference: {fileID: 0}
     - target: {fileID: 1450712506375978137, guid: 4737738861777bd4484a4377164e6271, type: 3}
       propertyPath: m_AnchorMax.y
       value: 0
@@ -36519,7 +36523,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 0, y: 0}
-  m_AnchoredPosition: {x: 450, y: 800}
+  m_AnchoredPosition: {x: 642.02, y: 800}
   m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0, y: 0}
 --- !u!224 &5178784439960610139
@@ -37260,7 +37264,7 @@ RectTransform:
   m_AnchorMin: {x: 0.6, y: 0.5}
   m_AnchorMax: {x: 1.1, y: 0.5}
   m_AnchoredPosition: {x: 0, y: 50}
-  m_SizeDelta: {x: 0, y: 506.12903}
+  m_SizeDelta: {x: 0, y: 720.49994}
   m_Pivot: {x: 1, y: 0.5}
 --- !u!1 &8562651512352297555
 GameObject:
@@ -37398,12 +37402,12 @@ MonoBehaviour:
   m_faceColor:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontSize: 80
+  m_fontSize: 70
   m_fontSizeBase: 60
   m_fontWeight: 400
   m_enableAutoSizing: 1
   m_fontSizeMin: 18
-  m_fontSizeMax: 80
+  m_fontSizeMax: 70
   m_fontStyle: 1
   m_HorizontalAlignment: 1
   m_VerticalAlignment: 256
@@ -37522,7 +37526,7 @@ RectTransform:
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
   m_AnchoredPosition: {x: 0, y: 0}
-  m_SizeDelta: {x: 1012.25806, y: 532.7674}
+  m_SizeDelta: {x: 1441, y: 758.4211}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &8562651513133308654
 CanvasRenderer:
@@ -37615,7 +37619,15 @@ MonoBehaviour:
   text: {fileID: 8562651512808858010}
   closePopup:
   - {fileID: 2669675738263661660}
-  story: 
+  resizedPanel: {fileID: 8562651513133308642}
+  robotImage: {fileID: 8562651512352297564}
+  story: Harnessing mined resources, we're building a Dyson Swarm to supply boundless
+    energy to Earth. Part of it enhances your miner's prestige rewards!
+  currentTime: 0
+  finished: 0
+  timeToStartTextWriting: 0.9
+  timeToEndTextWriting: 3
+  textProgress: 0
 --- !u!114 &8715208520801552668
 MonoBehaviour:
   m_ObjectHideFlags: 0

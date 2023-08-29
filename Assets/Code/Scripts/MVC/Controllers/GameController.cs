@@ -202,6 +202,20 @@ public class GameController : BaseController<GameView>
         }
     }
 
+    private void ConfigureDysonSwarm()
+    {
+        var atLeastOnePrestige = resourcesManager.ExecutedPrestigesCount != 0;
+
+        view.dysonSwarmButton.gameObject.SetActive(atLeastOnePrestige);
+
+        if (atLeastOnePrestige && !visitedDyson)
+        {
+            view.flashingDysonSwarmButtonCoroutine = StartCoroutine(FlashingDysonSwarmButton());
+
+            view.dysonSwarmButton.onClick += StopFlashingOfDysonSwarm;
+        }
+    }
+
     private void SwitchWorld(UIButtonController button, string parameter)
     {
         var switchingToCaverns = currentWorld != Worlds.Cavern;
@@ -237,7 +251,7 @@ public class GameController : BaseController<GameView>
                         view.dysonSwarmStory.Show();
                     }
                     
-                    visitedDyson = true;
+                    //visitedDyson = true;
                     dysonCamera.SetActive(true);
                     currentWorld = Worlds.DysonSwarm;
                     break;
@@ -300,20 +314,6 @@ public class GameController : BaseController<GameView>
     {
         premiumStoreManager.Setup();
         premiumStoreManager.onPremiumBuy += SavePersistentData;
-    }
-
-    private void ConfigureDysonSwarm()
-    {
-        var atLeastOnePrestige = resourcesManager.ExecutedPrestigesCount != 0;
-
-        view.dysonSwarmButton.gameObject.SetActive(atLeastOnePrestige);
-
-        if (atLeastOnePrestige && !visitedDyson)
-        {
-            view.flashingDysonSwarmButtonCoroutine = StartCoroutine(FlashingDysonSwarmButton());
-
-            view.dysonSwarmButton.onClick += StopFlashingOfDysonSwarm;
-        }
     }
 
     private IEnumerator FlashingDysonSwarmButton()
