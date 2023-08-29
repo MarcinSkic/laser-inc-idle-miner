@@ -62,7 +62,7 @@ public class PremiumStoreManager : MonoBehaviour
     [Header("Other")]
     Dictionary<string, double> crystalPacksValues;
     int standardBatSpawnRate = 0;
-    Coroutine batFrenzy = null;
+    public Coroutine batFrenzy = null;
     float subTimer = 1;
 
     private void Update()
@@ -190,7 +190,7 @@ public class PremiumStoreManager : MonoBehaviour
                     StopCoroutine(batFrenzy);
                 }
 
-                batFrenzy = StartCoroutine(BatFrenzy());
+                batFrenzy = StartCoroutine(BatFrenzy(durationOfBatFrenzy_Seconds));
             }
             else
             {
@@ -218,17 +218,17 @@ public class PremiumStoreManager : MonoBehaviour
         
     }
 
-    IEnumerator BatFrenzy()
+    public IEnumerator BatFrenzy(float duration)
     {
 
         gameModel.batFrenzyActive = true;
         gameModel.batsPer10000FixedUpdates = batsPer10000FixedUpdatesInFrenzy;
 
-        for(var i = durationOfBatFrenzy_Seconds; i >= 0; i--)
+        for(var i = duration; i >= 0.05f; i-=0.1f)
         {
-            yield return new WaitForSeconds(1);
-            Debug.Log($"Left {i}");
-            batFrenzyTimer.SetValueDirectly(string.Format($"00:{i:D2}"));
+            yield return new WaitForSeconds(0.1f);
+            int ceiled = (int)Math.Ceiling(i);
+            batFrenzyTimer.SetValueDirectly(string.Format($"00:{ceiled:D2}"));
         }
 
         batFrenzyTimer.DisableDirectly();

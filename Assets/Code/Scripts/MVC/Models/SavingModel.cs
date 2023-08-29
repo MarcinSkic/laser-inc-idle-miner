@@ -76,6 +76,11 @@ public class PersistentData
     public bool finishedTutorial;
     #endregion
 
+    #region Daily
+    public string last_reward_timestring;
+    public int consecutive_rewards_count;
+    #endregion
+
     public PersistentData()
     {
 
