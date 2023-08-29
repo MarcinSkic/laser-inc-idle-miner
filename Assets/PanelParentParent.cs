@@ -6,6 +6,7 @@ public class PanelParentParent : MonoBehaviour
 {
     [SerializeField] ResourcesModel resourcesModel;
     [SerializeField] GameObject panelParentPrefab;
+    [SerializeField] GameController gameController;
     public float totalMoneyForNextPanel = 1e4f;
     public int currentlyBuiltRingI = -1;
     public int panelsInRow = 0;
@@ -21,7 +22,7 @@ public class PanelParentParent : MonoBehaviour
 
     void Update()
     {
-        while (resourcesModel.undecreasableEarnedMoney > totalMoneyForNextPanel)
+        while (resourcesModel.undecreasableEarnedMoney > totalMoneyForNextPanel && gameController.visitedDyson)
         {
             if (panelsInRow == 119 || currentlyBuiltRingI == -1)
             {

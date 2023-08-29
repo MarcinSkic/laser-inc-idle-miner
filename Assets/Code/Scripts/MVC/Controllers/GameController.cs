@@ -44,7 +44,7 @@ public class GameController : BaseController<GameView>
     [SerializeField] GameObject[] cavernCameras;
     [SerializeField] GameObject dysonCamera;
     [SerializeField] Worlds currentWorld = Worlds.Cavern;
-    [SerializeField] bool visitedDyson = false;
+    public bool visitedDyson = false;
 
     [Header("ProgressionDebug")]
     [SerializeField] float previousMoneyProgressionDebugTime = 0;
@@ -192,7 +192,9 @@ public class GameController : BaseController<GameView>
         {
             SavePersistentData();
         }
+        
     }
+    
 
     private void OnApplicationQuit()
     {
@@ -226,6 +228,7 @@ public class GameController : BaseController<GameView>
             cavernCameras.ForEach((c) => { c.SetActive(true); });
             view.depthMeter.gameObject.SetActive(true);
             view.dysonSwarmStory.Hide();
+            view.dysonSwarmDescription.SetActive(false);
 
             FloatingTextSpawner.Instance.disableSpawning = false;
 
@@ -250,8 +253,9 @@ public class GameController : BaseController<GameView>
                     {
                         view.dysonSwarmStory.Show();
                     }
-                    
-                    //visitedDyson = true;
+
+                    visitedDyson = true;
+                    view.dysonSwarmDescription.SetActive(true);
                     dysonCamera.SetActive(true);
                     currentWorld = Worlds.DysonSwarm;
                     break;

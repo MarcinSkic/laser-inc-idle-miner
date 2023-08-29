@@ -35,8 +35,9 @@ public class GameView : BaseView
     [Header("Worlds Switching")]
     public UIButtonWithStringController dysonSwarmButton;
 
-    [Header("Story Bits")]
+    [Header("Dyson Swarm")]
     public UIStoryBit dysonSwarmStory;
+    public GameObject dysonSwarmDescription;
 
     [Header("Depth Meter")]
     public UIDepthMeter depthMeter;
