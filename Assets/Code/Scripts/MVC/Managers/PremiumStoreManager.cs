@@ -86,7 +86,7 @@ public class PremiumStoreManager : MonoBehaviour
         {
             if(ballType >= UpgradeableObjects.BasicBall && ballType < UpgradeableObjects.AllBalls)
             {
-                Debug.Log(ballType);
+                //Debug.Log(ballType);
             }
             
         }

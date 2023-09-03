@@ -384,4 +384,4 @@ MonoBehaviour:
   defaultColor: {r: 0, g: 0, b: 0, a: 0}
   selectedColor: {r: 0, g: 0, b: 0, a: 0}
   parameter: UpgradeWindow
-  selectedWhenNoWindowOpen: 1
+  selectWhenNoWindowOpen: 1

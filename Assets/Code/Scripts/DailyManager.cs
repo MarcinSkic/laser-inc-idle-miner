@@ -28,7 +28,7 @@ class DailyReward
 
 public class DailyManager : MonoBehaviour
 {
-    public string last_reward_timestring;
+    public DateTime last_reward_time = DateTime.Now;
     public int consecutive_rewards_count;
     public ResourcesManager resourcesManager;
     public PremiumStoreManager premiumStoreManager;
@@ -46,40 +46,54 @@ public class DailyManager : MonoBehaviour
 
     private void Start()
     {
-        // Invoke(nameof(CheckDailyState), 0.1f);
-        // InvokeRepeating("GetReward", 3, 3);
+        
+        
     }
 
-    public void CheckDailyState()
+    public bool CheckDailyState(out int rewardIndex)
     {
-        DateTime lastDate = DateTime.Parse(last_reward_timestring);
-        DateTime nowDate = DateTime.Parse(DateTime.Now.Date.ToLongDateString());
+        rewardIndex = -1;
+        DateTime lastDate = last_reward_time;
+        DateTime nowDate = DateTime.Now.Date;
         TimeSpan diff = nowDate.Subtract(lastDate);
         Debug.Log("diff in h: "+diff.TotalHours);
-        bool odbieralne;
+        Debug.Log($"lastDate: {lastDate}, nowDate: {nowDate}");
         if (diff.TotalHours == 0) {
             // juz dzis odebrane, nic ciekawego
-            odbieralne = false;
+            
             Debug.Log("juz dzis odebrane, nic ciekawego");
+            return false;
         } else if (diff.TotalHours == 24) {
             // odebrane wczoraj, mozna odebrac dzisiaj, nie ma resetu
-            odbieralne = true;
+            rewardIndex = GetRewardIndex();
             Debug.Log("odebrane wczoraj, mozna odebrac dzisiaj, nie ma resetu");
+            return true;
         } else {
             // nie odebrano dzisiaj ani wczoraj, mozna odebrac, ale jest reset
             consecutive_rewards_count = 0;
-            odbieralne = true;
+            rewardIndex = GetRewardIndex();
             Debug.Log("nie odebrano dzisiaj ani wczoraj, mozna odebrac, ale jest reset");
+            return true;
         }
+    }
+
+    public float CalculateReward(int rewardIndex)
+    {
+        int laps = consecutive_rewards_count / dailyRewards.Length;
+        return dailyRewards[rewardIndex].baseAmount + laps * dailyRewards[rewardIndex].bonusPerLap;
+    }
+
+    public int GetRewardIndex()
+    {
+        return consecutive_rewards_count % dailyRewards.Length;
     }
 
     public void GetReward()
     {
-        last_reward_timestring = DateTime.Now.Date.ToLongDateString();
+        last_reward_time = DateTime.Now;
         consecutive_rewards_count++;
-        int rewardIndex = consecutive_rewards_count % dailyRewards.Length;
-        int laps = consecutive_rewards_count / dailyRewards.Length;
-        float rewardAmount = dailyRewards[rewardIndex].baseAmount + laps * dailyRewards[rewardIndex].bonusPerLap;
+        int rewardIndex = GetRewardIndex();
+        float rewardAmount = CalculateReward(rewardIndex);
 
         switch (dailyRewards[rewardIndex].rewardType)
         {
@@ -103,18 +117,26 @@ public class DailyManager : MonoBehaviour
                 premiumStoreManager.batFrenzy = StartCoroutine(premiumStoreManager.BatFrenzy(rewardAmount));
                 break;
         }
-        Debug.LogWarning("index: "+rewardIndex + ", laps: " +laps+ ", reward: " + dailyRewards[rewardIndex].rewardType + ", amount: " + rewardAmount);
     }
 
     public void SavePersistentData(PersistentData data)
     {
-        data.last_reward_timestring = last_reward_timestring;
+        data.last_reward_time = last_reward_time.ToBinary().ToString();
         data.consecutive_rewards_count = consecutive_rewards_count;
     }
 
     public void LoadPersistentData(PersistentData data)
     {
-        last_reward_timestring = data?.last_reward_timestring ?? DateTime.Now.Subtract(TimeSpan.FromDays(1)).ToLongDateString();
+
+        if(data?.last_reward_time == null || long.Parse(data.last_reward_time) == 0)
+        {
+            last_reward_time = DateTime.Now.Subtract(TimeSpan.FromDays(2));
+        } 
+        else
+        {
+            last_reward_time = DateTime.FromBinary(long.Parse(data.last_reward_time));
+        }
+
         consecutive_rewards_count = data?.consecutive_rewards_count ?? 0;
     }
 }

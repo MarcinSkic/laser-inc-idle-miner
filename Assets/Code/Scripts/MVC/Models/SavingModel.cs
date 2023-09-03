@@ -77,7 +77,7 @@ public class PersistentData
     #endregion
 
     #region Daily
-    public string last_reward_timestring;
+    public string last_reward_time;
     public int consecutive_rewards_count;
     #endregion
 
