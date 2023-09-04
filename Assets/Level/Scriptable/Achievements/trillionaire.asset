@@ -1,0 +1,25 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 34d9a164a224495449c801551316aa61, type: 3}
+  m_Name: trillionaire
+  m_EditorClassIdentifier: 
+  achievement:
+    name: Tillionaire
+    description: accumulate $1000000000000
+    sprite: {fileID: 21300000, guid: 926d86209a13f7b4db157830653460ae, type: 3}
+    isCompleted: 0
+    leftRequirements: 0
+    requirements:
+    - dependsOn: 2
+      comparison: 1
+      requiredValue: 1000000000000
+      upgradeScriptable: {fileID: 0}

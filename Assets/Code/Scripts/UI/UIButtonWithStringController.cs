@@ -8,6 +8,7 @@ public class UIButtonWithStringController : UIButtonController
     [Header("BUTTON WITH STRING")]
     [SerializeField] protected string parameter;
     public new UnityAction<UIButtonController,string> onClick;
+    public bool selectWhenNoWindowOpen = false;
 
     protected override void OnClicked()
     {

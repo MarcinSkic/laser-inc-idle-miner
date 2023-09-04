@@ -18,7 +18,6 @@ public class BlocksModel : MonoBehaviour
 
     public Transform _dynamic_blocks;
     public Transform floatingTexts;
-    public Transform _dynamic_balls;
     public GameObject movingBorderTexturesParent;
     public Transform[] movingBackgrounds;
 

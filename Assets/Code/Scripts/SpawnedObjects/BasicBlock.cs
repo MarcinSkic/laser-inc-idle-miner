@@ -70,7 +70,7 @@ public class BasicBlock : MonoBehaviour, IPoolable<BasicBlock>
         
         hp -= damage;
 
-        if (SettingsModel.Instance.DisplayFloatingText)
+        if (SettingsModel.Instance.DisplayFloatingText && !FloatingTextSpawner.Instance.disableSpawning)
         {
             DisplayDamageTaken(damage, repeating);
         }

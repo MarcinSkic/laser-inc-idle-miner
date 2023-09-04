@@ -33,3 +33,9 @@ public enum UpgradeableValues
     ClickDamage = 0b01000,
     MoneyGainMultiplier = 0b10000,
 }
+
+public enum Worlds
+{
+    Cavern,
+    DysonSwarm
+}

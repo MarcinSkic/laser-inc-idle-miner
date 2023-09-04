@@ -30,6 +30,7 @@ public class Achievement
             if (leftRequirements <= 0)
             {
                 isCompleted = true;
+                StatisticsModel.Instance.AchievementsCount++;
                 onAchievementUnlocked?.Invoke(this);
             }
         }

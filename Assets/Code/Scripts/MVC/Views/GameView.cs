@@ -25,9 +25,6 @@ public class GameView : BaseView
 
     [Header("Tabs Switching")]
     [SerializeField] private List<GameObject> tabButtonsContainers;
-    [SerializeField] private List<UIButtonWithStringController> legacyWindowButtons;
-    [SerializeField] private List<GameObject> legacyWindows;
-
     [SerializeField] private UIWindow[] windows;
     [SerializeField] private UIButtonWithStringController[] windowButtons;
     public GameObject cheatWindowButton;
@@ -35,11 +32,21 @@ public class GameView : BaseView
     public Color bottomButton_Default;
     public Color bottomButton_Activated;
 
+    [Header("Worlds Switching")]
+    public UIButtonWithStringController dysonSwarmButton;
+
+    [Header("Dyson Swarm")]
+    public UIStoryBit dysonSwarmStory;
+    public GameObject dysonSwarmDescription;
+
     [Header("Depth Meter")]
     public UIDepthMeter depthMeter;
 
     [Header("PowerUps")]
     public UIPowerUp damagePowerUp;
+
+    [Header("Floating texts")]
+    public GameObject floatingTextsDisplay;
 
     [Header("Offline popup")]
     public GameObject offlinePopup;
@@ -109,6 +116,8 @@ public class GameView : BaseView
     [ReadOnly]
     public List<UIBallBar> ballBars;
 
+    public Coroutine flashingDysonSwarmButtonCoroutine; 
+
     public void InitButtons()
     {
         offlineConfirmButton.Init();
@@ -120,6 +129,8 @@ public class GameView : BaseView
         cheatSpeedUp.Init();
         cheatSlowDown.Init();
         cheatToggleBatsSpawn.Init();
+        dysonSwarmButton.Init();
+        dysonSwarmButton.Deselect();
 
         facebook.Init();
         facebook.onClick += () => { Application.OpenURL("https://www.facebook.com/profile.php?id=100091986607863"); };
@@ -128,7 +139,7 @@ public class GameView : BaseView
         instagram.onClick += () => { Application.OpenURL("https://www.instagram.com/laserinc.idleminer/?fbclid=IwAR2kcIsm0G-7cLZTtM9f9PJw39UYG6oPGZrcV8E2YBqbUdkyABgHWqdET9w"); };
 
         termsOfUse.Init();
-        termsOfUse.onClick += () => { Application.OpenURL("https://www.apple.com/legal/internet-services/itunes/dev/stdeula/"); };
+        termsOfUse.onClick += () => { Application.OpenURL("https://mistybytes.com/terms-of-service/"); };
 
         privacyPolicy.Init();
         privacyPolicy.onClick += () => { Application.OpenURL("https://mistybytes.com/privacy-policy/"); };
@@ -167,7 +178,7 @@ public class GameView : BaseView
         }
 
         DeselectAllWindowButtons();
-        SelectBottomWindowButtons();
+        SelectButtonsWhenNoWindowOpen();
     }
 
     private void SwitchWindow(UIButtonController button, string name)
@@ -180,7 +191,7 @@ public class GameView : BaseView
             DeselectAllWindowButtons();
             activeWindow.Dectivate();
             activeWindow = null;
-            SelectBottomWindowButtons();
+            SelectButtonsWhenNoWindowOpen();
             return;
         }
 
@@ -211,14 +222,14 @@ public class GameView : BaseView
         }
     }
 
-    private void SelectBottomWindowButtons()
+    private void SelectButtonsWhenNoWindowOpen()
     {
         foreach (var b in windowButtons)
         {
-            if (!b.name.Contains("Setting") && !b.name.Contains("Cheat") && !b.name.Contains("Premium"))
+            if (b.selectWhenNoWindowOpen)
             {
                 b.Select();
-            }        
+            }
         }
     }
 

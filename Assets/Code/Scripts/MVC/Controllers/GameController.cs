@@ -24,6 +24,7 @@ public class GameController : BaseController<GameView>
     [SerializeField] private SettingsModel settingsModel;
     [SerializeField] private GameModel gameModel;
     [SerializeField] private AdManager adManager;
+    [SerializeField] private DailyManager dailyManager;
 
     [Header("Managers")]
     [AutoProperty(AutoPropertyMode.Scene)] [SerializeField] private UpgradesManager upgradesManager;
@@ -39,7 +40,12 @@ public class GameController : BaseController<GameView>
     [Header("Bats!")]
     [SerializeField] RewardBat rewardBat;
     [SerializeField] Transform batParent;
-    [SerializeField] int batsPer10000FixedUpdates;
+
+    [Header("Dyson swarm")]
+    [SerializeField] GameObject[] cavernCameras;
+    [SerializeField] GameObject dysonCamera;
+    [SerializeField] Worlds currentWorld = Worlds.Cavern;
+    public bool visitedDyson = false;
 
     [Header("ProgressionDebug")]
     [SerializeField] float previousMoneyProgressionDebugTime = 0;
@@ -101,6 +107,7 @@ public class GameController : BaseController<GameView>
         CreateAchievementsWindow();
         ConnectToUpgradesEvents();
         UpdateSettingsViewBySavedData();
+        ConfigureDysonSwarm();
         achievementManager.SetupAchievements();
         upgradesManager.SetupUpgrades();  //Order important #beforeUI
         SetupBallBars();    //Order important #UI
@@ -161,15 +168,14 @@ public class GameController : BaseController<GameView>
 
     private void FixedUpdate()
     {
-        SpawnBatOrNot();
+        TrySpawnBat();
     }
-    private void SpawnBatOrNot()
+    private void TrySpawnBat()
     {
-        if (settingsModel.spawnBats && UnityEngine.Random.Range(0, 10000) < batsPer10000FixedUpdates)
+        if (settingsModel.spawnBats && UnityEngine.Random.Range(0, 10000) < gameModel.batsPer10000FixedUpdates)
         {
             RewardBat newBat = Instantiate(rewardBat, batParent);
-            newBat.resourcesManager = resourcesManager;
-            newBat.adManager = adManager;
+            newBat.Init(resourcesManager,adManager, !gameModel.batFrenzyActive);
         }
     }
 
@@ -187,7 +193,9 @@ public class GameController : BaseController<GameView>
         {
             SavePersistentData();
         }
+        
     }
+    
 
     private void OnApplicationQuit()
     {
@@ -196,6 +204,66 @@ public class GameController : BaseController<GameView>
             SavePersistentData();
         }
     }
+
+    private void ConfigureDysonSwarm()
+    {
+        var atLeastOnePrestige = resourcesManager.ExecutedPrestigesCount != 0;
+
+        view.dysonSwarmButton.gameObject.SetActive(atLeastOnePrestige);
+
+        if (atLeastOnePrestige && !visitedDyson)
+        {
+            view.flashingDysonSwarmButtonCoroutine = StartCoroutine(FlashingDysonSwarmButton());
+
+            view.dysonSwarmButton.onClick += StopFlashingOfDysonSwarm;
+        }
+    }
+
+    private void SwitchWorld(UIButtonController button, string parameter)
+    {
+        var switchingToCaverns = currentWorld != Worlds.Cavern;
+        if (switchingToCaverns)
+        {
+            currentWorld = Worlds.Cavern;
+            dysonCamera.SetActive(false);   // if more worlds then change it to dictionary or something
+            cavernCameras.ForEach((c) => { c.SetActive(true); });
+            view.depthMeter.gameObject.SetActive(true);
+            view.dysonSwarmStory.Hide();
+            view.dysonSwarmDescription.SetActive(false);
+
+            FloatingTextSpawner.Instance.disableSpawning = false;
+
+            button.Deselect();
+            
+        } 
+        else
+        {
+            view.depthMeter.gameObject.SetActive(false);
+            FloatingTextSpawner.Instance.disableSpawning = true;
+            FloatingTextSpawner.Instance.DisableHanging();
+
+            cavernCameras.ForEach((c) => { c.SetActive(false); });
+            button.Select();
+            
+
+            switch (parameter)
+            {
+                case "dyson":
+                    var atLeastOnePrestige = resourcesManager.ExecutedPrestigesCount != 0;
+                    if (atLeastOnePrestige && !visitedDyson)
+                    {
+                        view.dysonSwarmStory.Show();
+                    }
+
+                    visitedDyson = true;
+                    view.dysonSwarmDescription.SetActive(true);
+                    dysonCamera.SetActive(true);
+                    currentWorld = Worlds.DysonSwarm;
+                    break;
+            }
+        }
+    }
+
 
     private void ConnectToUpgradesEvents()
     {
@@ -223,6 +291,7 @@ public class GameController : BaseController<GameView>
             resourcesManager.Money = resourcesManager.Money;
             resourcesManager.PrestigeCurrency = resourcesManager.PrestigeCurrency;
             resourcesManager.PremiumCurrency = resourcesManager.PremiumCurrency;
+            StatisticsModel.Instance.AchievementsCount = StatisticsModel.Instance.AchievementsCount;
         }; //Welp ¯\_(ツ)_/¯
     }
 
@@ -250,6 +319,24 @@ public class GameController : BaseController<GameView>
     {
         premiumStoreManager.Setup();
         premiumStoreManager.onPremiumBuy += SavePersistentData;
+    }
+
+    private IEnumerator FlashingDysonSwarmButton()
+    {
+        while (true)
+        {
+            yield return new WaitForSeconds(0.5f);
+            view.dysonSwarmButton.Select();
+            yield return new WaitForSeconds(0.5f);
+            view.dysonSwarmButton.Deselect();
+        }
+    }
+
+    private void StopFlashingOfDysonSwarm(UIButtonController button, string _)
+    {
+        StopCoroutine(view.flashingDysonSwarmButtonCoroutine);
+        view.dysonSwarmButton.onClick -= StopFlashingOfDysonSwarm;
+        view.dysonSwarmButton.Select();
     }
 
     public void HandleDoubleOfflineReward()
@@ -380,6 +467,8 @@ public class GameController : BaseController<GameView>
         view.showDebugWindow.onValueChanged += v => {SettingsModel.Instance.ShowDebugWindow = v; };
         SettingsModel.Instance.ShowDebugWindow = view.showDebugWindow.IsOn;
         #endregion
+
+        view.dysonSwarmButton.onClick += SwitchWorld;
 
     }
 
@@ -630,12 +719,14 @@ public class GameController : BaseController<GameView>
         resourcesManager.SavePersistentData(persistentData);
         StatisticsModel.Instance.SavePersistentData(persistentData);
         persistentData.depth = model.Depth;
+        persistentData.visitedDyson = visitedDyson;
         upgradesManager.SavePersistentData(persistentData);
         blocksManager.SavePersistentData(persistentData);
         tutorialManager.SavePersistentData(persistentData);
 
         SettingsModel.Instance.SavePersistentData(persistentData);
         achievementManager.SavePersistentData(persistentData);
+        dailyManager.SavePersistentData(persistentData);
 
         savingManager.SavePersistentData(persistentData);
     }
@@ -657,8 +748,10 @@ public class GameController : BaseController<GameView>
         StatisticsModel.Instance.LoadPersistentData(persistentData);
         tutorialManager.LoadPersistentData(persistentData);
         model.Depth = persistentData.depth;
+        visitedDyson = persistentData?.visitedDyson ?? false;
+        dailyManager.LoadPersistentData(persistentData);
         #endregion
-        
+
         #region OrderImportant
         blocksManager.LoadPersistentData(persistentData);
         upgradesManager.LoadPersistentData(persistentData);
@@ -691,13 +784,17 @@ public class GameController : BaseController<GameView>
 
     private void ExecutePrestige()
     {
+        resourcesManager.IncreasePrestigeCurrency(resourcesManager.PrestigeCurrencyForNextPrestige);
+        resourcesManager.ExecutedPrestigesCount += 1;
+
         PersistentData persistentData = new();
 
+        persistentData.visitedDyson = visitedDyson;
         SettingsModel.Instance.SavePersistentData(persistentData);
-        achievementManager.SavePersistentData(persistentData);
-        resourcesManager.IncreasePrestigeCurrency(resourcesManager.PrestigeCurrencyForNextPrestige);
+        achievementManager.SavePersistentData(persistentData);  
         resourcesManager.SavePrestigePersistentData(persistentData);
         upgradesManager.SavePrestigePersistentData(persistentData);
+        dailyManager.SavePersistentData(persistentData);
         tutorialManager.SavePersistentData(persistentData);
 
         savingManager.SavePersistentData(persistentData);

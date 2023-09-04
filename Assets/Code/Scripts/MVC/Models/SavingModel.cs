@@ -17,6 +17,7 @@ public class PersistentData
     #region ResourceModel
     public double money;
     public double earnedMoney;
+    public double undecreasableEarnedMoney;
     public double offlineEarnedMoney;
     public double afkGainPerSec;
     public List<double> lastOnlineEarnedMoneyStates;
@@ -41,6 +42,7 @@ public class PersistentData
 
     #region GameModel
     public double depth;
+    public bool visitedDyson;
     #endregion
 
     #region SettingsModel
@@ -62,6 +64,8 @@ public class PersistentData
     public int minedRubyBlocks;
     public int minedDiamondBlocks;
     public int minedUraniumBlocks;
+    public int caughtBats;
+    public int executedPrestigesCount;
     #endregion
 
     #region AchievementsModel
@@ -70,6 +74,11 @@ public class PersistentData
 
     #region TutorialModel
     public bool finishedTutorial;
+    #endregion
+
+    #region Daily
+    public string last_reward_time;
+    public int consecutive_rewards_count;
     #endregion
 
     public PersistentData()

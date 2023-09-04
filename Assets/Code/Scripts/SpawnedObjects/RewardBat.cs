@@ -37,15 +37,27 @@ public class RewardBat : MonoBehaviour
     [SerializeField] GameObject crystalGO;
     [SerializeField] GameObject sphereGO;
     private BatOption batOption;
-    public ResourcesManager resourcesManager;
-    public AdManager adManager;
-
-    void Start()
+    private ResourcesManager resourcesManager;
+    private AdManager adManager;
+    
+    public void Init(ResourcesManager resourcesManager, AdManager adManager, bool withAds = true)
     {
+        this.resourcesManager = resourcesManager;
+        this.adManager = adManager;
+
         transform.position = new Vector3(Random.Range(-xDeviation, xDeviation), -yBorders, Random.Range(-3f, -5f));
         direction = Random.Range(0, 2) * 2 - 1; // either 1 or -1
         //handleDirectionChange();
+
         batOption = batOptions[Random.Range(0, batOptions.Length)];
+        if (!withAds)
+        {
+            while (batOption.needsAd)
+            {
+                batOption = batOptions[Random.Range(0, batOptions.Length)];
+            }
+        }
+        
         switch (batOption.rewardType)
         {
             case BatRewardType.money:
@@ -144,6 +156,7 @@ public class RewardBat : MonoBehaviour
         }
         Debug.Log(debugString);
         AudioManager.Instance.Play("bat_caught");
+        StatisticsModel.Instance.CaughtBats = StatisticsModel.Instance.CaughtBats + 1;
         Destroy(gameObject);
     }
 

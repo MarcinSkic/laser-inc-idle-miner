@@ -6,7 +6,7 @@ EditorBuildSettings:
   serializedVersion: 2
   m_Scenes:
   - enabled: 1
-    path: Assets/Art/NewLogo/Misty Bytes Logo/Scenes/Loader Scene.unity
+    path: Assets/Art/Logo/Misty Bytes Logo/Scenes/Loader Scene.unity
     guid: 44bc594c6e3c10640a526816d5e88001
   - enabled: 1
     path: Assets/Level/Scenes/Main.unity

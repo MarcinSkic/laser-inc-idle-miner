@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Events;
 using System;
+using MyBox;
 
 public class ResourcesManager : MonoBehaviour
 {
@@ -20,6 +21,8 @@ public class ResourcesManager : MonoBehaviour
     public UnityAction<double> onMoneyChange;
     public UnityAction<double> onMoneyEarned;
     public UnityAction<double> onAfkGainChange;
+    public PanelParentParent panelParentParent;
+    public float panelCountBonus = 0.01f;
 
 
     private void Start()
@@ -151,7 +154,7 @@ public class ResourcesManager : MonoBehaviour
             //return model.prestigeCurrencyForNextPrestige;
             if (gameModel.Depth >= 500f)
             {
-                return Math.Pow(2f, (gameModel.Depth/500f));
+                return (1.0f+panelParentParent.panelsCount*panelCountBonus)*Math.Pow(2f, (gameModel.Depth/500f));
             }
             return 0f;
         }
@@ -171,6 +174,23 @@ public class ResourcesManager : MonoBehaviour
     {
         return PrestigeCurrency < (PrestigeCurrencyForNextPrestige + PrestigeCurrency) / model.prestigeCurrencyMultiplierWorthThreshold;
     }
+    #endregion
+
+    #region ExecutedPrestigesCount
+    [ReadOnly] [SerializeField] private int executedPrestigesCount;
+    public int ExecutedPrestigesCount
+    {
+        get
+        {
+            return executedPrestigesCount;
+        }
+        set
+        {
+            executedPrestigesCount = value;
+            onExecutedPrestigesCount?.Invoke(value);
+        }
+    }
+    public UnityAction<int> onExecutedPrestigesCount;
     #endregion
 
     void UpdateLastEarnedMoneyStates()
@@ -224,6 +244,18 @@ public class ResourcesManager : MonoBehaviour
         }
     }
 
+    public double UndecreasableEarnedMoney
+    {
+        get
+        {
+            return model.undecreasableEarnedMoney;
+        }
+        set
+        {
+            model.undecreasableEarnedMoney = value;
+        }
+    }
+
     public void IncreaseMoney(double value, bool forBreakingBlocks = false)
     {
         if (value < 1)
@@ -238,6 +270,7 @@ public class ResourcesManager : MonoBehaviour
 
         Money += value;
         EarnedMoney += value;
+        UndecreasableEarnedMoney += value;
     }
 
     public void CheatMoney()
@@ -327,6 +360,7 @@ public class ResourcesManager : MonoBehaviour
     {
         data.money = Money;
         data.earnedMoney = model.earnedMoney;
+        data.undecreasableEarnedMoney = model.undecreasableEarnedMoney;
         data.offlineEarnedMoney = model.offlineEarnedMoney;
         data.afkGainPerSec = model.afkGainPerSec;
         data.lastOnlineEarnedMoneyStates = model.lastOnlineEarnedMoneyStates;
@@ -339,18 +373,23 @@ public class ResourcesManager : MonoBehaviour
 
         data.powerUpTime = model.powerUpTimeLeft;
         data.earnedPowerUpTime = model.earnedPowerUpTime;
+
+        data.executedPrestigesCount = ExecutedPrestigesCount;
     }
 
     public void SavePrestigePersistentData(PersistentData data)
     {
         data.prestigeCurrency = PrestigeCurrency;
         data.earnedPrestigeCurrency = model.earnedPrestigeCurrency;
+        data.undecreasableEarnedMoney = model.undecreasableEarnedMoney;
+        data.executedPrestigesCount = ExecutedPrestigesCount;
     }
 
     public void LoadPersistentData(PersistentData data)
     {
         Money = data?.money ?? model.startMoney;
         EarnedMoney = data?.earnedMoney ?? 0;
+        UndecreasableEarnedMoney = data?.undecreasableEarnedMoney ?? 0;
         model.offlineEarnedMoney = data?.offlineEarnedMoney ?? 0;
         model.afkGainPerSec = data?.afkGainPerSec ?? 0;
         model.lastOnlineEarnedMoneyStates = data?.lastOnlineEarnedMoneyStates ?? new List<double>();
@@ -362,5 +401,7 @@ public class ResourcesManager : MonoBehaviour
 
         PowerUpTimeLeft = data?.powerUpTime ?? 0;
         EarnedPowerUpTime = data?.earnedPowerUpTime ?? 0;
+
+        ExecutedPrestigesCount = data?.executedPrestigesCount ?? 0;
     }
 }

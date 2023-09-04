@@ -7,6 +7,7 @@ public class FloatingTextSpawner : BaseSpawner<FloatingText>
     #region Singleton
     public static FloatingTextSpawner Instance;
     public List<FloatingText> floatingTexts;
+    public bool disableSpawning = false;
     protected override void Awake()
     {
         base.Awake();
@@ -23,6 +24,11 @@ public class FloatingTextSpawner : BaseSpawner<FloatingText>
     public void ClearBeforePrestige()
     {
         floatingTexts.Clear();
+    }
+
+    public void DisableHanging()
+    {
+        floatingTexts.ForEach(f => f.ObjectPosition = new Vector3(1000, 0, 1000));
     }
 
     public void SpawnDefault(string text, Transform location)
