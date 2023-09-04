@@ -66,6 +66,7 @@ public class TutorialPopup : MonoBehaviour
             if (currentTime <= 0)
             {
                 resizedPanel.SetActive(false);
+                arrow.gameObject.SetActive(false);
             }
         }
         else
