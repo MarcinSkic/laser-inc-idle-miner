@@ -790,6 +790,7 @@ public class GameController : BaseController<GameView>
         achievementManager.SavePersistentData(persistentData);  
         resourcesManager.SavePrestigePersistentData(persistentData);
         upgradesManager.SavePrestigePersistentData(persistentData);
+        dailyManager.SavePersistentData(persistentData);
         tutorialManager.SavePersistentData(persistentData);
 
         savingManager.SavePersistentData(persistentData);

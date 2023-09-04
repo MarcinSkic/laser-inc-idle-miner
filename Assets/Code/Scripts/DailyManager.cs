@@ -28,7 +28,7 @@ class DailyReward
 
 public class DailyManager : MonoBehaviour
 {
-    public DateTime last_reward_time = DateTime.Now;
+    public DateTime last_reward_time = DateTime.Now.Subtract(TimeSpan.FromDays(1));
     public int consecutive_rewards_count;
     public ResourcesManager resourcesManager;
     public PremiumStoreManager premiumStoreManager;
@@ -52,18 +52,18 @@ public class DailyManager : MonoBehaviour
 
     public bool CheckDailyState(out int rewardIndex)
     {
-        rewardIndex = -1;
-        DateTime lastDate = last_reward_time;
+        
+        DateTime lastDate = last_reward_time.Date;
         DateTime nowDate = DateTime.Now.Date;
         TimeSpan diff = nowDate.Subtract(lastDate);
-        Debug.Log("diff in h: "+diff.TotalHours);
+        Debug.Log("diff in days: "+diff.TotalDays);
         Debug.Log($"lastDate: {lastDate}, nowDate: {nowDate}");
-        if (diff.TotalHours == 0) {
+        if (diff.TotalDays == 0) {
             // juz dzis odebrane, nic ciekawego
-            
+            rewardIndex = GetRewardIndex();
             Debug.Log("juz dzis odebrane, nic ciekawego");
             return false;
-        } else if (diff.TotalHours == 24) {
+        } else if (diff.TotalDays == 1) {
             // odebrane wczoraj, mozna odebrac dzisiaj, nie ma resetu
             rewardIndex = GetRewardIndex();
             Debug.Log("odebrane wczoraj, mozna odebrac dzisiaj, nie ma resetu");
@@ -83,6 +83,37 @@ public class DailyManager : MonoBehaviour
         return dailyRewards[rewardIndex].baseAmount + laps * dailyRewards[rewardIndex].bonusPerLap;
     }
 
+    public TimeSpan CalculateWaitTimeForReward(int rewardIndex)
+    {
+        int diff;
+        bool rewardToBeCollected = CheckDailyState(out int currentRewardIndex);
+
+        if (rewardIndex >= currentRewardIndex)
+        {
+            diff = rewardIndex - currentRewardIndex + (rewardToBeCollected ? 0 : 1);
+        } else
+        {
+            diff = dailyRewards.Length - (currentRewardIndex - rewardIndex) + (rewardToBeCollected ? 0 : 1);
+        }
+
+        return DateTime.Now.Date.AddDays(diff).Subtract(DateTime.Now);
+    }
+
+    public float CalculateRewardForDisplay(int rewardIndex)
+    {
+        bool rewardToBeCollected = CheckDailyState(out int currentRewardIndex);
+
+        float rewardAmount = CalculateReward(rewardIndex);
+        if (rewardIndex  >= currentRewardIndex)
+        {
+            return rewardAmount;
+        }
+        else
+        {
+            return rewardAmount + dailyRewards[rewardIndex].bonusPerLap;
+        }
+    }
+
     public int GetRewardIndex()
     {
         return consecutive_rewards_count % dailyRewards.Length;
@@ -91,7 +122,7 @@ public class DailyManager : MonoBehaviour
     public void GetReward()
     {
         last_reward_time = DateTime.Now;
-        consecutive_rewards_count++;
+        
         int rewardIndex = GetRewardIndex();
         float rewardAmount = CalculateReward(rewardIndex);
 
@@ -117,6 +148,8 @@ public class DailyManager : MonoBehaviour
                 premiumStoreManager.batFrenzy = StartCoroutine(premiumStoreManager.BatFrenzy(rewardAmount));
                 break;
         }
+
+        consecutive_rewards_count++;
     }
 
     public void SavePersistentData(PersistentData data)
@@ -127,10 +160,10 @@ public class DailyManager : MonoBehaviour
 
     public void LoadPersistentData(PersistentData data)
     {
-
-        if(data?.last_reward_time == null || long.Parse(data.last_reward_time) == 0)
+        if (data?.last_reward_time == null || long.Parse(data.last_reward_time) == 0)
         {
-            last_reward_time = DateTime.Now.Subtract(TimeSpan.FromDays(2));
+            
+            last_reward_time = DateTime.Now.Subtract(TimeSpan.FromDays(1));
         } 
         else
         {

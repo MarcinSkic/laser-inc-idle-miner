@@ -19,7 +19,7 @@ public static class NumberFormatter
         TimeSpan t = TimeSpan.FromSeconds(seconds);
         return string.Format(t.Days > 3 ? "{0:D}days" : "{1:D2}h:{2:D2}m:{3:D2}s",
             t.Days,
-            t.Hours,
+            (int) t.TotalHours,
             t.Minutes,
             t.Seconds);
     }
@@ -27,7 +27,7 @@ public static class NumberFormatter
     public static string FormatSecondsToHours(double seconds)
     {
         TimeSpan t= TimeSpan.FromSeconds(seconds);
-        return string.Format(t.TotalHours <= 1 ? "{0} hour" : "{0} hours",t.TotalHours);
+        return string.Format(t.TotalHours <= 1 ? "{0:0.##} hour" : "{0:0.##} hours", t.TotalHours);
     }
 
     private static string FormatToEngineering(double num)
