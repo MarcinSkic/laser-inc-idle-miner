@@ -178,7 +178,7 @@ public class GameView : BaseView
         }
 
         DeselectAllWindowButtons();
-        SelectBottomWindowButtons();
+        SelectButtonsWhenNoWindowOpen();
     }
 
     private void SwitchWindow(UIButtonController button, string name)
@@ -191,7 +191,7 @@ public class GameView : BaseView
             DeselectAllWindowButtons();
             activeWindow.Dectivate();
             activeWindow = null;
-            SelectBottomWindowButtons();
+            SelectButtonsWhenNoWindowOpen();
             return;
         }
 
@@ -222,14 +222,14 @@ public class GameView : BaseView
         }
     }
 
-    private void SelectBottomWindowButtons()
+    private void SelectButtonsWhenNoWindowOpen()
     {
         foreach (var b in windowButtons)
         {
-            if (!b.name.Contains("Setting") && !b.name.Contains("Cheat") && !b.name.Contains("Premium") && !b.name.Contains("Display"))
+            if (b.selectWhenNoWindowOpen)
             {
                 b.Select();
-            }        
+            }
         }
     }
 

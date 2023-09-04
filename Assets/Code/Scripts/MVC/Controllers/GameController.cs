@@ -24,6 +24,7 @@ public class GameController : BaseController<GameView>
     [SerializeField] private SettingsModel settingsModel;
     [SerializeField] private GameModel gameModel;
     [SerializeField] private AdManager adManager;
+    [SerializeField] private DailyManager dailyManager;
 
     [Header("Managers")]
     [AutoProperty(AutoPropertyMode.Scene)] [SerializeField] private UpgradesManager upgradesManager;
@@ -725,6 +726,7 @@ public class GameController : BaseController<GameView>
 
         SettingsModel.Instance.SavePersistentData(persistentData);
         achievementManager.SavePersistentData(persistentData);
+        dailyManager.SavePersistentData(persistentData);
 
         savingManager.SavePersistentData(persistentData);
     }
@@ -747,6 +749,7 @@ public class GameController : BaseController<GameView>
         tutorialManager.LoadPersistentData(persistentData);
         model.Depth = persistentData.depth;
         visitedDyson = persistentData?.visitedDyson ?? false;
+        dailyManager.LoadPersistentData(persistentData);
         #endregion
 
         #region OrderImportant
@@ -791,6 +794,7 @@ public class GameController : BaseController<GameView>
         achievementManager.SavePersistentData(persistentData);  
         resourcesManager.SavePrestigePersistentData(persistentData);
         upgradesManager.SavePrestigePersistentData(persistentData);
+        dailyManager.SavePersistentData(persistentData);
         tutorialManager.SavePersistentData(persistentData);
 
         savingManager.SavePersistentData(persistentData);
