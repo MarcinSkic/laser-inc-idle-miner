@@ -147,7 +147,7 @@ public class GameView : BaseView
 #if UNITY_ANDROID
         rateUs.gameObject.SetActive(true);
         rateUs.Init();
-        rateUs.onClick += ReviewPopup.Instance.ShowReviewPopup;
+        rateUs.onClick += () => { ReviewPopup.Instance.ShowReviewPopup(true); };
 #else
         rateUs.gameObject.SetActive(false);
 #endif

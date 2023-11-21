@@ -20,7 +20,7 @@ public class ReviewPopup : MonoBehaviour
     }
 
 
-    private IEnumerator ShowPopUp()
+    private IEnumerator ShowPopUp(bool isClicked)
     {
         ReviewManager ReviewManager = new ReviewManager();
         var requestFlowOperation = ReviewManager.RequestReviewFlow();
@@ -28,6 +28,10 @@ public class ReviewPopup : MonoBehaviour
         if (requestFlowOperation.Error != ReviewErrorCode.NoError)
         {
             Debug.Log($"Review Popup request error: {requestFlowOperation.Error.ToString()}");
+            if (isClicked)
+            {
+                 Application.OpenURL("market://details?id=laser.inc.idle.miner");
+            }
             // Log error. For example, using requestFlowOperation.Error.ToString().
             yield break;
         }
@@ -40,21 +44,25 @@ public class ReviewPopup : MonoBehaviour
         if (launchFlowOperation.Error != ReviewErrorCode.NoError)
         {
             Debug.Log($"Review Popup show error: {launchFlowOperation.Error.ToString()}");
+            if (isClicked)
+            {
+                Application.OpenURL("market://details?id=laser.inc.idle.miner");
+            }
             // Log error. For example, using requestFlowOperation.Error.ToString().
             yield break;
         }
     }
 
-    public void ShowReviewPopup()
+    public void ShowReviewPopup(bool isClicked)
     {
-        StartCoroutine(ShowPopUp());
+        StartCoroutine(ShowPopUp(isClicked));
     }
 
     public void AdvanceReviewPopupCounter()
     {
         if (currentCountToDisplayReviewPopup > maxCountToDisplayReviewPopup)
         {
-            ShowReviewPopup();
+            ShowReviewPopup(false);
             currentCountToDisplayReviewPopup = 0;
         }
         currentCountToDisplayReviewPopup++;
