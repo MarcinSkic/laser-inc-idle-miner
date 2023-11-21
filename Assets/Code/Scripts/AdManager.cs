@@ -305,9 +305,9 @@ public class MyRerwardCallbacks : RewardedListener
         adManager.OnRewardComplete();
     }
 
-    public void OnRequestStart(string placementId)
+    public void OnRequestStart(string placementId, string requestId)
     {
-        // Called when a rewarded ad from placement 'placementId' is going to be requested
+        
     }
 }
 
@@ -344,9 +344,9 @@ public class MyInterstitialCallbacks : InterstitialListener
         // Called when an Interstitial from placement 'placementId' becomes unavailable
     }
 
-    public void OnRequestStart(string placementId)
+    public void OnRequestStart(string placementId, string requestId)
     {
-        // Called when an Interstitial from placement 'placementId' is going to be requested
+
     }
 }
 
@@ -371,8 +371,8 @@ public class MyBannerCallbacks : BannerListener
         // Called when banner from placement 'placementId' is clicked
     }
 
-    public void OnRequestStart(string placementId)
+    public void OnRequestStart(string placementId, string requestId)
     {
-        // Called when a banner from placement 'placementId' is going to be requested
+
     }
 }
