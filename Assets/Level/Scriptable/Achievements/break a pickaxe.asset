@@ -14,7 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   achievement:
     name: Break a pickaxe
-    description: destroy 1561 blocks
+    description: Destroy 1561 blocks. Some pickaxes wouldn't survive that!
     sprite: {fileID: 21300000, guid: 56580343aa451b545919f384ff04d6b9, type: 3}
     isCompleted: 0
     leftRequirements: 0

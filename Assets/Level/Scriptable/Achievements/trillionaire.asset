@@ -14,7 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   achievement:
     name: Tillionaire
-    description: accumulate $1000000000000
+    description: Accumulate $1000000000000 and become a trillionaire!
     sprite: {fileID: 21300000, guid: 926d86209a13f7b4db157830653460ae, type: 3}
     isCompleted: 0
     leftRequirements: 0

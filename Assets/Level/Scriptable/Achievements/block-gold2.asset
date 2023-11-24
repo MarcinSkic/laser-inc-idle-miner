@@ -14,7 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   achievement:
     name: More gold!
-    description: Mine 1000 ores of gold. Did you know it is 6 times weaker than iron?
+    description: Mine 1000 ores of gold. Did you know it is a lot softer than iron?
     sprite: {fileID: 21300000, guid: 2b548b61b0a452c46a728bd8517d2a74, type: 3}
     isCompleted: 0
     leftRequirements: 0

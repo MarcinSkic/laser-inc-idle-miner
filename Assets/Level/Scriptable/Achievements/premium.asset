@@ -14,7 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   achievement:
     name: Premium collector
-    description: have at least 50 premium currency
+    description: Accumulate 50 premium currency
     sprite: {fileID: 21300000, guid: dd5dfe65cb4a62244b1440d0c1448a91, type: 3}
     isCompleted: 0
     leftRequirements: 0

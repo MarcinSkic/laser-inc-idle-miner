@@ -14,7 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   achievement:
     name: Ruby
-    description: break a ruby block
+    description: Mine ore of ruby, a gemstone used for making lasers!
     sprite: {fileID: 21300000, guid: d5d45f5635a8f16438dfae0e54d838a7, type: 3}
     isCompleted: 0
     leftRequirements: 0

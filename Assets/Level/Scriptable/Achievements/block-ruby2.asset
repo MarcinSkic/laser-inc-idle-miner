@@ -14,7 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   achievement:
     name: More rubies!
-    description: break 1000 ruby blocks
+    description: Mine 1000 ores of ruby. Rubies are one of the hardest natural minerals!
     sprite: {fileID: 21300000, guid: ebcf70092269ad148bb984fea02d4ee8, type: 3}
     isCompleted: 0
     leftRequirements: 0

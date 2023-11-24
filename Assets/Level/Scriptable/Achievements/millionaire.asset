@@ -14,7 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   achievement:
     name: Millionaire
-    description: accumulate $1000000
+    description: Accumulate $1000000 and become a millionaire!
     sprite: {fileID: 21300000, guid: fc3220ab5d09cd14ab297b92f4e4fa63, type: 3}
     isCompleted: 0
     leftRequirements: 0

@@ -14,7 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   achievement:
     name: Prestige collector
-    description: accumulate 50 prestige currency
+    description: Accumulate 50 prestige currency
     sprite: {fileID: 21300000, guid: c72207432a72a4c439c472672d1e4a08, type: 3}
     isCompleted: 0
     leftRequirements: 0

@@ -14,8 +14,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   achievement:
     name: Iron
-    description: Mine ore of iron, backbone of industry, it is a versatile metal
-      widely used in construction and manufacturing.
+    description: Mine ore of iron, backbone of industry, and a versatile metal widely
+      used in construction and manufacturing.
     sprite: {fileID: 21300000, guid: faace19c51d623e4385dc3786b4e87c0, type: 3}
     isCompleted: 0
     leftRequirements: 0

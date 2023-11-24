@@ -13,8 +13,8 @@ MonoBehaviour:
   m_Name: catch-a-bat
   m_EditorClassIdentifier: 
   achievement:
-    name: catch a bat!
-    description: catch 1 bat
+    name: Catch a bat!
+    description: Catch 1 bat. They learnt to carry valuable rewards!
     sprite: {fileID: 21300000, guid: 8175ffa36558e9c4d92af45232a09d4a, type: 3}
     isCompleted: 0
     leftRequirements: 0

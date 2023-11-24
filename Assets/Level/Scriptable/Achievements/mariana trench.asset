@@ -13,8 +13,8 @@ MonoBehaviour:
   m_Name: mariana trench
   m_EditorClassIdentifier: 
   achievement:
-    name: deeper than Mariana Trench
-    description: Reach a depth of 10984 meters
+    name: Deeper than Mariana Trench
+    description: Reach a depth of 10984 meters, as deep as the Earth's deepest ocean!
     sprite: {fileID: 21300000, guid: 25bd5d9ccb568524e938422e63eef228, type: 3}
     isCompleted: 0
     leftRequirements: 0

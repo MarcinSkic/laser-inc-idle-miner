@@ -14,7 +14,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   achievement:
     name: More sapphires!
-    description: break 1000 sapphire ores
+    description: Mine 1000 ores of sapphire. Sapphires are used in watches, because
+      they are hard to scratch!
     sprite: {fileID: 21300000, guid: 80f6a16263b0d3b4c8bfb7aab2d00b60, type: 3}
     isCompleted: 0
     leftRequirements: 0

@@ -14,7 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   achievement:
     name: Radioactive
-    description: mine uranium for the first time
+    description: Mine ore of uranium, a mineral known for its radioactivity.
     sprite: {fileID: 21300000, guid: 899e5cd089fdf934fba7410d3e24d5fe, type: 3}
     isCompleted: 0
     leftRequirements: 0
