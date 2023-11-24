@@ -11,6 +11,7 @@ using UnityEngine.UI;
 public class Achievement
 {
     public string name;
+    [TextArea]
     public string description;
     public Sprite sprite;
     public bool isCompleted = false;

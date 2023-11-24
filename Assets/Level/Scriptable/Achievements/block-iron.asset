@@ -13,8 +13,9 @@ MonoBehaviour:
   m_Name: block-iron
   m_EditorClassIdentifier: 
   achievement:
-    name: iron
-    description: mine iron ore for the first time
+    name: Iron
+    description: Mine ore of iron, backbone of industry, it is a versatile metal
+      widely used in construction and manufacturing.
     sprite: {fileID: 21300000, guid: faace19c51d623e4385dc3786b4e87c0, type: 3}
     isCompleted: 0
     leftRequirements: 0

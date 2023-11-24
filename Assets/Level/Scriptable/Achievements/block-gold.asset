@@ -13,8 +13,9 @@ MonoBehaviour:
   m_Name: block-gold
   m_EditorClassIdentifier: 
   achievement:
-    name: It's golden!
-    description: mine gold ore for the first time
+    name: It's shining!
+    description: Mine ore of gold, symbol of wealth, it is used finances and precise
+      electronics.
     sprite: {fileID: 21300000, guid: 83c9ec0bb12f0a740960d812e39ca042, type: 3}
     isCompleted: 0
     leftRequirements: 0

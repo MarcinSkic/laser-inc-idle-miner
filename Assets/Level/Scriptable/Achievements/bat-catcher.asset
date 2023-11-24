@@ -13,8 +13,8 @@ MonoBehaviour:
   m_Name: bat-catcher
   m_EditorClassIdentifier: 
   achievement:
-    name: bat catcher
-    description: catch 10 bats
+    name: Bat catcher
+    description: Catch 10 bats. They are the only mammals able to fly!
     sprite: {fileID: 21300000, guid: 434730068d666dc46823677988c5c144, type: 3}
     isCompleted: 0
     leftRequirements: 0

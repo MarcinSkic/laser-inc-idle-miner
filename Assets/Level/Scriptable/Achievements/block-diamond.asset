@@ -14,7 +14,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   achievement:
     name: Diamonds!
-    description: mine diamond ore for the first time
+    description: Mine ore of diamond, known for its strength, it has uses in many
+      industries and is highly prized as jewelry.
     sprite: {fileID: 21300000, guid: 9cba4acf95530fb4f9c0815f4dae3f7c, type: 3}
     isCompleted: 0
     leftRequirements: 0

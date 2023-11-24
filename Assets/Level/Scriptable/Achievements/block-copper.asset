@@ -13,8 +13,9 @@ MonoBehaviour:
   m_Name: block-copper
   m_EditorClassIdentifier: 
   achievement:
-    name: copper
-    description: mine copper ore for the first time
+    name: Copper
+    description: Mine ore of copper, it is widely used in electronics and building
+      construction.
     sprite: {fileID: 21300000, guid: 8d9f754fa03a6b14f8d3a73fcb623a8e, type: 3}
     isCompleted: 0
     leftRequirements: 0

@@ -13,8 +13,9 @@ MonoBehaviour:
   m_Name: block-coal
   m_EditorClassIdentifier: 
   achievement:
-    name: COAL!
-    description: it was COAL!
+    name: Coal
+    description: Mine ore of coal, it is utilised for electricity generation and
+      industrial processes like steel production.
     sprite: {fileID: 21300000, guid: a4d08f5e7743e284b9c7b7bd9a2ce0c2, type: 3}
     isCompleted: 0
     leftRequirements: 0

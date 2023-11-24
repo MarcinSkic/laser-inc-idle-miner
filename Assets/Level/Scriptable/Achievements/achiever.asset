@@ -14,7 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   achievement:
     name: Achiever
-    description: collect 10 achievements
+    description: Collect 10 achievements, for each you get tiny boost in damage!
     sprite: {fileID: 21300000, guid: be92b443956ab944e9b3ef4f35022e38, type: 3}
     isCompleted: 0
     leftRequirements: 0

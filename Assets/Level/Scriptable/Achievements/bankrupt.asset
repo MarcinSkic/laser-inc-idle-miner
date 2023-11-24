@@ -14,7 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   achievement:
     name: Bankrupt
-    description: make a total of $1M, but have less than $1000
+    description: Make a total of $1M, but have less than $1000 available
     sprite: {fileID: 21300000, guid: f01bce1026eb37f43b4685300597c0da, type: 3}
     isCompleted: 0
     leftRequirements: 0
