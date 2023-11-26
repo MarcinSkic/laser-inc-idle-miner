@@ -16,8 +16,8 @@ public class UIStoryBit : MonoBehaviour
     public string story;
 
     [Header("ANIMATION")]
-    [SerializeField] private float currentTime = 0f;
-    [SerializeField] private bool finished = false;
+    [SerializeField] public float currentTime = 0f;
+    [SerializeField] public bool finished = false;
     [SerializeField] private float timeToStartTextWriting = 0.9f;
     [SerializeField] float timeToEndTextWriting = 3f;
     [SerializeField] float textProgress = 0f;

@@ -230,6 +230,8 @@ public class GameController : BaseController<GameView>
             view.depthMeter.gameObject.SetActive(true);
             view.dysonSwarmStory.Hide();
             view.dysonSwarmDescription.SetActive(false);
+            view.dysonSwarmStoryOpenButton.gameObject.SetActive(false);
+            view.dysonSwarmTitle.gameObject.SetActive(false);
 
             FloatingTextSpawner.Instance.disableSpawning = false;
 
@@ -257,6 +259,8 @@ public class GameController : BaseController<GameView>
 
                     visitedDyson = true;
                     view.dysonSwarmDescription.SetActive(true);
+                    view.dysonSwarmStoryOpenButton.gameObject.SetActive(true);
+                    view.dysonSwarmTitle.gameObject.SetActive(true);
                     dysonCamera.SetActive(true);
                     currentWorld = Worlds.DysonSwarm;
                     break;

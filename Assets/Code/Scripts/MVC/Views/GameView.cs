@@ -38,6 +38,8 @@ public class GameView : BaseView
     [Header("Dyson Swarm")]
     public UIStoryBit dysonSwarmStory;
     public GameObject dysonSwarmDescription;
+    public UIButtonController dysonSwarmStoryOpenButton;
+    public TMP_Text dysonSwarmTitle;
 
     [Header("Depth Meter")]
     public UIDepthMeter depthMeter;
@@ -143,6 +145,19 @@ public class GameView : BaseView
 
         privacyPolicy.Init();
         privacyPolicy.onClick += () => { Application.OpenURL("https://mistybytes.com/privacy-policy/"); };
+
+        dysonSwarmStoryOpenButton.Init();
+        dysonSwarmStoryOpenButton.onClick += () =>
+        {
+            if (dysonSwarmStory.currentTime <= 0f)
+            {
+                dysonSwarmStory.finished = false;
+                dysonSwarmStory.Show();
+            } else
+            {
+                dysonSwarmStory.StartHiding();
+            }
+        };
 
 #if UNITY_ANDROID
         rateUs.gameObject.SetActive(true);
