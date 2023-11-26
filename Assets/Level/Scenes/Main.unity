@@ -4492,7 +4492,7 @@ MonoBehaviour:
   costOfEarnPrestigeReward: 200
   percentageOfPrestigeReward: 0.5
   costOfBatFrenzy: 100
-  batsPer10000FixedUpdatesInFrenzy: 400
+  batsPer10000FixedUpdatesInFrenzy: 1000
   durationOfBatFrenzy_Seconds: 10
   savingManager: {fileID: 567613855}
   resourcesManager: {fileID: 567613852}
@@ -41266,7 +41266,7 @@ MonoBehaviour:
   cheatDepth: 100
   heightOfBottomBar: 150
   bottomBorder: {fileID: 1719632677}
-  batsPer10000FixedUpdates: 1
+  batsPer10000FixedUpdates: 3
   batFrenzyActive: 0
 --- !u!114 &1947716360
 MonoBehaviour:

@@ -60,31 +60,30 @@ MonoBehaviour:
   - batSprite: {fileID: 21300000, guid: ba29b0299c4684d4eabcd609caf55805, type: 3}
     rewardType: 0
     needsAd: 0
-    rewardAmount: 58020000b004000008070000
+    rewardAmount: 2c0100005802000084030000
   - batSprite: {fileID: 21300000, guid: d429333b9c3fad14d87ddad3c6eb9d80, type: 3}
     rewardType: 0
     needsAd: 1
-    rewardAmount: 100e0000201c0000302a0000
+    rewardAmount: 08070000100e000018150000
   - batSprite: {fileID: 21300000, guid: 8a88c23dc0c74d446b404d49a910095f, type: 3}
     rewardType: 1
     needsAd: 0
-    rewardAmount: 010000000200000003000000
+    rewardAmount: 010000000100000001000000
   - batSprite: {fileID: 21300000, guid: 4e4cfadba63173c4aa20941bc4ea71f2, type: 3}
     rewardType: 1
     needsAd: 1
-    rewardAmount: 0a0000001400000019000000
+    rewardAmount: 050000000a0000000f000000
   - batSprite: {fileID: 21300000, guid: 8127d414e94ecf24eb0adcea5863c826, type: 3}
     rewardType: 2
     needsAd: 0
-    rewardAmount: 2c0100005802000084030000
+    rewardAmount: b40000002c010000a4010000
   - batSprite: {fileID: 21300000, guid: c31054e9bf0937d4994d520dcb91d528, type: 3}
     rewardType: 2
     needsAd: 1
-    rewardAmount: 08070000100e0000201c0000
+    rewardAmount: 8403000008070000100e0000
   coinGO: {fileID: 1743672019136884876}
   crystalGO: {fileID: 6749095685215407385}
   sphereGO: {fileID: 4649624862790322293}
-  resourcesManager: {fileID: 0}
 --- !u!65 &8697932057656942237
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -983,7 +982,7 @@ GameObject:
   m_PrefabAsset: {fileID: 0}
 --- !u!95 &2729267582417948705
 Animator:
-  serializedVersion: 4
+  serializedVersion: 5
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
@@ -1000,4 +999,5 @@ Animator:
   m_WarningMessage: 
   m_HasTransformHierarchy: 1
   m_AllowConstantClipSamplingOptimization: 1
-  m_KeepAnimatorControllerStateOnDisable: 0
+  m_KeepAnimatorStateOnDisable: 0
+  m_WriteDefaultValuesOnDisable: 0
