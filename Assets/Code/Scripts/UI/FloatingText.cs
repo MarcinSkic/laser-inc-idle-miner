@@ -3,10 +3,12 @@ using System.Collections.Generic;
 using UnityEngine;
 using TMPro;
 using UnityEngine.Pool;
+using UnityEngine.UI;
 
 public class FloatingText : MonoBehaviour, IPoolable<FloatingText>
 {
     public Animator animator;
+    public Image iconDisplay;
 
     private Vector3 objectPosition;
     public Vector3 ObjectPosition
@@ -54,9 +56,27 @@ public class FloatingText : MonoBehaviour, IPoolable<FloatingText>
         }
     }
 
+    public void SetIcon(Sprite icon, Vector3 scale)
+    {
+        if(icon != null)
+        {
+            iconDisplay.sprite = icon;
+            iconDisplay.transform.localScale = scale;
+            iconDisplay.gameObject.SetActive(true);
+        } else
+        {
+            iconDisplay.gameObject.SetActive(false);
+        }
+    }
+
     public void SetText(string text)
     {
         this.text.text = text;
+    }
+
+    public void SetScale(float scale)
+    {
+        transform.localScale = new Vector3(scale,scale,1);
     }
 
     public void Deinit()

@@ -106,7 +106,7 @@ public class RewardBat : MonoBehaviour
     //    batSprite.flipX = direction<0;
     //}
 
-    public void getClicked()
+    public void OnClicked()
     {
         string debugString = "";
         if (batOption.needsAd)
@@ -118,7 +118,7 @@ public class RewardBat : MonoBehaviour
         }
         int value = batOption.rewardAmount[Random.Range(0, batOption.rewardAmount.Length)];
         debugString += $"{value}";
-        // TODO: connect to ads
+
         if (batOption.needsAd)
         {
             if (adManager.subscribedNoAds)
@@ -140,23 +140,26 @@ public class RewardBat : MonoBehaviour
                 case BatRewardType.money:
                     debugString += " seconds worth of offlineReward";
                     resourcesManager.IncreaseMoneyForOfflineByTime(value);
+                    FloatingTextSpawner.Instance.SpawnDefault($"+{NumberFormatter.Format(value)}", transform,FloatingTextSpawner.Instance.batRewardScale,IconType.Money);
                     AudioManager.Instance.Play("caught_coins");
                     break;
                 case BatRewardType.powerup:
                     debugString += " seconds of double laser power";
                     resourcesManager.IncreasePowerUpTimeLeft(value);
+                    FloatingTextSpawner.Instance.SpawnDefault($"+{NumberFormatter.FormatSecondsToReadableShort(value)}", transform, FloatingTextSpawner.Instance.batRewardScale, IconType.PowerUp);
                     AudioManager.Instance.Play("caught_p_up");
                     break;
                 case BatRewardType.premium:
                     debugString += " premium curency";
                     resourcesManager.IncreasePremiumCurrency(value);
+                    FloatingTextSpawner.Instance.SpawnDefault($"+{NumberFormatter.Format(value)}", transform, FloatingTextSpawner.Instance.batRewardScale, IconType.PremiumCurrency);
                     AudioManager.Instance.Play("caught_crystal");
                     break;
             }
         }
         Debug.Log(debugString);
         AudioManager.Instance.Play("bat_caught");
-        StatisticsModel.Instance.CaughtBats = StatisticsModel.Instance.CaughtBats + 1;
+        StatisticsModel.Instance.CaughtBats++;
         Destroy(gameObject);
     }
 

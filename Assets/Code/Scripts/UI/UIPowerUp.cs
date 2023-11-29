@@ -18,19 +18,13 @@ public class UIPowerUp : MonoBehaviour
         StartCoroutine(Timer());
     }
 
-    private string GetFormattedTime()
-    {
-        var leftTime = resourcesModel.powerUpTimeLeft;
-        return string.Format(leftTime >= 3600 ? "{0:D2}:{1:D2}:{2:D2}" : "{1:D2}:{2:D2}",(int)leftTime/3600,((int)leftTime/60)%60,(int)leftTime%60);
-    }
-
     private IEnumerator Timer()
     {
         yield return new WaitForEndOfFrame();
 
         while (resourcesModel.powerUpTimeLeft > 0f)
         {
-            text.text = GetFormattedTime();
+            text.text = NumberFormatter.FormatSecondsToReadableShort(resourcesModel.powerUpTimeLeft);
 
             yield return new WaitForSeconds(1f);
         }

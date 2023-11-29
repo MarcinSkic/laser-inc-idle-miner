@@ -24,6 +24,11 @@ public static class NumberFormatter
             t.Seconds);
     }
 
+    public static string FormatSecondsToReadableShort(double seconds)
+    {
+        return string.Format(seconds >= 3600 ? "{0:D2}:{1:D2}:{2:D2}" : "{1:D2}:{2:D2}", (int)seconds / 3600, ((int)seconds / 60) % 60, (int)seconds % 60);
+    }
+
     public static string FormatSecondsToHours(double seconds)
     {
         TimeSpan t= TimeSpan.FromSeconds(seconds);

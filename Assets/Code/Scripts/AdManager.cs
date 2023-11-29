@@ -165,6 +165,7 @@ public class AdManager : MonoBehaviour
 
     }
 
+    [ContextMenu("Test")]
     public void VerifyIntegration()
     {
         FairBid.ShowTestSuite();

@@ -21,7 +21,7 @@ public class ClickDetector : MonoBehaviour
                 }
                 else if (hit.collider.gameObject.TryGetComponent<RewardBat>(out var bat))
                 {
-                    bat.getClicked();
+                    bat.OnClicked();
                 }
             }
 
