@@ -16,6 +16,7 @@ public class AdManager : MonoBehaviour
     public ResourcesManager resourcesManager;
     public GameModel gameModel;
     public GameController gameController;
+    public Transform rewardDisplaySpawn;
 
     public bool BannerDisplayed;
 
@@ -244,17 +245,20 @@ public class AdManager : MonoBehaviour
             {
                 case BatRewardType.money:
                     //debugString += " seconds worth of offlineReward";
-                    resourcesManager.IncreaseMoneyForOfflineByTime(batRewardValue);
+                    resourcesManager.IncreaseMoneyForOfflineByTime(batRewardValue); 
+                    FloatingTextSpawner.Instance.SpawnDefault($"+{NumberFormatter.Format(batRewardValue)}", rewardDisplaySpawn, FloatingTextSpawner.Instance.batRewardScale, IconType.Money);
                     AudioManager.Instance.Play("caught_coins");
                     break;
                 case BatRewardType.powerup:
                     //debugString += " seconds of double laser power";
                     resourcesManager.IncreasePowerUpTimeLeft(batRewardValue);
+                    FloatingTextSpawner.Instance.SpawnDefault($"+{NumberFormatter.FormatSecondsToReadableShort(batRewardValue)}", rewardDisplaySpawn, FloatingTextSpawner.Instance.batRewardScale, IconType.PowerUp);
                     AudioManager.Instance.Play("caught_p_up");
                     break;
                 case BatRewardType.premium:
                     //debugString += " premium curency";
                     resourcesManager.IncreasePremiumCurrency(batRewardValue);
+                    FloatingTextSpawner.Instance.SpawnDefault($"+{NumberFormatter.Format(batRewardValue)}", rewardDisplaySpawn, FloatingTextSpawner.Instance.batRewardScale, IconType.PremiumCurrency);
                     AudioManager.Instance.Play("caught_crystal");
                     break;
             }
