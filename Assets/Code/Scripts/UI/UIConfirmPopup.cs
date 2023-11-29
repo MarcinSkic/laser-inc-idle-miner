@@ -10,6 +10,7 @@ public class UIConfirmPopup : MonoBehaviour
     [SerializeField] private UIButtonController[] cancelButtons;
     [SerializeField] private TMP_Text title;
     [SerializeField] private TMP_Text description;
+    [SerializeField] private float delayPreventingAccidentalClosing = 0.4f;
 
     public void Init()
     {
@@ -27,11 +28,24 @@ public class UIConfirmPopup : MonoBehaviour
         gameObject.SetActive(false);
     }
 
+    public IEnumerator PreventAccidentalClosing(UIButtonController buttonController, float seconds)
+    {
+        buttonController.Deactivate();
+        yield return new WaitForSeconds(seconds);
+        buttonController.Activate();
+    }
+
     public UnityAction<bool> onResponse;
 
     public void Display(string title = "Are you certain?", string description = "")
     {
         gameObject.SetActive(true);
+
+        foreach(var button in cancelButtons)
+        {
+            StartCoroutine(PreventAccidentalClosing(button, delayPreventingAccidentalClosing));
+        }
+        
         this.title.text = title;
         this.description.text = description;
     }
