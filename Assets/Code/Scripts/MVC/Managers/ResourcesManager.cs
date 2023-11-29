@@ -379,9 +379,14 @@ public class ResourcesManager : MonoBehaviour
 
     public void SavePrestigePersistentData(PersistentData data)
     {
+        data.undecreasableEarnedMoney = model.undecreasableEarnedMoney;
+
         data.prestigeCurrency = PrestigeCurrency;
         data.earnedPrestigeCurrency = model.earnedPrestigeCurrency;
-        data.undecreasableEarnedMoney = model.undecreasableEarnedMoney;
+
+        data.premiumCurrency = PremiumCurrency;
+        data.earnedPremiumCurrency = model.earnedPremiumCurrency;
+
         data.executedPrestigesCount = ExecutedPrestigesCount;
     }
 
