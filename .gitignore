@@ -70,3 +70,8 @@ crashlytics-build.properties
 # Temporary auto-generated Android Assets
 /[Aa]ssets/[Ss]treamingAssets/aa.meta
 /[Aa]ssets/[Ss]treamingAssets/aa/*
+
+# Secrets
+/[Aa]ssets/Configs
+/[Aa]ssets/Plugins
+/[Aa]ssets/StreamingAssets
