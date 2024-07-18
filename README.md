@@ -1,4 +1,4 @@
-<img align="left" width="40" height="40" alt=".NET" src="./Public/icon.png" style="padding: 0 20px 16px 0"/>
+<img align="left" width="70" height="70" alt=".NET" src="./Public/icon.png" style="padding: 0 20px 16px 0"/>
 
 # Laser Inc. Idle Miner
 
